@@ -1,4 +1,5 @@
 # TaskAway
 Punam Woosaree  
 Sameerah Wajahat  
-Adrian Schuldhaus  Diane Boytang
+Adrian Schuldhaus  
+Diane Boytang
