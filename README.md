@@ -4,4 +4,6 @@ Sameerah Wajahat
 Adrian Schuldhaus  
 Diane Boytang  
 Katherine Mae Patenio  
-Suleman Ismail
+Suleman Ismail  
+
+### [Project Wiki](https://github.com/CMPUT301W18T19/TaskAway/wiki)  
