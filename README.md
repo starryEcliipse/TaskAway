@@ -1,3 +1,4 @@
 # TaskAway
-Punam Woosaree
-Sameerah Wajahat
+Punam Woosaree  
+Sameerah Wajahat  
+Adrian Schuldhaus  
