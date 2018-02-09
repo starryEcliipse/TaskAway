@@ -2,6 +2,5 @@
 Punam Woosaree  
 Sameerah Wajahat  
 Adrian Schuldhaus  
-Diane Boytang
-
-Katherine Mae Patenio
+Diane Boytang  
+Katherine Mae Patenio  
