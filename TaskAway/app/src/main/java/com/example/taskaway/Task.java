@@ -37,6 +37,8 @@ public class Task {
         return status;
     }
 
+    public String getLocation() {return location; }
+
     public Float getLowestBid(){
         return lowestBid;
     }
