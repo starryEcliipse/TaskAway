@@ -7,17 +7,25 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Acts as activity that displays all tasks a user has bid on.
+ */
 public class TaskUserProvides extends AppCompatActivity {
 
     private ArrayList<Task> proTask;
     private ArrayAdapter<Task> adapter;
-    private ListView provideTask;
+    private ListView provideTaskList;
 
+    /**
+     * Creates and initializes ListView upon creating app.
+     * @param savedInstanceState - previously saved state of app
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        provideTask = (ListView) findViewById(R.id.provideTask);
+        provideTaskList = (ListView) findViewById(R.id.provideTask);
         setContentView(R.layout.activity_task_user_provides);
+        // TODO: Buttons - 18/02/18
     }
 
     @Override
