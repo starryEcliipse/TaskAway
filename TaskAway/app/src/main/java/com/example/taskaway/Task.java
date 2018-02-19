@@ -47,7 +47,7 @@ public class Task {
         return pictures;
     }
 
-    public ArrayList<Bid> bids(){
+    public ArrayList<Bid> getBids(){
         return bids;
     }
 
