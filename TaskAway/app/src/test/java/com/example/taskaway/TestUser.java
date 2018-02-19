@@ -5,12 +5,12 @@ import android.test.ActivityInstrumentationTestCase2;
 
 
 public class TestUser extends ActivityInstrumentationTestCase2 {
-    public UserTest() {super(MainActivity.class)}
+    public TestUser() {super(User.class);}
 
     public void testSetUsername(){
-        User user = new User("hi", "email", "1234567");
+        User user = new User("hi", "email", "1234567", "secret");
         String username = "name";
-        user.setName(username);
+        user.setUsername(username);
 
         assertEquals(user.getUsername(), "name");
 
@@ -18,7 +18,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSetEmail(){
-        User user = new User("name", "hi", "1234567");
+        User user = new User("name", "hi", "1234567", "secret");
         String email = "email";
         user.setEmail(email);
 
@@ -28,7 +28,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSetPhone(){
-        User user = new User("name", "email", "hi");
+        User user = new User("name", "email", "hi", "secret");
         String phone = "1234567";
         user.setPhone(phone);
 
@@ -38,7 +38,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testUser(){
-        User user = new User("name", "email", "1234567");
+        User user = new User("name", "email", "1234567", "secret");
         assertEquals(user.getUsername(), "name");
         assertEquals(user.getEmail(), "email");
         assertEquals(user.getPhone(), "1234567");
@@ -47,7 +47,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetUsername(){
-        User user = new User("hi", "email", "1234567");
+        User user = new User("hi", "email", "1234567", "secret");
 
 
         assertEquals(user.getUsername(), "hi");
@@ -55,7 +55,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetEmail(){
-        User user = new User("hi", "email", "1234567");
+        User user = new User("hi", "email", "1234567", "secret");
 
 
         assertEquals(user.getEmail(), "email");
@@ -63,7 +63,7 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     }
 
     public void testGetPhone(){
-        User user = new User("hi", "email", "1234567");
+        User user = new User("hi", "email", "1234567", "secret");
 
 
         assertEquals(user.getPhone(), "1234567");
