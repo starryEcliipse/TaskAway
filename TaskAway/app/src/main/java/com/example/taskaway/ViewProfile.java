@@ -13,13 +13,13 @@ public class ViewProfile extends AppCompatActivity {
     }
 
     @Override
-    protected void OnStart(){
-
+    protected void onStart(){
+        super.onStart();
     }
 
 
     @Override
-    protected void OnDestroy(){
-
+    protected void onDestroy(){
+        super.onDestroy();
     }
 }
