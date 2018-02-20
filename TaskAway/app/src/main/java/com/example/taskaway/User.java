@@ -1,6 +1,5 @@
 package com.example.taskaway;
 
-import java.util.ArrayList;
 
 /**
  * Created by sameerah on 18/02/18.
@@ -13,11 +12,12 @@ public class User {
     private String username;
     private String email;
     private String phone;
-    private ArrayList<Task> reqTask;
-    private ArrayList<Task> proTask;
-    private ArrayList<Task> otherTask;
+    private TaskList reqTask;
+    private TaskList proTask;
+    private TaskList otherTask;
     private String password;
     // TODO: private int id; 18/02/18
+    //private int ID;
 
     /**
      * Constructor of user.
@@ -97,5 +97,9 @@ public class User {
         this.password = password;
     }
 
+
+
     // TODO: public void setID, public int getID - 18/02/18
+    //public int getID(){ return ID;}
+    //public void setID(int ID){ this.ID = ID; }
 }

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 /**
  * Represents a list of tasks.
  */
-public class TaskList extends ArrayList<Task> {
+public class TaskList extends ArrayList {
 
-    private ArrayList<Task> reqTask;
+    private ArrayList<Task> reqTask = new ArrayList<Task>();
 
     /**
      * Adds a new task to list of tasks.
