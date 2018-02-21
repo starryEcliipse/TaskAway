@@ -24,8 +24,6 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
      */
     public void testGetUsername(){
         User user = new User("hi", "email", "1234567", "secret");
-
-
         assertEquals(user.getUsername(), "hi");
     }
 
@@ -35,8 +33,6 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
 
     public void testGetEmail(){
         User user = new User("hi", "email", "1234567", "secret");
-
-
         assertEquals(user.getEmail(), "email");
     }
 
@@ -45,8 +41,6 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
      */
     public void testGetPhone(){
         User user = new User("hi", "email", "1234567", "secret");
-
-
         assertEquals(user.getPhone(), "1234567");
 
     }
@@ -56,7 +50,6 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
      */
     public void testGetPassword(){
         User user = new User("hi", "email", "1234567", "secret");
-
         assertEquals(user.getPassword(), "secret");
     }
 
@@ -106,5 +99,70 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
         assertEquals(user.getPassword(), "supersecret");
 
     }
+
+    /**
+     * Test getReqTasks()
+     */
+    public void testGetReqTasks(){
+        TaskList reqTask = new TaskList();
+        TaskList bidTask = new TaskList();
+        TaskList assignedTask = new TaskList();
+        User user = new User("name", "email", "1234567", "secret", reqTask, bidTask, assignedTask);
+        assertEquals(user.getReqTasks(), reqTask);
+    }
+
+    /**
+     * Tests getBidTasks()
+     */
+    public void testGetBidTasks(){
+        TaskList reqTask = new TaskList();
+        TaskList bidTask = new TaskList();
+        TaskList assignedTask = new TaskList();
+        User user = new User("name", "email", "1234567", "secret", reqTask, bidTask, assignedTask);
+        assertEquals(user.getBidTasks(), bidTask);
+    }
+
+    /**
+     * Tests getAssignedTasks()
+     */
+    public void testAssignedReqTasks(){
+        TaskList reqTask = new TaskList();
+        TaskList bidTask = new TaskList();
+        TaskList assignedTask = new TaskList();
+        User user = new User("name", "email", "1234567", "secret", reqTask, bidTask, assignedTask);
+        assertEquals(user.getAssignedTasks(), assignedTask);
+    }
+
+    /**
+     * Test setReqTasks()
+     */
+    public void testSetReqTasks(){
+        User user = new User("name", "email", "1234567", "secret");
+        TaskList new_list = new TaskList();
+        assertEquals(user.getReqTasks(), new_list);
+
+    }
+
+    /**
+     * Test setBidTasks()
+     */
+    public void testSetBidTasks(){
+        User user = new User("name", "email", "1234567", "secret");
+        TaskList new_list = new TaskList();
+        assertEquals(user.getBidTasks(), new_list);
+
+    }
+
+    /**
+     * Test setAssignedTask()
+     */
+    public void testSetAssignedTasks(){
+        User user = new User("name", "email", "1234567", "secret");
+        TaskList new_list = new TaskList();
+        assertEquals(user.getAssignedTasks(), new_list);
+
+    }
+
+
 
 }
