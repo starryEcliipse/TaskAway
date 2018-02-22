@@ -15,6 +15,7 @@ public class Bid {
      * Constructor of bid.
      * @param amount - the amount of a bid
      */
+    Bid(){}
     Bid(Float amount){
         this.amount = amount;
     }
