@@ -42,7 +42,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test getTask()
      */
-    public void testgetTask() throws Exception {
+    public void testgetTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
         newTaskList.addTask(newTask);
@@ -53,7 +53,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test removeTask()
      */
-    public void testRemoveTask() throws Exception {
+    public void testRemoveTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
         newTaskList.addTask(newTask);
