@@ -17,7 +17,7 @@ public class Task {
     private Float lowestBid;
     private String location;
     private ArrayList<Task> pictures;
-    // TODO: private int id 18/02/18
+    private String id;
 
     /**
      * Constructor of task.
@@ -37,7 +37,6 @@ public class Task {
         this.lowestBid = lowestBid;
         this.bids = bids;
         this.pictures = pictures;
-        // TODO: this.id = id; 18/02/18
     }
 
     /**
@@ -46,6 +45,14 @@ public class Task {
      */
     public String getName(){
         return name;
+    }
+
+    /**
+     * Returns id of the task.
+     * @return - id of task
+     */
+    public String getId(){
+        return id;
     }
 
     /**
@@ -108,6 +115,14 @@ public class Task {
         else{
             this.name = name;
         }
+    }
+
+    /**
+     * Sets id of task.
+     * @param id - id to be set for task
+     */
+    public void setId(String id){
+        this.id = id;
     }
 
     /**

@@ -16,8 +16,7 @@ public class User {
     private TaskList bidTasks; //updated var name to be more descriptive - 20/02/18
     private TaskList assignedTasks; //updated var name to be more descriptive - 20/02/18
     private String password;
-    // TODO: private int id; 18/02/18
-    //private int ID;
+    private String id;
 
     /**
      * Constructor of user.
@@ -62,6 +61,14 @@ public class User {
      */
     public String getUsername(){
         return username;
+    }
+
+    /**
+     * Returns id of user.
+     * @return - id of user
+     */
+    public String getId(){
+        return id;
     }
 
     /**
@@ -112,6 +119,14 @@ public class User {
      */
     public void setUsername(String username){
         this.username = username;
+    }
+
+    /**
+     * Sets id for user.
+     * @param id - id to be set
+     */
+    public void setId(String id){
+        this.id = id;
     }
 
     /**
