@@ -17,7 +17,8 @@ public class Task {
     private Float lowestBid;
     private String location;
     private ArrayList<Task> pictures;
-    // TODO: private int id 18/02/18
+    private String id;
+    private boolean deleted = false;
 
     /**
      * Constructor of task.
@@ -37,7 +38,6 @@ public class Task {
         this.lowestBid = lowestBid;
         this.bids = bids;
         this.pictures = pictures;
-        // TODO: this.id = id; 18/02/18
     }
 
     /**
@@ -46,6 +46,14 @@ public class Task {
      */
     public String getName(){
         return name;
+    }
+
+    /**
+     * Returns id of the task.
+     * @return - id of task
+     */
+    public String getId(){
+        return id;
     }
 
     /**
@@ -98,18 +106,38 @@ public class Task {
 
     /**
      * Sets name of task.
-     * @param name - name to be set for task
+     * @param name - name to be set for task.
+     * Throws TaskNameTooLongException if the name is greater than 30 chars
      */
-    public void setName(String name){
-        this.name = name;
+    public void setName (String name) throws TaskNameTooLongException{
+        if(name.length() > 30){
+            throw new TaskNameTooLongException();
+        }
+        else{
+            this.name = name;
+        }
+    }
+
+    /**
+     * Sets id of task.
+     * @param id - id to be set for task
+     */
+    public void setId(String id){
+        this.id = id;
     }
 
     /**
      * Sets description of task.
      * @param description - description to be set for task
+     * Throws TaskDescriptionTooLongException if the task description is greater than 300 chars
      */
-    public void setDescription(String description){
-        this.description = description;
+    public void setDescription(String description) throws TaskDescriptionTooLongException{
+        if(description.length() > 300){
+            throw new TaskDescriptionTooLongException();
+        }
+        else {
+            this.description = description;
+        }
     }
 
     /**
@@ -152,7 +180,12 @@ public class Task {
         this.pictures = pictures;
     }
 
-    // TODO public void setID, getID - 18/02/18
+    /**
+     * Sets the deleted boolean value to true, signifying this has been deleted from the server
+     */
+    public void markDeleted() {
+        this.deleted = true;
+    }
 
     /**
      * Represents attributes and information of a task as a string

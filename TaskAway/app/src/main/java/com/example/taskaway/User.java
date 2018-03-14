@@ -16,8 +16,8 @@ public class User {
     private TaskList bidTasks; //updated var name to be more descriptive - 20/02/18
     private TaskList assignedTasks; //updated var name to be more descriptive - 20/02/18
     private String password;
-    // TODO: private int id; 18/02/18
-    //private int ID;
+    private String id;
+    private boolean deleted = false;
 
     /**
      * Constructor of user.
@@ -62,6 +62,14 @@ public class User {
      */
     public String getUsername(){
         return username;
+    }
+
+    /**
+     * Returns id of user.
+     * @return - id of user
+     */
+    public String getId(){
+        return id;
     }
 
     /**
@@ -115,6 +123,14 @@ public class User {
     }
 
     /**
+     * Sets id for user.
+     * @param id - id to be set
+     */
+    public void setId(String id){
+        this.id = id;
+    }
+
+    /**
      * Sets email for user.
      * @param email - email to be set
      */
@@ -156,8 +172,10 @@ public class User {
      */
     public void setAssignedTasks (TaskList assignedTasks) { this.assignedTasks = assignedTasks; }
 
-
-    // TODO: public void setID, public int getID - 18/02/18
-    //public int getID(){ return ID;}
-    //public void setID(int ID){ this.ID = ID; }
+    /**
+     * Sets the deleted boolean value to true, signifying this has been deleted from the server
+     */
+    public void markDeleted() {
+        this.deleted = true;
+    }
 }
