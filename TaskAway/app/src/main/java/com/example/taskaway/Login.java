@@ -18,9 +18,6 @@ import java.util.ArrayList;
  */
 public class Login extends AppCompatActivity {
 
-    private EditText username;
-    private EditText password;
-
     /**
      * Creates and initializes login button and EditText of login page.
      * @param savedInstanceState - previously saved state of app
@@ -42,6 +39,7 @@ public class Login extends AppCompatActivity {
                 String password = passwordEdit.getText().toString();
 
                 User user = new User(userName, null, null, password, null, null ,null );
+                ServerWrapper.addUser(user);
 
                 TextView usernameTextView = (TextView)findViewById(R.id.editName);
                 usernameTextView.setText(userName);
