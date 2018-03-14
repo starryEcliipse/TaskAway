@@ -13,7 +13,7 @@ public class ServerWrapper {
      * Sends a new task to the server
      * @param task - the task to add
      */
-    public static void addTask(Task task) {
+    public static void addJob(Task task) {
         new ElasticsearchController.AddJobsTask().execute(task);
     }
 
@@ -21,7 +21,7 @@ public class ServerWrapper {
      * Sends a new task object to replace the one with the same id
      * @param task - the task to update
      */
-    public static void updateTask(Task task) {
+    public static void updateJob(Task task) {
         new ElasticsearchController.UpdateJobsTask().execute(task);
     }
 
@@ -29,7 +29,7 @@ public class ServerWrapper {
      * Deletes the task with same id from the server
      * @param task - the task to delete
      */
-    public static void deleteTask(Task task) {
+    public static void deleteJob(Task task) {
         new ElasticsearchController.DeleteJobsTask().execute(task);
     }
 
@@ -51,9 +51,9 @@ public class ServerWrapper {
         return null;
     }
 
-    public static Task getJobFromId(String jobId) {
+    public static Task getJobFromId(String taskId) {
         try{
-            return new ElasticsearchController.GetJobsTask().execute("_id", jobId).get().getTask(0);
+            return new ElasticsearchController.GetJobsTask().execute("_id", taskId).get().getTask(0);
         }catch(Exception e){
             Log.i("Error", "Something went wrong trying to get job with _id from server");
         }
@@ -101,9 +101,9 @@ public class ServerWrapper {
      * @param task - The task for which you want the creator's User object
      * @return the User object of the task creator
      */
-    public static ArrayList<User> getTaskUser(Task task) {
+    public static User getTaskCreator(Task task) {
         try{
-            return new ElasticsearchController.GetUsersTask().execute("_id", task.getCreatorId()).get();
+            return new ElasticsearchController.GetUsersTask().execute("_id", task.getCreatorId()).get().get(0);
         }catch(Exception e){
             Log.i("Error", "Something went wrong trying to get job creator's User object from server");
         }
