@@ -9,14 +9,23 @@ package com.example.taskaway;
  */
 public class Bid {
     private Float amount;
+    private String userId;
     // TODO: private int userId 18/02/18
 
     /**
      * Constructor of bid.
      * @param amount - the amount of a bid
      */
-    Bid(){}
     Bid(Float amount){
+        this.amount = amount;
+    }
+    Bid(String userId, Float amount){
+        this.userId = userId;
+        this.amount = amount;
+    }
+
+    Bid(User user, Float amount){
+        this.userId = user.getId();
         this.amount = amount;
     }
 
@@ -34,6 +43,30 @@ public class Bid {
      */
     public void setAmount(Float amount){
         this.amount = amount;
+    }
+
+    /**
+     * Returns the id of the user who placed the bid.
+     * @return - id of user
+     */
+    public String getUserId(){
+        return userId;
+    }
+
+    /**
+     * Sets the userId associated to this bid.
+     * @param id - user id to be set for bid
+     */
+    public void setUserId(String id){
+        this.userId = id;
+    }
+
+    /**
+     * Sets the userId associated to this bid.
+     * @param user - user who's id will be associated with this bid.
+     */
+    public void setUserId(User user){
+        this.userId = user.getId();
     }
 
     /**

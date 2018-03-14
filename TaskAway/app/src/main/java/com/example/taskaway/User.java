@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import java.security.MessageDigest;
 
 /**
  * Created by sameerah on 18/02/18.
@@ -15,7 +16,7 @@ public class User {
     private TaskList reqTasks;
     private TaskList bidTasks; //updated var name to be more descriptive - 20/02/18
     private TaskList assignedTasks; //updated var name to be more descriptive - 20/02/18
-    private String password;
+    private String passwordHash;
     private String id;
     private boolean deleted = false;
 
@@ -24,13 +25,11 @@ public class User {
      * @param username - username of user
      * @param email - email of user
      * @param phone - phone number of user
-     * @param password - password of user (as a String as of 18/02/18)
      */
-    User(String username, String email, String phone, String password){
+    User(String username, String email, String phone){
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.password = password;
         this.reqTasks = new TaskList();
         this.bidTasks = new TaskList();
         this.assignedTasks = new TaskList();
@@ -41,16 +40,16 @@ public class User {
      * @param username - username of user
      * @param email - email of user
      * @param phone - phone number of user
-     * @param password - password of user
+     * @param passwordHash - password hash of user
      * @param reqTasks - list of tasks requested by the user
      * @param bidTasks - list of tasks bid on by the user
      * @param assignedTasks - lists of tasks assigned to the user
      */
-    User(String username, String email, String phone, String password, TaskList reqTasks, TaskList bidTasks, TaskList assignedTasks){
+    User(String username, String email, String phone, String passwordHash, TaskList reqTasks, TaskList bidTasks, TaskList assignedTasks){
         this.username = username;
         this.email = email;
         this.phone = phone;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.reqTasks = reqTasks;
         this.bidTasks = bidTasks;
         this.assignedTasks = assignedTasks;
@@ -86,14 +85,6 @@ public class User {
      */
     public String getPhone(){
         return phone;
-    }
-
-    /**
-     * Returns password of user.
-     * @return - password of user
-     */
-    public String getPassword(){
-        return password;
     }
 
     /**
@@ -147,14 +138,6 @@ public class User {
     }
 
     /**
-     * Sets password for user.
-     * @param password - password (String as of 18/02/18) to be set
-     */
-    public void setPassword(String password){
-        this.password = password;
-    }
-
-    /**
      * Sets the list of tasks the user requests
      * @param reqTasks - list of requested tasks
      */
@@ -178,4 +161,31 @@ public class User {
     public void markDeleted() {
         this.deleted = true;
     }
+
+    public void setPasswordHash(String hash) {
+        this.passwordHash = hash;
+    }
+
+    public String getPasswordHash() {
+        return this.passwordHash;
+    }
+
+    public void setPassword(String password) {
+        this.passwordHash = hash_SHA256(password);
+    }
+
+    public String hash_SHA256(String str) {
+        try{
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(str.getBytes());
+            return new String(hash);
+        }catch(Exception e){}
+        return "SHA256 HASH ERROR";
+    }
+
+    public boolean verifyPassword(String comparisonPassword){
+        return this.passwordHash.equals(hash_SHA256(comparisonPassword));
+    }
+
+
 }
