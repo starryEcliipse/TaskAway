@@ -14,7 +14,12 @@ public class ServerWrapper {
      * @param task - the task to add
      */
     public static void addJob(Task task) {
-        new ElasticsearchController.AddJobsTask().execute(task);
+        try{
+            new ElasticsearchController.AddJobsTask().execute(task);
+        }catch(Exception e){
+        }finally{
+            new ElasticsearchController.UpdateJobsTask().execute(task); //Ensures id is defined
+        }
     }
 
     /**
@@ -68,7 +73,12 @@ public class ServerWrapper {
      * @param user - the user to add
      */
     public static void addUser(User user) {
-        new ElasticsearchController.AddUsersTask().execute(user);
+        try{
+            new ElasticsearchController.AddUsersTask().execute(user);
+        }catch(Exception e){
+        }finally{
+            new ElasticsearchController.UpdateUsersTask().execute(user); //Ensures id is defined
+        }
     }
 
     /**
