@@ -43,7 +43,6 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         holder.tv_name.setText(mData.get(position).getName());
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
-
     }
     /**
      *
