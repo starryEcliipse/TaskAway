@@ -33,10 +33,8 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(Task... tasks) {
             verifySettings();
-
             for (Task task : tasks) {
                 Index index = new Index.Builder(task).index(DBIndex).type(DBTaskType).build();
-
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
@@ -48,7 +46,6 @@ public class ElasticsearchController {
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
                 }
-
             }
             return null;
         }
@@ -58,7 +55,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(Task... tasks) {
             verifySettings();
-
             for (Task task : tasks) {
                 try {
                     if (task.getId() == null) throw new Exception("Error: Task id is not defined");
@@ -73,7 +69,6 @@ public class ElasticsearchController {
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
                 }
-
             }
             return null;
         }
@@ -83,7 +78,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(Task... tasks) {
             verifySettings();
-
             for (Task task : tasks) {
                 try {
                     if (task.getId() == null) throw new Exception("Error: Task id is not defined");
@@ -92,13 +86,12 @@ public class ElasticsearchController {
                     if (result.isSucceeded()) {
                         task.markDeleted();
                     } else {
-                        Log.i("Error", "An error occurred in UpdateJobsTask");
+                        Log.i("Error", "An error occurred in DeleteJobsTask");
                     }
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
                 }
-
             }
             return null;
         }
@@ -112,11 +105,8 @@ public class ElasticsearchController {
                 parameters[1] = "";
             }
             verifySettings();
-
             TaskList tasks = new TaskList();
-
             Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBTaskType).build();
-
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
@@ -138,10 +128,8 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(User... users) {
             verifySettings();
-
             for (User user : users) {
                 Index index = new Index.Builder(user).index(DBIndex).type(DBUserType).build();
-
                 try {
                     DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
@@ -153,7 +141,6 @@ public class ElasticsearchController {
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
                 }
-
             }
             return null;
         }
@@ -163,7 +150,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(User... users) {
             verifySettings();
-
             for (User user : users) {
                 try {
                     if (user.getId() == null) throw new Exception("Error: User id is not defined");
@@ -178,7 +164,6 @@ public class ElasticsearchController {
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
                 }
-
             }
             return null;
         }
@@ -188,7 +173,6 @@ public class ElasticsearchController {
         @Override
         protected Void doInBackground(User... users) {
             verifySettings();
-
             for (User user : users) {
                 try {
                     if (user.getId() == null) throw new Exception("Error: User id is not defined");
@@ -197,13 +181,12 @@ public class ElasticsearchController {
                     if (result.isSucceeded()) {
                         user.markDeleted();
                     } else {
-                        Log.i("Error", "An error occurred in UpdateUsersTask");
+                        Log.i("Error", "An error occurred in DeleteUsersTask");
                     }
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
                 }
-
             }
             return null;
         }
@@ -217,11 +200,8 @@ public class ElasticsearchController {
                 parameters[1] = "";
             }
             verifySettings();
-
             ArrayList<User> users = new ArrayList<User>();
-
             Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBUserType).build();
-
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
@@ -234,7 +214,6 @@ public class ElasticsearchController {
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
             }
-
             return users;
         }
     }
@@ -261,7 +240,6 @@ public class ElasticsearchController {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");
             DroidClientConfig config = builder.build();
-
             JestClientFactory factory = new JestClientFactory();
             factory.setDroidClientConfig(config);
             client = (JestDroidClient) factory.getObject();

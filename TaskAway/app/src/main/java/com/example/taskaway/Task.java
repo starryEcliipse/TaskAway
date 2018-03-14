@@ -19,6 +19,7 @@ public class Task {
     private String location;
     private ArrayList<String> pictures;
     private String id;
+    private String creatorId;
     private boolean deleted = false;
 
     /**
@@ -55,6 +56,14 @@ public class Task {
      */
     public String getId(){
         return id;
+    }
+
+    /**
+     * Returns creatorId of task - The Id of the User who created it
+     * @return - creatorId of the task
+     */
+    public String getCreatorId(){
+        return creatorId;
     }
 
     /**
@@ -125,6 +134,14 @@ public class Task {
      */
     public void setId(String id){
         this.id = id;
+    }
+
+    /**
+     * Sets creatorId of task - The Id of the User who created it
+     * @param id - creatorId to be set for task
+     */
+    public void setCreatorId(String id){
+        this.creatorId = id;
     }
 
     /**
