@@ -20,7 +20,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testTask(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -41,7 +41,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
 
     public void testGetName(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -53,7 +53,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetDescription(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -65,7 +65,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetStatus(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -77,7 +77,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetLocation(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -89,7 +89,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetLowestBid(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -101,7 +101,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetBids(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -113,7 +113,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testGetPictures(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -126,12 +126,14 @@ public class TestTask extends ActivityInstrumentationTestCase2{
 
     public void testSetName(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
         String newName = "new name";
-        task.setName(newName);
+        try {
+            task.setName(newName);
+        }catch(Exception e){}
 
         assertEquals(task.getName(), "new name");
     }
@@ -141,12 +143,14 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetDescription(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
         String newDescription = "I'm a description";
-        task.setDescription(newDescription);
+        try {
+            task.setDescription(newDescription);
+        }catch(Exception e){}
 
         assertEquals(task.getDescription(), "I'm a description");
     }
@@ -156,7 +160,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetStatus(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -171,7 +175,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetLocation(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -185,7 +189,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetLowestBid(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -199,7 +203,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetBids(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
@@ -213,11 +217,11 @@ public class TestTask extends ActivityInstrumentationTestCase2{
      */
     public void testSetPictures(){
         ArrayList<Bid> bidsList = new ArrayList<>();
-        ArrayList<Task> picturesList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid);
-        ArrayList<Task> newPicturesList = new ArrayList<>();
+        ArrayList<String> newPicturesList = new ArrayList<>();
         task.setPictures(newPicturesList);
         assertEquals(task.getPictures(), newPicturesList);
     }
