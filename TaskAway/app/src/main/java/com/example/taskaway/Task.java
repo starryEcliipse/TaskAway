@@ -18,6 +18,7 @@ public class Task {
     private String location;
     private ArrayList<Task> pictures;
     private String id;
+    private boolean deleted = false;
 
     /**
      * Constructor of task.
@@ -179,7 +180,12 @@ public class Task {
         this.pictures = pictures;
     }
 
-    // TODO public void setID, getID - 18/02/18
+    /**
+     * Sets the deleted boolean value to true, signifying this has been deleted from the server
+     */
+    public void markDeleted() {
+        this.deleted = true;
+    }
 
     /**
      * Represents attributes and information of a task as a string

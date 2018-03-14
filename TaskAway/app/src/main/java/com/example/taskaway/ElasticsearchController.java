@@ -10,6 +10,7 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
@@ -42,6 +43,56 @@ public class ElasticsearchController {
                         task.setId(result.getId());
                     } else {
                         Log.i("Error", "An error occurred in AddJobsTask");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the jobs");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class UpdateJobsTask extends AsyncTask<Task, Void, Void> {
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            verifySettings();
+
+            for (Task task : tasks) {
+                try {
+                    if (task.getId() == null) throw new Exception("Error: Task id is not defined");
+                    Index index = new Index.Builder(task).index(DBIndex).type(DBTaskType).id(task.getId()).build();
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        task.setId(result.getId());
+                    } else {
+                        Log.i("Error", "An error occurred in UpdateJobsTask");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the jobs");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class DeleteJobsTask extends AsyncTask<Task, Void, Void> {
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            verifySettings();
+
+            for (Task task : tasks) {
+                try {
+                    if (task.getId() == null) throw new Exception("Error: Task id is not defined");
+                    Delete delete = new Delete.Builder(task.getId()).index(DBIndex).type(DBTaskType).build();
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        task.markDeleted();
+                    } else {
+                        Log.i("Error", "An error occurred in UpdateJobsTask");
                     }
                 }
                 catch (Exception e) {
@@ -97,6 +148,56 @@ public class ElasticsearchController {
                         user.setId(result.getId());
                     } else {
                         Log.i("Error", "An error occurred in AddUsersTask");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the users");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class UpdateUsersTask extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            verifySettings();
+
+            for (User user : users) {
+                try {
+                    if (user.getId() == null) throw new Exception("Error: User id is not defined");
+                    Index index = new Index.Builder(user).index(DBIndex).type(DBUserType).id(user.getId()).build();
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        user.setId(result.getId());
+                    } else {
+                        Log.i("Error", "An error occurred in UpdateUsersTask");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the users");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class DeleteUsersTask extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User... users) {
+            verifySettings();
+
+            for (User user : users) {
+                try {
+                    if (user.getId() == null) throw new Exception("Error: User id is not defined");
+                    Delete delete = new Delete.Builder(user.getId()).index(DBIndex).type(DBUserType).build();
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        user.markDeleted();
+                    } else {
+                        Log.i("Error", "An error occurred in UpdateUsersTask");
                     }
                 }
                 catch (Exception e) {

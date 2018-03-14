@@ -17,6 +17,7 @@ public class User {
     private TaskList assignedTasks; //updated var name to be more descriptive - 20/02/18
     private String password;
     private String id;
+    private boolean deleted = false;
 
     /**
      * Constructor of user.
@@ -171,8 +172,10 @@ public class User {
      */
     public void setAssignedTasks (TaskList assignedTasks) { this.assignedTasks = assignedTasks; }
 
-
-    // TODO: public void setID, public int getID - 18/02/18
-    //public int getID(){ return ID;}
-    //public void setID(int ID){ this.ID = ID; }
+    /**
+     * Sets the deleted boolean value to true, signifying this has been deleted from the server
+     */
+    public void markDeleted() {
+        this.deleted = true;
+    }
 }
