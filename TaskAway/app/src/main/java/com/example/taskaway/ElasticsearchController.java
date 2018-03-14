@@ -53,14 +53,18 @@ public class ElasticsearchController {
         }
     }
 
-    public static class GetJobsTask extends AsyncTask<String, Void, ArrayList<Task>> {
+    public static class GetJobsTask extends AsyncTask<String, Void, TaskList> {
         @Override
-        protected ArrayList<Task> doInBackground(String... search_parameters) {
+        protected TaskList doInBackground(String... parameters) {
+            if (parameters.length < 2){
+                parameters[0] = "";
+                parameters[1] = "";
+            }
             verifySettings();
 
-            ArrayList<Task> tasks = new ArrayList<Task>();
+            TaskList tasks = new TaskList();
 
-            Search search = new Search.Builder(search_parameters[0]).addIndex(DBIndex).addType(DBTaskType).build();
+            Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBTaskType).build();
 
             try {
                 SearchResult result = client.execute(search);
@@ -106,12 +110,16 @@ public class ElasticsearchController {
 
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
-        protected ArrayList<User> doInBackground(String... searchTerms) {
+        protected ArrayList<User> doInBackground(String... parameters) {
+            if (parameters.length < 2){
+                parameters[0] = "";
+                parameters[1] = "";
+            }
             verifySettings();
 
             ArrayList<User> users = new ArrayList<User>();
 
-            Search search = new Search.Builder(searchTerms[0]).addIndex(DBIndex).addType(DBUserType).build();
+            Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBUserType).build();
 
             try {
                 SearchResult result = client.execute(search);
@@ -130,7 +138,22 @@ public class ElasticsearchController {
         }
     }
 
-
+    private static String buildQuery(String searchField, String searchParameter) {
+        if ((searchField != null && searchParameter != null)&&(searchField.length() >0 && searchParameter.length()>0)){
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "        \"filtered\" : {\n" +
+                    "            \"filter\" : {\n" +
+                    "                \"term\" : { \"" + searchField + "\" : \"" + searchParameter + "\" }\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+            return query;
+        }else{
+            return "";
+        }
+    }
 
 
     public static void verifySettings() {
