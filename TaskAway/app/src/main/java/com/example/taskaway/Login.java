@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Acts as the login activity when user first opens app.
  */
@@ -27,12 +29,6 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // TODO: Create login button 18/02/18
-    }
-
-    @Override
-    protected void onStart(){
-        super.onStart();
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         final EditText userNameEdit = (EditText)findViewById(R.id.editTextUsername);
@@ -48,13 +44,20 @@ public class Login extends AppCompatActivity {
                 User user = new User(userName, null, null, password, null, null ,null );
 
                 TextView usernameTextView = (TextView)findViewById(R.id.editName);
-                usernameTextView.setText(userName;
+                usernameTextView.setText(userName);
 
-                final Context context = this;
-                Intent eventIntent = new Intent(context, MainActivity.class);
-                startActivity(eventIntent);
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
     }
 
 

@@ -31,17 +31,24 @@ public class ViewProfile extends AppCompatActivity {
         super.onStart();
 
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
+
+        View v = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
+
+        final EditText editName = (EditText) v.findViewById(R.id.editName);
+        final EditText editPhone = (EditText) v.findViewById(R.id.editPhoneNumber);
+        final EditText editEmail = (EditText) v.findViewById(R.id.editEmail);
+
+        User user = getUser(editName.getText().toString());
+
+        //create editable text views
+        editName.setText(user.getUsername().toString(), TextView.BufferType.EDITABLE);
+        editPhone.setText(user.getPhone().toString(), TextView.BufferType.EDITABLE);
+        editEmail.setText(user.getEmail().toString(), TextView.BufferType.EDITABLE);
+
+
         editButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
-                //inflate the edit_view to gather information
-                View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
-
-                final EditText editName = (EditText) ViewProfile.findViewById(R.id.editName);
-                final EditText editPhone = (EditText) ViewProfile.findViewById(R.id.editPhoneNumber);
-                final EditText editEmail = (EditText) ViewProfile.findViewById(R.id.editEmail);
-
 
                 //create dialog to allow user to edit subscription
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewProfile.this);
@@ -52,8 +59,9 @@ public class ViewProfile extends AppCompatActivity {
                 builder.setPositiveButton("Edit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //executes if name, charge and date are not empty fields
-                        if (!(editName.getText().toString().equals("")) && !(editPhone.getText().toString().equals("")) && !(editEmail.getText().toString().equals(""))) {
+
+                        //executes if name is at least 8 characters
+                        if (!(editName.getText().toString().length()<8)) {
                             //set name,phone and email to the new values
                             String Name = editName.getText().toString();
                             String Phone = editPhone.getText().toString();
@@ -76,8 +84,8 @@ public class ViewProfile extends AppCompatActivity {
 
                         }
                         else {
-                            //execute if either the name, date or charge is left blank
-                            Toast.makeText(getApplicationContext(), "Make sure Name, Phone number and Email are not blank", Toast.LENGTH_SHORT).show();
+                            //executes if the name is less than 8 characters
+                            Toast.makeText(getApplicationContext(), "Username must be at least 8 characters!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
