@@ -24,19 +24,11 @@ public class ViewProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        final EditText editName = (EditText) ViewProfile.findViewById(R.id.editName);
-        final EditText editPhoneNumber = (EditText) ViewProfile.findViewById(R.id.editPhoneNumber);
-        final EditText editEmail = (EditText) ViewProfile.findViewById(R.id.editEmail);
-
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-
-        final EditText editName = (EditText) ViewProfile.findViewById(R.id.editName);
-        final EditText editPhone = (EditText) ViewProfile.findViewById(R.id.editPhoneNumber);
-        final EditText editEmail = (EditText) ViewProfile.findViewById(R.id.editEmail);
 
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
         editButton.setOnClickListener(new View.OnClickListener(){
@@ -44,12 +36,12 @@ public class ViewProfile extends AppCompatActivity {
             public void onClick(View v) {
 
                 //inflate the edit_view to gather information
-                View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_view_profile, null);
+                View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
 
-            //create editable text views
-                editName.setText(User.getUsername().toString(), TextView.BufferType.EDITABLE);
-                editPhone.setText(User.getPhone().toString(), TextView.BufferType.EDITABLE);
-                editEmail.setText(User.getEmail().toString(), TextView.BufferType.EDITABLE);
+                final EditText editName = (EditText) ViewProfile.findViewById(R.id.editName);
+                final EditText editPhone = (EditText) ViewProfile.findViewById(R.id.editPhoneNumber);
+                final EditText editEmail = (EditText) ViewProfile.findViewById(R.id.editEmail);
+
 
                 //create dialog to allow user to edit subscription
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewProfile.this);
@@ -67,11 +59,20 @@ public class ViewProfile extends AppCompatActivity {
                             String Phone = editPhone.getText().toString();
                             String Email = editEmail.getText().toString();
 
+                            /*
+                            user.setUsername(Name);
+                            user.setPhone(Phone);
+                            user.setEmail(Email);
+                            */
 
-                            //update the current subscription to the new values
-                            User.setUsername(Name);
-                            User.setPhone(Phone);
-                            User.setEmail(Email);
+                            TextView usernameTextView = (TextView)findViewById(R.id.editName);
+                            TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
+                            TextView emailTextView = (TextView)findViewById(R.id.editEmail);
+
+                            usernameTextView.setText(Name);
+                            phoneTextView.setText(Phone);
+                            emailTextView.setText(Email);
+
 
                         }
                         else {
