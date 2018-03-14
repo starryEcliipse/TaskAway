@@ -1,6 +1,7 @@
 package com.example.taskaway;
 
 import java.util.ArrayList;
+import 	android.util.Base64;
 
 /**
  * Created by sameerah on 18/02/18.
@@ -16,7 +17,7 @@ public class Task {
     private String status;
     private Float lowestBid;
     private String location;
-    private ArrayList<Task> pictures;
+    private ArrayList<String> pictures;
     private String id;
     private boolean deleted = false;
 
@@ -30,7 +31,7 @@ public class Task {
      * @param pictures - pictures related to task
      * @param lowestBid - lowest bid of all other bids made on task
      */
-    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid){
+    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<String> pictures, Float lowestBid){
         this.name = name;
         this.description = description;
         this.status = status;
@@ -92,7 +93,7 @@ public class Task {
      * Returns pictures related to task.
      * @return - pictures of task
      */
-    public ArrayList<Task> getPictures(){
+    public ArrayList<String> getPictures(){
         return pictures;
     }
 
@@ -176,8 +177,16 @@ public class Task {
      * Sets pictures for task.
      * @param pictures - pictures to be set for task
      */
-    public void setPictures(ArrayList<Task> pictures){
+    public void setPictures(ArrayList<String> pictures){
         this.pictures = pictures;
+    }
+
+    /**
+     * Adds a picture to the task.
+     * @param picture - pictures to be set for task
+     */
+    public void addPicture(String picture){
+        this.pictures.add(picture);
     }
 
     /**
