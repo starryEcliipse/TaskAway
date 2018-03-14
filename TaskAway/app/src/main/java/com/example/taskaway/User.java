@@ -183,7 +183,7 @@ public class User {
         return "SHA256 HASH ERROR";
     }
 
-    public boolean verifyPassword(String comparisonPassword){
+    public boolean validatePassword(String comparisonPassword){
         return this.passwordHash.equals(hash_SHA256(comparisonPassword));
     }
 
