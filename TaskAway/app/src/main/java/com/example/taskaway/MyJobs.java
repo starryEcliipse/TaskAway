@@ -1,9 +1,11 @@
 package com.example.taskaway;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,8 +54,10 @@ public class MyJobs extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Add Clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
+                Intent intent1 = new Intent(getContext(), AddActivity.class);
+                startActivity(intent1);
+           }
+       });
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
         TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask);
@@ -62,6 +66,7 @@ public class MyJobs extends Fragment {
         return rootView;
 
     }
+
     /**
      * Testing the functionality of the arraylist and its compatibility with the layout "
      * Adds tasks to the ArrayList
