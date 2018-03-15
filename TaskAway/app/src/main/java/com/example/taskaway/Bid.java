@@ -10,6 +10,7 @@ package com.example.taskaway;
 public class Bid {
     private Float amount;
     private String userId;
+    // TODO: private int userId 18/02/18
 
     /**
      * Constructor of bid.
