@@ -84,12 +84,6 @@ public class MyJobs extends Fragment {
         // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
         //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
 
-
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         //TESTING BELOW
         lstTask = new ArrayList<>();
         lstTask.add(new Task("Job 1",null,null,null,null,null,null));
