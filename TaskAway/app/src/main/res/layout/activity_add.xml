@@ -9,15 +9,15 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
-        android:textColor="@color/Black"
         android:layout_height="wrap_content"
         android:layout_marginEnd="294dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="85dp"
+        android:text="@string/name_tag"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/name_tag" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editText2"
@@ -41,11 +41,11 @@
         android:layout_marginEnd="163dp"
         android:layout_marginStart="163dp"
         android:layout_marginTop="67dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/req_tag"
         android:textColor="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        tools:text="@string/req_tag" />
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
     <EditText
         android:id="@+id/editText3"
@@ -69,11 +69,11 @@
         android:layout_marginEnd="297dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="359dp"
+        android:text="@string/price_tag"
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        tools:text="@string/price_tag" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <EditText
         android:id="@+id/editText4"
