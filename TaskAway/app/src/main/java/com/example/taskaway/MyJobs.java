@@ -59,10 +59,17 @@ public class MyJobs extends Fragment {
            }
        });
 
+
+
+
+
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
+
         TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask);
+
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myrecyclerview.setAdapter(recycleAdapter);
+
         return rootView;
 
     }
@@ -76,6 +83,8 @@ public class MyJobs extends Fragment {
         super.onCreate(savedInstanceState);
         // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
         //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
+
+
 
 
         //TESTING BELOW

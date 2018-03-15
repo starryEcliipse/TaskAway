@@ -1,6 +1,7 @@
 package com.example.taskaway;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,8 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, ViewOwnTask.class);
+                mContext.startActivity(intent);
             }
         });
 
