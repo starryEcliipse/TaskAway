@@ -16,11 +16,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/activity_main"
-            >
+            android:label="@string/activity_main">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".TaskUserRequests" />
@@ -30,7 +30,7 @@
         <activity android:name=".ViewOwnTask" />
         <activity android:name=".ViewProfile" />
         <activity android:name=".Login" />
-
+        <activity android:name=".AddActivity"></activity>
     </application>
 
 </manifest>
