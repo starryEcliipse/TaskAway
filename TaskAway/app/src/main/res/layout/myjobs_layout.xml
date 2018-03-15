@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/jobs_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/jobs_recyclerview">
+        android:layout_height="547dp">
 
     </android.support.v7.widget.RecyclerView>
 
+    <ImageButton
+        android:id="@+id/img_btn_add"
+        android:layout_width="70dp"
+        android:layout_height="90dp"
+        android:src="@mipmap/ic_add"
+        android:background="@null"
+        android:layout_gravity="bottom|right"
+        android:scaleType="fitCenter"
+         />
+
+
 </LinearLayout>
+

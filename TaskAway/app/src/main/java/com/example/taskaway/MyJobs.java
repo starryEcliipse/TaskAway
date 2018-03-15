@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +32,29 @@ public class MyJobs extends Fragment {
     View rootView;
     private RecyclerView myrecyclerview;
     private ArrayList<Task> lstTask;
-
+    ImageButton imgButton;
 
     public MyJobs() {
     }
     /**
      * instantiate the ViewPagerAdapter class with the lstTask arraylist
+     * OnCreateView adds the "Add Button" to the first Fragment tab.
+     *
      */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.myjobs_layout, container, false);
+
+        imgButton = (ImageButton) rootView.findViewById(R.id.img_btn_add);
+        imgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Add Clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
         TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -51,12 +64,14 @@ public class MyJobs extends Fragment {
     }
     /**
      * Testing the functionality of the arraylist and its compatibility with the layout "
+     * Adds tasks to the ArrayList
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
         //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
+
 
         //TESTING BELOW
         lstTask = new ArrayList<>();
@@ -66,6 +81,6 @@ public class MyJobs extends Fragment {
         //lstTask.add(new Task("KIM"));
         //lstTask.add(new Task("JUNG"));
 
-
     }
+
 }
