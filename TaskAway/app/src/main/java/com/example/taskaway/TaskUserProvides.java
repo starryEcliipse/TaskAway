@@ -18,7 +18,7 @@ public class TaskUserProvides extends AppCompatActivity {
     private TaskList tasklist;
     private ArrayAdapter<Task> adapter;
     private ListView provideTaskList;
-    // TODO: Is TaskList Class needed?
+
 
     /**
      * Creates and initializes ListView upon creating app.

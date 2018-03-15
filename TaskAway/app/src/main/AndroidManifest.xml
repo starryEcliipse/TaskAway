@@ -27,6 +27,7 @@
         <activity android:name=".TaskUserProvides" />
         <activity android:name=".OtherTasks" />
         <activity android:name=".ViewTask" />
+        <activity android:name=".ViewOwnTask" />
         <activity android:name=".ViewProfile" />
         <activity android:name=".Login" />
 

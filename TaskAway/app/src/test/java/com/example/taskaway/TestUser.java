@@ -149,8 +149,8 @@ public class TestUser extends ActivityInstrumentationTestCase2 {
     public void testVerifyPassword(){
         User user = new User("name", "email", "1234567");
         user.setPassword("superSecretPassword");
-        assertTrue(user.verifyPassword("superSecretPassword"));
-        assertFalse(user.verifyPassword("notSoSecretPassword"));
+        assertTrue(user.validatePassword("superSecretPassword"));
+        assertFalse(user.validatePassword("notSoSecretPassword"));
     }
 
 
