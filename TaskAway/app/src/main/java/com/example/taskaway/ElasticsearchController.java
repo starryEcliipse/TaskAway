@@ -24,7 +24,7 @@ import io.searchbox.core.SearchResult;
 public class ElasticsearchController {
     private static JestDroidClient client;
 
-    private static final String DBIndex = "CMPUT301W18T19";
+    private static final String DBIndex = "cmput301w18t19";
     private static final String DBTaskType = "task";
     private static final String DBUserType = "user";
 
@@ -100,18 +100,24 @@ public class ElasticsearchController {
     public static class GetJobsTask extends AsyncTask<String, Void, TaskList> {
         @Override
         protected TaskList doInBackground(String... parameters) {
+            String parameter1, parameter2;
             if (parameters.length < 2){
-                parameters[0] = "";
-                parameters[1] = "";
+                parameter1 = "";
+                parameter2 = "";
+            }else{
+                parameter1 = parameters[0];
+                parameter2 = parameters[1];
             }
             verifySettings();
             TaskList tasks = new TaskList();
-            Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBTaskType).build();
+            Search search = new Search.Builder(buildQuery(parameter1, parameter2)).addIndex(DBIndex).addType(DBTaskType).build();
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<Task> foundTasks = result.getSourceAsObjectList(Task.class);
-                    tasks.addAll(foundTasks);
+                    for (Task t : foundTasks){
+                        tasks.addTask(t);
+                    }
                 } else {
                     Log.i("Error", "Search query failed to find anything");
                 }
@@ -195,18 +201,24 @@ public class ElasticsearchController {
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
         protected ArrayList<User> doInBackground(String... parameters) {
+            String parameter1, parameter2;
             if (parameters.length < 2){
-                parameters[0] = "";
-                parameters[1] = "";
+                parameter1 = "";
+                parameter2 = "";
+            }else{
+                parameter1 = parameters[0];
+                parameter2 = parameters[1];
             }
             verifySettings();
             ArrayList<User> users = new ArrayList<User>();
-            Search search = new Search.Builder(buildQuery(parameters[0], parameters[1])).addIndex(DBIndex).addType(DBUserType).build();
+            Search search = new Search.Builder(buildQuery(parameter1, parameter2)).addIndex(DBIndex).addType(DBUserType).build();
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<User> foundUsers = result.getSourceAsObjectList(User.class);
-                    users.addAll(foundUsers);
+                    for (User u : foundUsers){
+                        users.add(u);
+                    }
                 } else {
                     Log.i("Error", "Search query failed to find anything");
                 }
