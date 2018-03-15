@@ -86,7 +86,10 @@ public class MyJobs extends Fragment {
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         //TESTING BELOW
         lstTask = new ArrayList<>();
         lstTask.add(new Task("Job 1",null,null,null,null,null,null));
