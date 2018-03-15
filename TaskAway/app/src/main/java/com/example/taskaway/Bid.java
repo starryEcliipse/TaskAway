@@ -23,6 +23,7 @@ public class Bid {
         this.userId = userId;
         this.amount = amount;
     }
+    Bid(){}
 
     Bid(User user, Float amount){
         this.userId = user.getId();
