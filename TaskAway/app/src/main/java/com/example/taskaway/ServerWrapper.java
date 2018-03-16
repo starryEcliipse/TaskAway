@@ -128,4 +128,13 @@ public class ServerWrapper {
         }
         return null;
     }
+
+    public static User getUserFromUsername(String username) {
+        try{
+            return new ElasticsearchController.GetUsersTask().execute("username", username).get().get(0);
+        }catch(Exception e){
+            Log.i("Error", "Something went wrong trying to get user with username from server");
+        }
+        return null;
+    }
 }
