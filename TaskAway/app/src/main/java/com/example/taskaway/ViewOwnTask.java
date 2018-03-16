@@ -18,7 +18,7 @@ public class ViewOwnTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_own_task);
-        Button editButton = (Button) findViewById(R.id.editbutton);
+        Button editButton = (Button) findViewById(R.id.edit_button);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -16,4 +16,26 @@
     <string name="edit_price">0.00</string>
     <string name="cancel_button">Cancel</string>
     <string name="save_button">Save</string>
+    <string name="edit_button">EDIT</string>
+    <string name="my_task_name"> </string>
+    <string name="my_task_details"> </string>"
+    <string name="location">Location: </string>
+    <string name="my_task_location"> </string>
+    <string name="location_detail_button">LOCATION DETAILS</string>
+    <string name="status">Status: </string>
+    <string name="my_task_status"> </string>
+    <string name="lowest_bid">Lowest Bid:</string>
+    <string name="lowest_bid_username"> </string>
+    <string name="lowest_bid_amount"> </string>
+    <string name="accept_button">ACCEPT</string>
+    <string name="other_bids_button">other bids</string>
+    <string name="task_name"> </string>
+    <string name="task_details"> </string>
+    <string name="task_location"> </string>
+    <string name="asking_price">Asking Price:</string>
+    <string name="winning_bid">Winning Bid:</string>
+    <string name="your_price">Your Price:</string>
+    <string name="asking_price_amount"> </string>
+    <string name="winning_bid_amount"> </string>
+    <string name="your_price_amount">$0.00</string>
 </resources>
