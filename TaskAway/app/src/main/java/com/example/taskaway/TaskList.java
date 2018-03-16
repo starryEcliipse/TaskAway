@@ -9,16 +9,14 @@ import java.util.ArrayList;
 /**
  * Represents a list of tasks.
  */
-public class TaskList extends ArrayList {
-
-    private ArrayList<Task> reqTask = new ArrayList<Task>();
+public class TaskList extends ArrayList<Task> {
 
     /**
      * Adds a new task to list of tasks.
      * @param task - task to be added
      */
     public void addTask(Task task){
-        reqTask.add(task);
+        super.add(task);
     }
 
     /**
@@ -27,7 +25,7 @@ public class TaskList extends ArrayList {
      * @return - boolean value of True or False - True if task exists; otherwise False
      */
     public boolean hasTask(Task task){
-        return reqTask.contains(task);
+        return super.contains(task);
     }
 
     /**
@@ -36,7 +34,7 @@ public class TaskList extends ArrayList {
      * @return - task at current index
      */
     public Task getTask(int index){
-        return reqTask.get(index);
+        return super.get(index);
     }
 
     /**
@@ -44,7 +42,7 @@ public class TaskList extends ArrayList {
      * @param task - task to be deleted
      */
     public void removeTask(Task task){
-        reqTask.remove(task);
+        super.remove(task);
     }
 
 }
