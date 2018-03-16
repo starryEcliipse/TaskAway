@@ -18,7 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:hint="Edit Name"
+        android:gravity = "center"
+        android:hint="Username"
         />
 
     <EditText
@@ -26,14 +27,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:hint="Edit Phone Number"
+        android:gravity = "center"
+        android:inputType="phone"
+        android:hint="Phone Number"
         />
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
-        android:hint="Edit Email"
+        android:gravity = "center"
+        android:hint="Email"
         />
 
 

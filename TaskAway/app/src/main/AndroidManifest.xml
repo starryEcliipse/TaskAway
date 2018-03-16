@@ -15,21 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:name=".Login"
+            android:label="@string/activity_login"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".TaskUserRequests" />
         <activity android:name=".TaskUserProvides" />
         <activity android:name=".OtherTasks" />
         <activity android:name=".ViewTask" />
         <activity android:name=".ViewOwnTask" />
         <activity android:name=".ViewProfile" />
-        <activity android:name=".Login" />
         <activity android:name=".AddActivity"></activity>
     </application>
 

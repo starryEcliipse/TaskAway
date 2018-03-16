@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final String userID = getIntent().getStringExtra("user_id");
+
 
         /**
          * TOOLBAR
@@ -62,8 +65,11 @@ public class MainActivity extends AppCompatActivity{
                             public boolean onMenuItemClick(MenuItem item) {
                                 switch (item.getItemId()){
                                     case R.id.Item1:
-                                        Toast.makeText(MainActivity.this, "Profile Clicked", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(MainActivity.this, ViewProfile.class);
+                                        intent.putExtra("user_id", userID);
+                                        startActivity(intent);
                                         return true;
+
                                     case R.id.Item2:
                                         Toast.makeText(MainActivity.this, "About Us Clicked", Toast.LENGTH_SHORT).show();
                                         return true;

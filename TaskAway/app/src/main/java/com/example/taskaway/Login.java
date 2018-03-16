@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,14 +40,25 @@ public class Login extends AppCompatActivity {
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
-                User user = new User(userName, null, null, password, null, null ,null );
+                if(userName.length()<8){
+                    userNameEdit.setError("Username must be 8 characters minimum");
+                    return;
+                }
+
+                if(ServerWrapper.getUserFromUsername(userName)!=null){
+                    userNameEdit.setError("This username is already taken");
+                    return;
+                }
+                User user = new User(userName, null, null);
                 ServerWrapper.addUser(user);
 
-                TextView usernameTextView = (TextView)findViewById(R.id.editName);
-                usernameTextView.setText(userName);
+                User current_user = ServerWrapper.getUserFromUsername(userName);
+                String current_ID = current_user.getId();
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("user_id", current_ID);
                 startActivity(intent);
+
 
             }
         });
