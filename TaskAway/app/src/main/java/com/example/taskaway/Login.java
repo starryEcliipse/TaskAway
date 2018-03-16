@@ -45,18 +45,23 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                if(ServerWrapper.getUserFromUsername(userName)!=null){
-                    userNameEdit.setError("This username is already taken");
-                    return;
-                }
                 User user = new User(userName, null, null);
-                ServerWrapper.addUser(user);
 
-                User current_user = ServerWrapper.getUserFromUsername(userName);
-                String current_ID = current_user.getId();
+                /**
+                 * DO NOT REMOVE COMMENTS
+                 * Those lines are for when we have server connectivity
+                 */
+                //ServerWrapper.addUser(user);
+                //User current_user = ServerWrapper.getUserFromUsername(userName);
+                //String current_ID = current_user.getId();
+
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                saveFileController.addNewUser(context, user);
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.putExtra("user_id", current_ID);
+                //intent.putExtra("user_id", current_ID);
+                intent.putExtra("user_name", userName);
                 startActivity(intent);
 
 
