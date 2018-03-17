@@ -10,6 +10,7 @@ import android.widget.EditText;
 public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
+    private EditText status;
     private Button delete;
     private Button save;
 
@@ -20,12 +21,15 @@ public class EditActivity extends AppCompatActivity {
 
         tname = (EditText) findViewById(R.id.editText2);
         des = (EditText) findViewById(R.id.editText3);
+        status = (EditText) findViewById(R.id.editText);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("one");
         String description = intent.getStringExtra("two");
+        String statusTask = intent.getStringExtra("three");
         tname.setText(name);
         des.setText(description);
+        status.setText(statusTask);
 
 
 
