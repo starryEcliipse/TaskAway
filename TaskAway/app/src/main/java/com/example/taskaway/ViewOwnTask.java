@@ -75,6 +75,14 @@ public class ViewOwnTask extends AppCompatActivity {
         tasklowestbid = task.findLowestBid();
         tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
 
+//        Button deleteButton = (Button) findViewById(R.id.button3);
+//        deleteButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
     }
 
 

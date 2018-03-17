@@ -31,8 +31,14 @@ public class EditActivity extends AppCompatActivity {
         tname.setText(name);
         des.setText(description);
         status.setText(statusTask);
-        
 
+        cancel = (Button) findViewById(R.id.button);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
 

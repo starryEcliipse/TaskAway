@@ -76,10 +76,10 @@ public class AddActivity extends AppCompatActivity {
                 saveFileController.addRequiredTask(context, index, task);
 
 //
-//                Intent intent = new Intent();
-//                String userName = "someonee";
-//                intent.putExtra("one", userName);
-//                startActivity(intent);
+                Intent intent = new Intent(getBaseContext(), TaskListViewAdapter.class);
+                String userName = "someonee";
+                intent.putExtra("one", userName);
+                startActivity(intent);
 
 
             }
