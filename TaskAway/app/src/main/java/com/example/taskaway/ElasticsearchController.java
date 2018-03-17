@@ -45,6 +45,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -68,6 +69,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -91,6 +93,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the jobs");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -122,6 +125,7 @@ public class ElasticsearchController {
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Log.i("Error", e.toString());
             }
 
             return tasks;
@@ -144,6 +148,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -167,6 +172,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -190,6 +196,7 @@ public class ElasticsearchController {
                 }
                 catch (Exception e) {
                     Log.i("Error", "The application failed to build and send the users");
+                    Log.i("Error", e.toString());
                 }
             }
             return null;
@@ -221,6 +228,7 @@ public class ElasticsearchController {
             }
             catch (Exception e) {
                 Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                Log.i("Error", e.toString());
             }
             return users;
         }
