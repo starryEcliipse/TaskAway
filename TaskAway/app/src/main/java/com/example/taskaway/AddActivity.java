@@ -67,10 +67,7 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
 
-                intent.putExtra("one", name);
-                intent.putExtra("two", comment);
-                intent.putExtra("three", price);
-                startActivity(intent);
+
 
             }
         });
