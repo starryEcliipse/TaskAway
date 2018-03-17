@@ -10,22 +10,24 @@
     <Button
         android:id="@+id/edit_button"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="28dp"
         android:background="@color/colorEditButton"
-        android:textColor="@color/colorWhite"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="@string/edit_button"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/my_task_name"
-        android:layout_width="184dp"
-        android:layout_height="25dp"
+        android:layout_width="177dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
+        android:gravity="center"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +39,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="42dp"
-        android:text="@string/my_task_details"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_task_name" />
@@ -49,6 +51,7 @@
         android:textColor="@color/Black"
         android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
+        android:textStyle="bold"
         android:text="@string/location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_task_details" />
@@ -86,20 +89,22 @@
         android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/Black"
+        android:textStyle="bold"
         android:text="@string/status"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_task_location" />
 
     <TextView
         android:id="@+id/my_task_status"
-        android:layout_width="169dp"
-        android:layout_height="21dp"
+        android:layout_width="93dp"
+        android:layout_height="19dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/Black"
         android:text="@string/my_task_status"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/status"
         app:layout_constraintTop_toBottomOf="@+id/location_detail_button" />
 
@@ -111,6 +116,7 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/Black"
         android:text="@string/lowest_bid"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
@@ -172,14 +178,16 @@
 
     <TextView
         android:id="@+id/requirements"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="21dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/req_tag"
         android:textColor="@color/Black"
+        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/my_task_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
