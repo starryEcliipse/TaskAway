@@ -12,7 +12,7 @@ public class AddActivity extends AppCompatActivity {
 
     private EditText nameField;
     private EditText requirementField;
-    private EditText priceField;
+    private EditText statusField;
     private Button cancelButton;
     private Button saveButton;
 
@@ -22,6 +22,7 @@ public class AddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add);
         nameField = (EditText) findViewById(R.id.editText2);
         requirementField = (EditText) findViewById(R.id.editText3);
+        statusField = (EditText) findViewById(R.id.editText);
 
         saveButton = (Button) findViewById(R.id.button2);
 
@@ -57,6 +58,12 @@ public class AddActivity extends AppCompatActivity {
 
                 if (comment.length()>300) {
                     requirementField.setError("Description too long");
+                    return;
+                }
+
+                String s = statusField.getText().toString();
+                if (s.isEmpty()){
+                    statusField.setError("Assign status");
                     return;
                 }
 
