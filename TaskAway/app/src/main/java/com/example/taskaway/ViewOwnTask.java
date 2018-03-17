@@ -48,8 +48,10 @@ public class ViewOwnTask extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
                 String name = taskname.getText().toString();
                 String description = taskdescription.getText().toString();
+                String status = taskstatus.getText().toString();
                 intent.putExtra("one", name);
                 intent.putExtra("two", description);
+                intent.putExtra("three", status);
                 startActivity(intent);
             }
         });

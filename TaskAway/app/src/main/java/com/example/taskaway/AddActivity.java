@@ -69,7 +69,7 @@ public class AddActivity extends AppCompatActivity {
                 //TESTING
 
                 Task task = new Task(name, comment, s, null, null, null, null);
-                
+
 
 
             }
