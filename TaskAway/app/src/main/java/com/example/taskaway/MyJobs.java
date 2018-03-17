@@ -86,7 +86,7 @@ public class MyJobs extends Fragment {
 
         //TESTING BELOW
         lstTask = new ArrayList<>();
-        lstTask.add(new Task("Job 1",null,null,null,null,null,null));
+        lstTask.add(new Task("Job 1",null,"requested",null,null,null,null));
         lstTask.add(new Task("Job 2",null,null,null,null,null,null));
         lstTask.add(new Task("Job 3",null,null,null,null,null,null));
         //lstTask.add(new Task("KIM"));

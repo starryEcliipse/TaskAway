@@ -22,6 +22,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String id;
     private String creatorId;
     private boolean deleted = false;
+    // TODO: getUserName -> for use when user is offline or server unavailable
 
     /**
      * Constructor of task.

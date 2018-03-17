@@ -16,6 +16,11 @@ import android.content.Intent;
 public class ViewOwnTask extends AppCompatActivity {
 
     private TextView taskname;
+    private TextView taskstatus;
+    private TextView taskdescription;
+    private TextView tasklocation;
+    private TextView tasklowestbidusername;
+    private TextView tasklowestbidamount;
     private Task task;
 
     @Override
@@ -24,6 +29,16 @@ public class ViewOwnTask extends AppCompatActivity {
         setContentView(R.layout.activity_view_own_task);
 
         taskname = (TextView)this.findViewById(R.id.my_task_name);
+        taskstatus = (TextView)this.findViewById(R.id.my_task_status);
+        taskdescription = (TextView)this.findViewById(R.id.my_task_details);
+        tasklocation = (TextView)this.findViewById(R.id.my_task_location);
+        /* TODO: use with elasticsearch:
+            userid = task.getCreatorId();
+            user = ServerWrapper.getUserFromId(userid);
+            lowest
+         */
+        tasklowestbidusername = (TextView)this.findViewById(R.id.lowest_bid_username);
+        tasklowestbidamount = (TextView)this.findViewById(R.id.lowest_bid_amount);
 
         Button editButton = (Button) findViewById(R.id.edit_button);
 
@@ -43,6 +58,7 @@ public class ViewOwnTask extends AppCompatActivity {
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
         taskname.setText(task.getName()); // read task name and display it
+        taskstatus.setText(task.getStatus());
     }
 
 
