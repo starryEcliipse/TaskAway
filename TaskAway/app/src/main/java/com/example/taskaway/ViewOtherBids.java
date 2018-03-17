@@ -5,20 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Diane on 2018-03-16.
- * Acts as activity that displays a tasks information when a user selects a task
- * that they HAVE previously bid on.
+ * Acts as an activity that displays all bids on a task that the user created.
+ * Allows the user to select bids and accept/decline them
  */
 
-
-public class ViewBidTask extends AppCompatActivity {
+public class ViewOtherBids extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_bid_task);
-        // TODO: Buttons
-    }
+        setContentView(R.layout.activity_view_other_bids);
 
+        //TODO: Buttons
+    }
 
     @Override
     protected void onStart(){
@@ -30,4 +29,5 @@ public class ViewBidTask extends AppCompatActivity {
     protected void onDestroy(){
         super.onDestroy();
     }
+
 }
