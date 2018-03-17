@@ -10,7 +10,6 @@ import android.widget.EditText;
 public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
-    private EditText aprice;
     private Button delete;
     private Button save;
 

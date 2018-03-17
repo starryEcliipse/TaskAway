@@ -43,4 +43,6 @@
     <string name="delete">Delete</string>
     <string name="accept">Accept</string>
     <string name="delete_task">Delete</string>
+    <string name="status_tag">Status</string>
+    <string name="status_edit"></string>
 </resources>
