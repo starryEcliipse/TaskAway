@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,7 +70,16 @@ public class AddActivity extends AppCompatActivity {
                 //TESTING
 
                 Task task = new Task(name, comment, s, null, null, null, null);
+                Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                int index = saveFileController.getUserIndex(context, "someonee");
+                saveFileController.addRequiredTask(context, index, task);
 
+//
+//                Intent intent = new Intent();
+//                String userName = "someonee";
+//                intent.putExtra("one", userName);
+//                startActivity(intent);
 
 
             }

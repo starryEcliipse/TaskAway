@@ -11,6 +11,7 @@ public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
     private EditText status;
+    private Button cancel;
     private Button delete;
     private Button save;
 
@@ -30,6 +31,8 @@ public class EditActivity extends AppCompatActivity {
         tname.setText(name);
         des.setText(description);
         status.setText(statusTask);
+        
+
 
 
 
