@@ -38,7 +38,6 @@ public class AddActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MyJobs.class);
                 String name = nameField.getText().toString();
                 if (name.isEmpty()) {
                     nameField.setError("Enter name");
@@ -67,6 +66,10 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
 
+                //TESTING
+
+                Task task = new Task(name, comment, s, null, null, null, null);
+                
 
 
             }
