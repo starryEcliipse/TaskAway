@@ -1,13 +1,17 @@
 package com.example.taskaway;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+/**
+ * Created by Sameerah Wajahat
+ * This class handles adding a new task
+ */
 
 public class AddActivity extends AppCompatActivity {
 
@@ -69,10 +73,10 @@ public class AddActivity extends AppCompatActivity {
 
                 //TESTING
 
-                Task task = new Task(name, comment, s, null, null, null, null);
                 Intent intent = new Intent(getBaseContext(), TaskListViewAdapter.class);
-                String userName = "someonee";
-                intent.putExtra("one", userName);
+                intent.putExtra("one", name);
+                intent.putExtra("two", comment);
+                intent.putExtra("three", s);
                 startActivity(intent);
 
 

@@ -2,6 +2,7 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,13 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
+
+//        Intent intent = ((AddActivity) mContext).getIntent();
+//        Task task = (Task) intent.getSerializableExtra("task");
+//        mData.add(task);
+////        SaveFileController saveFileController = new SaveFileController();
+////        User currentuser = saveFileController.getUserFromUsername(mContext, "someonee");
+////        TaskList tasks = currentuser.getReqTasks();
 
 
 //        /* Ensure that when a task is clicked, we can pass THAT task to ViewOwnTask

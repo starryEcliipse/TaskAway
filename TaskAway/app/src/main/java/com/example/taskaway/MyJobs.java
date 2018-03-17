@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -113,6 +114,7 @@ public class MyJobs extends Fragment {
         Collections.sort(blist); /* DELETE LATER - from findLowestBid method in Task class */
         Bid bidbid = blist.get(0); /* DELETE LATER - from findLowestBid method in Task class */
         float blow = bidbid.getAmount(); /* DELETE LATER - get bid amount of lowest bid in arraylist of bids */
+
 
         // ADD TEMPORARY TASKS FOR TESTING
         lstTask = new ArrayList<>();

@@ -7,6 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Created by Sameerah Wajahat
+ * This class handles editing / deleting an existing task
+ *
+ */
+
 public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
