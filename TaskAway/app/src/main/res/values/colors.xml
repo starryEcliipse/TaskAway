@@ -6,7 +6,13 @@
     <color name="DarkGrey">#1a2930</color>
     <color name="Black">#000000</color>
     <color name="colorCoolGrey">#262938</color>
+    <color name="colorRedCancelButton">#8e2311</color>
+    <color name="colorGreenSaveButton">#0f8e1d</color>
     <color name="colorLightBlack">#181A24</color>
+    <color name="colorAccept">#35c683</color>
+    <color name="colorOtherBids">#0e7f63</color>
+    <color name="colorDarkGreen">#204726</color>
+    <color name="colorEditButton">#474f4b</color>
     <color name="colorTransparentWhite">#cccccc</color>
     <color name="colorWhite">#ffffff</color>
 

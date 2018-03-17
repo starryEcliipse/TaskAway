@@ -13,6 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
+        android:textColor="@color/Black"
         android:text="@string/task_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="42dp"
+        android:textColor="@color/Black"
         android:text="@string/task_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/Black"
         android:text="@string/location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_details" />
@@ -46,6 +49,7 @@
         android:layout_height="31dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/Black"
         android:text="@string/task_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location" />
@@ -57,6 +61,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="48dp"
+        android:background="@color/colorDarkGreen"
+        android:textColor="@color/colorWhite"
         android:text="@string/location_detail_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
@@ -69,6 +75,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="25dp"
+        android:textColor="@color/Black"
         android:text="@string/old"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_location" />
@@ -80,6 +87,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="25dp"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/old_price"
         app:layout_constraintTop_toBottomOf="@+id/task_location" />
@@ -90,6 +98,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/Black"
         android:text="@string/winning_bid"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/old_price" />
@@ -101,6 +110,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/winning_bid"
         app:layout_constraintTop_toBottomOf="@id/old_price_amount" />
@@ -111,6 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="20dp"
+        android:textColor="@color/Black"
         android:text="@string/new_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/winning_bid" />
@@ -133,10 +144,14 @@
         android:id="@+id/cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="15dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
+        android:background="@color/colorRedCancelButton"
         android:text="@string/cancel_button"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/save_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_price" />
@@ -145,12 +160,28 @@
         android:id="@+id/save_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="12dp"
+        android:background="@color/colorGreenSaveButton"
         android:text="@string/save_button"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_bid_amount" />
 
+    <TextView
+        android:id="@+id/requirements"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/req_tag"
+        android:textColor="@color/Black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_name" />
 
 
 </android.support.constraint.ConstraintLayout>
