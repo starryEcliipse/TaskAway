@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //final String userID = getIntent().getStringExtra("user_id");
+        final String userID = getIntent().getStringExtra("user_id");
         final String user_name = getIntent().getStringExtra("user_name");
 
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
                                 switch (item.getItemId()){
                                     case R.id.Item1:
                                         Intent intent = new Intent(MainActivity.this, ViewProfile.class);
-                                        //intent.putExtra("user_id", userID);
+                                        intent.putExtra("user_id", userID);
                                         intent.putExtra("user_name", user_name);
                                         startActivity(intent);
                                         return true;

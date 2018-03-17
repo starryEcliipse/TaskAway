@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -28,28 +29,43 @@ import java.util.ArrayList;
  */
 public class ViewProfile extends AppCompatActivity {
 
+    private Boolean lengthReq;
+    private Boolean userTaken;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        //final String userID = getIntent().getStringExtra("user_id");
-        //final User current_user = ServerWrapper.getUserFromId(userID);
-        String user_name = getIntent().getStringExtra("user_name");
-        Context context = getApplicationContext();
-        SaveFileController saveFileController = new SaveFileController();
+
+        //Get user_id and user_name
+        final String user_name = getIntent().getStringExtra("user_name");
+        final String userID = getIntent().getStringExtra("user_id");
+
+        //Get user from server
+        final User current_user_server = ServerWrapper.getUserFromId(userID);
+
+        //Get user from file
+        final Context context = getApplicationContext();
+        final SaveFileController saveFileController = new SaveFileController();
         final User current_user = saveFileController.getUserFromUsername(context, user_name);
+        final Integer userIndex = saveFileController.getUserIndex(context, user_name);
 
         String username = current_user.getUsername();
-        String phonenumber = current_user.getPhone();
-        String email = current_user.getEmail();
-
+        Log.i("User_name:", username);
         TextView usernameTextView = (TextView)findViewById(R.id.editName);
-        TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
-        TextView emailTextView = (TextView)findViewById(R.id.editEmail);
-
         usernameTextView.setText(username);
-        phoneTextView.setText(phonenumber);
-        emailTextView.setText(email);
+
+        if(current_user.getPhone()!=null) {
+            String phonenumber = current_user.getPhone();
+            TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
+            phoneTextView.setText(phonenumber);
+        }
+
+        if(current_user.getEmail()!=null) {
+            String email = current_user.getEmail();
+            TextView emailTextView = (TextView) findViewById(R.id.editEmail);
+            emailTextView.setText(email);
+        }
 
         final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
@@ -66,8 +82,13 @@ public class ViewProfile extends AppCompatActivity {
 
                 //create editable text views
                 editName.setText(current_user.getUsername().toString(), TextView.BufferType.EDITABLE);
-                editPhone.setText(current_user.getPhone().toString(), TextView.BufferType.EDITABLE);
-                editEmail.setText(current_user.getEmail().toString(), TextView.BufferType.EDITABLE);
+
+                if(current_user.getPhone()!=null){
+                    editPhone.setText(current_user.getPhone().toString(), TextView.BufferType.EDITABLE);
+                }
+                if(current_user.getEmail()!=null) {
+                    editEmail.setText(current_user.getEmail().toString(), TextView.BufferType.EDITABLE);
+                }
 
 
                 //create dialog to allow user to edit profile
@@ -78,21 +99,39 @@ public class ViewProfile extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                        Integer usernameLength = editName.getText().toString().length();
+                        if (usernameLength<8){
+                            lengthReq = false;
+                        }else{
+                            lengthReq = true;
+                        }
+
+                        User checkUser = saveFileController.getUserFromUsername(context, editName.getText().toString());
+                        if (checkUser!=null){
+                            userTaken = true;
+                        }else{
+                            userTaken = false;
+                        }
+
+
                         //executes if name is at least 8 characters
-                        if (!(editName.getText().toString().length()<8)) {
+                        if ((lengthReq) || !(userTaken)) {
 
                             //set name,phone and email to the new values
                             String Name = editName.getText().toString();
                             String Phone = editPhone.getText().toString();
                             String Email = editEmail.getText().toString();
 
-                            //update the user information
+                            //update the user information for file
                             current_user.setUsername(Name);
                             current_user.setPhone(Phone);
                             current_user.setEmail(Email);
 
                             //update the user information in the server
-                            ServerWrapper.updateUser(current_user);
+                            //ServerWrapper.updateUser(current_user);
+
+                            //update information in server
+                            saveFileController.updateUser(context, userIndex, current_user);
 
                             //get the profile TextView values
                             TextView usernameTextView = (TextView)findViewById(R.id.editName);
@@ -107,8 +146,13 @@ public class ViewProfile extends AppCompatActivity {
 
                         }
                         else {
-                            //executes if the name is less than 8 characters
-                            Toast.makeText(getApplicationContext(), "Username must be at least 8 characters!", Toast.LENGTH_SHORT).show();
+                            if (!lengthReq) {
+                                //executes if the name is less than 8 characters
+                                Toast.makeText(getApplicationContext(), "Username must be at least 8 characters!", Toast.LENGTH_SHORT).show();
+                            }
+                            if(userTaken){
+                                Toast.makeText(getApplicationContext(), "Username is taken!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });

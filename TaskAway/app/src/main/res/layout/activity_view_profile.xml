@@ -22,6 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:textSize="16sp"
         android:layout_centerInParent="true"
         android:layout_below="@+id/imageView"
         />
@@ -31,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
+        android:textSize="14sp"
         android:layout_centerInParent="true"
         android:layout_below="@+id/editName"
         />
@@ -39,16 +43,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
+        android:textSize="14sp"
         android:layout_centerInParent="true"
         android:layout_below="@+id/editPhoneNumber"
         />
 
     <ImageButton
         android:id="@+id/editProfileButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorGreenSaveButton"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
 

@@ -23,9 +23,13 @@ import java.util.List;
 
 public class SaveFileController {
     private ArrayList<User> allUsers;
-    private ArrayList<Task> allTasks;
-    //private String username;
+    private User user;
+    private Task task;
     private String saveFile = "test_save_file4.sav";
+
+    /**
+     *
+     */
 
     public SaveFileController() {
         this.allUsers = new ArrayList<User>();
@@ -241,7 +245,7 @@ public class SaveFileController {
         User currentuser = this.allUsers.get(userIndex);
         TaskList tasks = currentuser.getReqTasks();
         for(int i=0; i<tasks.size(); i++){
-            if(tasks.getTask(i).getId() == id){
+            if(tasks.getTask(i).getId().equals(id)){
                 tasks.getTask(i).markDeleted();
             }
             i++;
@@ -260,9 +264,8 @@ public class SaveFileController {
         loadFromFile(context);
         User currentuser = this.allUsers.get(userIndex);
         TaskList tasks = currentuser.getReqTasks();
-        Task task = null;
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.getTask(i).getId() == id) {
+            if (tasks.getTask(i).getId().equals(id)) {
                 task = tasks.getTask(i);
             }
         }
@@ -275,7 +278,7 @@ public class SaveFileController {
         User currentuser = this.allUsers.get(userIndex);
         TaskList tasks = currentuser.getReqTasks();
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.getTask(i).getId() == id) {
+            if (tasks.getTask(i).getId().equals(id)) {
                 tasks.set(i, task);
             }
         }
@@ -284,10 +287,10 @@ public class SaveFileController {
 
     public User getUserFromUsername(Context context, String username){
         loadFromFile(context);
-        User user = null;
         for(int i=0; i<this.allUsers.size(); i++){
-            if(this.allUsers.get(i).getUsername() == username){
-                user = this.allUsers.get(i);
+            if(this.allUsers.get(i).getUsername().equals(username)){
+               user = this.allUsers.get(i);
+               break;
             }
         }
         return user;
