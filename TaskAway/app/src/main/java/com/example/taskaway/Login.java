@@ -129,7 +129,6 @@ public class Login extends AppCompatActivity {
                 }
 
                 String current_ID = current_user.getId();
-                if (current_ID == null) Log.i("ID is Null!!", "Things are broken!");
 
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
