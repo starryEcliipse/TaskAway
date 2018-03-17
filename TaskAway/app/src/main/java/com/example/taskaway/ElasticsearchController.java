@@ -115,9 +115,7 @@ public class ElasticsearchController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<Task> foundTasks = result.getSourceAsObjectList(Task.class);
-                    for (Task t : foundTasks){
-                        tasks.addTask(t);
-                    }
+                    tasks.addAll(foundTasks);
                 } else {
                     Log.i("Error", "Search query failed to find anything");
                 }
@@ -203,8 +201,8 @@ public class ElasticsearchController {
         protected ArrayList<User> doInBackground(String... parameters) {
             String parameter1, parameter2;
             if (parameters.length < 2){
-                parameter1 = "";
-                parameter2 = "";
+                parameter1 = null;
+                parameter2 = null;
             }else{
                 parameter1 = parameters[0];
                 parameter2 = parameters[1];
@@ -216,9 +214,7 @@ public class ElasticsearchController {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
                     List<User> foundUsers = result.getSourceAsObjectList(User.class);
-                    for (User u : foundUsers){
-                        users.add(u);
-                    }
+                    users.addAll(foundUsers);
                 } else {
                     Log.i("Error", "Search query failed to find anything");
                 }
@@ -232,18 +228,10 @@ public class ElasticsearchController {
 
     private static String buildQuery(String searchField, String searchParameter) {
         if ((searchField != null && searchParameter != null)&&(searchField.length() >0 && searchParameter.length()>0)){
-            String query = "{\n" +
-                    "    \"query\": {\n" +
-                    "        \"filtered\" : {\n" +
-                    "            \"filter\" : {\n" +
-                    "                \"term\" : { \"" + searchField + "\" : \"" + searchParameter + "\" }\n" +
-                    "            }\n" +
-                    "        }\n" +
-                    "    }\n" +
-                    "}";
+            String query = "{\"query\": { \"term\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"from\": 0, \"size\": 1000}";
             return query;
         }else{
-            return "";
+            return "{\"query\": {\"match_all\" : {}}}, \"from\": 0, \"size\": 1000}";
         }
     }
 

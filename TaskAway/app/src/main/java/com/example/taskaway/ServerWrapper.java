@@ -151,8 +151,30 @@ public class ServerWrapper {
         try{
             return new ElasticsearchController.GetUsersTask().execute(field, value).get();
         }catch(Exception e){
+            Log.i("Exception", e.toString());
             Log.i("Error", "Something went wrong trying to search users on server");
         }
         return null;
+    }
+
+
+    //For testing purposes only
+    public static void deleteAllJobs() {
+        TaskList taskList = ServerWrapper.getAllJobs();
+        for (Task t : taskList){
+            ServerWrapper.deleteJob(t);
+        }
+        taskList = ServerWrapper.getAllJobs();
+        if (taskList.size() > 0) deleteAllJobs();
+    }
+
+    //For testing purposes only
+    public static void deleteAllUsers() {
+        ArrayList<User> userList = ServerWrapper.getAllUsers();
+        for (User u : userList){
+            ServerWrapper.deleteUser(u);
+        }
+        userList = ServerWrapper.getAllUsers();
+        if (userList.size() > 0) deleteAllUsers();
     }
 }
