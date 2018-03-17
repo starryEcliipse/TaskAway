@@ -64,6 +64,8 @@ public class ViewOwnTask extends AppCompatActivity {
         task = (Task) intent.getSerializableExtra("task");
         taskname.setText(task.getName()); // read task name and display it
         taskstatus.setText(task.getStatus());
+        tasklocation.setText(task.getLocation());
+        taskdescription.setText(task.getDescription());
     }
 
 
