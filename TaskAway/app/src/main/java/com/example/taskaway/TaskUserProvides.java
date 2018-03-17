@@ -47,8 +47,8 @@ public class TaskUserProvides extends AppCompatActivity {
         // TODO: clarify what mybids layout is
         // TODO: what to do with MyBids class?
         // TODO: update - frags for "sections" in our interface
-        adapter = new ArrayAdapter<Task>(TaskUserProvides.this, R.layout.mybids_layout, R.id.mybids_listview, tasklist);
-        provideTaskList.setAdapter(adapter);
+       // adapter = new ArrayAdapter<Task>(TaskUserProvides.this, R.layout.mybids_layout, R.id.mybids_listview, tasklist);
+       // provideTaskList.setAdapter(adapter);
     }
 
 
