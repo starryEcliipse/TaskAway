@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import java.util.regex.*;
+
 /**
  * Acts as the login activity when user first opens app.
  */
@@ -30,6 +32,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
+        Button registerButton = (Button) findViewById(R.id.registerButton);
         final EditText userNameEdit = (EditText)findViewById(R.id.editTextUsername);
         final EditText passwordEdit = (EditText)findViewById(R.id.editTextPassword);
 
@@ -45,7 +48,65 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+                Pattern p = Pattern.compile("^[a-zA-Z]+$");//. represents single character
+                Matcher m = p.matcher(userName);
+                if (!m.matches()){
+                    userNameEdit.setError("Username must consist only of letters");
+                    return;
+                }
+
+                User current_user = ServerWrapper.getUserFromUsername(userName);
+                if (current_user == null) {
+                    userNameEdit.setError("We could not find a user with that username");
+                    return;
+                }
+
+                if (!current_user.validatePassword(password)){
+                    passwordEdit.setError("Incorrect password");
+                    return;
+                }
+
+                String current_ID = current_user.getId();
+
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                saveFileController.addNewUser(context, current_user);
+
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("user_id", current_ID);
+                intent.putExtra("user_name", userName);
+                startActivity(intent);
+
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String userName = userNameEdit.getText().toString();
+                String password = passwordEdit.getText().toString();
+
+                if(userName.length()<8){
+                    userNameEdit.setError("Username must be 8 characters minimum");
+                    return;
+                }
+
+                Pattern p = Pattern.compile("^[a-zA-Z]+$");//. represents single character
+                Matcher m = p.matcher(userName);
+                if (!m.matches()){
+                    userNameEdit.setError("Username must consist only of letters");
+                    return;
+                }
+
+                if(ServerWrapper.getUserFromUsername(userName)!=null){
+                    userNameEdit.setError("Username is already taken");
+                    return;
+                }
+
                 User user = new User(userName, null, null);
+
+                user.setPassword(password);
 
                 ServerWrapper.addUser(user);
                 User current_user = ServerWrapper.getUserFromUsername(userName);
@@ -59,7 +120,6 @@ public class Login extends AppCompatActivity {
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);
                 startActivity(intent);
-
 
             }
         });
