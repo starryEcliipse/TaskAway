@@ -38,7 +38,8 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
-        MyViewHolder vHolder = new MyViewHolder(v);
+
+        final MyViewHolder vHolder = new MyViewHolder(v);
 
 //        Intent intent = ((AddActivity) mContext).getIntent();
 //        Task task = (Task) intent.getSerializableExtra("task");
@@ -47,19 +48,18 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
 ////        User currentuser = saveFileController.getUserFromUsername(mContext, "someonee");
 ////        TaskList tasks = currentuser.getReqTasks();
 
+        vHolder.item.setOnClickListener(new View.OnClickListener() {
 
-//        /* Ensure that when a task is clicked, we can pass THAT task to ViewOwnTask
-//            WORK IN PROGRESS
-//         */
-//        vHolder.item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            // Go to a requester's own task
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(mContext, ViewOwnTask.class);
-//                mContext.startActivity(intent);
-//            }
-//        });
+            @Override
+            // Go to a requester's own task
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, ViewOwnTask.class);
+                int pos = vHolder.getAdapterPosition();
+                intent.putExtra("task", mData.get(pos));
+                mContext.startActivity(intent);
+            }
+        });
 
         return vHolder;
     }
@@ -74,16 +74,16 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         /* Ensure that when a task is clicked, we can pass THAT task to ViewOwnTask
             WORK IN PROGRESS
          */
-        holder.item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            // Go to a requester's own task
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, ViewOwnTask.class);
-                intent.putExtra("task", mData.get(position));
-                mContext.startActivity(intent);
-            }
-        });
+//        holder.item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            // Go to a requester's own task
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(mContext, ViewOwnTask.class);
+//                intent.putExtra("task", mData.get(position));
+//                mContext.startActivity(intent);
+//            }
+//        });
 
 
 
