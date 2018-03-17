@@ -2,6 +2,8 @@ package com.example.taskaway;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import 	android.util.Base64;
 
 /**
@@ -213,6 +215,16 @@ public class Task implements Serializable { // made Serializable to that Task ca
      */
     public void markDeleted() {
         this.deleted = true;
+    }
+
+    /**
+     * Sorts the ArrayList of bids
+     * @return lowest bid
+     */
+    public Bid findLowestBid(){
+        Collections.sort(bids);
+        Bid bid = bids.get(0);
+        return bid;
     }
 
     /**

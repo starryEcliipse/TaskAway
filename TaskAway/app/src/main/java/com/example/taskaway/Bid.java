@@ -7,7 +7,7 @@ package com.example.taskaway;
 /**
  * Represents a user's bid on a task.
  */
-public class Bid {
+public class Bid implements Comparable<Bid> { //implement comparable in order to sort the bids
     private Float amount;
     private String userId;
 
@@ -76,5 +76,19 @@ public class Bid {
     public String toString(){
         // TODO: 18/02/18
         return "";
+    }
+
+    /**
+     * Compares 2 bids to one another
+     * @param bid bid object to compare to
+     * @return -1 if this.amount < bid.amount; +1 if this.amount >= bid.amount
+     */
+    @Override
+    public int compareTo(Bid bid) {
+        if (this.getAmount()< bid.getAmount()){
+            return -1;
+        }else{
+            return 1;
+        }
     }
 }
