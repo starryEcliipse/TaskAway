@@ -46,6 +46,7 @@ public class ViewOwnTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
+                
                 startActivity(intent);
             }
         });
