@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.*;
 
 /**
@@ -99,7 +100,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                if(ServerWrapper.getUserFromUsername(userName)!=null){
+                if(ServerWrapper.getUserFromUsername(userName)!= null){
                     userNameEdit.setError("Username is already taken");
                     return;
                 }
@@ -109,12 +110,30 @@ public class Login extends AppCompatActivity {
                 user.setPassword(password);
 
                 ServerWrapper.addUser(user);
+
                 User current_user = ServerWrapper.getUserFromUsername(userName);
+
+                if (current_user == null){
+                    Log.i("LOGIN", "User not yet on server. Will attempt to fetch again in 2 seconds");
+                    try{
+                        TimeUnit.SECONDS.sleep(2);
+                    }catch(Exception e){
+                        Log.i("LOGIN", "Something happened when trying to stop thread. Aborting.");
+                        return;
+                    }
+                    current_user = ServerWrapper.getUserFromUsername(userName);
+                    if (current_user == null) {
+                        Log.i("LOGIN", "User still not on server. Aborting.");
+                        return;
+                    }
+                }
+
                 String current_ID = current_user.getId();
+                if (current_ID == null) Log.i("ID is Null!!", "Things are broken!");
 
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
-                saveFileController.addNewUser(context, user);
+                saveFileController.addNewUser(context, current_user);
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
