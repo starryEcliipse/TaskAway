@@ -16,10 +16,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Login"
-            android:label="@string/activity_login"
-            >
+            android:label="@string/activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,7 +30,8 @@
         <activity android:name=".ViewTask" />
         <activity android:name=".ViewOwnTask" />
         <activity android:name=".ViewProfile" />
-        <activity android:name=".AddActivity"></activity>
+        <activity android:name=".AddActivity" />
+        <activity android:name=".EditActivity"></activity>
     </application>
 
 </manifest>

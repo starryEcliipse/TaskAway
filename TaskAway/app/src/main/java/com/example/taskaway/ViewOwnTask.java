@@ -45,7 +45,8 @@ public class ViewOwnTask extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: set intent to switch to the EditTask activity
+                Intent intent = new Intent(getBaseContext(), EditActivity.class);
+                startActivity(intent);
             }
         });
 
