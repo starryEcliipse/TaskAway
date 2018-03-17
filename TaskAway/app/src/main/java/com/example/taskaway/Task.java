@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import 	android.util.Base64;
 
@@ -10,7 +11,7 @@ import 	android.util.Base64;
 /**
  * Represents a task.
  */
-public class Task {
+public class Task implements Serializable { // made Serializable to that Task can be passed in intents
     private String name;
     private String description;
     private ArrayList<Bid> bids;

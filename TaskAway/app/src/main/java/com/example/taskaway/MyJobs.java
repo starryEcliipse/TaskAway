@@ -94,4 +94,9 @@ public class MyJobs extends Fragment {
 
     }
 
+    // TODO: Implement Reading Data from ElasticSearch.
+    // user = ServerWrapper.getUserFromID(someIDfromMain);  // always pass id
+    // tasklist = user.getReqTasks();
+
+
 }

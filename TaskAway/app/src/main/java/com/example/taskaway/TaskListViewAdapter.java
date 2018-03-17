@@ -38,23 +38,36 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
-        vHolder.item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, ViewOwnTask.class);
-                mContext.startActivity(intent);
-            }
-        });
+//        vHolder.item.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            // Go to a requester's own task
+//            public void onClick(View view) {
+//                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(mContext, ViewOwnTask.class);
+//                mContext.startActivity(intent);
+//            }
+//        });
 
         return vHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(mData.get(position).getName());
+
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
+
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            // Go to a requester's own task
+            public void onClick(View view) { // pass a task to ViewOwnTask activity
+                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, ViewOwnTask.class);
+                intent.putExtra("task", mData.get(position));
+                mContext.startActivity(intent);
+            }
+        });
 
     }
     /**
