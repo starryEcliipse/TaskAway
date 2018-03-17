@@ -70,12 +70,6 @@ public class AddActivity extends AppCompatActivity {
                 //TESTING
 
                 Task task = new Task(name, comment, s, null, null, null, null);
-                Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-                int index = saveFileController.getUserIndex(context, "someonee");
-                saveFileController.addRequiredTask(context, index, task);
-
-//
                 Intent intent = new Intent(getBaseContext(), TaskListViewAdapter.class);
                 String userName = "someonee";
                 intent.putExtra("one", userName);

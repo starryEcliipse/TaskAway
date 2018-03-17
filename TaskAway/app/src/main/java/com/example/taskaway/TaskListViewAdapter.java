@@ -39,6 +39,7 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
 
+
 //        /* Ensure that when a task is clicked, we can pass THAT task to ViewOwnTask
 //            WORK IN PROGRESS
 //         */
@@ -75,6 +76,8 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
                 mContext.startActivity(intent);
             }
         });
+
+
 
     }
     /**
