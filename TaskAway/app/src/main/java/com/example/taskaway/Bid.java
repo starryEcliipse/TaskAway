@@ -4,10 +4,12 @@ package com.example.taskaway;
  * Created by sameerah on 18/02/18.
  */
 
+import java.io.Serializable;
+
 /**
  * Represents a user's bid on a task.
  */
-public class Bid implements Comparable<Bid> { //implement comparable in order to sort the bids
+public class Bid implements Comparable<Bid>, Serializable { //implement comparable in order to sort the bids
     private Float amount;
     private String userId;
 

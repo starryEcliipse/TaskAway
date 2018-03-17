@@ -22,6 +22,7 @@ public class ViewOwnTask extends AppCompatActivity {
     private TextView tasklowestbidusername;
     private TextView tasklowestbidamount;
     private Task task;
+    private Bid tasklowestbid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class ViewOwnTask extends AppCompatActivity {
             user = ServerWrapper.getUserFromId(userid);
             lowest
          */
+
         tasklowestbidusername = (TextView)this.findViewById(R.id.lowest_bid_username);
         tasklowestbidamount = (TextView)this.findViewById(R.id.lowest_bid_amount);
 
@@ -64,10 +66,15 @@ public class ViewOwnTask extends AppCompatActivity {
         // TODO: read from server
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
-        taskname.setText(task.getName()); // read task name and display it
+
+        // read and display task info
+        taskname.setText(task.getName());
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+        tasklowestbid = task.findLowestBid();
+        tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
+
     }
 
 

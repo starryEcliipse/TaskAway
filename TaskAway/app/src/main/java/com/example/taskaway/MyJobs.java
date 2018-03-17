@@ -17,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -34,6 +35,7 @@ public class MyJobs extends Fragment {
     View rootView;
     private RecyclerView myrecyclerview;
     private ArrayList<Task> lstTask;
+    private ArrayList<Bid> blist; /* DELETE LATER - temporarily make an arraylist of bids for TESTING (see MARCH 17 2018 note)*/
     ImageButton imgButton;
 
     public MyJobs() {
@@ -59,10 +61,6 @@ public class MyJobs extends Fragment {
            }
        });
 
-
-
-
-
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
 
         TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask);
@@ -84,9 +82,41 @@ public class MyJobs extends Fragment {
         // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
         //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
 
-        //TESTING BELOW
+        // TESTING BELOW
+        /*
+            ADDED MARCH 17 2018
+            FIXME: Ensure we can read Tasks with an empty arraylist of bids aka read Tasks with NO bids!
+
+            NOTE:
+            I added stuff labeled with "DELETE LATER" just for testing (too lazy to make an actual test).
+            I can confirm that ViewOwnTask will find the lowest bid, but it WILL CRASH if no bids exist!
+            I had to make Task AND Bid classes Serializable!
+                TODO: use exception handling
+             - Katherine
+         */
+        // MAKE NEW BIDS
+        Bid b=new Bid("kpatenio",(float)23.1); /* DELETE LATER*/
+        Bid c=new Bid("kpatenio",(float)5); /* DELETE LATER*/
+        Bid d=new Bid("kpatenio",(float)500.23); /* DELETE LATER */
+        Bid e=new Bid("kpatenio",(float)4.999); /* DELETE LATER  */
+
+        // MAKE ARRAYLIST OF BIDS
+        blist = new ArrayList<Bid>(); /* DELETE LATER - make arraylist of bids */
+
+        // ADD BIDS TO ARRAYLIST OF BIDS
+        blist.add(b); /* DELETE LATER  */
+        blist.add(c); /* DELETE LATER  */
+        blist.add(d); /* DELETE LATER  */
+        blist.add(e); /* DELETE LATER  */
+
+        // FIND LOWEST BID
+        Collections.sort(blist); /* DELETE LATER - from findLowestBid method in Task class */
+        Bid bidbid = blist.get(0); /* DELETE LATER - from findLowestBid method in Task class */
+        float blow = bidbid.getAmount(); /* DELETE LATER - get bid amount of lowest bid in arraylist of bids */
+
+        // ADD TEMPORARY TASKS FOR TESTING
         lstTask = new ArrayList<>();
-        lstTask.add(new Task("Job 1","This is a test description!","Requested","Kamloops, BC",null,null,null));
+        lstTask.add(new Task("Katherine's Taskuhhhh","This is a test description!","Requested","Kamloops, BC", blist, null, blow));
         lstTask.add(new Task("Job 2",null,null,null,null,null,null));
         lstTask.add(new Task("Job 3",null,null,null,null,null,null));
         //lstTask.add(new Task("KIM"));
