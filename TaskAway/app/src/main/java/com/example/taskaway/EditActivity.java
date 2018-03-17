@@ -40,6 +40,14 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        Button delete = (Button) findViewById(R.id.button3);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
 
     }
