@@ -34,6 +34,7 @@ public class Login extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         Button registerButton = (Button) findViewById(R.id.registerButton);
+        final TextView continueOffline = (TextView) findViewById(R.id.continueOfflineTextView);
         final EditText userNameEdit = (EditText)findViewById(R.id.editTextUsername);
         final EditText passwordEdit = (EditText)findViewById(R.id.editTextPassword);
 
@@ -57,9 +58,15 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+                if(password.length()<1){
+                    passwordEdit.setError("A password is required");
+                    return;
+                }
+
                 User current_user = ServerWrapper.getUserFromUsername(userName);
                 if (current_user == null) {
                     userNameEdit.setError("We could not find a user with that username");
+                    continueOffline.setVisibility(View.VISIBLE);
                     return;
                 }
 
@@ -102,6 +109,11 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+                if(password.length()<1){
+                    passwordEdit.setError("A password is required");
+                    return;
+                }
+
                 if(ServerWrapper.getUserFromUsername(userName)!= null){
                     userNameEdit.setError("Username is already taken");
                     return;
@@ -126,6 +138,7 @@ public class Login extends AppCompatActivity {
                     current_user = ServerWrapper.getUserFromUsername(userName);
                     if (current_user == null) {
                         Log.i("LOGIN", "User still not on server. Aborting.");
+                        continueOffline.setVisibility(View.VISIBLE);
                         return;
                     }
                 }
@@ -141,6 +154,45 @@ public class Login extends AppCompatActivity {
                 intent.putExtra("user_name", userName);
                 startActivity(intent);
 
+            }
+        });
+
+        continueOffline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String userName = userNameEdit.getText().toString();
+                String password = passwordEdit.getText().toString();
+
+                if(userName.length()<8){
+                    userNameEdit.setError("Username must be 8 characters minimum");
+                    return;
+                }
+
+                Pattern p = Pattern.compile("^[a-zA-Z]+$");//. represents single character
+                Matcher m = p.matcher(userName);
+                if (!m.matches()){
+                    userNameEdit.setError("Username must consist only of letters");
+                    return;
+                }
+
+                if(password.length()<1){
+                    passwordEdit.setError("A password is required");
+                    return;
+                }
+
+                //TODO configure this user object so it doesn't crash
+                User current_user = new User("userName", null, null);
+                current_user.setPassword(password);
+                String current_ID = null;//TODO what should go here?
+
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                saveFileController.addNewUser(context, current_user);
+
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                intent.putExtra("user_id", current_ID);
+                intent.putExtra("user_name", userName);
+                startActivity(intent);
             }
         });
 
