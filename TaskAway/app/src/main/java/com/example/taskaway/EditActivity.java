@@ -52,15 +52,15 @@ public class EditActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent2 = new Intent(getBaseContext(), ViewOwnTask.class);
-                String name = tname.getText().toString();
-                String description = des.getText().toString();
-                String s = status.getText().toString();
-                intent2.putExtra("one", name);
-                intent2.putExtra("two", description);
-                intent2.putExtra("three", s);
-                intent2.putExtra("four", position);
-                startActivity(intent2);
+//              //  Intent intent2 = new Intent(getBaseContext(), ViewOwnTask.class);
+//                String name = tname.getText().toString();
+//                String description = des.getText().toString();
+//                String s = status.getText().toString();
+//                intent2.putExtra("one", name);
+//                intent2.putExtra("two", description);
+//                intent2.putExtra("three", s);
+//                intent2.putExtra("four", position);
+//                startActivity(intent2);
             }
         });
 

@@ -73,11 +73,15 @@ public class AddActivity extends AppCompatActivity {
 
                 //TESTING
 
-                Intent intent = new Intent(getBaseContext(), TaskListViewAdapter.class);
-                intent.putExtra("one", name);
-                intent.putExtra("two", comment);
-                intent.putExtra("three", s);
-                startActivity(intent);
+                Bundle bundle = new Bundle();
+                bundle.putString("name", name);
+                bundle.putString("des", comment);
+                bundle.putString("status", s);
+
+                MyJobs fragment = new MyJobs();
+                fragment.setArguments(bundle);
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
 
             }
