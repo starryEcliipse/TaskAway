@@ -45,8 +45,11 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // USERNAME + USERID
         final String userID = getIntent().getStringExtra("user_id");
         final String user_name = getIntent().getStringExtra("user_name");
+
 
 
         /**
@@ -95,8 +98,6 @@ public class MainActivity extends AppCompatActivity{
         /***/
 
 
-
-
         /**
          * Creates a tab-layout with three fragments.
          */
@@ -105,21 +106,29 @@ public class MainActivity extends AppCompatActivity{
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Adding Fragment here
-        adapter.addFragment(new MyJobs(),"My Jobs");
+        MyJobs myjobs = new MyJobs();
+        adapter.addFragment(myjobs,"My Jobs");
         adapter.addFragment(new MyBids(),"My Bids");
         adapter.addFragment(new AllBids(),"All Jobs");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        // PASS USERNAME + USERID TO MYJOBS
+        Bundle bundle = new Bundle();
+        Log.i("BUNDLE","going to bundle stuff!");
+        bundle.putString("userid", userID);
+        Log.i("userid",bundle.getString("userid")+"");
+        bundle.putString("username", user_name);
+        Log.i("username",user_name+"");
+        myjobs.setArguments(bundle);
+
         //Will add icons for the tabs below here
         //tabLayout.getTabAt(2).setIcon(R.drawable.ic_alljobs);
         /***/
 
 
-
     }
-
 
 
     /**

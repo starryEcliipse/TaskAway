@@ -1,9 +1,11 @@
 package com.example.taskaway;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,17 +74,27 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
 
-                //TESTING
+                // READ USERNAME AND USER ID FROM MAIN
+                Intent intent = getIntent();
+                String username = intent.getStringExtra("username");
+                String userid = intent.getStringExtra("userid");
 
-                Bundle bundle = new Bundle();
-                bundle.putString("task", name);
-                bundle.putString("task", comment);
-                bundle.putString("task", s);
+                // NEW TASK - create with valid input
+                Task task = new Task(name, comment, s, null, null, null, null);
 
-                MyJobs fragment = new MyJobs();
-                fragment.setArguments(bundle);
+                // SAVE TO FILE TODO: ELASTICSEARCH
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                int userindex = saveFileController.getUserIndex(context, username); // get userindex
+                Log.i("AddActivity","userindex is "+userindex);
+                saveFileController.addRequiredTask(context, userindex, task); // add task to proper user in savefile
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+                // GO TO MAIN ACTIVITY
+                Intent intent2 = new Intent(AddActivity.this, MainActivity.class);
+                startActivity(intent2);
+
+                //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
 
             }

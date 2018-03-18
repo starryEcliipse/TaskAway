@@ -36,9 +36,12 @@ public class MyJobs extends Fragment {
      */
     View rootView;
     private RecyclerView myrecyclerview;
-    private ArrayList<Task> lstTask;
+    //private static ArrayList<Task> lstTask; /* CHANGE LATER */
+    private static TaskList lstTask;
     private ArrayList<Bid> blist; /* DELETE LATER - temporarily make an arraylist of bids for TESTING (see MARCH 17 2018 note)*/
     ImageButton imgButton;
+    private String user_name;
+    private String user_id;
 
     public MyJobs() {
     }
@@ -61,6 +64,8 @@ public class MyJobs extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Add Clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent1 = new Intent(getContext(), AddActivity.class);
+                intent1.putExtra("username",user_name);
+                intent1.putExtra("userid", user_id);
                 startActivity(intent1);
            }
        });
@@ -85,6 +90,17 @@ public class MyJobs extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
+        if (getArguments() != null){
+            Log.i("My Jobs","getArguments NOT null!");
+            //Bundle bundle = new Bundle();
+            user_name = getArguments().getString("username");
+            Log.i("My Jobs",getArguments().getString("username")+"");
+            user_id = getArguments().getString("userid");
+            Log.i("My Jobs", getArguments().getString("userid")+"");
+        }
         // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
         //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
 
@@ -101,7 +117,6 @@ public class MyJobs extends Fragment {
              - Katherine
          */
         // MAKE NEW BIDS
-
         Bid b=new Bid("kpatenio",(float)23.1); //DELETE LATER
         Bid c=new Bid("kpatenio",(float)5); //DELETE LATER
         Bid d=new Bid("kpatenio",(float)500.23); //DELETE LATER
@@ -125,19 +140,59 @@ public class MyJobs extends Fragment {
         float blow = bidbid.getAmount(); // DELETE LATER - get bid amount of lowest bid in arraylist of bids
 
 
-        Bundle bundle = new Bundle();
-        String name = bundle.getString("task");
-        String des = bundle.getString("task");
-        String status = bundle.getString("task");
+//        Bundle bundle = new Bundle();
+//        String name = bundle.getString("task");
+//        String des = bundle.getString("task");
+//        String status = bundle.getString("task");
 
         // ADD TEMPORARY TASKS FOR TESTING
-        lstTask = new ArrayList<>();
-        lstTask.add(new Task("Katherine's Taskuhhhh","This is a test description!","Requested","Kamloops, BC", blist, null, null));
-        lstTask.add(new Task("Job 2",null,null,null,null,null,null));
-        lstTask.add(new Task("Job 3",null,null,null,null,null,null));
-        lstTask.add(new Task(name, des, status, null, blist, null, null));
+        //lstTask = new ArrayList<>();
+        //lstTask = new TaskList();
+        //lstTask.add(new Task("Katherine's Taskuhhhh","This is a test description!","Requested","Kamloops, BC", blist, null, null));
+
+        final Context context = getContext();
+        SaveFileController saveFileController = new SaveFileController();
+        int userIndex = saveFileController.getUserIndex(context, user_name);
+        Log.i("My Jobs","userindex is "+userIndex);
+        lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
+        //lstTask.add(new Task("Job 2",null,null,null,null,null,null));
+        //lstTask.add(new Task("Job 3",null,null,null,null,null,null));
+
+        //lstTask.add(new Task(name, des, status, null, blist, null, null));
         //lstTask.add(new Task("KIM"));
         //lstTask.add(new Task("JUNG"));
+
+    }
+
+//    public void addTask(Bundle bundle){
+//        Log.i("onStart","Onstart began!");
+//        if (getArguments() != null){
+//            Log.i("getArguments!=null","is not null!");
+//            //bundle = new Bundle();
+//            Task task = (Task) bundle.getSerializable("task");
+//            if (task != null){
+//                Log.i("Onstart task","got task!");
+//            }
+//            if (lstTask == null){
+//                Log.i("lstTask","lstTask is null!");
+//                lstTask = new ArrayList<>();
+//                lstTask.add(task);
+//            }
+//            else{
+//                Log.i("lsTask", "lstTask is NOT null!");
+//                lstTask.add(task);
+//                Log.i("after add SIZE",lstTask.size()+"");
+//                Log.i("task",task.getName()+"");
+//            }
+//
+//        }
+//
+//    }
+
+    public void onStart(){
+        super.onStart();
+        Log.i("onStart SIZE",lstTask.size()+"");
+
 
     }
 
