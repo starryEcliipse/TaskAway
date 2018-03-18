@@ -221,11 +221,14 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * Sorts the ArrayList of bids
      * @return lowest bid
      */
-    public Bid findLowestBid(){
+    public Bid findLowestBid() {
         Collections.sort(bids);
         Bid bid = bids.get(0);
         return bid;
+
     }
+
+
 
     /**
      * Represents attributes and information of a task as a string
