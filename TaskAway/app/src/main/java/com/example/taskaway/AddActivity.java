@@ -92,6 +92,9 @@ public class AddActivity extends AppCompatActivity {
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(AddActivity.this, MainActivity.class);
+                intent2.putExtra("user_name", username);
+                intent2.putExtra("user_id", userid);
+                Log.i("AddActivity","Sending name and id to MainActivity!");
                 startActivity(intent2);
 
                 //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

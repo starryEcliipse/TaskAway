@@ -101,54 +101,6 @@ public class MyJobs extends Fragment {
             user_id = getArguments().getString("userid");
             Log.i("My Jobs", getArguments().getString("userid")+"");
         }
-        // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
-        //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
-
-        // TESTING BELOW
-        /*
-            ADDED MARCH 17 2018
-            FIXME: Ensure we can read Tasks with an empty arraylist of bids aka read Tasks with NO bids!
-
-            NOTE:
-            I added stuff labeled with "DELETE LATER" just for testing (too lazy to make an actual test).
-            I can confirm that ViewOwnTask will find the lowest bid, but it WILL CRASH if no bids exist!
-            I had to make Task AND Bid classes Serializable!
-                TODO: use exception handling
-             - Katherine
-         */
-        // MAKE NEW BIDS
-        Bid b=new Bid("kpatenio",(float)23.1); //DELETE LATER
-        Bid c=new Bid("kpatenio",(float)5); //DELETE LATER
-        Bid d=new Bid("kpatenio",(float)500.23); //DELETE LATER
-        Bid e=new Bid("kpatenio",(float)4.999); // DELETE LATER
-
-        // MAKE ARRAYLIST OF BIDS
-        blist = new ArrayList<Bid>(); /* DELETE LATER - make arraylist of bids */
-
-
-        // ADD BIDS TO ARRAYLIST OF BIDS
-        blist.add(b); //DELETE LATER
-        blist.add(c); // DELETE LATER
-        blist.add(d); //DELETE LATER
-        blist.add(e); //DELETE LATER
-
-
-
-        // FIND LOWEST BID
-        Collections.sort(blist); //DELETE LATER - from findLowestBid method in Task class
-        Bid bidbid = blist.get(0); //DELETE LATER - from findLowestBid method in Task class
-        float blow = bidbid.getAmount(); // DELETE LATER - get bid amount of lowest bid in arraylist of bids
-
-
-//        Bundle bundle = new Bundle();
-//        String name = bundle.getString("task");
-//        String des = bundle.getString("task");
-//        String status = bundle.getString("task");
-
-        // ADD TEMPORARY TASKS FOR TESTING
-        //lstTask = new ArrayList<>();
-        //lstTask = new TaskList();
-        //lstTask.add(new Task("Katherine's Taskuhhhh","This is a test description!","Requested","Kamloops, BC", blist, null, null));
 
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
@@ -163,31 +115,6 @@ public class MyJobs extends Fragment {
         //lstTask.add(new Task("JUNG"));
 
     }
-
-//    public void addTask(Bundle bundle){
-//        Log.i("onStart","Onstart began!");
-//        if (getArguments() != null){
-//            Log.i("getArguments!=null","is not null!");
-//            //bundle = new Bundle();
-//            Task task = (Task) bundle.getSerializable("task");
-//            if (task != null){
-//                Log.i("Onstart task","got task!");
-//            }
-//            if (lstTask == null){
-//                Log.i("lstTask","lstTask is null!");
-//                lstTask = new ArrayList<>();
-//                lstTask.add(task);
-//            }
-//            else{
-//                Log.i("lsTask", "lstTask is NOT null!");
-//                lstTask.add(task);
-//                Log.i("after add SIZE",lstTask.size()+"");
-//                Log.i("task",task.getName()+"");
-//            }
-//
-//        }
-//
-//    }
 
     public void onStart(){
         super.onStart();
