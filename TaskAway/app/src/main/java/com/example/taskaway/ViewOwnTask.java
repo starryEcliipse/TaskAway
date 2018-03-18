@@ -2,6 +2,7 @@ package com.example.taskaway;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class ViewOwnTask extends AppCompatActivity {
     private TextView tasklowestbidamount;
     private Task task;
     private Bid tasklowestbid;
+    String userID;
+    String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,6 @@ public class ViewOwnTask extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = getIntent();
-                String position = intent1.getStringExtra("position");
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
                 String name = taskname.getText().toString();
                 String description = taskdescription.getText().toString();
@@ -56,7 +57,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 intent.putExtra("one", name);
                 intent.putExtra("two", description);
                 intent.putExtra("three", status);
-                intent.putExtra("position", position);
+                //intent.putExtra("")
                 startActivity(intent);
             }
         });
@@ -69,6 +70,10 @@ public class ViewOwnTask extends AppCompatActivity {
         // TODO: read from server
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
+        userID = intent.getStringExtra("userid");
+        Log.i("userID", userID);
+        userName = intent.getStringExtra("userName");
+        Log.i("username", userName);
 
         // read and display task info
         taskname.setText(task.getName());

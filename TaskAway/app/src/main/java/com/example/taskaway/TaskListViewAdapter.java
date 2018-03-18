@@ -28,10 +28,14 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
 
     Context mContext;
     ArrayList<Task> mData;
+    String userName;
+    String userID;
 
-    public TaskListViewAdapter(Context mContext, ArrayList<Task> mData){
+    public TaskListViewAdapter(Context mContext, ArrayList<Task> mData, String userName, String userID){
         this.mContext = mContext;
         this.mData = mData;
+        this.userName = userName;
+        this.userID = userID;
     }
 
     @Override
@@ -57,6 +61,8 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
                 Intent intent = new Intent(mContext, ViewOwnTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));
+                intent.putExtra("userid", userID);
+                intent.putExtra("userName", userName);
                 String position = Integer.toString(pos);
                 intent.putExtra("index", position);
                 mContext.startActivity(intent);

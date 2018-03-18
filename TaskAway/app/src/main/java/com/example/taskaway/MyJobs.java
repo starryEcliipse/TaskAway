@@ -4,23 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 /**
@@ -72,7 +66,7 @@ public class MyJobs extends Fragment {
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
 
-        TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask);
+        TaskListViewAdapter recycleAdapter = new TaskListViewAdapter(getContext(), lstTask, user_name, user_id);
 
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myrecyclerview.setAdapter(recycleAdapter);

@@ -1,8 +1,10 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,11 +33,13 @@ public class EditActivity extends AppCompatActivity {
         des = (EditText) findViewById(R.id.editText3);
         status = (EditText) findViewById(R.id.editText);
 
+        final String user_name = getIntent().getStringExtra("user_name");
+        final String userID = getIntent().getStringExtra("user_id");
+
         final Intent intent = getIntent();
         String name = intent.getStringExtra("one");
         String description = intent.getStringExtra("two");
         final String statusTask = intent.getStringExtra("three");
-        final String position = intent.getStringExtra("position");
         tname.setText(name);
         des.setText(description);
         status.setText(statusTask);
@@ -52,15 +56,7 @@ public class EditActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//              //  Intent intent2 = new Intent(getBaseContext(), ViewOwnTask.class);
-//                String name = tname.getText().toString();
-//                String description = des.getText().toString();
-//                String s = status.getText().toString();
-//                intent2.putExtra("one", name);
-//                intent2.putExtra("two", description);
-//                intent2.putExtra("three", s);
-//                intent2.putExtra("four", position);
-//                startActivity(intent2);
+
             }
         });
 
