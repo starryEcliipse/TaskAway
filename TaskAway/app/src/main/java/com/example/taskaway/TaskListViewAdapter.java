@@ -57,6 +57,8 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
                 Intent intent = new Intent(mContext, ViewOwnTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));
+                String position = Integer.toString(pos);
+                intent.putExtra("index", position);
                 mContext.startActivity(intent);
             }
         });

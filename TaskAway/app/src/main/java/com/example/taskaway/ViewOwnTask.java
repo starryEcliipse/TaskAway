@@ -47,6 +47,8 @@ public class ViewOwnTask extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent1 = getIntent();
+                String position = intent1.getStringExtra("position");
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
                 String name = taskname.getText().toString();
                 String description = taskdescription.getText().toString();
@@ -54,6 +56,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 intent.putExtra("one", name);
                 intent.putExtra("two", description);
                 intent.putExtra("three", status);
+                intent.putExtra("position", position);
                 startActivity(intent);
             }
         });
