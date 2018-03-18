@@ -20,6 +20,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText statusField;
     private Button cancelButton;
     private Button saveButton;
+    private final String text = "task";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +75,9 @@ public class AddActivity extends AppCompatActivity {
                 //TESTING
 
                 Bundle bundle = new Bundle();
-                bundle.putString("name", name);
-                bundle.putString("des", comment);
-                bundle.putString("status", s);
+                bundle.putString("task", name);
+                bundle.putString("task", comment);
+                bundle.putString("task", s);
 
                 MyJobs fragment = new MyJobs();
                 fragment.setArguments(bundle);

@@ -131,16 +131,17 @@ public class MyJobs extends Fragment {
         Bid bidbid = blist.get(0); /* DELETE LATER - from findLowestBid method in Task class */
         float blow = bidbid.getAmount(); /* DELETE LATER - get bid amount of lowest bid in arraylist of bids */
 
-//        name = this.getArguments().getString("name");
-//        des = this.getArguments().getString("des");
-//        status = this.getArguments().getString("status");
+//        Bundle bundle = new Bundle();
+//        name = bundle.getString("task");
+//        des = bundle.getString("task");
+//        status = bundle.getString("task");
 
         // ADD TEMPORARY TASKS FOR TESTING
         lstTask = new ArrayList<>();
         lstTask.add(new Task("Katherine's Taskuhhhh","This is a test description!","Requested","Kamloops, BC", blist, null, blow));
         lstTask.add(new Task("Job 2",null,null,null,null,null,null));
         lstTask.add(new Task("Job 3",null,null,null,null,null,null));
-        lstTask.add(new Task(name, des, status, null, null, null, null));
+      //  lstTask.add(new Task(name, des, status, null, null, null, null));
         //lstTask.add(new Task("KIM"));
         //lstTask.add(new Task("JUNG"));
 
