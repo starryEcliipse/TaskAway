@@ -101,29 +101,29 @@ public class MyJobs extends Fragment {
              - Katherine
          */
         // MAKE NEW BIDS
-        /*
+
         Bid b=new Bid("kpatenio",(float)23.1); //DELETE LATER
         Bid c=new Bid("kpatenio",(float)5); //DELETE LATER
         Bid d=new Bid("kpatenio",(float)500.23); //DELETE LATER
         Bid e=new Bid("kpatenio",(float)4.999); // DELETE LATER
-        */
+
         // MAKE ARRAYLIST OF BIDS
         blist = new ArrayList<Bid>(); /* DELETE LATER - make arraylist of bids */
 
-        /*
+
         // ADD BIDS TO ARRAYLIST OF BIDS
         blist.add(b); //DELETE LATER
         blist.add(c); // DELETE LATER
         blist.add(d); //DELETE LATER
         blist.add(e); //DELETE LATER
-         */
 
-        /*
+
+
         // FIND LOWEST BID
         Collections.sort(blist); //DELETE LATER - from findLowestBid method in Task class
         Bid bidbid = blist.get(0); //DELETE LATER - from findLowestBid method in Task class
         float blow = bidbid.getAmount(); // DELETE LATER - get bid amount of lowest bid in arraylist of bids
-        */
+
 
         Bundle bundle = new Bundle();
         String name = bundle.getString("task");

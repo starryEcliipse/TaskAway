@@ -75,14 +75,17 @@ public class ViewOwnTask extends AppCompatActivity {
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
-        if (task.getBids().size() == 0){
+        try {
+            if (task.getBids().isEmpty()) {
+                tasklowestbidamount.setText("No bids yet!");
+            } else {
+                tasklowestbid = task.findLowestBid();
+                tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
+            }
+        }
+        catch (Exception e){
             tasklowestbidamount.setText("No bids yet!");
         }
-        else {
-            tasklowestbid = task.findLowestBid();
-            tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
-        }
-
     }
 
 
