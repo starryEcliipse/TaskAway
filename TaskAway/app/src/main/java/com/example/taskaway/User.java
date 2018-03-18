@@ -170,18 +170,35 @@ public class User {
         return this.deleted;
     }
 
+    /**
+     * Sets the password hash for this user
+     * @param hash - the password hash String
+     */
     public void setPasswordHash(String hash) {
         this.passwordHash = hash;
     }
 
+    /**
+     * Returns the password hash for this user
+     * @return
+     */
     public String getPasswordHash() {
         return this.passwordHash;
     }
 
+    /**
+     * Hashes the provided password and sets it as the user's password hash
+     * @param password - the new password for the user
+     */
     public void setPassword(String password) {
         this.passwordHash = hash_SHA256(password);
     }
 
+    /**
+     * Returns the hash String of the provided String using SHA256 cryptographic hash function
+     * @param str - the String to hash
+     * @return The hash of the String proided
+     */
     public String hash_SHA256(String str) {
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -191,9 +208,13 @@ public class User {
         return "SHA256 HASH ERROR";
     }
 
+    /**
+     * Returns whether the hash of the provided String matches this user's password hash
+     * @param comparisonPassword - the password to compare
+     * @return true if password matches, false otherwise
+     */
     public boolean validatePassword(String comparisonPassword){
         return this.passwordHash.equals(hash_SHA256(comparisonPassword));
     }
-
 
 }
