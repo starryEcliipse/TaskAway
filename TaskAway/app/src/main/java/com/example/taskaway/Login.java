@@ -37,6 +37,7 @@ public class Login extends AppCompatActivity {
         final EditText userNameEdit = (EditText)findViewById(R.id.editTextUsername);
         final EditText passwordEdit = (EditText)findViewById(R.id.editTextPassword);
 
+        //login button clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +82,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //register button clicked
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

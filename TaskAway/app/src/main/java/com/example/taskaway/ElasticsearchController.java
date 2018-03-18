@@ -29,8 +29,15 @@ public class ElasticsearchController {
     private static final String DBUserType = "user";
 
 
+    /**
+     * A class used add Task objects to the server
+     */
     public static class AddJobsTask extends AsyncTask<Task, Void, Void> {
         @Override
+        /**
+         * Adds all provided Task objects to the server
+         * @param tasks - the Task object(s) to add
+         */
         protected Void doInBackground(Task... tasks) {
             verifySettings();
             for (Task task : tasks) {
@@ -52,8 +59,15 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to update Task objects on the server
+     */
     public static class UpdateJobsTask extends AsyncTask<Task, Void, Void> {
         @Override
+        /**
+         * Updates all provided Task objects on the server
+         * @param tasks - the Task object(s) to update
+         */
         protected Void doInBackground(Task... tasks) {
             verifySettings();
             for (Task task : tasks) {
@@ -76,8 +90,15 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to delete Task objects from the server
+     */
     public static class DeleteJobsTask extends AsyncTask<Task, Void, Void> {
         @Override
+        /**
+         * Deletes all provided Task objects from the server
+         * @param tasks - the Task object(s) to delete
+         */
         protected Void doInBackground(Task... tasks) {
             verifySettings();
             for (Task task : tasks) {
@@ -100,8 +121,16 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to fetch Task objects from the server
+     */
     public static class GetJobsTask extends AsyncTask<String, Void, TaskList> {
         @Override
+        /**
+         * Fetches all Task objects from the server matching optionally provided criteria
+         * @param parameters - the search parameters to use
+         * @returns A TaskList containing Tasks found on the server
+         */
         protected TaskList doInBackground(String... parameters) {
             String parameter1, parameter2;
             if (parameters.length < 2){
@@ -132,8 +161,15 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to add User objects to the server
+     */
     public static class AddUsersTask extends AsyncTask<User, Void, Void> {
         @Override
+        /**
+         * Adds all provided User objects to the server
+         * @param users - the User object(s) to add
+         */
         protected Void doInBackground(User... users) {
             verifySettings();
             for (User user : users) {
@@ -155,8 +191,15 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to update User objects on the server
+     */
     public static class UpdateUsersTask extends AsyncTask<User, Void, Void> {
         @Override
+        /**
+         * Updates the provided User objects on the server
+         * @param users - the User object(s) to update
+         */
         protected Void doInBackground(User... users) {
             verifySettings();
             for (User user : users) {
@@ -179,8 +222,15 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to delete User objects from the server
+     */
     public static class DeleteUsersTask extends AsyncTask<User, Void, Void> {
         @Override
+        /**
+         * Deletes the provided User objects from the server
+         * @param users - the User object(s) to delete
+         */
         protected Void doInBackground(User... users) {
             verifySettings();
             for (User user : users) {
@@ -203,8 +253,16 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * A class used to fetch User objects from the server
+     */
     public static class GetUsersTask extends AsyncTask<String, Void, ArrayList<User>> {
         @Override
+        /**
+         * Fetches the User object(s) from the server matching the provided search criteria
+         * @param parameters - the search parameters
+         * @returns An ArrayList of User objects that matched the search criteria
+         */
         protected ArrayList<User> doInBackground(String... parameters) {
             String parameter1, parameter2;
             if (parameters.length < 2){
@@ -234,6 +292,12 @@ public class ElasticsearchController {
         }
     }
 
+    /**
+     * Builds an Elasticsearch query String with provided parameters
+     * @param searchField - the field to search in each object
+     * @param searchParameter - the value required in the field to return a hit
+     * @return A String formatted as an Elasticsearch query
+     */
     private static String buildQuery(String searchField, String searchParameter) {
         if ((searchField != null && searchParameter != null)&&(searchField.length() >0 && searchParameter.length()>0)){
             String query = "{\"query\": { \"term\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"from\": 0, \"size\": 1000}";
@@ -244,6 +308,9 @@ public class ElasticsearchController {
     }
 
 
+    /**
+     * Verifies the Jest Droid settings are configured to communicate with the server
+     */
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080");

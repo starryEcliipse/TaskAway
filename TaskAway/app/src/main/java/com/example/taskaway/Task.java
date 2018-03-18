@@ -218,6 +218,14 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
+     * Returns whether the task has been deleted from the server
+     * @returns deleted boolean variable
+     */
+    public boolean isDeleted() {
+        return this.deleted;
+    }
+
+    /**
      * Sorts the ArrayList of bids
      * @return lowest bid
      */

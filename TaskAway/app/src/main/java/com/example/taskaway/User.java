@@ -162,6 +162,14 @@ public class User {
         this.deleted = true;
     }
 
+    /**
+     * Returns whether the user has been deleted from the server
+     * @returns deleted boolean variable
+     */
+    public boolean isDeleted() {
+        return this.deleted;
+    }
+
     public void setPasswordHash(String hash) {
         this.passwordHash = hash;
     }
