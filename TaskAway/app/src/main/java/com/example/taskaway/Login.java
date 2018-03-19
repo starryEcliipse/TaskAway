@@ -168,7 +168,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                Pattern p = Pattern.compile("^[a-zA-Z]+$");//. represents single character
+                Pattern p = Pattern.compile("^[a-zA-Z]+$");//represents String consisting of alphabetic characters only
                 Matcher m = p.matcher(userName);
                 if (!m.matches()){
                     userNameEdit.setError("Username must consist only of letters");
