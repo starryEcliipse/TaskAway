@@ -36,6 +36,7 @@ public class ViewTask extends AppCompatActivity {
         tasklocation = (TextView)this.findViewById(R.id.task_location);
         taskwinningbid = (TextView)this.findViewById(R.id.winning_bid_amount);
         userbid = (EditText)this.findViewById(R.id.your_bid_amount);
+
         // TODO: ElasticSearch
 
         Button cancelButton = (Button) findViewById(R.id.cancel_button_1);

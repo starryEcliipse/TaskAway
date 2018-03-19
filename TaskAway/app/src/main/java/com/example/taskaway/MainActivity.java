@@ -109,9 +109,11 @@ public class MainActivity extends AppCompatActivity{
         // Adding Fragment here
         MyJobs myjobs = new MyJobs();
         AllBids allbids = new AllBids();
+        MyBids mybids = new MyBids();
         adapter.addFragment(myjobs,"My Jobs");
-        adapter.addFragment(new MyBids(),"My Bids");
         adapter.addFragment(allbids,"All Jobs");
+        adapter.addFragment(mybids, "My Bids");
+
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity{
         // PASS USERNAME + USERID TO MYJOBS
         passUserData(user_name, userID, myjobs);
         passUserData(user_name, userID, allbids);
+        passUserData(user_name, userID, mybids);
 //        Bundle bundle = new Bundle();
 //        Log.i("BUNDLE","going to bundle stuff!");
 //        bundle.putString("userid", userID);
