@@ -53,17 +53,21 @@ public class ViewOwnTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
-//                String name = taskname.getText().toString();
-//                String description = taskdescription.getText().toString();
-//                String status = taskstatus.getText().toString();
+                String name = taskname.getText().toString();
+                String description = taskdescription.getText().toString();
+                String status = taskstatus.getText().toString();
 //                intent.putExtra("one", name);
 //                intent.putExtra("two", description);
 //                intent.putExtra("three", status);
                 final Context context = getApplicationContext();
                 final SaveFileController saveFileController = new SaveFileController();
-                final Integer userIndex = saveFileController.getUserIndex(context, userName);
+                final int userIndex = saveFileController.getUserIndex(context, userName);
                 id = task.getId();
-                intent.putExtra("task", userIndex);
+                String index = Integer.toString(userIndex);
+                intent.putExtra("name", name);
+                intent.putExtra("des", description);
+                intent.putExtra("status", status);
+                intent.putExtra("task", index);
                 intent.putExtra("task_id", id);
                 intent.putExtra("userid", userID);
                 intent.putExtra("userName", userName);

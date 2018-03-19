@@ -32,7 +32,7 @@ public class EditActivity extends AppCompatActivity {
     String userName;
     String user_id;
     String task_id;
-    Integer index;
+    int index;
 
 
     @Override
@@ -56,11 +56,15 @@ public class EditActivity extends AppCompatActivity {
 
 
 
-        index = intent.getIntExtra("index", 1);
+        String i = intent.getStringExtra("index");
+        index = Integer.parseInt(i);
 
         final Context context1 = getApplicationContext();
         SaveFileController saveFileController1 = new SaveFileController();
         task = saveFileController1.getTask(context1, index, task_id);
+        Log.i("USER INDEX", index+"");
+        Log.i("TASK ID:", task_id+"");
+
 
         new_name = task.getName();
         new_des = task.getDescription();

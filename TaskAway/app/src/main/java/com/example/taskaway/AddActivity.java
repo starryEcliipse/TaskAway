@@ -83,8 +83,9 @@ public class AddActivity extends AppCompatActivity {
 
                 // NEW TASK - create with valid input
                 String task_id = Calendar.getInstance().getTime().toString();
-                task_id.replaceAll(" ", "");
+                task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, null, null, null, null, task_id);
+                Log.i("TASK ID:", task_id+"");
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();
