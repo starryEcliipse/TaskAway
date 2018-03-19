@@ -246,7 +246,7 @@ public class SaveFileController {
         TaskList tasks = currentuser.getReqTasks();
         for(int i=0; i<tasks.size(); i++){
             if(tasks.getTask(i).getId().equals(id)){
-                tasks.getTask(i).markDeleted();
+                tasks.remove(i);
             }
             i++;
         }

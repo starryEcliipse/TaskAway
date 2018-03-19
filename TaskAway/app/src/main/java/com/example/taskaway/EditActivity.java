@@ -53,7 +53,7 @@ public class EditActivity extends AppCompatActivity {
 
 
 
-        String i = intent.getStringExtra("userindex");
+        final String i = intent.getStringExtra("userindex");
         Log.i("EditActivity","Received string User Index is "+i);
         index = Integer.parseInt(i);
         Log.i("EditActivity","User index as int is "+index);
@@ -145,14 +145,13 @@ public class EditActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //final Context context1 = getApplicationContext();
+                final Context context2 = getApplicationContext();
                 SaveFileController saveFileController2 = new SaveFileController();
                 Log.i("AddActivity","userindex is "+index);
                 Log.i("AddActivity","TASKID is "+task_id);
 
 
-
-                saveFileController2.deleteTask(context1, index, task_id); // add task to proper user in savefile
+                saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
 
 
 
