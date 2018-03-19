@@ -1,13 +1,12 @@
 package com.example.taskaway;
 
-/**
- * Created by sameerah on 18/02/18.
- */
-
 import java.io.Serializable;
 
 /**
  * Represents a user's bid on a task.
+ *
+ * @author Sameerah Wajahat
+ * Created on 18/02/18
  */
 public class Bid implements Comparable<Bid>, Serializable { //implement comparable in order to sort the bids
     private Float amount;
@@ -20,11 +19,22 @@ public class Bid implements Comparable<Bid>, Serializable { //implement comparab
     Bid(Float amount){
         this.amount = amount;
     }
+
+    /**
+     * Constructor of bid.
+     * @param userId - user's id
+     * @param amount - the amount of a bid
+     */
     Bid(String userId, Float amount){
         this.userId = userId;
         this.amount = amount;
     }
 
+    /**
+     * Consstructor of a bid.
+     * @param user - current user
+     * @param amount - amoutn of a bid
+     */
     Bid(User user, Float amount){
         this.userId = user.getId();
         this.amount = amount;
@@ -84,6 +94,8 @@ public class Bid implements Comparable<Bid>, Serializable { //implement comparab
      * Compares 2 bids to one another
      * @param bid bid object to compare to
      * @return -1 if this.amount < bid.amount; +1 if this.amount >= bid.amount
+     *
+     * @author Diane Boytang
      */
     @Override
     public int compareTo(Bid bid) {

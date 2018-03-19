@@ -18,16 +18,20 @@ import java.util.ArrayList;
 
 
 /**
- * Created by SJIsmail.
- * The following below creates a layout class for the Jobs requested class
- *  https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
- *  https://www.youtube.com/watch?v=oBhgyiBVd3k <- More examples/explanation
+ * Displays tasks user has made/requested.
+ * Sources used:
+ *      https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
+ *      https://www.youtube.com/watch?v=oBhgyiBVd3k <- More examples/explanation
+ *
+ * @author Jonathan Ismail
+ *
+ * @see MainActivity
+ * @see TaskListViewAdapter
+ * @see SaveFileController
+ * @see AddActivity
  */
-
 public class MyJobs extends Fragment {
-    /**
-     * This class will also create an array of tasks and display the arraylist in the "myjobs_layout"
-     */
+
     View rootView;
     private RecyclerView myrecyclerview;
     //private static ArrayList<Task> lstTask; /* CHANGE LATER */
@@ -37,6 +41,9 @@ public class MyJobs extends Fragment {
     private String user_name;
     private String user_id;
 
+    /**
+     * Contructor of MyJobs
+     */
     public MyJobs() {
     }
     /**
@@ -44,8 +51,14 @@ public class MyJobs extends Fragment {
      * OnCreateView adds the "Add Button" to the first Fragment tab.
      *
      */
-    
 
+    /**
+     * Creates RecyclerView by setting layout and adapter. Also adds "Add Button" for adding a task.
+     * @param inflater - instance of LayoutInflater
+     * @param container - instance of ViewGroup
+     * @param savedInstanceState - saved state
+     * @return inflater
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -53,6 +66,13 @@ public class MyJobs extends Fragment {
         rootView = inflater.inflate(R.layout.myjobs_layout, container, false);
 
         imgButton = (ImageButton) rootView.findViewById(R.id.img_btn_add);
+
+        /**
+         * Determines behaviour of Add button. Go to AddActivity. Also pass username and user id to
+         * AddActivity.
+         *
+         * @see AddActivity
+         */
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +98,10 @@ public class MyJobs extends Fragment {
 
 
     /**
-     * Testing the functionality of the arraylist and its compatibility with the layout "
-     * Adds tasks to the ArrayList
+     * Displays all tasks of current user. Also receives username and user id from MainActivity.
+     * @param savedInstanceState - saved state
+     *
+     * @see SaveFileController
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +126,11 @@ public class MyJobs extends Fragment {
 
     }
 
+    /**
+     * Calls superclass onStart
+     *
+     * @see android.support.v7.app.AppCompatActivity
+     */
     public void onStart(){
         super.onStart();
         Log.i("onStart SIZE",lstTask.size()+"");

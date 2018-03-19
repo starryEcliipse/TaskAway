@@ -11,11 +11,14 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 /**
- * Created by Diane on 2018-03-16.
  * Acts as activity that displays a tasks information when a user selects a task
  * that they HAVE previously bid on.
+ *
+ * WORK IN PROGRESS
+ *
+ * @author Diane Boytang
+ * Created on 2018-03-16
  */
-
 
 public class ViewBidTask extends AppCompatActivity {
 
@@ -28,11 +31,16 @@ public class ViewBidTask extends AppCompatActivity {
     private Task task;
     private Bid winningbid;
 
+    /**
+     * Create layout and buttons. Determine button behaviours.
+     * @param savedInstanceState - saved state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_bid_task);
 
+        // Text layouts
         taskname = (TextView)this.findViewById(R.id.task_bid_name);
         taskdescription = (TextView)this.findViewById(R.id.task_bid_details);
         tasklocation = (TextView)this.findViewById(R.id.task_bid_location);
@@ -40,21 +48,31 @@ public class ViewBidTask extends AppCompatActivity {
         useroldbid = (TextView)this.findViewById(R.id.old_price_amount);
         userbid = (EditText)this.findViewById(R.id.new_bid_amount);
 
+        // CANCEL button - cancel activity
         Button cancelButton = (Button) findViewById(R.id.cancel_button_2);
-        Button saveButton = (Button) findViewById(R.id.save_button_2);
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Lets user stop viewing bid on a task.
+             *
+             * @param view - instance of View
+             */
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
 
-
-
+        // SAVE BUTTON
+        // TODO - functionality of save button
+        Button saveButton = (Button) findViewById(R.id.save_button_2);
     }
 
 
+    /**
+     * Displays Task information.
+     *
+     * @see Task
+     */
     @Override
     protected void onStart(){
         super.onStart();
@@ -79,8 +97,11 @@ public class ViewBidTask extends AppCompatActivity {
 
     }
 
-
-
+    /**
+     * Call superclass onDestroy.
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onDestroy(){
         super.onDestroy();

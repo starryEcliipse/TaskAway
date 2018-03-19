@@ -16,6 +16,9 @@ import java.util.Calendar;
  *
  * This activity is responsible to adding new tasks for the current user.
  * @author Sameerah Wajahat
+ *
+ * @see EditActivity
+ * @see SaveFileController
  */
 
 public class AddActivity extends AppCompatActivity {

@@ -18,12 +18,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by SJIsmail.
- * The Following adapter below is used in conjuction with the item_jobs.xml layout.
+ * Displays appropriate data when user goes go view current requested tasks (MyJobs).
+ * Used in conjuction with the item_jobs.xml layout.
  * As each item in the layout holds a specifc Textview position, we are able to change the data accordingly.
  *
+ * @author Jonathan Ismail
+ *
+ * @see MyJobs
+ * @see MainActivity
+ * @see RecyclerView.Adapter
+ * @see ViewOwnTask
  */
-
 public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapter.MyViewHolder> {
 
     Context mContext;
@@ -31,6 +36,14 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
     String userName;
     String userID;
 
+
+    /**
+     * Constructor of TaskListViewAdapter
+     * @param mContext - current context; instance of Context
+     * @param mData - data containing appropriate information (user's tasks)
+     * @param userName - current user's username
+     * @param userID - current user's id
+     */
     public TaskListViewAdapter(Context mContext, ArrayList<Task> mData, String userName, String userID){
         this.mContext = mContext;
         this.mData = mData;
@@ -38,6 +51,14 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         this.userID = userID;
     }
 
+    /**
+     * Creates View Holder of TaskListViewAdapter.
+     * Also determines behaviour when a task is selected by user.
+     *
+     * @param parent
+     * @param viewType
+     * @return MyViewHolder
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
@@ -45,15 +66,16 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
 
         final MyViewHolder vHolder = new MyViewHolder(v);
 
-//        Intent intent = ((AddActivity) mContext).getIntent();
-//        Task task = (Task) intent.getSerializableExtra("task");
-//        mData.add(task);
-////        SaveFileController saveFileController = new SaveFileController();
-////        User currentuser = saveFileController.getUserFromUsername(mContext, "someonee");
-////        TaskList tasks = currentuser.getReqTasks();
-
         vHolder.item.setOnClickListener(new View.OnClickListener() {
 
+            /**
+             * View current requested task when task is selected. Go to ViewOwnTask activity.
+             * Also pass username and userid to ViewOwnTask.
+             *
+             * @param view
+             *
+             * @see ViewOwnTask
+             */
             @Override
             // Go to a requester's own task
             public void onClick(View view) {
@@ -72,6 +94,12 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         return vHolder;
     }
 
+    /**
+     * Gets item position and displays name of task (through TextView found in items_job.xml).
+     *
+     * @param holder - current holder created
+     * @param position - position of task
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(mData.get(position).getName());
@@ -81,11 +109,11 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
 
 
     }
+
     /**
+     * Get number of tasks to display.
      *
-     * The Following below grabs the item position of the arraylist and displays the get.name() of that position to the Textview.
-     * Textview can be found in items_job.xml
-     *
+     * @return int - number of tasks to display
      */
     @Override
     public int getItemCount() {

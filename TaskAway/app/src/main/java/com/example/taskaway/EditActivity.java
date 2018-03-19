@@ -15,6 +15,8 @@ import android.widget.EditText;
 /**
  *
  * This class handles editing / deleting an existing task.
+ *
+ * @see Task
  * @author Sameerah Wajahat
  *
  */
@@ -94,39 +96,45 @@ public class EditActivity extends AppCompatActivity {
         // Save button - save changes and update task
         save = (Button) findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Determines behaviour of save button.
+             * Reads inputted text fields (if valid) and updates task information
+             *
+             * @see SaveFileController
+             */
             @Override
             public void onClick(View view) {
+
+                // Task name
                 String name = tname.getText().toString();
                 if (name.isEmpty()) {
                     tname.setError("Enter name");
                     return;
                 }
-
                 if (name.length() > 30){
                     tname.setError("Name too long");
                     return;
                 }
 
+                // Description
                 String comment = des.getText().toString();
                 if (comment.isEmpty()){
                     des.setError("Enter requirement");
                     return;
                 }
-
                 if (comment.length()>300) {
                     des.setError("Description too long");
                     return;
                 }
 
+                // Task status
                 String s = status.getText().toString();
                 if (s.isEmpty()){
                     status.setError("Assign status");
                     return;
                 }
 
-
                 Task task = new Task(name, comment, s, null, null, null, null, task_id);
-
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();
@@ -134,7 +142,7 @@ public class EditActivity extends AppCompatActivity {
                 int userindex = saveFileController.getUserIndex(context, userName); // get userindex
                 Log.i("AddActivity","userindex is "+userindex);
 
-
+                // Update user information
                 saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
 
                 // GO TO MAIN ACTIVITY
@@ -146,8 +154,15 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        // Delete button - deletes the task being viewed
         Button delete = (Button) findViewById(R.id.button3);
         delete.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Determines delete button behaviour.
+             * Deletes the current task. Updates user information.
+             *
+             * @see SaveFileController
+             */
             @Override
             public void onClick(View view) {
                 final Context context2 = getApplicationContext();
@@ -155,6 +170,7 @@ public class EditActivity extends AppCompatActivity {
                 Log.i("AddActivity","userindex is "+index);
                 Log.i("AddActivity","TASKID is "+task_id);
 
+                // Update user information - remove task
                 saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
 
                 // GO TO MAIN ACTIVITY
@@ -165,9 +181,13 @@ public class EditActivity extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+    } // end of onCreate
 
-    }
-
+    /**
+     * Calls superclass onStart.
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onStart(){
         super.onStart();

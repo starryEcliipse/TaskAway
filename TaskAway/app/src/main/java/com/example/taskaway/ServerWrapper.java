@@ -7,6 +7,8 @@ import java.util.ArrayList;
 /**
  * Handles interactions with the Elasticsearch server.
  * Wraps around ElasticsearchController to make interactions and method calls more simple.
+ *
+ * @author Adrian Schuldhaus
  */
 public class ServerWrapper {
     /**

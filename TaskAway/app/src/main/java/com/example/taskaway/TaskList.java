@@ -2,12 +2,12 @@ package com.example.taskaway;
 
 import java.util.ArrayList;
 
-/**
- * Created by sameerah on 18/02/18.
- */
 
 /**
  * Represents a list of tasks.
+ *
+ * @author Sameerah
+ * Created on 18/02/18
  */
 public class TaskList extends ArrayList<Task> {
 

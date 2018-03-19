@@ -19,6 +19,8 @@ import io.searchbox.core.SearchResult;
 
 /**
  * Directly handles communication with server using Jest Droid
+ *
+ * @author Adrian Schuldhaus
  */
 public class ElasticsearchController {
     private static JestDroidClient client;

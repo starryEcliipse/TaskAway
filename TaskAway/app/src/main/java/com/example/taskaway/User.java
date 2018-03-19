@@ -3,11 +3,10 @@ package com.example.taskaway;
 import java.security.MessageDigest;
 
 /**
- * Created by sameerah on 18/02/18.
- */
-
-/**
  * Represents a user.
+ *
+ * @author Sameerah Wajahat
+ * Created on 18/02/18
  */
 public class User {
     private String username;
@@ -198,6 +197,8 @@ public class User {
      * Returns the hash String of the provided String using SHA256 cryptographic hash function
      * @param str - the String to hash
      * @return The hash of the String proided
+     *
+     * @author Adrian Schuldhaus
      */
     public String hash_SHA256(String str) {
         try{
@@ -212,6 +213,8 @@ public class User {
      * Returns whether the hash of the provided String matches this user's password hash
      * @param comparisonPassword - the password to compare
      * @return true if password matches, false otherwise
+     *
+     * @author Adrian Schuldhaus
      */
     public boolean validatePassword(String comparisonPassword){
         return this.passwordHash.equals(hash_SHA256(comparisonPassword));

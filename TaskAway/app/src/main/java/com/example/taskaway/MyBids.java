@@ -21,10 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by SJIsmail.
- * The following below creates a layout class for the Bids class, working progress... Will be similar to Jobs class
+ * Displays tasks that the user has bid on.
+ * Sources used:
+ *      https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
+ *      https://www.youtube.com/watch?v=oBhgyiBVd3k <- More examples/explanation
+ *
+ * @author Jonathan Ismail
+ *
+ * @see MainActivity
+ * @see MyBidsListViewAdapter
+ * @see SaveFileController
  */
-
 public class MyBids extends Fragment{
     View rootView;
     private RecyclerView myrecyclerview;
@@ -33,8 +40,18 @@ public class MyBids extends Fragment{
     private String user_name;
     private String user_id;
 
+    /**
+     * Constructor of MyBids.
+     */
     public MyBids(){}
 
+    /**
+     * Creates RecyclerView by setting layout and adapter.
+     * @param inflater - instance of LayoutInflater
+     * @param container - instance of ViewGroup
+     * @param savedInstanceState - saved state
+     * @return inflater
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,11 +69,15 @@ public class MyBids extends Fragment{
         return rootView;
     }
 
+    /**
+     * Displays tasks. Also receives username and user id from MainActivity.
+     * @param savedInstanceState - saved state
+     *
+     * @see SaveFileController
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<Task> pictures, Float lowestBid)
-        //nTask = new Task("Cleaner Joe","Cleaning","",null,null,null,null);
 
         // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
         if (getArguments() != null){
@@ -68,6 +89,7 @@ public class MyBids extends Fragment{
             Log.i("My Bids", getArguments().getString("userid")+"");
         }
 
+        // DISPLAY TASKS - uses SaveFileController
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);

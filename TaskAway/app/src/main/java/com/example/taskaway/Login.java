@@ -20,6 +20,8 @@ import java.util.regex.*;
 
 /**
  * Acts as the login activity when user first opens app.
+ *
+ * @author
  */
 public class Login extends AppCompatActivity {
 
@@ -157,6 +159,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        // If server is unavailable
         continueOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,6 +201,11 @@ public class Login extends AppCompatActivity {
 
     }
 
+    /**
+     * Call superclass onStart
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onStart(){
         super.onStart();
@@ -205,6 +213,11 @@ public class Login extends AppCompatActivity {
     }
 
 
+    /**
+     * Call superclass onDestroy
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onDestroy(){
         super.onDestroy();

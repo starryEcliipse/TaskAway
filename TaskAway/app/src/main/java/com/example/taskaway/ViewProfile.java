@@ -20,10 +20,10 @@ import java.util.ArrayList;
 /**
  * Acts a activity that displays user's profile information.
  *
- * Implemented by Punam Woosaree
+ * @author Punam Woosaree
  */
 
-/**
+/*
  * DO NOT REMOVE COMMENTS
  * Those lines are for when we have server connectivity
  */
@@ -32,6 +32,11 @@ public class ViewProfile extends AppCompatActivity {
     private Boolean lengthReq;
     private Boolean userTaken;
 
+    /**
+     * Receive username and userid from Login activity to receive user information from server.
+     *
+     * @param savedInstanceState - saved state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +47,7 @@ public class ViewProfile extends AppCompatActivity {
         final String userID = getIntent().getStringExtra("user_id");
 
         //Get user from server
+        // TODO SaveFileController
         final User current_user_server = ServerWrapper.getUserFromId(userID);
 
         //Get user from file
@@ -71,6 +77,10 @@ public class ViewProfile extends AppCompatActivity {
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
         //executed when the edit button is selected
         editButton.setOnClickListener(new View.OnClickListener(){
+            /**
+             * Selecting Edit button allows user to edit user information.
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
@@ -166,14 +176,21 @@ public class ViewProfile extends AppCompatActivity {
 
     }
 
+    /**
+     * Calls superclass onStart
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onStart(){
         super.onStart();
-
     }
 
-
-
+    /**
+     * Calls superclass onDestroy
+     *
+     * @see AppCompatActivity
+     */
     @Override
     protected void onDestroy(){
         super.onDestroy();

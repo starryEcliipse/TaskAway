@@ -15,28 +15,55 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * Created by SJIsmail on 2018-03-16.
- * The Following adapter below is used in conjuction with the item_jobs.xml layout.
+ * Displays appropriate data when user goes go view all other user's tasks (AllBids).
+ * Used in conjuction with the item_jobs.xml layout.
  * As each item in the layout holds a specifc Textview position, we are able to change the data accordingly.
  *
+ * WORK IN PROGRESS
+ * @author Jonathan Ismail
+ *
+ *
+ * @see MyBids
+ * @see MainActivity
+ * @see RecyclerView.Adapter
  */
-
 public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAdapter.MyViewHolder> {
     Context mContext;
     ArrayList<Task> mData;
 
+    /**
+     * Constructor of MyBidsListViewAdapter
+     * @param mContext - current context; instance of Context
+     * @param mData - data containing appropriate information (bidded-on tasks)
+     */
     public MyBidsListViewAdapter(Context mContext, ArrayList<Task> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
 
+    /**
+     * Creates View Holder of MyBidsListViewAdapter.
+     * Also determines behaviour when a task is selected by user.
+     *
+     * @param parent
+     * @param viewType
+     * @return MyViewHolder
+     */
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
         final MyViewHolder vHolder = new MyViewHolder(v);
         vHolder.item.setOnClickListener(new View.OnClickListener() {
+            /**
+             * View current task when task is selected. Go to ViewTask activity.
+             *
+             * @param view
+             *
+             * @see ViewTask
+             */
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, "My Bids Item Clicked!", Toast.LENGTH_SHORT).show();
@@ -51,6 +78,12 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
         return vHolder;
     }
 
+    /**
+     * Gets item position and displays name of task (through TextView found in items_job.xml).
+     *
+     * @param holder - current holder created
+     * @param position - position of task
+     */
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(mData.get(position).getName());
@@ -60,13 +93,12 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
 
     }
-    /**
-     *
-     * The Following below grabs the item position of the arraylist and displays the get.name() of that position to the Textview.
-     * Textview can be found in items_job.xml
-     *
-     */
 
+    /**
+     * Get number of tasks to display.
+     *
+     * @return int - number of tasks to display
+     */
     @Override
     public int getItemCount() {
         return mData.size();
