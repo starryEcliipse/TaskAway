@@ -34,18 +34,18 @@ public class ViewOwnTask extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_own_task);
 
-        taskname = (TextView)this.findViewById(R.id.my_task_name);
-        taskstatus = (TextView)this.findViewById(R.id.my_task_status);
-        taskdescription = (TextView)this.findViewById(R.id.my_task_details);
-        tasklocation = (TextView)this.findViewById(R.id.my_task_location);
+        taskname = (TextView) this.findViewById(R.id.my_task_name);
+        taskstatus = (TextView) this.findViewById(R.id.my_task_status);
+        taskdescription = (TextView) this.findViewById(R.id.my_task_details);
+        tasklocation = (TextView) this.findViewById(R.id.my_task_location);
         /* TODO: use with elasticsearch:
             userid = task.getCreatorId();
             user = ServerWrapper.getUserFromId(userid);
             lowest
          */
 
-        tasklowestbidusername = (TextView)this.findViewById(R.id.lowest_bid_username);
-        tasklowestbidamount = (TextView)this.findViewById(R.id.lowest_bid_amount);
+        tasklowestbidusername = (TextView) this.findViewById(R.id.lowest_bid_username);
+        tasklowestbidamount = (TextView) this.findViewById(R.id.lowest_bid_amount);
 
         Button editButton = (Button) findViewById(R.id.edit_button);
 
@@ -75,7 +75,7 @@ public class ViewOwnTask extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         // TODO: read from server
         Intent intent = getIntent(); // receive task
@@ -97,18 +97,16 @@ public class ViewOwnTask extends AppCompatActivity {
                 tasklowestbid = task.findLowestBid();
                 tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             tasklowestbidamount.setText("No bids yet!");
         }
     }
 
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
     }
 
 }
-
 

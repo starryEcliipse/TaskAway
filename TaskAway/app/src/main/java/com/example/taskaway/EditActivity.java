@@ -1,8 +1,11 @@
+
 package com.example.taskaway;
+import android.support.v7.app.AppCompatActivity;
+
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +26,9 @@ public class EditActivity extends AppCompatActivity {
     private Button delete;
     private Button save;
     private Task task;
+    private String new_name;
+    private String new_des;
+    private String new_status;
     String userName;
     String user_id;
     String task_id;
@@ -47,11 +53,23 @@ public class EditActivity extends AppCompatActivity {
         userName = intent.getStringExtra("user_name");
         user_id = intent.getStringExtra("userId");
         task_id = intent.getStringExtra("task_id");
-       /* index = intent.getStringExtra("index");
 
-        tname.setText(name);
-        des.setText(description);
-        status.setText(statusTask); */
+
+
+        index = intent.getIntExtra("index", 1);
+
+        final Context context1 = getApplicationContext();
+        SaveFileController saveFileController1 = new SaveFileController();
+        task = saveFileController1.getTask(context1, index, task_id);
+
+        new_name = task.getName();
+        new_des = task.getDescription();
+        new_status = task.getStatus();
+
+        tname.setText(new_name);
+        des.setText(new_des);
+        status.setText(new_status);
+
 
         cancel = (Button) findViewById(R.id.button);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -93,14 +111,22 @@ public class EditActivity extends AppCompatActivity {
                     return;
                 }
 
-                Task task = new Task(name, comment, s, null, null, null, null, null);
+
+
+
+                Task task = new Task(name, comment, s, null, null, null, null, task_id);
+
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 int userindex = saveFileController.getUserIndex(context, userName); // get userindex
                 Log.i("AddActivity","userindex is "+userindex);
-               // saveFileController.updateTask(context, userindex, task); // add task to proper user in savefile
+
+
+
+                saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
+
 
 
                 // GO TO MAIN ACTIVITY
@@ -124,6 +150,7 @@ public class EditActivity extends AppCompatActivity {
 
 
     }
+
 
     @Override
     protected void onStart(){
