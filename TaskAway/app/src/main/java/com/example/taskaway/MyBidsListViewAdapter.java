@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Displays appropriate data when user goes go view all other user's tasks (AllBids).
+ * Displays appropriate data when user goes go view all tasks the user has bid on (MyBids).
  * Used in conjuction with the item_jobs.xml layout.
  * As each item in the layout holds a specifc Textview position, we are able to change the data accordingly.
  *
