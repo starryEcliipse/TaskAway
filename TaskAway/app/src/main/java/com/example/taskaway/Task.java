@@ -7,11 +7,9 @@ import java.util.Collections;
 import 	android.util.Base64;
 
 /**
- * Created by sameerah on 18/02/18.
- */
-
-/**
  * Represents a task.
+ * @author Sameerah Wajahat
+ * Created on 18/02/18
  */
 public class Task implements Serializable { // made Serializable to that Task can be passed in intents
     private String name;
@@ -24,7 +22,6 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String id;
     private String creatorId;
     private boolean deleted = false;
-    // TODO: getUserName -> for use when user is offline or server unavailable
 
     /**
      * Constructor of task.
@@ -217,17 +214,15 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
-     * Sorts the ArrayList of bids
+     * Sorts the ArrayList of bids - used for finding the lowest bid
      * @return lowest bid
+     * @author Diane Boytang
      */
     public Bid findLowestBid() {
         Collections.sort(bids);
         Bid bid = bids.get(0);
         return bid;
-
     }
-
-
 
     /**
      * Represents attributes and information of a task as a string

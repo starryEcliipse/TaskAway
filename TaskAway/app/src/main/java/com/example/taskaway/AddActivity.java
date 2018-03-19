@@ -13,8 +13,9 @@ import android.widget.EditText;
 import java.util.Calendar;
 
 /**
- * Created by Sameerah Wajahat
- * This class handles adding a new task
+ *
+ * This activity is responsible to adding new tasks for the current user.
+ * @author Sameerah Wajahat
  */
 
 public class AddActivity extends AppCompatActivity {
@@ -26,18 +27,30 @@ public class AddActivity extends AppCompatActivity {
     private Button saveButton;
     private final String text = "task";
 
+    /**
+     *
+     * Creates EditText fields so that user can input information for a new task.
+     * Creates buttons as well.
+     * Also determines button behaviours when clicked on.
+     *
+     * @param savedInstanceState - previously saved state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        // EditText layouts
         nameField = (EditText) findViewById(R.id.editText2);
         requirementField = (EditText) findViewById(R.id.editText3);
         statusField = (EditText) findViewById(R.id.editText);
 
-        saveButton = (Button) findViewById(R.id.button2);
 
+        // Button layouts
+        saveButton = (Button) findViewById(R.id.button2);
         cancelButton = (Button) findViewById(R.id.button);
 
+        // Cancel activity
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,32 +58,35 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
+        // READ INPUT AND ADD TASK - SAVE BUTTON
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = nameField.getText().toString();
+
+                // Check task name input
                 if (name.isEmpty()) {
                     nameField.setError("Enter name");
                     return;
                 }
-
                 if (name.length() > 30){
                     nameField.setError("Name too long");
                     return;
                 }
-
                 String comment = requirementField.getText().toString();
+
+                // Check task description input
                 if (comment.isEmpty()){
                     requirementField.setError("Enter requirement");
                     return;
                 }
-
                 if (comment.length()>300) {
                     requirementField.setError("Description too long");
                     return;
                 }
-
                 String s = statusField.getText().toString();
+
+                // Check task status input
                 if (s.isEmpty()){
                     statusField.setError("Assign status");
                     return;
@@ -102,14 +118,8 @@ public class AddActivity extends AppCompatActivity {
                 Log.i("AddActivity","Sending name and id to MainActivity!");
                 startActivity(intent2);
 
-                //getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-
-
-            }
+            } // end of onClick
         });
-    }
-
-
-
+    } // end of onCreate()
 
 }

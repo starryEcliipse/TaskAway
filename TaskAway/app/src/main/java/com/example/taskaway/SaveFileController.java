@@ -19,19 +19,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by PunamWoosaree on 2018-03-16.
+ * Is responsible for manipulating user information saved locally in device.
+ * @author Punam Woosaree
+ * Created on 2018-03-16
+ *
  */
-
 public class SaveFileController {
-    private ArrayList<User> allUsers;
+    private ArrayList<User> allUsers; // arraylist of all users currently saved
     private User user;
     private Task task;
-    private String saveFile = "test_save_file4.sav";
+    private String saveFile = "test_save_file4.sav"; // local save file
 
     /**
-     *
+     * Constructor.
+     * Creates new array of all users to be locally saved.
      */
-
     public SaveFileController() {
         this.allUsers = new ArrayList<User>();
     }
@@ -51,7 +53,7 @@ public class SaveFileController {
             this.allUsers = gson1.fromJson(bufferedReader, userArrayListType);
             ifStream.close();
         }
-        //create a new array list if a file does not already exist
+        // Create a new array list if a file does not already exist
         catch (FileNotFoundException e) {
             this.allUsers = new ArrayList<User>();
             saveToFile(context);
@@ -65,7 +67,6 @@ public class SaveFileController {
      *
      * @param context instance of Context
      */
-
     private void saveToFile(Context context) {
         try {
             FileOutputStream ofStream = context.openFileOutput(saveFile, Context.MODE_PRIVATE);
@@ -80,8 +81,6 @@ public class SaveFileController {
             throw new RuntimeException();
         }
     }
-
-
 
     /**
      * Adds new user and saves to file.
@@ -124,12 +123,12 @@ public class SaveFileController {
     }
 
     /**
+     * Updates user data
      *
      * @param context
      * @param userIndex
      * @param user
      */
-
     public void updateUser(Context context, int userIndex, User user){
         loadFromFile(context);
         this.allUsers.set(userIndex, user);
@@ -235,6 +234,15 @@ public class SaveFileController {
         return allTasks;
     }
 
+    /**
+     * Gets all tasks of other users.
+     *
+     * @param context - instance of Context
+     * @param UserIndex - integer user index
+     * @return TaskList containing all tasks of other users
+     *
+     * @see AllBids
+     */
     public TaskList getEveryonesTasks(Context context, int UserIndex){
         loadFromFile(context);
         TaskList allTasks = new TaskList();
@@ -254,10 +262,11 @@ public class SaveFileController {
     }
 
     /**
+     * Deletes a task.
      *
-     * @param context
-     * @param userIndex
-     * @param id
+     * @param context - instance of Context
+     * @param userIndex - integer user index
+     * @param id - id of task
      */
     public void deleteTask(Context context, int userIndex, String id){
         loadFromFile(context);
@@ -273,10 +282,11 @@ public class SaveFileController {
     }
 
     /**
+     * Retrieves a task.
      *
-     * @param context
-     * @param userIndex
-     * @param id
+     * @param context - instance of Context
+     * @param userIndex - integer user index
+     * @param id - id of task
      * @return task
      */
     public Task getTask(Context context, int userIndex, String id) {
@@ -291,6 +301,14 @@ public class SaveFileController {
         return task;
     }
 
+    /**
+     * Updates a user's task.
+     *
+     * @param context - instance of Context
+     * @param userIndex - integer user index
+     * @param id - id of task
+     * @param task - the task itself
+     */
     public void updateTask(Context context, int userIndex, String id, Task task){
         loadFromFile(context);
         User currentuser = this.allUsers.get(userIndex);
@@ -303,6 +321,13 @@ public class SaveFileController {
         saveToFile(context);
     }
 
+    /**
+     * Get user information via User class by using username as identifier
+     *
+     * @param context - instance of Context
+     * @param username - username of a usre
+     * @return User
+     */
     public User getUserFromUsername(Context context, String username){
         loadFromFile(context);
         for(int i=0; i<this.allUsers.size(); i++){

@@ -13,11 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Created by Sameerah Wajahat
- * This class handles editing / deleting an existing task
+ *
+ * This class handles editing / deleting an existing task.
+ * @author Sameerah Wajahat
  *
  */
-
 public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
@@ -34,30 +34,36 @@ public class EditActivity extends AppCompatActivity {
     String task_id;
     int index;
 
-
+    /**
+     * Upon creating activity, create EditText and Button layouts.
+     * Also retrieve username and user id information for obtaining appropriate task information.
+     * Determine behaviours of buttons.
+     *
+     * @param savedInstanceState - saved state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        // EditText layout
         tname = (EditText) findViewById(R.id.editText2);
         des = (EditText) findViewById(R.id.editText3);
         status = (EditText) findViewById(R.id.editText);
 
+        // Get information needed to update task
         Intent intent = getIntent();
-
-
         userName = intent.getStringExtra("userName");
         user_id = intent.getStringExtra("userid");
         task_id = intent.getStringExtra("task_id");
 
-
-
+        // Get userindex
         final String i = intent.getStringExtra("userindex");
         Log.i("EditActivity","Received string User Index is "+i);
         index = Integer.parseInt(i);
         Log.i("EditActivity","User index as int is "+index);
 
+        // SaveFileController - getTask
         final Context context1 = getApplicationContext();
         SaveFileController saveFileController1 = new SaveFileController();
         task = saveFileController1.getTask(context1, index, task_id);
@@ -65,15 +71,18 @@ public class EditActivity extends AppCompatActivity {
         Log.i("TASK ID:", task_id+"");
 
 
+        // Get task information
         new_name = task.getName();
         new_des = task.getDescription();
         new_status = task.getStatus();
 
+        // setText
         tname.setText(new_name);
         des.setText(new_des);
         status.setText(new_status);
 
 
+        // Cancel button - cancel activity
         cancel = (Button) findViewById(R.id.button);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +91,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        // Save button - save changes and update task
         save = (Button) findViewById(R.id.button2);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +125,6 @@ public class EditActivity extends AppCompatActivity {
                 }
 
 
-
-
                 Task task = new Task(name, comment, s, null, null, null, null, task_id);
 
 
@@ -127,10 +135,7 @@ public class EditActivity extends AppCompatActivity {
                 Log.i("AddActivity","userindex is "+userindex);
 
 
-
                 saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
-
-
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
@@ -150,10 +155,7 @@ public class EditActivity extends AppCompatActivity {
                 Log.i("AddActivity","userindex is "+index);
                 Log.i("AddActivity","TASKID is "+task_id);
 
-
                 saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
-
-
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
@@ -164,10 +166,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-
 
     @Override
     protected void onStart(){
