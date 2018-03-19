@@ -69,12 +69,17 @@ public class AllBids extends Fragment {
             user_id = getArguments().getString("userid");
             Log.i("All Bids", getArguments().getString("userid")+"");
         }
+        else{
+            Log.i("All Bids","getArguments is null!");
+
+        }
 
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);
         Log.i("All Bids","Currently getting all other tasks");
-        lstTask = saveFileController.getAllTasks(context);
+        lstTask = saveFileController.getEveryonesTasks(context, userIndex);
+        //getEveryonesTasks(Context context, int UserIndex)
 
         //TESTING BELOW
         //lstTask = new ArrayList<>();
