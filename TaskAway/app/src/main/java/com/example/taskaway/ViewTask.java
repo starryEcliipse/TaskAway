@@ -96,19 +96,21 @@ public class ViewTask extends AppCompatActivity {
 
                 // SaveFileController - update user information so that user can
                 // see this task in MyBids
-                final Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
-                Log.i("ViewTask","userindex is "+userindex);
-                Log.i("ViewTask","Adding "+task.getName()+" task!");
-                saveFileController.addBiddedTask(context, userindex, task);
 
-                // GO BACK TO MAIN
-                Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
-                intent2.putExtra("user_name", userName);
-                intent2.putExtra("user_id", userID);
-                Log.i("ViewTask","Sending name and id to MainActivity!");
-                startActivity(intent2);
+                // TODO: FIX ADDING BIDS
+//                final Context context = getApplicationContext();
+//                SaveFileController saveFileController = new SaveFileController();
+//                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+//                Log.i("ViewTask","userindex is "+userindex);
+//                Log.i("ViewTask","Adding "+task.getName()+" task!");
+//                saveFileController.addBiddedTask(context, userindex, task);
+//
+//                // GO BACK TO MAIN
+//                Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
+//                intent2.putExtra("user_name", userName);
+//                intent2.putExtra("user_id", userID);
+//                Log.i("ViewTask","Sending name and id to MainActivity!");
+//                startActivity(intent2);
             }
         });
 
