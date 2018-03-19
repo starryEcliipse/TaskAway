@@ -140,7 +140,6 @@ public class Login extends AppCompatActivity {
                     current_user = ServerWrapper.getUserFromUsername(userName);
                     if (current_user == null) {
                         Log.i("LOGIN", "User still not on server. Aborting.");
-                        continueOffline.setVisibility(View.VISIBLE);
                         return;
                     }
                 }
