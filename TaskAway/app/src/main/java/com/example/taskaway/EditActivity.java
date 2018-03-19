@@ -47,11 +47,11 @@ public class EditActivity extends AppCompatActivity {
         userName = intent.getStringExtra("user_name");
         user_id = intent.getStringExtra("userId");
         task_id = intent.getStringExtra("task_id");
-        index = intent.getStringExtra("index");
+       /* index = intent.getStringExtra("index");
 
         tname.setText(name);
         des.setText(description);
-        status.setText(statusTask);
+        status.setText(statusTask); */
 
         cancel = (Button) findViewById(R.id.button);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -93,14 +93,14 @@ public class EditActivity extends AppCompatActivity {
                     return;
                 }
 
-                Task task = new Task(name, comment, s, null, null, null, null, );
+                Task task = new Task(name, comment, s, null, null, null, null, null);
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 int userindex = saveFileController.getUserIndex(context, userName); // get userindex
                 Log.i("AddActivity","userindex is "+userindex);
-                saveFileController.updateTask(context, userindex, , task); // add task to proper user in savefile
+               // saveFileController.updateTask(context, userindex, task); // add task to proper user in savefile
 
 
                 // GO TO MAIN ACTIVITY

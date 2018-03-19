@@ -123,15 +123,9 @@ public class Task implements Serializable { // made Serializable to that Task ca
     /**
      * Sets name of task.
      * @param name - name to be set for task.
-     * Throws TaskNameTooLongException if the name is greater than 30 chars
      */
-    public void setName (String name) throws TaskNameTooLongException{
-        if(name.length() > 30){
-            throw new TaskNameTooLongException();
-        }
-        else{
-            this.name = name;
-        }
+    public void setName (String name){
+        this.name = name;
     }
 
     /**
@@ -153,16 +147,11 @@ public class Task implements Serializable { // made Serializable to that Task ca
     /**
      * Sets description of task.
      * @param description - description to be set for task
-     * Throws TaskDescriptionTooLongException if the task description is greater than 300 chars
      */
-    public void setDescription(String description) throws TaskDescriptionTooLongException{
-        if(description.length() > 300){
-            throw new TaskDescriptionTooLongException();
-        }
-        else {
-            this.description = description;
-        }
+    public void setDescription(String description){
+        this.description = description;
     }
+
 
     /**
      * Sets bids for task.

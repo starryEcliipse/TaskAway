@@ -76,6 +76,7 @@ public class ViewBidTask extends AppCompatActivity {
         catch (Exception e){
             taskwinningbid.setText("No bids yet!");
         }
+
     }
 
 
