@@ -79,21 +79,6 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
 
-        /* Ensure that when a task is clicked, we can pass THAT task to ViewOwnTask
-            WORK IN PROGRESS
-         */
-//        holder.item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            // Go to a requester's own task
-//            public void onClick(View view) {
-//                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(mContext, ViewOwnTask.class);
-//                intent.putExtra("task", mData.get(position));
-//                mContext.startActivity(intent);
-//            }
-//        });
-
-
 
     }
     /**

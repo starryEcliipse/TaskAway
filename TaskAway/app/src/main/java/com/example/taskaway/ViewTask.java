@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,9 @@ public class ViewTask extends AppCompatActivity {
     private Task task;
     private Bid winningbid;
     private float bidamount;
-
+    String id;
+    String userID;
+    String userName;
 
 
     @Override
@@ -44,10 +47,11 @@ public class ViewTask extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button_1);
         Button saveButton = (Button) findViewById(R.id.save_button_1);
 
+        // Save bid
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // read userbid
+                // read input
                 String inputbid = userbid.getText().toString();
                 try{
                     if (inputbid.isEmpty()){
@@ -55,12 +59,35 @@ public class ViewTask extends AppCompatActivity {
                         return;
                     }
                     bidamount = Float.parseFloat(inputbid);
+                    // Invalid input
                 } catch (Exception e){
                     Log.i("ViewTask","Invalid bid entered!");
                     userbid.setError("Invalid bid entered!");
                     return;
                 }
+                // Valid input
                 Log.i("ViewTask","The new bid is: "+bidamount);
+
+
+                // TODO: make bid objects?
+                //Bid bid = new Bid(userID, bidamount);
+                //task.getBids(bid);
+
+                // SaveFileController
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+                Log.i("ViewTask","userindex is "+userindex);
+                Log.i("ViewTask","Adding "+task.getName()+" task!");
+                saveFileController.addBiddedTask(context, userindex, task);
+
+
+                // GO BACK TO MAIN
+                Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", userID);
+                Log.i("ViewTwask","Sending name and id to MainActivity!");
+                startActivity(intent2);
             }
         });
 
@@ -78,6 +105,7 @@ public class ViewTask extends AppCompatActivity {
         Log.i("ViewTask","Viewing task!");
         //TODO: Read from server
 
+        // TODO: update to use SaveFileController?
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("task");
         // read and display task info
@@ -85,6 +113,12 @@ public class ViewTask extends AppCompatActivity {
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+
+        userID = intent.getStringExtra("userid");
+        Log.i("userID", userID);
+        userName = intent.getStringExtra("userName");
+        Log.i("userName", userName);
+
         try {
             if (task.getBids().isEmpty()) {
                 taskwinningbid.setText("No bids yet!");
@@ -97,10 +131,6 @@ public class ViewTask extends AppCompatActivity {
             taskwinningbid.setText("No bids yet!");
         }
     }
-
-
-
-
 
     @Override
     protected void onDestroy(){

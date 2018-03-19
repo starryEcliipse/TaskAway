@@ -46,7 +46,7 @@ public class AllBids extends Fragment {
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.allbids_recyclerview);
 
-        AllBidsListViewAdapter recycleAdapter = new AllBidsListViewAdapter(getContext(), lstTask);
+        AllBidsListViewAdapter recycleAdapter = new AllBidsListViewAdapter(getContext(), lstTask, user_name, user_id);
 
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myrecyclerview.setAdapter(recycleAdapter);
@@ -79,14 +79,6 @@ public class AllBids extends Fragment {
         int userIndex = saveFileController.getUserIndex(context, user_name);
         Log.i("All Bids","Currently getting all other tasks");
         lstTask = saveFileController.getEveryonesTasks(context, userIndex);
-        //getEveryonesTasks(Context context, int UserIndex)
-
-        //TESTING BELOW
-        //lstTask = new ArrayList<>();
-        //lstTask.add(new Task("Job 7","This is a test!","Requested","Edmonton, AB",null,null,null, null));
-        //lstTask.add(new Task("Job 8",null,null,null,null,null,null,null));
-        //lstTask.add(new Task("Job 9",null,null,null,null,null,null, null));
-
 
     }
 }

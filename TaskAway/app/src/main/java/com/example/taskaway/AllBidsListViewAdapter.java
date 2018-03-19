@@ -22,10 +22,14 @@ import java.util.ArrayList;
 public class AllBidsListViewAdapter extends RecyclerView.Adapter<AllBidsListViewAdapter.MyViewHolder>{
     Context mContext;
     ArrayList<Task> mData;
+    String userName;
+    String userID;
 
-    public AllBidsListViewAdapter(Context mContext, ArrayList<Task> mData) {
+    public AllBidsListViewAdapter(Context mContext, ArrayList<Task> mData, String userName, String userID) {
         this.mContext = mContext;
         this.mData = mData;
+        this.userName = userName;
+        this.userID = userID;
     }
 
     @Override
@@ -41,10 +45,13 @@ public class AllBidsListViewAdapter extends RecyclerView.Adapter<AllBidsListView
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));
                 String position = Integer.toString(pos);
+                intent.putExtra("userid", userID);
+                intent.putExtra("userName", userName);
                 intent.putExtra("index", position);
                 mContext.startActivity(intent);
             }
         });
+
         return vHolder;
     }
 

@@ -30,8 +30,6 @@ public class Bid implements Comparable<Bid>, Serializable { //implement comparab
         this.amount = amount;
     }
 
-    Bid(){};
-
     /**
      * Returns the amount of a bid.
      * @return - current amount of bid
