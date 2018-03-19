@@ -5,9 +5,9 @@ import android.util.Log;
 import java.util.ArrayList;
 
 /**
- * Created by aschu on 2018-03-14.
+ * Handles interactions with the Elasticsearch server.
+ * Wraps around ElasticsearchController to make interactions and method calls more simple.
  */
-
 public class ServerWrapper {
     /**
      * Sends a new task to the server

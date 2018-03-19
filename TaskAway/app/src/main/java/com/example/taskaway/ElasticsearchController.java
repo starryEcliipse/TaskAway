@@ -18,9 +18,8 @@ import io.searchbox.core.SearchResult;
 
 
 /**
- * Created by aschu on 2018-03-13.
+ * Directly handles communication with server using Jest Droid
  */
-
 public class ElasticsearchController {
     private static JestDroidClient client;
 
