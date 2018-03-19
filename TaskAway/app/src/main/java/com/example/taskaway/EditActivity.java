@@ -46,9 +46,6 @@ public class EditActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-//        String name = intent.getStringExtra("one");
-//        String description = intent.getStringExtra("two");
-//        final String statusTask = intent.getStringExtra("three");
 
         userName = intent.getStringExtra("userName");
         user_id = intent.getStringExtra("userid");
@@ -148,8 +145,23 @@ public class EditActivity extends AppCompatActivity {
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //needs to be worked on once,
-                //taskList.remove(position);
+                //final Context context1 = getApplicationContext();
+                SaveFileController saveFileController2 = new SaveFileController();
+                Log.i("AddActivity","userindex is "+index);
+                Log.i("AddActivity","TASKID is "+task_id);
+
+
+
+                saveFileController2.deleteTask(context1, index, task_id); // add task to proper user in savefile
+
+
+
+                // GO TO MAIN ACTIVITY
+                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", user_id);
+                Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent2);
             }
         });
 
