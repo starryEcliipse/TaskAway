@@ -1,6 +1,7 @@
 package com.example.taskaway;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -232,6 +233,24 @@ public class SaveFileController {
             }
         }
         return allTasks;
+    }
+
+    public TaskList getEveryonesTasks(Context context, int UserIndex){
+        loadFromFile(context);
+        TaskList allTasks = new TaskList();
+        for(int i=0; i<allUsers.size(); i++){
+            if(i==UserIndex){
+                Log.i("im removing you", "nice");
+            }
+            else{
+                TaskList tasklist = this.allUsers.get(i).getReqTasks();
+                for (int j = 0; j<tasklist.size(); j++) {
+                    allTasks.add(tasklist.getTask(j));
+                }
+            }
+        }
+        return allTasks;
+
     }
 
     /**
