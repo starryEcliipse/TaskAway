@@ -101,13 +101,6 @@ public class MyJobs extends Fragment {
         int userIndex = saveFileController.getUserIndex(context, user_name);
         Log.i("My Jobs","userindex is "+userIndex);
         lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
-        //lstTask.add(new Task("Job 2",null,null,null,null,null,null));
-        //lstTask.add(new Task("Job 3",null,null,null,null,null,null));
-
-        //lstTask.add(new Task(name, des, status, null, blist, null, null));
-        //lstTask.add(new Task("KIM"));
-        //lstTask.add(new Task("JUNG"));
-
     }
 
     public void onStart(){
