@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.junit.Test;
+
 /**
  * Created by PunamWoosaree on 2018-02-21.
  */
@@ -18,6 +20,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test the constructor
      */
+    @Test
     public void testTask(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -38,7 +41,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getName()
      */
-
+    @Test
     public void testGetName(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -51,6 +54,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getDescription()
      */
+    @Test
     public void testGetDescription(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -63,6 +67,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getStatus()
      */
+    @Test
     public void testGetStatus(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -75,6 +80,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getLocation()
      */
+    @Test
     public void testGetLocation(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -87,6 +93,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getLowestBid()
      */
+    @Test
     public void testGetLowestBid(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -99,6 +106,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getBids()
      */
+    @Test
     public void testGetBids(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -111,6 +119,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test getPictures()
      */
+    @Test
     public void testGetPictures(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -123,7 +132,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setName()
      */
-
+    @Test
     public void testSetName(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -141,6 +150,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setDescription()
      */
+    @Test
     public void testSetDescription(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -158,6 +168,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setStatus()
      */
+    @Test
     public void testSetStatus(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -173,6 +184,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setLocation()
      */
+    @Test
     public void testSetLocation(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -187,6 +199,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setLowestBid()
      */
+    @Test
     public void testSetLowestBid(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -201,6 +214,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setBids()
      */
+    @Test
     public void testSetBids(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();
@@ -215,6 +229,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
     /**
      * Test setPictures()
      */
+    @Test
     public void testSetPictures(){
         ArrayList<Bid> bidsList = new ArrayList<>();
         ArrayList<String> picturesList = new ArrayList<>();

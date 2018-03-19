@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import org.junit.Test;
+
 /**
  * Created by SJIsmail on 2018-02-21.
  */
@@ -12,6 +14,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test the constructor
      */
+    @Test
     public void testTaskList() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
@@ -21,6 +24,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test addTask()
      */
+    @Test
     public void testAddTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
@@ -32,6 +36,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test hasTask()
      */
+    @Test
     public void testHasTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
@@ -42,6 +47,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test getTask()
      */
+    @Test
     public void testgetTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
@@ -53,6 +59,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
     /**
      * Test removeTask()
      */
+    @Test
     public void testRemoveTask() {
         Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
         TaskList newTaskList = new TaskList();
@@ -60,8 +67,6 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
 
         newTaskList.remove(0);
         assertEquals(newTaskList.size(), 0);
-
-
     }
 
 }
