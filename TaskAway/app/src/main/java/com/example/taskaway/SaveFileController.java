@@ -80,6 +80,8 @@ public class SaveFileController {
         }
     }
 
+
+
     /**
      * Adds new user and saves to file.
      *
@@ -225,11 +227,9 @@ public class SaveFileController {
         TaskList allTasks = new TaskList();
         for(int i=0; i<allUsers.size(); i++){
             TaskList tasklist = this.allUsers.get(i).getReqTasks();
-            for (int j = 0; j<tasklist.size(); j++){
+            for (int j = 0; j<tasklist.size(); j++) {
                 allTasks.add(tasklist.getTask(j));
-                j++;
             }
-            i++;
         }
         return allTasks;
     }
@@ -264,12 +264,11 @@ public class SaveFileController {
         loadFromFile(context);
         User currentuser = this.allUsers.get(userIndex);
         TaskList tasks = currentuser.getReqTasks();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.getTask(i).getId().equals(id)) {
-                task = tasks.getTask(i);
+        for (Task t : tasks) {
+            if (t.getId().equals(id)) {
+                task = t;
             }
         }
-        saveToFile(context);
         return task;
     }
 
