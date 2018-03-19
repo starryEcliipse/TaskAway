@@ -7,7 +7,7 @@
     tools:context="com.example.taskaway.ViewBidTask">
 
     <TextView
-        android:id="@+id/task_name"
+        android:id="@+id/task_bid_name"
         android:layout_width="184dp"
         android:layout_height="25dp"
         android:layout_marginEnd="8dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/task_details"
+        android:id="@+id/task_bid_details"
         android:layout_width="185dp"
         android:layout_height="121dp"
         android:layout_marginEnd="8dp"
@@ -29,7 +29,7 @@
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_name" />
 
     <TextView
         android:id="@+id/location"
@@ -41,10 +41,10 @@
         android:textStyle="bold"
         android:text="@string/location"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details" />
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_details" />
 
     <TextView
-        android:id="@+id/task_location"
+        android:id="@+id/task_bid_location"
         android:layout_width="117dp"
         android:layout_height="31dp"
         android:layout_marginStart="60dp"
@@ -66,8 +66,8 @@
         android:text="@string/location_detail_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toEndOf="@+id/task_location"
-        app:layout_constraintTop_toBottomOf="@+id/task_details" />
+        app:layout_constraintStart_toEndOf="@+id/task_bid_location"
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_details" />
 
     <TextView
         android:id="@+id/old_price"
@@ -79,7 +79,7 @@
         android:textStyle="bold"
         android:text="@string/old"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_location" />
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_location" />
 
     <TextView
         android:id="@+id/old_price_amount"
@@ -91,7 +91,7 @@
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/old_price"
-        app:layout_constraintTop_toBottomOf="@+id/task_location" />
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_location" />
 
     <TextView
         android:id="@+id/winning_bid"
@@ -106,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@+id/old_price" />
 
     <TextView
-        android:id="@+id/winning_bid_amount"
+        android:id="@+id/winning_bid_amount_2"
         android:layout_width="156dp"
         android:layout_height="19dp"
         android:layout_marginEnd="20dp"
@@ -141,10 +141,10 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/new_price"
-        app:layout_constraintTop_toBottomOf="@+id/winning_bid_amount" />
+        app:layout_constraintTop_toBottomOf="@+id/winning_bid_amount_2" />
 
     <Button
-        android:id="@+id/cancel_button"
+        android:id="@+id/cancel_button_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -155,12 +155,12 @@
         android:text="@string/cancel_button"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/save_button"
+        app:layout_constraintEnd_toStartOf="@+id/save_button_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/new_price" />
 
     <Button
-        android:id="@+id/save_button"
+        android:id="@+id/save_button_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -185,7 +185,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_name" />
+        app:layout_constraintTop_toBottomOf="@+id/task_bid_name" />
 
 
 </android.support.constraint.ConstraintLayout>

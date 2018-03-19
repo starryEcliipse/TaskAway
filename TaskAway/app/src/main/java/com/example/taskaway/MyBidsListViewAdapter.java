@@ -33,14 +33,18 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View v;
+        View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.item_jobs,parent, false);
-        MyViewHolder vHolder = new MyViewHolder(v);
+        final MyViewHolder vHolder = new MyViewHolder(v);
         vHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, "My Bids Item Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext, ViewOwnTask.class);
+                Intent intent = new Intent(mContext, ViewBidTask.class);
+                int pos = vHolder.getAdapterPosition();
+                intent.putExtra("task", mData.get(pos));
+                String position = Integer.toString(pos);
+                intent.putExtra("index", position);
                 mContext.startActivity(intent);
             }
         });

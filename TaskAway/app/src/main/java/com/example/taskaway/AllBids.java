@@ -58,7 +58,7 @@ public class AllBids extends Fragment {
 
         //TESTING BELOW
         lstTask = new ArrayList<>();
-        lstTask.add(new Task("Job 7",null,null,null,null,null,null));
+        lstTask.add(new Task("Job 7","This is a test!","Requested","Edmonton, AB",null,null,null));
         lstTask.add(new Task("Job 8",null,null,null,null,null,null));
         lstTask.add(new Task("Job 9",null,null,null,null,null,null));
 
