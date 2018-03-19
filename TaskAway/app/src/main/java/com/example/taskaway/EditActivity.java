@@ -22,7 +22,12 @@ public class EditActivity extends AppCompatActivity {
     private Button cancel;
     private Button delete;
     private Button save;
-    private TaskList taskList;
+    private Task task;
+    String userName;
+    String user_id;
+    String task_id;
+    Integer index;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,17 @@ public class EditActivity extends AppCompatActivity {
         des = (EditText) findViewById(R.id.editText3);
         status = (EditText) findViewById(R.id.editText);
 
-        final String user_name = getIntent().getStringExtra("user_name");
-        final String userID = getIntent().getStringExtra("user_id");
+        Intent intent = getIntent();
 
-        final Intent intent = getIntent();
-        String name = intent.getStringExtra("one");
-        String description = intent.getStringExtra("two");
-        final String statusTask = intent.getStringExtra("three");
+//        String name = intent.getStringExtra("one");
+//        String description = intent.getStringExtra("two");
+//        final String statusTask = intent.getStringExtra("three");
+
+        userName = intent.getStringExtra("user_name");
+        user_id = intent.getStringExtra("userId");
+        task_id = intent.getStringExtra("task_id");
+        index = intent.getStringExtra("index");
+
         tname.setText(name);
         des.setText(description);
         status.setText(statusTask);
@@ -56,7 +65,50 @@ public class EditActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = tname.getText().toString();
+                if (name.isEmpty()) {
+                    tname.setError("Enter name");
+                    return;
+                }
 
+                if (name.length() > 30){
+                    tname.setError("Name too long");
+                    return;
+                }
+
+                String comment = des.getText().toString();
+                if (comment.isEmpty()){
+                    des.setError("Enter requirement");
+                    return;
+                }
+
+                if (comment.length()>300) {
+                    des.setError("Description too long");
+                    return;
+                }
+
+                String s = status.getText().toString();
+                if (s.isEmpty()){
+                    status.setError("Assign status");
+                    return;
+                }
+
+                Task task = new Task(name, comment, s, null, null, null, null, );
+
+                // SAVE TO FILE TODO: ELASTICSEARCH
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+                Log.i("AddActivity","userindex is "+userindex);
+                saveFileController.updateTask(context, userindex, , task); // add task to proper user in savefile
+
+
+                // GO TO MAIN ACTIVITY
+                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", user_id);
+                Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent2);
             }
         });
 

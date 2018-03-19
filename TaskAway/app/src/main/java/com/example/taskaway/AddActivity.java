@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Calendar;
+
 /**
  * Created by Sameerah Wajahat
  * This class handles adding a new task
@@ -80,7 +82,9 @@ public class AddActivity extends AppCompatActivity {
                 String userid = intent.getStringExtra("userid");
 
                 // NEW TASK - create with valid input
-                Task task = new Task(name, comment, s, null, null, null, null);
+                String task_id = Calendar.getInstance().getTime().toString();
+                task_id.replaceAll(" ", "");
+                Task task = new Task(name, comment, s, null, null, null, null, task_id);
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();

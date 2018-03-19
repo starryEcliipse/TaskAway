@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class ViewOwnTask extends AppCompatActivity {
     private TextView tasklowestbidamount;
     private Task task;
     private Bid tasklowestbid;
+    String id;
     String userID;
     String userName;
 
@@ -51,12 +53,20 @@ public class ViewOwnTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
-                String name = taskname.getText().toString();
-                String description = taskdescription.getText().toString();
-                String status = taskstatus.getText().toString();
-                intent.putExtra("one", name);
-                intent.putExtra("two", description);
-                intent.putExtra("three", status);
+//                String name = taskname.getText().toString();
+//                String description = taskdescription.getText().toString();
+//                String status = taskstatus.getText().toString();
+//                intent.putExtra("one", name);
+//                intent.putExtra("two", description);
+//                intent.putExtra("three", status);
+                final Context context = getApplicationContext();
+                final SaveFileController saveFileController = new SaveFileController();
+                final Integer userIndex = saveFileController.getUserIndex(context, userName);
+                id = task.getId();
+                intent.putExtra("task", userIndex);
+                intent.putExtra("task_id", id);
+                intent.putExtra("userid", userID);
+                intent.putExtra("userName", userName);
                 //intent.putExtra("")
                 startActivity(intent);
             }

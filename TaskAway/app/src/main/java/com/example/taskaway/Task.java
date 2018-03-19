@@ -36,7 +36,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * @param pictures - pictures related to task
      * @param lowestBid - lowest bid of all other bids made on task
      */
-    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<String> pictures, Float lowestBid){
+    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<String> pictures, Float lowestBid, String id){
         this.name = name;
         this.description = description;
         this.status = status;
@@ -44,6 +44,8 @@ public class Task implements Serializable { // made Serializable to that Task ca
         this.lowestBid = lowestBid;
         this.bids = bids;
         this.pictures = pictures;
+        this.id = id;
+
     }
 
     /**
