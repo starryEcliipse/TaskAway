@@ -106,21 +106,20 @@ public class MainActivity extends AppCompatActivity{
 
         // Adding Fragment here
         MyJobs myjobs = new MyJobs();
-        AllBids allbids = new AllBids();
         MyBids mybids = new MyBids();
+        AllBids allbids = new AllBids();
         adapter.addFragment(myjobs,"My Jobs");
-        adapter.addFragment(allbids,"All Jobs");
         adapter.addFragment(mybids, "My Bids");
-
+        adapter.addFragment(allbids,"All Jobs");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
         // PASS USERNAME + USERID TO ALL FRAGMENTS
         passUserData(user_name, userID, myjobs);
-        passUserData(user_name, userID, allbids);
         passUserData(user_name, userID, mybids);
-        
+        passUserData(user_name, userID, allbids);
+
         //Will add icons for the tabs below here
         //tabLayout.getTabAt(2).setIcon(R.drawable.ic_alljobs);
         /***/

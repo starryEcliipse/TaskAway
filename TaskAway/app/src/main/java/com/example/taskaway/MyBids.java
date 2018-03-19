@@ -28,7 +28,8 @@ import java.util.List;
 public class MyBids extends Fragment{
     View rootView;
     private RecyclerView myrecyclerview;
-    private ArrayList<Task> lstTask;
+    //private ArrayList<Task> lstTask;
+    TaskList lstTask;
     private String user_name;
     private String user_id;
 
