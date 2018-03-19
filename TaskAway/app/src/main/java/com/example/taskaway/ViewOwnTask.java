@@ -67,7 +67,8 @@ public class ViewOwnTask extends AppCompatActivity {
                 intent.putExtra("name", name);
                 intent.putExtra("des", description);
                 intent.putExtra("status", status);
-                intent.putExtra("task", index);
+                intent.putExtra("userindex", index);
+                Log.i("ViewOwnTask","User index is "+index);
                 intent.putExtra("task_id", id);
                 intent.putExtra("userid", userID);
                 intent.putExtra("userName", userName);

@@ -50,14 +50,16 @@ public class EditActivity extends AppCompatActivity {
 //        String description = intent.getStringExtra("two");
 //        final String statusTask = intent.getStringExtra("three");
 
-        userName = intent.getStringExtra("user_name");
-        user_id = intent.getStringExtra("userId");
+        userName = intent.getStringExtra("userName");
+        user_id = intent.getStringExtra("userid");
         task_id = intent.getStringExtra("task_id");
 
 
 
-        String i = intent.getStringExtra("index");
+        String i = intent.getStringExtra("userindex");
+        Log.i("EditActivity","Received string User Index is "+i);
         index = Integer.parseInt(i);
+        Log.i("EditActivity","User index as int is "+index);
 
         final Context context1 = getApplicationContext();
         SaveFileController saveFileController1 = new SaveFileController();
