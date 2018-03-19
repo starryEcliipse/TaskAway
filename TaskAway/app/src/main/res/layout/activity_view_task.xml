@@ -132,15 +132,16 @@
     <EditText
         android:id="@+id/your_bid_amount"
         android:layout_width="168dp"
-        android:layout_height="21dp"
+        android:layout_height="39dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/Black"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/your_price_amount"
         android:inputType="numberDecimal"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toEndOf="@+id/your_price"
         app:layout_constraintTop_toBottomOf="@+id/winning_bid_amount" />
 
@@ -164,15 +165,12 @@
         android:id="@+id/save_button_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginTop="10dp"
         android:background="@color/colorGreenSaveButton"
         android:text="@string/save_button"
         android:textColor="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/your_bid_amount" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/cancel_button_1"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/requirements"

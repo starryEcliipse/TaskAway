@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity{
         final String user_name = getIntent().getStringExtra("user_name");
 
 
-
-
         /**
          * TOOLBAR
          * The following below creates the layout for the Toolbar.
@@ -118,18 +116,11 @@ public class MainActivity extends AppCompatActivity{
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        // PASS USERNAME + USERID TO MYJOBS
+        // PASS USERNAME + USERID TO ALL FRAGMENTS
         passUserData(user_name, userID, myjobs);
         passUserData(user_name, userID, allbids);
         passUserData(user_name, userID, mybids);
-//        Bundle bundle = new Bundle();
-//        Log.i("BUNDLE","going to bundle stuff!");
-//        bundle.putString("userid", userID);
-//        Log.i("userid",bundle.getString("userid")+"");
-//        bundle.putString("username", user_name);
-//        Log.i("username",user_name+"");
-//        myjobs.setArguments(bundle);
-
+        
         //Will add icons for the tabs below here
         //tabLayout.getTabAt(2).setIcon(R.drawable.ic_alljobs);
         /***/

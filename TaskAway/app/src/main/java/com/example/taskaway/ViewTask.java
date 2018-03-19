@@ -3,6 +3,7 @@ package com.example.taskaway;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ public class ViewTask extends AppCompatActivity {
     private EditText userbid;
     private Task task;
     private Bid winningbid;
+    private float bidamount;
 
 
 
@@ -42,6 +44,26 @@ public class ViewTask extends AppCompatActivity {
         Button cancelButton = (Button) findViewById(R.id.cancel_button_1);
         Button saveButton = (Button) findViewById(R.id.save_button_1);
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // read userbid
+                String inputbid = userbid.getText().toString();
+                try{
+                    if (inputbid.isEmpty()){
+                        userbid.setError("No bid entered!");
+                        return;
+                    }
+                    bidamount = Float.parseFloat(inputbid);
+                } catch (Exception e){
+                    Log.i("ViewTask","Invalid bid entered!");
+                    userbid.setError("Invalid bid entered!");
+                    return;
+                }
+                Log.i("ViewTask","The new bid is: "+bidamount);
+            }
+        });
+
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +75,7 @@ public class ViewTask extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        Log.i("ViewTask","Viewing task!");
         //TODO: Read from server
 
         Intent intent = getIntent();
