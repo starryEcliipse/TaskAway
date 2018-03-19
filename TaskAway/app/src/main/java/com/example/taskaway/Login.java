@@ -181,7 +181,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 //TODO configure this user object so it doesn't crash
-                User current_user = new User("userName", null, null);
+                User current_user = new User(userName, null, null);
                 current_user.setPassword(password);
                 String current_ID = null;//TODO what should go here?
 
