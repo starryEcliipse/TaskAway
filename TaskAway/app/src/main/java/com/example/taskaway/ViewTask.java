@@ -107,7 +107,7 @@ public class ViewTask extends AppCompatActivity {
                 Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", userID);
-                Log.i("ViewTwask","Sending name and id to MainActivity!");
+                Log.i("ViewTask","Sending name and id to MainActivity!");
                 startActivity(intent2);
             }
         });

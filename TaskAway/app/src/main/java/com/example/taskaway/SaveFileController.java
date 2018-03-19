@@ -106,7 +106,7 @@ public class SaveFileController {
     }
 
     /**
-     * Gets user index.
+     * Gets user index in array.
      *
      * @param context  instance of Context
      * @param username string username
@@ -123,7 +123,7 @@ public class SaveFileController {
     }
 
     /**
-     * Updates user data
+     * Updates user information
      *
      * @param context
      * @param userIndex
@@ -137,7 +137,7 @@ public class SaveFileController {
     }
 
     /**
-     * Adds a task to a particular user's required task list.
+     * Adds a task to  user's required task list.
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -146,13 +146,12 @@ public class SaveFileController {
      */
     public void addRequiredTask(Context context, int userIndex, Task task) {
         loadFromFile(context);
-
         this.allUsers.get(userIndex).getReqTasks().addTask(task);
         saveToFile(context);
     }
 
     /**
-     * Adds a task to a particular user's bidded list.
+     * Adds a task to user's bidded list.
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -161,13 +160,12 @@ public class SaveFileController {
      */
     public void addBiddedTask(Context context, int userIndex, Task task) {
         loadFromFile(context);
-
         this.allUsers.get(userIndex).getBidTasks().addTask(task);
         saveToFile(context);
     }
 
     /**
-     * Adds a task to a particular user's assigned task list.
+     * Adds a task to user's assigned task list.
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -176,13 +174,12 @@ public class SaveFileController {
      */
     public void addAssignedTask(Context context, int userIndex, Task task) {
         loadFromFile(context);
-
         this.allUsers.get(userIndex).getAssignedTasks().addTask(task);
         saveToFile(context);
     }
 
     /**
-     * Gets Required Tasks
+     * Gets User's Required Tasks
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -194,7 +191,7 @@ public class SaveFileController {
     }
 
     /**
-     * Gets Bidded Tasks
+     * Gets User's Bidded Tasks
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -206,7 +203,7 @@ public class SaveFileController {
     }
 
     /**
-     * Gets Assigned Tasks
+     * Gets User's Assigned Tasks
      *
      * @param context   instance of Context
      * @param userIndex integer user index
@@ -218,6 +215,7 @@ public class SaveFileController {
     }
 
     /**
+     * Gets all Tasks ever created
      *
      * @param context
      * @return allTasks
@@ -235,7 +233,7 @@ public class SaveFileController {
     }
 
     /**
-     * Gets all tasks of other users.
+     * Gets all tasks of all users except the current user
      *
      * @param context - instance of Context
      * @param UserIndex - integer user index
@@ -262,7 +260,7 @@ public class SaveFileController {
     }
 
     /**
-     * Deletes a task.
+     * Deletes a user's task.
      *
      * @param context - instance of Context
      * @param userIndex - integer user index
@@ -282,7 +280,7 @@ public class SaveFileController {
     }
 
     /**
-     * Retrieves a task.
+     * Retrieves a user's task.
      *
      * @param context - instance of Context
      * @param userIndex - integer user index
@@ -325,7 +323,7 @@ public class SaveFileController {
      * Get user information via User class by using username as identifier
      *
      * @param context - instance of Context
-     * @param username - username of a usre
+     * @param username - username of a user
      * @return User
      */
     public User getUserFromUsername(Context context, String username){

@@ -175,4 +175,22 @@ public class TestSaveFileController extends ActivityInstrumentationTestCase2 {
         assertEquals(testUser, user);
     }
 
+    public void testGetEveryonesTasks(){
+        SaveFileController saveFileController = new SaveFileController();
+        Context context = activity.getApplicationContext();
+        saveFileController.addNewUser(context, user);
+        Integer index1 = saveFileController.getUserIndex(context, "testUser");
+        TaskList ureqTasks = new TaskList();
+        TaskList ubidTasks = new TaskList();
+        TaskList uassignTasks = new TaskList();
+        User testUser = new User("newUser", null, null, null, ureqTasks, ubidTasks, uassignTasks);
+        saveFileController.addNewUser(context, testUser);
+        Integer index2 = saveFileController.getUserIndex(context, "newUser");
+        saveFileController.addRequiredTask(context, index2, task);
+        TaskList allTasks = saveFileController.getEveryonesTasks(context, index1);
+        assertEquals(allTasks.size(), 1);
+
+    }
+
+
 }

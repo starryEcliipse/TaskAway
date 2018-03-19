@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity{
                     public boolean onMenuItemClick(MenuItem item) {
                     switch (item.getItemId()){
                         case R.id.Item1:
+                            //pass username and userID to the next activity
                             Intent intent = new Intent(MainActivity.this, ViewProfile.class);
                             intent.putExtra("user_id", userID);
                             intent.putExtra("user_name", user_name);
