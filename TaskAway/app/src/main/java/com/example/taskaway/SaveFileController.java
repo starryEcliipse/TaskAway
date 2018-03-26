@@ -214,23 +214,6 @@ public class SaveFileController {
         return this.allUsers.get(userIndex).getAssignedTasks();
     }
 
-    /**
-     * Gets all Tasks ever created
-     *
-     * @param context
-     * @return allTasks
-     */
-    public TaskList getAllTasks(Context context){
-        loadFromFile(context);
-        TaskList allTasks = new TaskList();
-        for(int i=0; i<allUsers.size(); i++){
-            TaskList tasklist = this.allUsers.get(i).getReqTasks();
-            for (int j = 0; j<tasklist.size(); j++) {
-                allTasks.add(tasklist.getTask(j));
-            }
-        }
-        return allTasks;
-    }
 
     /**
      * Gets all tasks of all users except the current user
@@ -335,6 +318,34 @@ public class SaveFileController {
             }
         }
         return user;
+    }
+
+
+    /**
+     * Returns Tasklist of all tasks user has not bidded on
+     *
+     * @param context
+     * @param userIndex
+     * @return TaskList
+     */
+    public TaskList getAllTasks(Context context, int userIndex){
+        User currentUser = this.allUsers.get(userIndex);
+        SaveFileController saveFileController = new SaveFileController();
+        TaskList allTasks = saveFileController.getEveryonesTasks(context, userIndex);
+        if(currentUser.getBidTasks().size()==0){
+            return allTasks;
+        }else{
+            TaskList userBidTasks = currentUser.getBidTasks();
+            for(int i=0; i<allTasks.size();i++){
+                for(int j=0; j<userBidTasks.size(); j++){
+                    if(allTasks.get(i).getId().equals(userBidTasks.get(j).getId())){
+                        allTasks.remove(i);
+                    }
+                }
+
+            }
+        }
+        return allTasks;
     }
 
 }

@@ -100,7 +100,8 @@ public class AllBids extends Fragment {
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);
         Log.i("All Bids","Currently getting all other tasks");
-        lstTask = saveFileController.getEveryonesTasks(context, userIndex);
+        //changed this from getEveryonesTask to getAllTasks
+        lstTask = saveFileController.getAllTasks(context, userIndex);
 
     }
 }
