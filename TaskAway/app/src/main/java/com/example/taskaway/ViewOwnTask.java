@@ -109,6 +109,40 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
+        //Location Details
+        Button locationButton = (Button) findViewById(R.id.location_detail_button);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Get task information
+                Intent intent = new Intent(getBaseContext(), MapActivity.class);
+                String name = taskname.getText().toString();
+                String location = tasklocation.getText().toString();
+
+                // id of task
+                id = task.getId();
+
+                // Pass relevant information to MapActivity via SaveFileController
+                final Context context = getApplicationContext();
+                final SaveFileController saveFileController = new SaveFileController();
+                final int userIndex = saveFileController.getUserIndex(context, userName);
+
+                // Send task info
+                String index = Integer.toString(userIndex);
+                intent.putExtra("name", name);
+                intent.putExtra("location", location);
+                intent.putExtra("task_id", id);
+
+
+                // Send user info
+                intent.putExtra("userid", userID);
+                intent.putExtra("userName", userName);
+
+                startActivity(intent);
+            }
+        });
+
     }
 
     /**

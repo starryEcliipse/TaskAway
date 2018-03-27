@@ -26,6 +26,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText requirementField;
     private EditText statusField;
+    private EditText locationField;
     private Button cancelButton;
     private Button saveButton;
     private final String text = "task";
@@ -47,6 +48,7 @@ public class AddActivity extends AppCompatActivity {
         nameField = (EditText) findViewById(R.id.editText2);
         requirementField = (EditText) findViewById(R.id.editText3);
         statusField = (EditText) findViewById(R.id.editText);
+        locationField = (EditText) findViewById(R.id.editMyTaskLocation);
 
 
         // Button layouts
@@ -95,6 +97,13 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
 
+                String location = locationField.getText().toString();
+                // Check location input
+                if(location.isEmpty()){
+                    locationField.setError("Assign location");
+                    return;
+                }
+
                 // READ USERNAME AND USER ID FROM MAIN
                 Intent intent = getIntent();
                 String username = intent.getStringExtra("username");
@@ -103,7 +112,7 @@ public class AddActivity extends AppCompatActivity {
                 // NEW TASK - create with valid input
                 String task_id = Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
-                Task task = new Task(name, comment, s, null, null, null, null, task_id);
+                Task task = new Task(name, comment, s, location, null, null, null, task_id);
                 Log.i("TASK ID:", task_id+"");
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
