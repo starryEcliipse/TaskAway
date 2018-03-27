@@ -48,5 +48,6 @@
     <string name="cancel_button2">Cancel</string>
     <string name="save_button2">Save</string>
     <string name="upload_pic">Upload Pictures</string>
+    <string name="view_pic">Photos</string>
 
 </resources>
