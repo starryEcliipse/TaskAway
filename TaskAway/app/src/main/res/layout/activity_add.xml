@@ -49,11 +49,11 @@
 
     <EditText
         android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
+        android:layout_width="215dp"
+        android:layout_height="88dp"
         android:layout_marginEnd="95dp"
         android:layout_marginStart="65dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/edit_req"
         android:inputType="textPersonName"
@@ -92,12 +92,12 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:textColor="@color/Black"
         android:layout_height="wrap_content"
         android:layout_marginEnd="163dp"
         android:layout_marginStart="163dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/status_tag"
+        android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText3" />
@@ -108,11 +108,11 @@
         android:layout_height="40dp"
         android:layout_marginEnd="76dp"
         android:layout_marginStart="93dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/status_edit"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/location"
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,15 +132,33 @@
     <EditText
         android:id="@+id/editMyTaskLocation"
         android:layout_width="216dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="76dp"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="57dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="191dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginEnd="82dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="7dp"
+        android:text="@string/upload_pic"
+        android:textSize="5pt"
+        android:background="#136572"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editMyTaskLocation" />
 
 </android.support.constraint.ConstraintLayout>

@@ -47,5 +47,6 @@
     <string name="status_edit"> </string>
     <string name="cancel_button2">Cancel</string>
     <string name="save_button2">Save</string>
+    <string name="upload_pic">Upload Pictures</string>
 
 </resources>

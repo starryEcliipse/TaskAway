@@ -6,9 +6,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -33,11 +31,13 @@
         <activity android:name=".ViewProfile" />
         <activity android:name=".MapActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".EditActivity"/>
+        <activity android:name=".EditActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY"/>
+            android:value="AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY" />
 
+        <activity android:name=".UploadPic"></activity>
     </application>
 
 </manifest>

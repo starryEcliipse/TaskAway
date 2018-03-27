@@ -29,6 +29,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText locationField;
     private Button cancelButton;
     private Button saveButton;
+    private Button uploadPic;
     private final String text = "task";
 
     /**
@@ -54,12 +55,21 @@ public class AddActivity extends AppCompatActivity {
         // Button layouts
         saveButton = (Button) findViewById(R.id.button2);
         cancelButton = (Button) findViewById(R.id.button);
+        uploadPic = (Button) findViewById(R.id.button4);
 
         // Cancel activity
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        uploadPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent0 = new Intent(getBaseContext(), UploadPic.class);
+                startActivity(intent0);
             }
         });
 
