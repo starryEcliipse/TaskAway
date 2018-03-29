@@ -50,5 +50,6 @@
     <string name="upload_pic">Upload Pictures</string>
     <string name="view_pic">Photos</string>
     <string name="upload_gallery">Upload from Gallery</string>
+    <string name="okay_button">OK</string>
 
 </resources>

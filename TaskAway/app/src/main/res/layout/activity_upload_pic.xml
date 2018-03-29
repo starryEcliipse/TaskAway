@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="400dp"
             android:layout_gravity="center_horizontal"
             android:id="@+id/imageToUpload"/>
 
@@ -26,6 +26,16 @@
             android:background="#494949"
             android:text="@string/upload_gallery"
             android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#494949"
+            android:text="@string/okay_button"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="20dp"/>
 
     </LinearLayout>
 </ScrollView>
