@@ -94,6 +94,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        if (task_location_coords == null){
+            return;
+        }
         locationMap = googleMap;
 
         locationMap.addMarker(new MarkerOptions().position(task_location_coords).title("Task Location"));
