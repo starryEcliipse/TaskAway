@@ -139,6 +139,10 @@ public class ViewTask extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
                 String name = taskname.getText().toString();
                 String location = tasklocation.getText().toString();
+                if(location.equals("N/A")){
+                    return;
+                }
+
 
                 // id of task
                 id = task.getId();

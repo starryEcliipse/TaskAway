@@ -110,8 +110,7 @@ public class AddActivity extends AppCompatActivity {
                 String location = locationField.getText().toString();
                 // Check location input
                 if(location.isEmpty()){
-                    locationField.setError("Assign location");
-                    return;
+                    location = "N/A";
                 }
 
                 // READ USERNAME AND USER ID FROM MAIN

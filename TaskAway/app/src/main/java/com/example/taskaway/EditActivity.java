@@ -141,6 +141,9 @@ public class EditActivity extends AppCompatActivity {
 
                 // Task location
                 String loc = location.getText().toString();
+                if(loc.isEmpty()){
+                    loc = "N/A";
+                }
 
                 Task task = new Task(name, comment, s, loc, null, null, null, task_id);
 
