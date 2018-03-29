@@ -6,6 +6,8 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -67,8 +69,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         List<Address> address;
         LatLng latLng = null;
 
+        Log.i("MAPACTIVITY", "Our strAddress is: "+strAddress);
+
         try {
-            address = coder.getFromLocationName(strAddress, 5);
+            address = coder.getFromLocationName(strAddress, 100);
+            Log.i("MAPACTIVITY", "Address.get(0) is: "+ address.get(0));
+            Log.i("MAPACTIVITY", "Address is: "+ address);
+            Log.i("MAPACTIVITY", "Try was called lol");
             if (address == null) {
                 return null;
             }
@@ -76,11 +83,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             Address location = address.get(0);
             latLng = new LatLng(location.getLatitude(), location.getLongitude() );
 
-        } catch (IOException ex) {
-
+        } catch (Exception ex) {
+            Log.i("MAPACTIVITY", "Catch was called lol");
             ex.printStackTrace();
         }
 
+        Log.i("MAPACTIVITY", "Function passed");
         return latLng;
     }
 
