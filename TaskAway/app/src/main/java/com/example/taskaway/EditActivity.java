@@ -24,6 +24,7 @@ public class EditActivity extends AppCompatActivity {
     private EditText tname;
     private EditText des;
     private EditText status;
+    private EditText location;
     private Button cancel;
     private Button delete;
     private Button save;
@@ -31,6 +32,7 @@ public class EditActivity extends AppCompatActivity {
     private String new_name;
     private String new_des;
     private String new_status;
+    private String new_location;
     String userName;
     String user_id;
     String task_id;
@@ -52,6 +54,7 @@ public class EditActivity extends AppCompatActivity {
         tname = (EditText) findViewById(R.id.editText2);
         des = (EditText) findViewById(R.id.editText3);
         status = (EditText) findViewById(R.id.editText);
+        location = (EditText) findViewById(R.id.Edit_Location);
 
         // Get information needed to update task
         Intent intent = getIntent();
@@ -77,11 +80,13 @@ public class EditActivity extends AppCompatActivity {
         new_name = task.getName();
         new_des = task.getDescription();
         new_status = task.getStatus();
+        new_location = task.getLocation();
 
         // setText
         tname.setText(new_name);
         des.setText(new_des);
         status.setText(new_status);
+        location.setText(new_location);
 
 
         // Cancel button - cancel activity
@@ -134,7 +139,10 @@ public class EditActivity extends AppCompatActivity {
                     return;
                 }
 
-                Task task = new Task(name, comment, s, null, null, null, null, task_id);
+                // Task location
+                String loc = location.getText().toString();
+
+                Task task = new Task(name, comment, s, loc, null, null, null, task_id);
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();
