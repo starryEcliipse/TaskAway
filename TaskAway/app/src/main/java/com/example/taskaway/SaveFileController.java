@@ -112,10 +112,32 @@ public class SaveFileController {
      * @param username string username
      * @return integer user index if username matches, -1 otherwise
      */
+    // TODO: refactor like change to "getUserIndexFromUsername"? - Katherine Mae Patenio
     public int getUserIndex(Context context, String username) {
         loadFromFile(context);
         for (int i = 0; i < this.allUsers.size(); i++) {
             if (this.allUsers.get(i).getUsername().equals(username)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Gets user index in array according to the author/creator ID in task
+     * Made so that a task can be identified if the task REQUESTER of that task
+     * is NOT the CURRENT USER
+     *
+     * @author Katherine Mae Patenio
+     *
+     * @param context instance of Context
+     * @param creatorID task requester's ID
+     * @return integer of user index if Creator ID found; -1 otherwise
+     */
+    public int getUserIndexFromCreatorID(Context context, String creatorID) {
+        loadFromFile(context);
+        for (int i = 0; i < this.allUsers.size(); i++) {
+            if (this.allUsers.get(i).getId().equals(creatorID)) {
                 return i;
             }
         }
@@ -301,6 +323,8 @@ public class SaveFileController {
         }
         saveToFile(context);
     }
+
+
 
     /**
      * Get user information via User class by using username as identifier

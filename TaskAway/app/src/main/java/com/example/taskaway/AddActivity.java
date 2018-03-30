@@ -122,7 +122,11 @@ public class AddActivity extends AppCompatActivity {
                 String task_id = Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, location, null, null, null, task_id);
-                Log.i("TASK ID:", task_id+"");
+
+                // Added by Katherine Mae Patenio March 30 2018
+                // Include current user's ID into the task so that we can identify to whom the task
+                // belongs to later on
+                task.setCreatorId(userid);
 
                 // SAVE TO FILE TODO: ELASTICSEARCH
                 final Context context = getApplicationContext();

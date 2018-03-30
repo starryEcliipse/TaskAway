@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Acts as activity that displays a tasks information when a user selects a task
  * that they HAVE NOT previously bid on.
@@ -34,6 +37,8 @@ public class ViewTask extends AppCompatActivity {
     String id;
     String userID;
     String userName;
+    private ArrayList<Bid> bidList; // TODO: new class?
+
 
 
     /**
@@ -88,29 +93,77 @@ public class ViewTask extends AppCompatActivity {
                     return;
                 }
 
+                /**
+                 * ADDING A NEW BID STARTS HERE
+                 * @author: Katherine Mae Patenio
+                 */
+                // TODO: new activity instead?
+
                 Log.i("ViewTask","The new bid is: "+bidamount);
+                Log.i("ViewTask","--------------------------------");
+                Log.i("ViewTask","We are now bidding on task "+task.getName());
 
-                // TODO: make bid objects?
-                //Bid bid = new Bid(userID, bidamount);
-                //task.getBids(bid);
+                Bid bid = new Bid(userID, bidamount);
 
-                // SaveFileController - update user information so that user can
-                // see this task in MyBids
+                // If no bid list exists for a task, create a new one
+                if (task.getBids() == null){
+                    Log.i("ViewTask","task.getBids() is NULL");
 
-                // TODO: FIX ADDING BIDS
-//                final Context context = getApplicationContext();
-//                SaveFileController saveFileController = new SaveFileController();
-//                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
-//                Log.i("ViewTask","userindex is "+userindex);
-//                Log.i("ViewTask","Adding "+task.getName()+" task!");
-//                saveFileController.addBiddedTask(context, userindex, task);
-//
-//                // GO BACK TO MAIN
-//                Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
-//                intent2.putExtra("user_name", userName);
-//                intent2.putExtra("user_id", userID);
-//                Log.i("ViewTask","Sending name and id to MainActivity!");
-//                startActivity(intent2);
+                    // Make new arraylist to contain bids
+                    bidList = new ArrayList<Bid>();
+                    bidList.add(bid);
+                    task.setBids(bidList);
+
+                    Log.i("ViewTask","Going to add bid amount of: "+ bid.getAmount());
+                    Log.i("ViewTask","bidList is currently not null: "+ (task.getBids()!= null));
+                    Log.i("ViewTask","bidList is empty: "+bidList.isEmpty());
+
+                }
+                // Else, update current one
+                else{
+                    Log.i("ViewTask","task.getBids() is NOT NULL");
+
+                    bidList = task.getBids();
+                    bidList.add(bid);
+                    task.setBids(bidList);
+                }
+
+
+                // Just for reading all bids in IDE Console - for debugging purposes
+                for (Bid temp : task.getBids()) {
+                    Log.i("ViewTask","Reading: "+temp.getAmount());
+                }
+                Log.i("ViewTask","--------------------------------");
+
+
+                // SAVEFILECONTROLLER FOR UPDATING BIDDED TASK
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+                // Could have used get.UserIndex(context, userName) if username was displayed on layout!
+                //int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+
+                int userindex = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
+                saveFileController.updateTask(context, userindex, task.getId(), task);
+
+
+                // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
+                // A task the user has bid on should now appear in the middle menu
+                //final Context context = getApplicationContext();
+                //SaveFileController saveFileController = new SaveFileController();
+                userindex = saveFileController.getUserIndex(context, userName); // get userindex
+
+                Log.i("ViewTask","userindex is "+userindex);
+                Log.i("ViewTask","Adding "+task.getName()+" task!");
+
+                saveFileController.addBiddedTask(context, userindex, task);
+
+                // GO BACK TO MAIN
+                Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", userID);
+                Log.i("ViewTask","Sending name and id to MainActivity!");
+                Log.i("ViewTask","Is task bid list still empty? --> "+task.getBids().isEmpty());
+                startActivity(intent2);
             }
         });
 
@@ -182,6 +235,8 @@ public class ViewTask extends AppCompatActivity {
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("task");
 
+        Log.i("ViewTask","Now reading task id: "+task.getId());
+
         // Read and display task info
         taskname.setText(task.getName());
         taskstatus.setText(task.getStatus());
@@ -195,7 +250,6 @@ public class ViewTask extends AppCompatActivity {
         Log.i("userName", userName);
 
         // Bid information
-        // TODO - display winning bid
         try {
             if (task.getBids().isEmpty()) {
                 taskwinningbid.setText("No bids yet!");

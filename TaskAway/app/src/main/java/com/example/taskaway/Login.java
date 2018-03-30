@@ -72,6 +72,8 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+                Log.i("lOGIN", "current_user is NOT null->"+current_user.getUsername());
+
                 if (!current_user.validatePassword(password)){
                     passwordEdit.setError("Incorrect password");
                     return;
@@ -117,9 +119,12 @@ public class Login extends AppCompatActivity {
                 }
 
                 if(ServerWrapper.getUserFromUsername(userName)!= null){
+                    Log.i("LOGIN","Testing register FAILED-->"+ServerWrapper.getUserFromUsername(userName).getUsername());
                     userNameEdit.setError("Username is already taken");
                     return;
                 }
+
+                Log.i("LOGIN","Testing register passed-->"+ServerWrapper.getUserFromUsername(userName).getUsername());
 
                 User user = new User(userName, null, null);
 

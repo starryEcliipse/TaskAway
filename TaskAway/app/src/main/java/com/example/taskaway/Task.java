@@ -114,7 +114,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * @return - arraylist of bid objects relating to task
      */
     public ArrayList<Bid> getBids(){
-        return bids;
+        return this.bids;
     }
 
     /**
