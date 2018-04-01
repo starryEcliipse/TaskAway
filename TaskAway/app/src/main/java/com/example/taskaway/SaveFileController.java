@@ -325,6 +325,57 @@ public class SaveFileController {
     }
 
 
+    public void updateTaskBids(Context context, int userIndexCreator, int userIndexBidder, Task task, String ID, Bid bid){
+        loadFromFile(context);
+        // Read all other users
+        for(int i=0; i<allUsers.size(); i++){
+            if((i==userIndexCreator) || (i == userIndexBidder)){ // ignore task requester
+                Log.i("im removing you", "nice");
+            }
+            else{
+
+                Log.i("in outer else-->","currentuser is: "+allUsers.get(i));
+                TaskList biddedtasks = allUsers.get(i).getBidTasks();
+                if (biddedtasks.isEmpty()){
+                    // ignore this user
+                }
+                else{
+                    // For each task
+                    Log.i("in inner else-->","currentuser is: "+(allUsers.get(i)).getUsername());
+
+
+                    for (int j=0; j<biddedtasks.size(); j++){
+                        Task aTask = biddedtasks.getTask(j);
+                        Log.i("in inner else-->","currenttask is: "+aTask.getName());
+                        // Update task bids
+                        if (aTask.getId().equals(ID)){
+                            Log.i("in inner else-->","adding: "+bid.getAmount()+" to task "+aTask.getName());
+                            ArrayList<Bid> bidList = aTask.getBids();
+                            bidList.add(bid);
+                            aTask.setBids(bidList);
+                            //biddedtasks.set(j,aTask);
+                            // Just for reading all bids in IDE Console - for debugging purposes
+                            for (Bid temp : aTask.getBids()) {
+                                Log.i("SAVEFILE","Reading: "+temp.getAmount());
+                            }
+
+                            // updates this task
+                            if (biddedtasks.getTask(j).getId().equals(ID)) {
+                                biddedtasks.set(j, task);
+                            }
+
+                            saveToFile(context);
+                        } // end of inside sinde if
+
+                    }
+                } // end of else
+
+            } // end of outer else
+        }
+
+    }
+
+
 
     /**
      * Get user information via User class by using username as identifier

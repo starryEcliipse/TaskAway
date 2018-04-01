@@ -142,20 +142,21 @@ public class ViewTask extends AppCompatActivity {
                 // Could have used get.UserIndex(context, userName) if username was displayed on layout!
                 //int userindex = saveFileController.getUserIndex(context, userName); // get userindex
 
-                int userindex = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
-                saveFileController.updateTask(context, userindex, task.getId(), task);
+                int userindexCreator = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
+                saveFileController.updateTask(context, userindexCreator, task.getId(), task);
 
 
                 // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
                 // A task the user has bid on should now appear in the middle menu
                 //final Context context = getApplicationContext();
                 //SaveFileController saveFileController = new SaveFileController();
-                userindex = saveFileController.getUserIndex(context, userName); // get userindex
+                int userindexBidder = saveFileController.getUserIndex(context, userName); // get userindex
 
-                Log.i("ViewTask","userindex is "+userindex);
+                Log.i("ViewTask","userindex is "+userindexBidder);
                 Log.i("ViewTask","Adding "+task.getName()+" task!");
 
-                saveFileController.addBiddedTask(context, userindex, task);
+                saveFileController.addBiddedTask(context, userindexBidder, task);
+                saveFileController.updateTaskBids(context, userindexCreator, userindexBidder, task, task.getId(), bid);
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewTask.this, MainActivity.class);

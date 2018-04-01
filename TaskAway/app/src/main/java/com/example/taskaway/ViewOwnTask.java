@@ -174,6 +174,11 @@ public class ViewOwnTask extends AppCompatActivity {
             } else {
                 tasklowestbid = task.findLowestBid();
                 tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
+                // Just for reading all bids in IDE Console - for debugging purposes
+                Log.i("ViewOwmTask", "id of task is: "+task.getId());
+                for (Bid temp : task.getBids()) {
+                    Log.i("ViewOwnTask","Reading: "+temp.getAmount());
+                }
             }
         } catch (Exception e) {
             tasklowestbidamount.setText("No bids yet!");

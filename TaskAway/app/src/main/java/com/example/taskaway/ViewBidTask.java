@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -131,6 +132,12 @@ public class ViewBidTask extends AppCompatActivity {
             } else {
                 winningbid = task.findLowestBid();
                 taskwinningbid.setText(String.valueOf(winningbid.getAmount()));
+
+                // Just for reading all bids in IDE Console - for debugging purposes
+                Log.i("ViewBidTask", "id of task is: "+task.getId());
+                for (Bid temp : task.getBids()) {
+                    Log.i("ViewBidTask","Reading: "+temp.getAmount());
+                }
             }
         }
         catch (Exception e){
