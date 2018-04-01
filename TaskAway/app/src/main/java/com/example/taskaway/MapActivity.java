@@ -100,7 +100,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         locationMap = googleMap;
 
         locationMap.addMarker(new MarkerOptions().position(task_location_coords).title("Task Location"));
-        locationMap.moveCamera(CameraUpdateFactory.newLatLng(task_location_coords));
+        locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(task_location_coords, 10.0f));
     }
 }
 
