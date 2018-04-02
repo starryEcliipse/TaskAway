@@ -14,7 +14,7 @@ import org.w3c.dom.Text;
 
 /**
  * Acts as activity that displays a tasks information when a user selects a task
- * that they HAVE previously bid on.
+ * that they have previously bid on.
  *
  * WORK IN PROGRESS
  *
@@ -135,8 +135,9 @@ public class ViewBidTask extends AppCompatActivity {
 
                 // Just for reading all bids in IDE Console - for debugging purposes
                 Log.i("ViewBidTask", "id of task is: "+task.getId());
+                SaveFileController saveFileController = new SaveFileController();
                 for (Bid temp : task.getBids()) {
-                    Log.i("ViewBidTask","Reading: "+temp.getAmount());
+                    Log.i("ViewBidTask","Reading: "+temp.getAmount() + "by "+temp.getUserId());
                 }
             }
         }

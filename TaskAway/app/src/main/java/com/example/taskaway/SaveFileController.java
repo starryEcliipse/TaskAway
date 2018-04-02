@@ -324,40 +324,42 @@ public class SaveFileController {
         saveToFile(context);
     }
 
-
+    /**
+     * Once a user places a bid on a certain task, bid information
+     *
+     * @author Katherine Mae Patenio
+     *
+     * @param context - instance of Context
+     * @param userIndexCreator - the index of the Task Requester for a particular requested task
+     * @param userIndexBidder - the index of a Task Provider (that has made a bid) for a particular requested task
+     * @param task - the task that has just been bidded on
+     * @param ID - string id of the task itself
+     * @param bid - the bid to be applied to the task for all other bidders
+     */
     public void updateTaskBids(Context context, int userIndexCreator, int userIndexBidder, Task task, String ID, Bid bid){
+
         loadFromFile(context);
+
         // Read all other users
         for(int i=0; i<allUsers.size(); i++){
+            // Ignore recent bidder bidder and task requester
             if((i==userIndexCreator) || (i == userIndexBidder)){ // ignore task requester
-                Log.i("im removing you", "nice");
+                // do nothing
             }
+            // Update all other users' list of tasks they've bidded on
             else{
-
-                Log.i("in outer else-->","currentuser is: "+allUsers.get(i));
                 TaskList biddedtasks = allUsers.get(i).getBidTasks();
-                if (biddedtasks.isEmpty()){
-                    // ignore this user
-                }
-                else{
+
+                if (!(biddedtasks.isEmpty())){
                     // For each task
-                    Log.i("in inner else-->","currentuser is: "+(allUsers.get(i)).getUsername());
-
-
                     for (int j=0; j<biddedtasks.size(); j++){
                         Task aTask = biddedtasks.getTask(j);
-                        Log.i("in inner else-->","currenttask is: "+aTask.getName());
+
                         // Update task bids
                         if (aTask.getId().equals(ID)){
-                            Log.i("in inner else-->","adding: "+bid.getAmount()+" to task "+aTask.getName());
                             ArrayList<Bid> bidList = aTask.getBids();
                             bidList.add(bid);
                             aTask.setBids(bidList);
-                            //biddedtasks.set(j,aTask);
-                            // Just for reading all bids in IDE Console - for debugging purposes
-                            for (Bid temp : aTask.getBids()) {
-                                Log.i("SAVEFILE","Reading: "+temp.getAmount());
-                            }
 
                             // updates this task
                             if (biddedtasks.getTask(j).getId().equals(ID)) {
@@ -365,15 +367,13 @@ public class SaveFileController {
                             }
 
                             saveToFile(context);
-                        } // end of inside sinde if
+                        }
 
-                    }
-                } // end of else
-
+                    } // end of for loop
+                } // end of if
             } // end of outer else
-        }
-
-    }
+        } // end of for
+    } // end of function
 
 
 

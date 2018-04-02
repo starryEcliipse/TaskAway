@@ -37,7 +37,7 @@ public class ViewTask extends AppCompatActivity {
     String id;
     String userID;
     String userName;
-    private ArrayList<Bid> bidList; // TODO: new class?
+    private ArrayList<Bid> bidList;
 
 
 
@@ -66,15 +66,18 @@ public class ViewTask extends AppCompatActivity {
 
             /**
              * Allows user to place a bid on another user's task once the save button is selected.
-             * WORK IN PROGRESS
+             * Updates list of bids for a certain task for task requester.
+             * Updates list of tasks task provider has bidded on.
              *
              * @param view - instance of View
              *
+             * @author Katherine Mae Patenio, Diane Boytang
+             *
              * @see SaveFileController
+             * @see MyBids
              */
             @Override
             public void onClick(View view) {
-                // read input
                 String inputbid = userbid.getText().toString();
 
                 // Check if input is valid
@@ -84,6 +87,7 @@ public class ViewTask extends AppCompatActivity {
                         userbid.setError("No bid entered!");
                         return;
                     }
+
                     bidamount = Float.parseFloat(inputbid);
 
                     // Not a decimal/float
@@ -91,12 +95,9 @@ public class ViewTask extends AppCompatActivity {
                     Log.i("ViewTask","Invalid bid entered!");
                     userbid.setError("Invalid bid entered!");
                     return;
-                }
+                } // end of catch
 
-                /**
-                 * ADDING A NEW BID STARTS HERE
-                 * @author: Katherine Mae Patenio
-                 */
+                /* ADDING NEW BID STARTS HERE */
                 // TODO: new activity instead?
 
                 Log.i("ViewTask","The new bid is: "+bidamount);
@@ -128,7 +129,6 @@ public class ViewTask extends AppCompatActivity {
                     task.setBids(bidList);
                 }
 
-
                 // Just for reading all bids in IDE Console - for debugging purposes
                 for (Bid temp : task.getBids()) {
                     Log.i("ViewTask","Reading: "+temp.getAmount());
@@ -136,21 +136,17 @@ public class ViewTask extends AppCompatActivity {
                 Log.i("ViewTask","--------------------------------");
 
 
-                // SAVEFILECONTROLLER FOR UPDATING BIDDED TASK
+                // SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
-                // Could have used get.UserIndex(context, userName) if username was displayed on layout!
-                //int userindex = saveFileController.getUserIndex(context, userName); // get userindex
-
+                // get userindex of the task requester
                 int userindexCreator = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
                 saveFileController.updateTask(context, userindexCreator, task.getId(), task);
 
 
                 // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
                 // A task the user has bid on should now appear in the middle menu
-                //final Context context = getApplicationContext();
-                //SaveFileController saveFileController = new SaveFileController();
-                int userindexBidder = saveFileController.getUserIndex(context, userName); // get userindex
+                int userindexBidder = saveFileController.getUserIndex(context, userName);
 
                 Log.i("ViewTask","userindex is "+userindexBidder);
                 Log.i("ViewTask","Adding "+task.getName()+" task!");
@@ -163,7 +159,6 @@ public class ViewTask extends AppCompatActivity {
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", userID);
                 Log.i("ViewTask","Sending name and id to MainActivity!");
-                Log.i("ViewTask","Is task bid list still empty? --> "+task.getBids().isEmpty());
                 startActivity(intent2);
             }
         });
@@ -175,7 +170,7 @@ public class ViewTask extends AppCompatActivity {
             /**
              * Cancels activity when cancel button selected by user.
              *
-             * @param view
+             * @param view - instance of View
              */
             @Override
             public void onClick(View view) {
@@ -186,6 +181,16 @@ public class ViewTask extends AppCompatActivity {
         //Location Details
         Button locationButton = (Button) findViewById(R.id.location_detail_button);
         locationButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Begins MapActivity when the user selects the Location Details button.
+             *
+             * @author Diane Boytang
+             *
+             * @param view - instance of View
+             *
+             * @see MapActivity
+             * @see SaveFileController
+             */
             @Override
             public void onClick(View view) {
 
@@ -193,12 +198,12 @@ public class ViewTask extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
                 String name = taskname.getText().toString();
                 String location = tasklocation.getText().toString();
+
+                // If no location is entered by the user
                 if(location.equals("N/A")){
                     return;
                 }
 
-
-                // id of task
                 id = task.getId();
 
                 // Pass relevant information to MapActivity via SaveFileController

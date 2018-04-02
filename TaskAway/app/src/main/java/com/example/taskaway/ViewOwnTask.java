@@ -177,7 +177,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 // Just for reading all bids in IDE Console - for debugging purposes
                 Log.i("ViewOwmTask", "id of task is: "+task.getId());
                 for (Bid temp : task.getBids()) {
-                    Log.i("ViewOwnTask","Reading: "+temp.getAmount());
+                    Log.i("ViewOwnTask","Reading: "+temp.getAmount() + "by "+temp.getUserId());
                 }
             }
         } catch (Exception e) {
