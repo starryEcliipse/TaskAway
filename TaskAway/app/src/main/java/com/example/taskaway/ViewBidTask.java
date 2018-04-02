@@ -12,11 +12,11 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Acts as activity that displays a tasks information when a user selects a task
  * that they have previously bid on.
- *
- * WORK IN PROGRESS
  *
  * @author Diane Boytang
  * Created on 2018-03-16
@@ -46,12 +46,12 @@ public class ViewBidTask extends AppCompatActivity {
         setContentView(R.layout.activity_view_bid_task);
 
         // Text layouts
-        taskname = (TextView)this.findViewById(R.id.task_bid_name);
-        taskdescription = (TextView)this.findViewById(R.id.task_bid_details);
-        tasklocation = (TextView)this.findViewById(R.id.task_bid_location);
-        taskwinningbid = (TextView)this.findViewById(R.id.winning_bid_amount_2);
-        useroldbid = (TextView)this.findViewById(R.id.old_price_amount);
-        userbid = (EditText)this.findViewById(R.id.new_bid_amount);
+        taskname = (TextView) this.findViewById(R.id.task_bid_name);
+        taskdescription = (TextView) this.findViewById(R.id.task_bid_details);
+        tasklocation = (TextView) this.findViewById(R.id.task_bid_location);
+        taskwinningbid = (TextView) this.findViewById(R.id.winning_bid_amount_2);
+        useroldbid = (TextView) this.findViewById(R.id.old_price_amount);
+        userbid = (EditText) this.findViewById(R.id.new_bid_amount);
 
         //Location Details
         Button locationButton = (Button) findViewById(R.id.location_detail_button);
@@ -63,12 +63,10 @@ public class ViewBidTask extends AppCompatActivity {
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
                 String name = taskname.getText().toString();
                 String location = tasklocation.getText().toString();
-                if(location.equals("N/A")){
+                if (location.equals("N/A")) {
                     return;
                 }
 
-
-                // id of task
                 id = task.getId();
 
                 // Pass relevant information to MapActivity via SaveFileController
@@ -105,11 +103,86 @@ public class ViewBidTask extends AppCompatActivity {
             }
         });
 
-        // SAVE BUTTON
-        // TODO - functionality of save button
-        Button saveButton = (Button) findViewById(R.id.save_button_2);
-    }
 
+
+        // SAVE BUTTON
+        Button saveButton = (Button) findViewById(R.id.save_button_2);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Updates the task provider's current bid on a task when the save button is selected
+             * Updates list of bids for a certain task for task requester.
+             * Updates list of tasks task provider has bidded on
+             *
+             * @author Katherine Mae Patenio
+             *
+             * @param view - instance of View
+             *
+             * @see SaveFileController
+             */
+            @Override
+            public void onClick(View view) {
+
+                String inputbid = userbid.getText().toString();
+                float bidamount;
+
+                // Check if input is valid
+                try {
+                    // No bid entered
+                    if (inputbid.isEmpty()) {
+                        userbid.setError("No bid entered!");
+                        return;
+                    }
+
+                    bidamount = Float.parseFloat(inputbid);
+
+                    // Not a decimal/float
+                } catch (Exception e) {
+                    Log.i("ViewTask", "Invalid bid entered!");
+                    userbid.setError("Invalid bid entered!");
+                    return;
+                } // end of catch
+
+                Bid bid = new Bid(userID, bidamount);
+
+                ArrayList<Bid> bidList = task.getBids();
+
+                for (int i = 0; i < bidList.size(); i++) {
+                    if (bidList.get(i).getUserId().equals(userID)) {
+                        bidList.set(i, bid);
+                        break;
+                    }
+                } // end of for
+
+                task.setBids(bidList);
+
+                // SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
+                final Context context = getApplicationContext();
+                SaveFileController saveFileController = new SaveFileController();
+
+                // get userindex of the task requester
+                int userindexCreator = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
+                saveFileController.updateTask(context, userindexCreator, task.getId(), task);
+
+
+                // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
+
+                // A task the user has bid on should now appear in the middle menu
+                int userindexBidder = saveFileController.getUserIndex(context, userName);
+
+                // Update bids on tasks that other users bidded on
+                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);
+
+                // GO BACK TO MAIN
+                Intent intent2 = new Intent(ViewBidTask.this, MainActivity.class);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", userID);
+                Log.i("ViewBidTask", "Sending name and id to MainActivity!");
+                startActivity(intent2);
+
+            } // end of onClick override
+        }); // end of onclicklistener
+    } // end of method
 
     /**
      * Displays Task information.
@@ -126,18 +199,23 @@ public class ViewBidTask extends AppCompatActivity {
         taskname.setText(task.getName());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+
+        // Get user information
+        userID = intent.getStringExtra("userid");
+        Log.i("ViewBidTask", "userid is: "+userID);
+        userName = intent.getStringExtra("userName");
+        Log.i("ViewBidTask", "username is: "+userName);
+
         try {
             if (task.getBids().isEmpty()) {
                 taskwinningbid.setText("No bids yet!");
             } else {
                 winningbid = task.findLowestBid();
                 taskwinningbid.setText(String.valueOf(winningbid.getAmount()));
-
+                Log.i("ViewTask", "On start");
                 // Just for reading all bids in IDE Console - for debugging purposes
-                Log.i("ViewBidTask", "id of task is: "+task.getId());
-                SaveFileController saveFileController = new SaveFileController();
                 for (Bid temp : task.getBids()) {
-                    Log.i("ViewBidTask","Reading: "+temp.getAmount() + "by "+temp.getUserId());
+                    Log.i("ViewTask", "Reading: " + temp.getAmount()+ " by "+temp.getUserId());
                 }
             }
         }

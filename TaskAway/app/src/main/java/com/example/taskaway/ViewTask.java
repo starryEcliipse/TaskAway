@@ -52,12 +52,12 @@ public class ViewTask extends AppCompatActivity {
         setContentView(R.layout.activity_view_task);
 
         // Text layouts
-        taskname = (TextView)this.findViewById(R.id.task_name);
-        taskdescription = (TextView)this.findViewById(R.id.task_details);
-        taskstatus = (TextView)this.findViewById(R.id.task_status);
-        tasklocation = (TextView)this.findViewById(R.id.task_location);
-        taskwinningbid = (TextView)this.findViewById(R.id.winning_bid_amount);
-        userbid = (EditText)this.findViewById(R.id.your_bid_amount);
+        taskname = (TextView) this.findViewById(R.id.task_name);
+        taskdescription = (TextView) this.findViewById(R.id.task_details);
+        taskstatus = (TextView) this.findViewById(R.id.task_status);
+        tasklocation = (TextView) this.findViewById(R.id.task_location);
+        taskwinningbid = (TextView) this.findViewById(R.id.winning_bid_amount);
+        userbid = (EditText) this.findViewById(R.id.your_bid_amount);
 
 
         // SAVE BUTTON - place a bid
@@ -67,12 +67,10 @@ public class ViewTask extends AppCompatActivity {
             /**
              * Allows user to place a bid on another user's task once the save button is selected.
              * Updates list of bids for a certain task for task requester.
-             * Updates list of tasks task provider has bidded on.
+             * Updates list of tasks task provider has bidded on
              *
              * @param view - instance of View
-             *
              * @author Katherine Mae Patenio, Diane Boytang
-             *
              * @see SaveFileController
              * @see MyBids
              */
@@ -81,9 +79,9 @@ public class ViewTask extends AppCompatActivity {
                 String inputbid = userbid.getText().toString();
 
                 // Check if input is valid
-                try{
+                try {
                     // No bid entered
-                    if (inputbid.isEmpty()){
+                    if (inputbid.isEmpty()) {
                         userbid.setError("No bid entered!");
                         return;
                     }
@@ -91,49 +89,40 @@ public class ViewTask extends AppCompatActivity {
                     bidamount = Float.parseFloat(inputbid);
 
                     // Not a decimal/float
-                } catch (Exception e){
-                    Log.i("ViewTask","Invalid bid entered!");
+                } catch (Exception e) {
+                    Log.i("ViewTask", "Invalid bid entered!");
                     userbid.setError("Invalid bid entered!");
                     return;
                 } // end of catch
 
                 /* ADDING NEW BID STARTS HERE */
-                // TODO: new activity instead?
-
-                Log.i("ViewTask","The new bid is: "+bidamount);
-                Log.i("ViewTask","--------------------------------");
-                Log.i("ViewTask","We are now bidding on task "+task.getName());
-
                 Bid bid = new Bid(userID, bidamount);
 
                 // If no bid list exists for a task, create a new one
-                if (task.getBids() == null){
-                    Log.i("ViewTask","task.getBids() is NULL");
+                if (task.getBids() == null) {
+                    Log.i("ViewTask", "task.getBids() is NULL");
 
                     // Make new arraylist to contain bids
                     bidList = new ArrayList<Bid>();
                     bidList.add(bid);
                     task.setBids(bidList);
 
-                    Log.i("ViewTask","Going to add bid amount of: "+ bid.getAmount());
-                    Log.i("ViewTask","bidList is currently not null: "+ (task.getBids()!= null));
-                    Log.i("ViewTask","bidList is empty: "+bidList.isEmpty());
 
                 }
                 // Else, update current one
-                else{
-                    Log.i("ViewTask","task.getBids() is NOT NULL");
+                else {
+                    Log.i("ViewTask", "task.getBids() is NOT NULL");
 
                     bidList = task.getBids();
                     bidList.add(bid);
                     task.setBids(bidList);
                 }
 
+                /*
                 // Just for reading all bids in IDE Console - for debugging purposes
                 for (Bid temp : task.getBids()) {
-                    Log.i("ViewTask","Reading: "+temp.getAmount());
-                }
-                Log.i("ViewTask","--------------------------------");
+                    Log.i("ViewTask", "Reading: " + temp.getAmount());
+                } */
 
 
                 // SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
@@ -148,17 +137,14 @@ public class ViewTask extends AppCompatActivity {
                 // A task the user has bid on should now appear in the middle menu
                 int userindexBidder = saveFileController.getUserIndex(context, userName);
 
-                Log.i("ViewTask","userindex is "+userindexBidder);
-                Log.i("ViewTask","Adding "+task.getName()+" task!");
-
                 saveFileController.addBiddedTask(context, userindexBidder, task);
-                saveFileController.updateTaskBids(context, userindexCreator, userindexBidder, task, task.getId(), bid);
+                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", userID);
-                Log.i("ViewTask","Sending name and id to MainActivity!");
+                Log.i("ViewTask", "Sending name and id to MainActivity!");
                 startActivity(intent2);
             }
         });
@@ -252,7 +238,7 @@ public class ViewTask extends AppCompatActivity {
         // Get user information
         userID = intent.getStringExtra("userid");
         Log.i("userID", userID);
-        userName = intent.getStringExtra("userName");
+        userName = intent.getStringExtra("userName"); // FIXME username vs userName
         Log.i("userName", userName);
 
         // Bid information

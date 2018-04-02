@@ -60,7 +60,7 @@ public class MyBids extends Fragment{
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.bids_recyclerview);
 
-        MyBidsListViewAdapter recycleAdapter = new MyBidsListViewAdapter(getContext(), lstTask);
+        MyBidsListViewAdapter recycleAdapter = new MyBidsListViewAdapter(getContext(), lstTask, user_name, user_id);
 
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         myrecyclerview.setAdapter(recycleAdapter);
@@ -81,12 +81,13 @@ public class MyBids extends Fragment{
 
         // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
         if (getArguments() != null){
-            Log.i("My Jobs","getArguments NOT null!");
+            Log.i("My Bids","getArguments NOT null!");
             //Bundle bundle = new Bundle();
             user_name = getArguments().getString("username");
             Log.i("My Bids",getArguments().getString("username")+"");
             user_id = getArguments().getString("userid");
             Log.i("My Bids", getArguments().getString("userid")+"");
+
         }
 
         // DISPLAY TASKS - uses SaveFileController

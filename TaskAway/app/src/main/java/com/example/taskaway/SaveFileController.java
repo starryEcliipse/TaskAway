@@ -331,19 +331,18 @@ public class SaveFileController {
      *
      * @param context - instance of Context
      * @param userIndexCreator - the index of the Task Requester for a particular requested task
-     * @param userIndexBidder - the index of a Task Provider (that has made a bid) for a particular requested task
      * @param task - the task that has just been bidded on
      * @param ID - string id of the task itself
      * @param bid - the bid to be applied to the task for all other bidders
      */
-    public void updateTaskBids(Context context, int userIndexCreator, int userIndexBidder, Task task, String ID, Bid bid){
+    public void updateTaskBids(Context context, int userIndexCreator, Task task, String ID, Bid bid){
 
         loadFromFile(context);
 
         // Read all other users
         for(int i=0; i<allUsers.size(); i++){
             // Ignore recent bidder bidder and task requester
-            if((i==userIndexCreator) || (i == userIndexBidder)){ // ignore task requester
+            if((i==userIndexCreator)){ // ignore task requester
                 // do nothing
             }
             // Update all other users' list of tasks they've bidded on

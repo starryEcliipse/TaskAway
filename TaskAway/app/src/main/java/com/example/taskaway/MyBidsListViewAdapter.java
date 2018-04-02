@@ -32,15 +32,21 @@ import java.util.List;
 public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAdapter.MyViewHolder> {
     Context mContext;
     ArrayList<Task> mData;
+    String userName;
+    String userID;
+
 
     /**
      * Constructor of MyBidsListViewAdapter
      * @param mContext - current context; instance of Context
      * @param mData - data containing appropriate information (bidded-on tasks)
      */
-    public MyBidsListViewAdapter(Context mContext, ArrayList<Task> mData) {
+    public MyBidsListViewAdapter(Context mContext, ArrayList<Task> mData,String userName, String userID) {
         this.mContext = mContext;
         this.mData = mData;
+        this.userName = userName;
+        this.userID = userID;
+
     }
 
     /**
@@ -72,6 +78,8 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
                 intent.putExtra("task", mData.get(pos));
                 String position = Integer.toString(pos);
                 intent.putExtra("index", position);
+                intent.putExtra("userid", userID);
+                intent.putExtra("userName", userName);
                 mContext.startActivity(intent);
             }
         });
