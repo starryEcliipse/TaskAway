@@ -13,7 +13,7 @@ import android.content.Intent;
  * Acts as activity that displays a tasks information when a user selects a task *they have created*.
  * DIFFERENT from ViewTask as this implements an Edit button.
  *
- * @author Diane Boytang
+ * @author Diane Boytang, Katherine Mae Patenio
  * Created on 2018-03-14
  *
  * @see AllBids
@@ -123,7 +123,6 @@ public class ViewOwnTask extends AppCompatActivity {
                     return;
                 }
 
-                // id of task
                 id = task.getId();
 
                 // Pass relevant information to MapActivity via SaveFileController
@@ -137,7 +136,6 @@ public class ViewOwnTask extends AppCompatActivity {
                 intent.putExtra("location", location);
                 intent.putExtra("task_id", id);
 
-
                 // Send user info
                 intent.putExtra("userid", userID);
                 intent.putExtra("userName", userName);
@@ -145,7 +143,6 @@ public class ViewOwnTask extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     /**
@@ -168,23 +165,26 @@ public class ViewOwnTask extends AppCompatActivity {
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+
         try {
             if (task.getBids().isEmpty()) {
                 tasklowestbidamount.setText("No bids yet!");
             } else {
                 tasklowestbid = task.findLowestBid();
                 tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
-                // Just for reading all bids in IDE Console - for debugging purposes
-                Log.i("ViewOwmTask", "id of task is: "+task.getId());
-                for (Bid temp : task.getBids()) {
-                    Log.i("ViewOwnTask","Reading: "+temp.getAmount() + "by "+temp.getUserId());
-                }
+
+                // Get username of bidder with lowest bid
+                SaveFileController saveFileController = new SaveFileController();
+                Context context = getApplicationContext();
+                User userBidder = saveFileController.getUserFromUserId(context,tasklowestbid.getUserId());
+
+                String userBidderName = userBidder.getUsername();
+                tasklowestbidusername.setText(userBidderName);
             }
         } catch (Exception e) {
             tasklowestbidamount.setText("No bids yet!");
         }
     }
-
 
     /**
      * Calls superclass onDestroy

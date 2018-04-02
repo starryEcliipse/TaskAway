@@ -394,6 +394,23 @@ public class SaveFileController {
         return user;
     }
 
+    /**
+     * Get user information via User class by using user ID as identifier
+     *
+     * @param context - instance of Context
+     * @param Id - String ID of the user
+     * @return User
+     */
+    public User getUserFromUserId(Context context, String Id){
+        loadFromFile(context);
+        for(int i=0; i<this.allUsers.size(); i++){
+            if(this.allUsers.get(i).getId().equals(Id)){
+                user = this.allUsers.get(i);
+                break;
+            }
+        }
+        return user;
+    }
 
     /**
      * Returns Tasklist of all tasks user has not bidded on
