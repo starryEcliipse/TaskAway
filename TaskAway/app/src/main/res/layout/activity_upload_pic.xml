@@ -13,6 +13,12 @@
         android:layout_height="match_parent"
         android:id="@+id/linearImage">
 
+        <ImageView
+            android:id="@+id/imageToUpload"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
         <Button
             android:id="@+id/button5"
             android:layout_width="165dp"

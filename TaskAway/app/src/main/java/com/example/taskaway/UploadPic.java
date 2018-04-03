@@ -17,11 +17,13 @@ import android.widget.LinearLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import java.io.IOException;
+
 public class UploadPic extends AppCompatActivity implements View.OnClickListener{
     private static final int RESULT_LOAD_IMAGE = 1;
 
     LinearLayout linearMain;
-    //ImageView imageToUpload;
+    ImageView imageToUpload;
     Button upload;
     Button done;
 
@@ -31,7 +33,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pic);
         linearMain = (LinearLayout) findViewById(R.id.linearImage);
-        //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
+        imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
 
@@ -62,21 +64,28 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
-            ClipData clipData = data.getClipData();
+            //ClipData clipData = data.getClipData();
 
-/*            Uri selectedImage = data.getData();
-            //imageToUpload.setImageURI(selectedImage);
-            String photoPath = getPath(selectedImage);
-            ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this).build();
-            ImageLoader.getInstance().init(configuration);
-            //Bitmap bitmap =*/
+            Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+            Bitmap bitmap = null;
+
+            try{
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imageToUpload.setImageBitmap(bitmap);
+            //String photoPath = getPath(selectedImage);
+           // ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this).build();
+            //ImageLoader.getInstance().init(configuration);
+            //Bitmap bitmap =
         }
     }
 
 
     //https://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
 
-    public String getPath(Uri uri) {
+/*    public String getPath(Uri uri) {
         // just some safety built in
         if( uri == null ) {
             // TODO perform some logging or show user feedback
@@ -96,5 +105,5 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         }
         // this is our fallback here
         return uri.getPath();
-    }
+    }*/
 }
