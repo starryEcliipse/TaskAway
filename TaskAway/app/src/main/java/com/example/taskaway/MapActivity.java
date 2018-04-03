@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -95,6 +97,17 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         if (task_location_coords == null){
+            try{
+                String task_location_encoded = URLEncoder.encode(task_location, "UTF-8");
+                String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
+                GetLocationJson locationJson = new GetLocationJson();
+                AsyncTask.Status status = locationJson.execute(location_uri).getStatus();
+
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
             return;
         }
         locationMap = googleMap;
