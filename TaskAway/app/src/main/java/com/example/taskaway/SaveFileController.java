@@ -278,11 +278,52 @@ public class SaveFileController {
         for(int i=0; i<tasks.size(); i++){
             if(tasks.getTask(i).getId().equals(id)){
                 tasks.remove(i);
+                break;
             }
-            i++;
+            //i++;
         }
         saveToFile(context);
     }
+
+    /**
+     * Deletes a task from bidders' tasklist of bidded-on tasks.
+     * Is only called when a task requester deletes a task that has a status "bidded".
+     *
+     * @author Katherine Mae Patenio
+     *
+     * @param context - instance of Context
+     * @param userIndexCreator - user index of task requester
+     * @param ID - the task id
+     */
+    public void deleteTaskBids(Context context, int userIndexCreator, String ID) {
+        loadFromFile(context);
+
+        // Read all other users
+        for(int i=0; i<allUsers.size(); i++){
+            // Ignore recent bidder bidder and task requester
+            if((i==userIndexCreator)){ // ignore task requester
+                // do nothing
+            }
+            // Update all other users' list of tasks they've bidded on
+            else if (!allUsers.get(i).getBidTasks().isEmpty()){
+                TaskList biddedtasks = allUsers.get(i).getBidTasks();
+
+                // For each task
+                for (int j=0; j<biddedtasks.size(); j++){
+                    Task aTask = biddedtasks.getTask(j);
+
+                    // Update task bids - remove the task
+                    if (aTask.getId().equals(ID)){
+                        biddedtasks.removeTask(aTask);
+                        saveToFile(context);
+                        break;
+                    } // end of if
+
+                } // end of for loop
+            } // end of if
+        } // end of for
+    }
+
 
     /**
      * Retrieves a user's task.
@@ -373,35 +414,6 @@ public class SaveFileController {
         } // end of for
     } // end of function
 
-
-    public void deleteTaskBids(Context context, int userIndexCreator, Task task, String ID) {
-        loadFromFile(context);
-
-        // Read all other users
-        for(int i=0; i<allUsers.size(); i++){
-            // Ignore recent bidder bidder and task requester
-            if((i==userIndexCreator)){ // ignore task requester
-                // do nothing
-            }
-            // Update all other users' list of tasks they've bidded on
-            else if (!allUsers.get(i).getBidTasks().isEmpty()){
-                TaskList biddedtasks = allUsers.get(i).getBidTasks();
-
-                // For each task
-                for (int j=0; j<biddedtasks.size(); j++){
-                    Task aTask = biddedtasks.getTask(j);
-
-                    // Update task bids - remove the task
-                    if (aTask.getId().equals(ID)){
-                        biddedtasks.removeTask(aTask);
-                        saveToFile(context);
-                        break;
-                    } // end of if
-
-                } // end of for loop
-            } // end of if
-        } // end of for
-    }
 
     /**
      * Get user information via User class by using username as identifier
