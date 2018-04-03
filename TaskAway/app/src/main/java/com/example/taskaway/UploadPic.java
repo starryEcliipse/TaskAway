@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,7 +21,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     private static final int RESULT_LOAD_IMAGE = 1;
 
     LinearLayout linearMain;
-    ImageView imageToUpload;
+    //ImageView imageToUpload;
     Button upload;
     Button done;
 
@@ -46,6 +47,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.button5:
+                //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
                 Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -59,12 +61,15 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
-            Uri selectedImage = data.getData();
+
+            ClipData clipData = data.getClipData();
+
+/*            Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             String photoPath = getPath(selectedImage);
             ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this).build();
             ImageLoader.getInstance().init(configuration);
-            //Bitmap bitmap =
+            //Bitmap bitmap =*/
         }
     }
 
