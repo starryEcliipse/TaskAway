@@ -106,6 +106,10 @@ public class AddActivity extends AppCompatActivity {
                     statusField.setError("Assign status");
                     return;
                 }
+                if (s != "requested" && s != "assigned" && s != "bidded" && s!= "done"){
+                    statusField.setError("Invalid status type");
+                    return;
+                }
 
                 String location = locationField.getText().toString();
                 // Check location input

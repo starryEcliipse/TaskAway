@@ -138,6 +138,10 @@ public class EditActivity extends AppCompatActivity {
                     status.setError("Assign status");
                     return;
                 }
+                if (s != "requested" && s != "assigned" && s != "bidded" && s!= "done"){
+                    status.setError("Invalid status type");
+                    return;
+                }
 
                 // Task location
                 String loc = location.getText().toString();
