@@ -100,13 +100,14 @@ public class AddActivity extends AppCompatActivity {
                     return;
                 }
                 String s = statusField.getText().toString();
+                s = s.toUpperCase();
 
                 // Check task status input
                 if (s.isEmpty()){
                     statusField.setError("Assign status");
                     return;
                 }
-                if (s != "requested" && s != "assigned" && s != "bidded" && s!= "done"){
+                if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
                     statusField.setError("Invalid status type");
                     return;
                 }

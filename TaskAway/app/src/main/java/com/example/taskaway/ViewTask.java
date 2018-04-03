@@ -68,7 +68,7 @@ public class ViewTask extends AppCompatActivity {
              * Allows user to place a bid on another user's task once the save button is selected.
              * Updates list of bids for a certain task for task requester.
              * Updates list of tasks task provider has bidded on
-             *
+             *\
              * @param view - instance of View
              * @author Katherine Mae Patenio, Diane Boytang
              * @see SaveFileController

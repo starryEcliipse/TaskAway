@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  *
  * This class handles editing / deleting an existing task.
  *
  * @see Task
+ * @see ViewOwnTask
  * @author Sameerah Wajahat
  *
  */
@@ -110,63 +112,68 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Task name
-                String name = tname.getText().toString();
-                if (name.isEmpty()) {
-                    tname.setError("Enter name");
-                    return;
-                }
-                if (name.length() > 30){
-                    tname.setError("Name too long");
-                    return;
-                }
+                if (task.getBids() == null) {
 
-                // Description
-                String comment = des.getText().toString();
-                if (comment.isEmpty()){
-                    des.setError("Enter requirement");
-                    return;
+                    // Task name
+                    String name = tname.getText().toString();
+                    if (name.isEmpty()) {
+                        tname.setError("Enter name");
+                        return;
+                    }
+                    if (name.length() > 30) {
+                        tname.setError("Name too long");
+                        return;
+                    }
+
+                    // Description
+                    String comment = des.getText().toString();
+                    if (comment.isEmpty()) {
+                        des.setError("Enter requirement");
+                        return;
+                    }
+                    if (comment.length() > 300) {
+                        des.setError("Description too long");
+                        return;
+                    }
+
+                    // Task status
+                    String s = status.getText().toString();
+                    if (s.isEmpty()) {
+                        status.setError("Assign status");
+                        return;
+                    }
+                    if (s != "requested" && s != "assigned" && s != "bidded" && s != "done") {
+                        status.setError("Invalid status type");
+                        return;
+                    }
+
+                    // Task location
+                    String loc = location.getText().toString();
+                    if (loc.isEmpty()) {
+                        loc = "N/A";
+                    }
+
+                    Task task = new Task(name, comment, s, loc, null, null, null, task_id);
+
+                    // SAVE TO FILE TODO: ELASTICSEARCH
+                    final Context context = getApplicationContext();
+                    SaveFileController saveFileController = new SaveFileController();
+                    int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+
+                    // Update user information
+                    saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
+
+                    // GO TO MAIN ACTIVITY
+                    Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                    intent2.putExtra("user_name", userName);
+                    intent2.putExtra("user_id", user_id);
+                    Log.i("AddActivity", "Sending name and id to MainActivity!");
+                    startActivity(intent2);
+                } // end of if
+                else if (task.getBids() != null){
+                    Toast.makeText(EditActivity.this, "Unable to save changes: this task already has bids!", Toast.LENGTH_SHORT).show();
                 }
-                if (comment.length()>300) {
-                    des.setError("Description too long");
-                    return;
-                }
-
-                // Task status
-                String s = status.getText().toString();
-                if (s.isEmpty()){
-                    status.setError("Assign status");
-                    return;
-                }
-                if (s != "requested" && s != "assigned" && s != "bidded" && s!= "done"){
-                    status.setError("Invalid status type");
-                    return;
-                }
-
-                // Task location
-                String loc = location.getText().toString();
-                if(loc.isEmpty()){
-                    loc = "N/A";
-                }
-
-                Task task = new Task(name, comment, s, loc, null, null, null, task_id);
-
-                // SAVE TO FILE TODO: ELASTICSEARCH
-                final Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-                int userindex = saveFileController.getUserIndex(context, userName); // get userindex
-                Log.i("AddActivity","userindex is "+userindex);
-
-                // Update user information
-                saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
-
-                // GO TO MAIN ACTIVITY
-                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
-                intent2.putExtra("user_name", userName);
-                intent2.putExtra("user_id", user_id);
-                Log.i("AddActivity","Sending name and id to MainActivity!");
-                startActivity(intent2);
-            }
+            } // end of onclick
         });
 
         // Delete button - deletes the task being viewed
@@ -182,11 +189,13 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Context context2 = getApplicationContext();
                 SaveFileController saveFileController2 = new SaveFileController();
-                Log.i("AddActivity","userindex is "+index);
-                Log.i("AddActivity","TASKID is "+task_id);
 
                 // Update user information - remove task
                 saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
+                saveFileController2.deleteTaskBids(context2, index, task, task_id);
+
+                // Update other users' list of tasks that they've bidded on
+                //saveFileController2.updateTaskBids(context2, user_id, task, task_id, ); //TODO: OVERLOAD update when deleted
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
