@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UploadPic extends AppCompatActivity implements View.OnClickListener{
     private static final int RESULT_LOAD_IMAGE = 1;
@@ -64,21 +66,20 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
-            //ClipData clipData = data.getClipData();
-
-            Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+            //Uri selectedImage = data.getData();
+            //imageToUpload.setImageURI(selectedImage);
+            //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
+            Uri selectedImage = data.getClipData().getItemAt(0).getUri();//As of now use static position 0 use as per itemcount.
             Bitmap bitmap = null;
-
-            try{
+            //        Uri selectedImage1 = data.getData();
+            try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             imageToUpload.setImageBitmap(bitmap);
-            //String photoPath = getPath(selectedImage);
-           // ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this).build();
-            //ImageLoader.getInstance().init(configuration);
-            //Bitmap bitmap =
+
         }
     }
 
