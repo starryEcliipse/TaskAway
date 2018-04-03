@@ -142,7 +142,7 @@ public class EditActivity extends AppCompatActivity {
                         status.setError("Assign status");
                         return;
                     }
-                    if (s != "requested" && s != "assigned" && s != "bidded" && s != "done") {
+                    if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
                         status.setError("Invalid status type");
                         return;
                     }

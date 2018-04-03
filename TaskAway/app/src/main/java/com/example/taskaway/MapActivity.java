@@ -16,6 +16,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.List;
@@ -101,19 +103,42 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 String task_location_encoded = URLEncoder.encode(task_location, "UTF-8");
                 String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
                 GetLocationJson locationJson = new GetLocationJson();
-                AsyncTask.Status status = locationJson.execute(location_uri).getStatus();
+                locationJson.execute(location_uri);
+
+                JSONObject jsonObject = new JSONObject(locationJson.get());
+                JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+                String lat = locationGeo.getString("lat");
+                String lng = locationGeo.getString("lng");
+
+                Double latitude = Double.parseDouble(lat);
+                Double longitude = Double.parseDouble(lng);
+
+                LatLng location_coords = new LatLng(latitude, longitude);
+
+                locationMap = googleMap;
+
+                locationMap.addMarker(new MarkerOptions().position(location_coords).title("Task Location"));
+                locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location_coords, 10.0f));
+
+
+
+                Log.i("MAPACTIVITYJSON", "wat:" + locationJson.get());
+
+
 
 
             } catch (Exception e){
                 e.printStackTrace();
             }
 
-            return;
-        }
-        locationMap = googleMap;
 
-        locationMap.addMarker(new MarkerOptions().position(task_location_coords).title("Task Location"));
-        locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(task_location_coords, 10.0f));
+        }
+        else {
+            locationMap = googleMap;
+
+            locationMap.addMarker(new MarkerOptions().position(task_location_coords).title("Task Location"));
+            locationMap.moveCamera(CameraUpdateFactory.newLatLngZoom(task_location_coords, 10.0f));
+        }
     }
 }
 
