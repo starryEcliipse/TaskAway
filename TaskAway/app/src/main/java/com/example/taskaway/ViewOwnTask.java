@@ -8,12 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 /**
  * Acts as activity that displays a tasks information when a user selects a task *they have created*.
  * DIFFERENT from ViewTask as this implements an Edit button.
  *
- * @author Diane Boytang, Katherine Mae Patenio
+ * @author Diane Boytang, Katherine Mae Patenio, Jonathan Ismail
  * Created on 2018-03-14
  *
  * @see AllBids
@@ -144,15 +145,37 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
+        // ADDED BY JONATHAN ISMAIL, EDITED BY KATHERINE MAE PATENIO
         Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
         otherbidsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = taskname.getText().toString();
 
-                Intent intent = new Intent(ViewOwnTask.this, ViewOtherBids.class);
-                intent.putExtra("name", name);
-                startActivity(intent);
+                if (task.getBids() != null) {
+
+                    // Pass relevant information to EditActivity via SaveFileController
+                    final Context context = getApplicationContext();
+                    final SaveFileController saveFileController = new SaveFileController();
+                    final int userIndex = saveFileController.getUserIndex(context, userName);
+
+                    id = task.getId();
+
+                    String name = taskname.getText().toString();
+
+                    Intent intent = new Intent(ViewOwnTask.this, ViewOtherBids.class);
+                    intent.putExtra("name", name);
+                    intent.putExtra("username", userName);
+                    intent.putExtra("taskid", id);
+                    startActivity(intent);
+                }
+
+                else if (task.getBids() == null){
+                    Toast.makeText(ViewOwnTask.this, "Your task currently has no bids!", Toast.LENGTH_SHORT).show();
+                }
+
+                else if (task.getBids().size() == 1){
+                    Toast.makeText(ViewOwnTask.this, "Your task only has one bid!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
