@@ -40,7 +40,6 @@
             android:value="AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY" />
 
         <activity android:name=".UploadPic"/>
-        <activity android:name="PicturesDisplay"/>
     </application>
 
 </manifest>
