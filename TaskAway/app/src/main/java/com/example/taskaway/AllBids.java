@@ -11,6 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +45,12 @@ public class AllBids extends Fragment {
     private String user_name;
     private String user_id;
 
+    private EditText searchbox;
+    private ImageButton searchbutton;
+    private CheckBox checkbox;
+
+    private AllBidsListViewAdapter listAdapter;
+
     /**
      * Constructor of AllBids.
      */
@@ -62,10 +72,7 @@ public class AllBids extends Fragment {
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.allbids_recyclerview);
 
-        AllBidsListViewAdapter recycleAdapter = new AllBidsListViewAdapter(getContext(), lstTask, user_name, user_id);
-
-        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myrecyclerview.setAdapter(recycleAdapter);
+        updateListAdapter();
 
         return rootView;
 
@@ -95,13 +102,86 @@ public class AllBids extends Fragment {
 
         }
 
-        // DISPLAY OTHER USER TASKS - uses SaveFileController
+        /*// DISPLAY OTHER USER TASKS - uses SaveFileController
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);
         Log.i("All Bids","Currently getting all other tasks");
         //changed this from getEveryonesTask to getAllTasks
-        lstTask = saveFileController.getAllTasks(context, userIndex);
+        lstTask = saveFileController.getAllTasks(context, userIndex);*/
 
+        // DISPLAY OTHER USER TASKS - uses ServerWrapper
+        lstTask = ServerWrapper.getAllJobs();
+
+    }
+
+    /**
+     * Sets up the view objects once the view is created.
+     * @param view
+     * @param savedInstanceState
+     */
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        searchbox = view.findViewById(R.id.alljobs_searchbox);
+        searchbutton = view.findViewById(R.id.alljobs_search_btn);
+        checkbox = view.findViewById(R.id.alljobs_checkbox);
+
+        searchbox.setText("");
+        checkbox.setChecked(false);
+
+        searchbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateSearchResults();
+            }
+        });
+
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                updateSearchResults();
+            }
+        });
+    }
+
+    /**
+     * Executes a search query to the server with the current search parameters.
+     */
+    private void updateSearchResults() {
+        String searchString = searchbox.getText().toString();
+        TaskList totalHits;
+        if (searchString != null && searchString.length() > 0){
+            TaskList descriptionHits = ServerWrapper.searchJobs("description", searchString);
+            TaskList nameHits = ServerWrapper.searchJobs("name", searchString);
+            totalHits = descriptionHits;
+            for (Task t : nameHits){ //combines search results without duplicating
+                if (!totalHits.contains(t)){
+                    totalHits.add(t);
+                }
+            }
+        }else{
+            totalHits = ServerWrapper.getAllJobs();
+        }
+
+        if (checkbox.isChecked()){
+            //TODO: Remove results further than 5 km away.
+            Log.i("All Bids","Sort out results further than 5km away.");
+        }
+        int size = ServerWrapper.getAllUsers().size();
+        Log.i("Number of users", "" + size);
+        lstTask = totalHits;
+        updateListAdapter();
+    }
+
+    /**
+     * Updates the AllBidsListViewAdapter contained in this fragment, and notifies it of a data set change.
+     */
+    private void updateListAdapter() {
+        listAdapter = new AllBidsListViewAdapter(getContext(), lstTask, user_name, user_id);
+        myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myrecyclerview.setAdapter(listAdapter);
+        listAdapter.notifyDataSetChanged();
+        myrecyclerview.invalidate();
     }
 }
