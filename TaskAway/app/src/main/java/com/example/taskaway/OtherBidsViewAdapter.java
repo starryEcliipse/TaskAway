@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
     private Context mContext;
     //ArrayList<Task> mData;
     private ArrayList<Bid> mData;
+    private int lastPosition = -1;
 
 
     /**
@@ -80,16 +82,13 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         float amount;
         String strAmount;
 
-        for (int i=0; i < mData.size(); i++){
-            //Log.i("OTHERBIDSADAPTER","Current element is: "+mData.get(i).getI);
-            if (mData.get(i).getUserId().equals(userid)){
-                amount = mData.get(i).getAmount();
-                strAmount = Float.toString(amount);
-                holder.tv_otherbid.setText(strAmount);
-                break;
-            }
 
-        }
+        // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
+        amount = mData.get(position).getAmount();
+        strAmount = Float.toString(amount);
+        holder.tv_otherbid.setText(strAmount);
+
+        holder.radioButton.setChecked(lastPosition == position);
     }
 
     /**
@@ -115,12 +114,24 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_name;
         private TextView tv_otherbid;
+        private RadioButton radioButton;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.name_other);
             tv_otherbid = (TextView) itemView.findViewById(R.id.bid_other);
 
+            // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
+            radioButton = (RadioButton) itemView.findViewById(R.id.img_status);
+            radioButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lastPosition = getAdapterPosition();
+                    notifyDataSetChanged();
+
+                    Toast.makeText(mContext, "selected bid is " + tv_name.getText(), Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }
