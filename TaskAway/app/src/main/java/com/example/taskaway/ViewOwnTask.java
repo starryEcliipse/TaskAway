@@ -143,6 +143,18 @@ public class ViewOwnTask extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
+        otherbidsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = taskname.getText().toString();
+
+                Intent intent = new Intent(ViewOwnTask.this, ViewOtherBids.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
