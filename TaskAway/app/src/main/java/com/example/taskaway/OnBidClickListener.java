@@ -7,5 +7,5 @@ package com.example.taskaway;
  */
 
 public interface OnBidClickListener {
-    void onBidClick(Bid bid);
+    void onBidClick(Bid bid, int position);
 }

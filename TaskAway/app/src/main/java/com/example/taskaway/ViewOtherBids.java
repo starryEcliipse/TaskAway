@@ -51,11 +51,13 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private Button deleteButton;
     private OnBidClickListener onBidClickListener;
     private Bid bidderbid;
+    private int posOther;
+    private int posList;
 
     //private ArrayList<Task> lstTask;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_other_bids);
 
@@ -77,19 +79,21 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
         // TODO: just pass the task via intent instead?
         /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
-        SaveFileController saveFileController = new SaveFileController();
+        final SaveFileController saveFileController = new SaveFileController();
         Context context = getApplicationContext();
         final int userindex = saveFileController.getUserIndex(context, user_name);
-        Task task = saveFileController.getTask(context, userindex, taskid);
-        ArrayList<Bid> bidList = task.getBids();
+        final Task task = saveFileController.getTask(context, userindex, taskid);
+        final ArrayList<Bid> bidList = task.getBids();
 
         // Get and display all other bids that are not the lowest
         // assume size > 1
         // bidListOther will contain all bids that do not include lowest bid
-        ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
+        final ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
         Bid bid = task.findLowestBid();
         bidListOther.remove(bid);
         adapter = new OtherBidsViewAdapter(this, bidListOther, this);
+
+
 
         myrecyclerview.setAdapter(adapter);
 
@@ -113,8 +117,40 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             @Override
             public void onClick(View view){
                 // TODO: delete a bid
-
+                // TODO: make CALL TO ADAPTER (like the interface)
                 Toast.makeText(getApplicationContext(), "Our bid amount is: "+bidderbid.getAmount(), Toast.LENGTH_LONG).show();
+
+/*
+                for (int i=0;i<bidListOther.size();i++){
+                    if (bidListOther.get(i).getUserId().equals(user_id)){
+                        posOther = i;
+                        break;
+                    }
+                }*/
+
+                for (int i=0;i<bidList.size();i++){
+                    if (bidList.get(i).getUserId().equals(bidderbid.getUserId())){
+                        posList = i;
+                        break;
+                    }
+                }
+
+                bidListOther.remove(posOther);
+                bidList.remove(posList);
+                //adapter.notifyDataSetChanged();
+
+                // FIXME: deleting bid and then visting previous bidder's All Jobs menu results in changing
+                // FIXME: winning bid amount to previously deleted amount
+                task.setBids(bidList);
+                saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
+                saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), bidderbid);
+                //saveFileController.deleteTask(getApplicationContext() bidderbid.getUserId(), task.getId());
+                User user = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
+                int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
+                saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
+
+                adapter.notifyItemRemoved(posOther);
+                adapter.notifyItemRangeChanged(posOther, adapter.getItemCount());
 
             } // end of onClick
 
@@ -125,9 +161,10 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
     // SOURCE: https://stackoverflow.com/a/47183251
     @Override
-    public void onBidClick(Bid bid){
+    public void onBidClick(Bid bid, int position){
         //Toast.makeText(getApplicationContext(), "Our bid amount is: "+bid.getAmount(), Toast.LENGTH_LONG).show();
         bidderbid = bid;
+        posOther = position;
     }
 
 } // end of class

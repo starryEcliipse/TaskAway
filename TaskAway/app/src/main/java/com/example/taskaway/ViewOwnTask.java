@@ -152,7 +152,7 @@ public class ViewOwnTask extends AppCompatActivity {
             public void onClick(View view) {
 
                 // If bids exist, go to ViewOtherBids Activity
-                if (task.getBids() != null) {
+                if ((task.getBids() != null) && (task.getBids().size() > 1)) {
 
                     // Pass relevant information to EditActivity via SaveFileController
                     final Context context = getApplicationContext();
@@ -171,7 +171,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 }
 
                 // No bids
-                else if (task.getBids() == null){
+                else if ((task.getBids() == null) || (task.getBids().isEmpty())){
                     Toast.makeText(ViewOwnTask.this, "Your task currently has no bids!", Toast.LENGTH_SHORT).show();
                 }
 

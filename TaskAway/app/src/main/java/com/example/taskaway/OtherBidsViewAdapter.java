@@ -146,7 +146,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
                     lastPosition = getAdapterPosition();
                     notifyDataSetChanged();
                     final Bid bid = mData.get(lastPosition);
-                    onBidClickListener.onBidClick(bid);
+                    onBidClickListener.onBidClick(bid,lastPosition);
                     //Toast.makeText(mContext, "selected bidder is: " + tv_name.getText(), Toast.LENGTH_LONG).show();
 
 
