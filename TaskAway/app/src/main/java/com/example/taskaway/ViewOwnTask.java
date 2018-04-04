@@ -145,12 +145,13 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
-        // ADDED BY JONATHAN ISMAIL, EDITED BY KATHERINE MAE PATENIO
+        // OTHER BIDS BUTTON
         Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
         otherbidsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // If bids exist, go to ViewOtherBids Activity
                 if (task.getBids() != null) {
 
                     // Pass relevant information to EditActivity via SaveFileController
@@ -169,10 +170,12 @@ public class ViewOwnTask extends AppCompatActivity {
                     startActivity(intent);
                 }
 
+                // No bids
                 else if (task.getBids() == null){
                     Toast.makeText(ViewOwnTask.this, "Your task currently has no bids!", Toast.LENGTH_SHORT).show();
                 }
 
+                // Only lowest bid available
                 else if (task.getBids().size() == 1){
                     Toast.makeText(ViewOwnTask.this, "Your task only has one bid!", Toast.LENGTH_SHORT).show();
                 }

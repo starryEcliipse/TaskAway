@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,13 +33,13 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_new_login);
 
-        Button loginButton = (Button) findViewById(R.id.loginButton);
-        Button registerButton = (Button) findViewById(R.id.registerButton);
-        final TextView continueOffline = (TextView) findViewById(R.id.continueOfflineTextView);
-        final EditText userNameEdit = (EditText)findViewById(R.id.editTextUsername);
-        final EditText passwordEdit = (EditText)findViewById(R.id.editTextPassword);
+        RelativeLayout loginButton = (RelativeLayout) findViewById(R.id.newloginButton);
+        Button registerButton = (Button) findViewById(R.id.newregisterButton);
+        final TextView continueOffline = (TextView) findViewById(R.id.newcontinueOfflineTextView);
+        final EditText userNameEdit = (EditText)findViewById(R.id.neweditTextUsername);
+        final EditText passwordEdit = (EditText)findViewById(R.id.neweditTextPassword);
 
         //login button clicked
         loginButton.setOnClickListener(new View.OnClickListener() {

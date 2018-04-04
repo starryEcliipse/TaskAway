@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * Is responsible for manipulating user information saved locally in device.
- * @author Punam Woosaree
+ * @author Punam Woosaree, Katherine Mae Patenio
  * Created on 2018-03-16
  *
  */
@@ -426,8 +426,8 @@ public class SaveFileController {
         loadFromFile(context);
         for(int i=0; i<this.allUsers.size(); i++){
             if(this.allUsers.get(i).getUsername().equals(username)){
-               user = this.allUsers.get(i);
-               break;
+                user = this.allUsers.get(i);
+                break;
             }
         }
         return user;
