@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity{
                             Intent intentLogout = new Intent(MainActivity.this, Login.class);
                             intentLogout.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intentLogout);
-                            Toast.makeText(MainActivity.this, "Logout Clicked", Toast.LENGTH_SHORT).show();
                             return true;
                     }
                     return true;
