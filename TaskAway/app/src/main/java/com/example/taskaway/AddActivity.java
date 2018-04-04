@@ -68,7 +68,8 @@ public class AddActivity extends AppCompatActivity {
         uploadPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent0 = new Intent(getBaseContext(), UploadPic.class);
+                //Intent intent0 = new Intent(getBaseContext(), UploadPic.class);
+                Intent intent0 = new Intent(getBaseContext(), PicturesDisplay.class);
                 startActivity(intent0);
             }
         });

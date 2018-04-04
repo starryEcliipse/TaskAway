@@ -34,11 +34,13 @@
         <activity android:name=".EditActivity" />
         <activity android:name=".ViewOtherBids" />
 
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY" />
 
-        <activity android:name=".UploadPic"></activity>
+        <activity android:name=".UploadPic"/>
+        <activity android:name="PicturesDisplay"/>
     </application>
 
 </manifest>
