@@ -1,6 +1,8 @@
 package com.example.taskaway;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
     //ArrayList<Task> mData;
     private ArrayList<Bid> mData;
     private int lastPosition = -1;
+    private OnBidClickListener onBidClickListener;
 
 
     /**
@@ -36,9 +40,10 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
      * @param mContext - the context of the adapter
      * @param mData - the TaskList of bids for the current task
      */
-    public OtherBidsViewAdapter(Context mContext, ArrayList<Bid> mData) {
+    public OtherBidsViewAdapter(Context mContext, ArrayList<Bid> mData, OnBidClickListener onBidClickListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.onBidClickListener = onBidClickListener;
     }
 
 
@@ -89,7 +94,18 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         holder.tv_otherbid.setText(strAmount);
 
         holder.radioButton.setChecked(lastPosition == position);
-    }
+
+        /*
+        final Bid bid = mData.get(position);
+
+        holder.radioButton.setOnClickListener(new View.OnClickListener(){
+           @Override
+            public void onClick(View view){
+                OnBidClickListener.onBidClick(bid);
+           }
+        }); */
+
+        }
 
     /**
      * Returns the size of mData or the TaskList containing bids
@@ -116,7 +132,8 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         private TextView tv_otherbid;
         private RadioButton radioButton;
 
-        public MyViewHolder(View itemView) {
+        public MyViewHolder(final View itemView) {
+            // SOURCE: https://stackoverflow.com/a/47183251
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.name_other);
             tv_otherbid = (TextView) itemView.findViewById(R.id.bid_other);
@@ -128,8 +145,11 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
                 public void onClick(View v) {
                     lastPosition = getAdapterPosition();
                     notifyDataSetChanged();
+                    final Bid bid = mData.get(lastPosition);
+                    onBidClickListener.onBidClick(bid);
+                    //Toast.makeText(mContext, "selected bidder is: " + tv_name.getText(), Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(mContext, "selected bidder is: " + tv_name.getText(), Toast.LENGTH_LONG).show();
+
                 }
             });
         }

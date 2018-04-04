@@ -32,7 +32,6 @@ public class ViewBidTask extends AppCompatActivity {
     private TextView useroldbid;
     private EditText userbid;
     private Task task;
-    private Bid winningbid;
     String id;
     String userName;
     String userID;
@@ -220,6 +219,8 @@ public class ViewBidTask extends AppCompatActivity {
                 break;
             }
         }
+
+        Bid winningbid;
 
         try {
             if (task.getBids().isEmpty()) {

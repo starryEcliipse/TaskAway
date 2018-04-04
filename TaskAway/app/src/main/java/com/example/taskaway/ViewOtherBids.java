@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,10 +25,12 @@ import java.util.Collections;
 
 /**
  * Displays bids that have been placed on the current task.
- * User can accept ONE bid or delete other bids.
+ * User can accept ONE bid or delete ONE bids (this is the nature of the radio button).
  *
  * @author Created by Jonathan Ismail, Edited by Katherine Mae Patenio
  * Created on 2018-04-01
+ *
+ * Interaction with Adapter is based on: https://stackoverflow.com/a/47183251
  *
  * @see Bid
  * @see MyBids
@@ -35,7 +38,7 @@ import java.util.Collections;
  * //@see activity_view_other_bids.xml
  * //@see item_otherbids.xml
  */
-public class ViewOtherBids extends AppCompatActivity {
+public class ViewOtherBids extends AppCompatActivity implements OnBidClickListener {
 
     View rootView;
     private TextView tname;
@@ -46,6 +49,8 @@ public class ViewOtherBids extends AppCompatActivity {
     private String user_id;
     private Button acceptButton;
     private Button deleteButton;
+    private OnBidClickListener onBidClickListener;
+    private Bid bidderbid;
 
     //private ArrayList<Task> lstTask;
 
@@ -84,7 +89,7 @@ public class ViewOtherBids extends AppCompatActivity {
         ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
         Bid bid = task.findLowestBid();
         bidListOther.remove(bid);
-        adapter = new OtherBidsViewAdapter(this, bidListOther);
+        adapter = new OtherBidsViewAdapter(this, bidListOther, this);
 
         myrecyclerview.setAdapter(adapter);
 
@@ -96,6 +101,7 @@ public class ViewOtherBids extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
+
                 // TODO: accept a bid
             } // end of onClick
 
@@ -108,12 +114,21 @@ public class ViewOtherBids extends AppCompatActivity {
             public void onClick(View view){
                 // TODO: delete a bid
 
+                Toast.makeText(getApplicationContext(), "Our bid amount is: "+bidderbid.getAmount(), Toast.LENGTH_LONG).show();
+
             } // end of onClick
 
         }); // end of onClickListener delete
 
 
     } // end of onCreate
+
+    // SOURCE: https://stackoverflow.com/a/47183251
+    @Override
+    public void onBidClick(Bid bid){
+        //Toast.makeText(getApplicationContext(), "Our bid amount is: "+bid.getAmount(), Toast.LENGTH_LONG).show();
+        bidderbid = bid;
+    }
 
 } // end of class
 
