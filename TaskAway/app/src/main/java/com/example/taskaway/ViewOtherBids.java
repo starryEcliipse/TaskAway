@@ -15,6 +15,7 @@ import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import java.util.Collections;
  * Displays bids that have been placed on the current task.
  * User can accept ONE bid or delete other bids.
  *
- * @author Jonathan Ismail
+ * @author Created by Jonathan Ismail, Edited by Katherine Mae Patenio
  * Created on 2018-04-01
  *
  * @see Bid
@@ -43,6 +44,8 @@ public class ViewOtherBids extends AppCompatActivity {
     //private static TaskList lstTask;
     private String user_name;
     private String user_id;
+    private Button acceptButton;
+    private Button deleteButton;
 
     //private ArrayList<Task> lstTask;
 
@@ -67,38 +70,50 @@ public class ViewOtherBids extends AppCompatActivity {
         user_name = intent.getStringExtra("username");
         String taskid = intent.getStringExtra("taskid");
 
-
-        /*
-        lstTask = new ArrayList<>();
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null));
-        lstTask.add(new Task("AAAA",null,null,null,null,null,null,null)); */
-
-        // TODO: just pass the task instead?
-
+        // TODO: just pass the task via intent instead?
+        /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
         SaveFileController saveFileController = new SaveFileController();
         Context context = getApplicationContext();
         final int userindex = saveFileController.getUserIndex(context, user_name);
         Task task = saveFileController.getTask(context, userindex, taskid);
         ArrayList<Bid> bidList = task.getBids();
+
         // Get and display all other bids that are not the lowest
         // assume size > 1
+        // bidListOther will contain all bids that do not include lowest bid
         ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
         Bid bid = task.findLowestBid();
         bidListOther.remove(bid);
         adapter = new OtherBidsViewAdapter(this, bidListOther);
-        
-        //adapter = new OtherBidsViewAdapter(this,lstTask);
+
         myrecyclerview.setAdapter(adapter);
 
+        /* BUTTONS */
+        acceptButton = (Button) findViewById(R.id.accept_button);
+        deleteButton = (Button) findViewById(R.id.delete_button);
 
-    }
+        acceptButton.setOnClickListener(new View.OnClickListener(){
 
-}
+            @Override
+            public void onClick(View view){
+                // TODO: accept a bid
+            } // end of onClick
+
+        }); // end of onClickListener Accept
+
+
+        deleteButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                // TODO: delete a bid
+
+            } // end of onClick
+
+        }); // end of onClickListener delete
+
+
+    } // end of onCreate
+
+} // end of class
 

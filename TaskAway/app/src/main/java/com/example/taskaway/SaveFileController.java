@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * Is responsible for manipulating user information saved locally in device.
- * @author Punam Woosaree
+ * @author Punam Woosaree, Katherine Mae Patenio
  * Created on 2018-03-16
  *
  */
