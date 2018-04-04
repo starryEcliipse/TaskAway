@@ -22,7 +22,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String id;
     private String creatorId;
     private boolean deleted = false;
-    private boolean hasUnreadBids = false;
+    private boolean hasNewBids = false;
 
     /**
      * Constructor of task.
@@ -227,8 +227,8 @@ public class Task implements Serializable { // made Serializable to that Task ca
     /**
      * Sets whether there are unread bids on the task
      */
-    public void setHasUnreadBids(boolean bool){
-        this.hasUnreadBids = bool;
+    public void setHasNewBids(boolean bool){
+        this.hasNewBids = bool;
     }
 
     /**
@@ -244,7 +244,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * @return hasUnreadBids
      */
     public boolean hasNewBids() {
-        return this.hasUnreadBids;
+        return this.hasNewBids;
     }
 
     /**
