@@ -22,6 +22,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String id;
     private String creatorId;
     private boolean deleted = false;
+    private boolean hasUnreadBids = false;
 
     /**
      * Constructor of task.
@@ -91,6 +92,24 @@ public class Task implements Serializable { // made Serializable to that Task ca
      */
     public String getLocation() {
         return location;
+    }
+
+    /**
+     * Returns latitude of the task location.
+     * @return - latitude
+     */
+    public double getLatitude() {
+        //TODO
+        return 0;
+    }
+
+    /**
+     * Returns longitude of the task location.
+     * @return - longitude
+     */
+    public double getLongitude() {
+        //TODO
+        return 0;
     }
 
     /**
@@ -206,11 +225,26 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
+     * Sets whether there are unread bids on the task
+     */
+    public void setHasUnreadBids(boolean bool){
+        this.hasUnreadBids = bool;
+    }
+
+    /**
      * Returns whether the task has been deleted from the server
      * @returns deleted boolean variable
      */
     public boolean isDeleted() {
         return this.deleted;
+    }
+
+    /**
+     * Returns whether the task has bids unseen by the creator
+     * @return hasUnreadBids
+     */
+    public boolean hasNewBids() {
+        return this.hasUnreadBids;
     }
 
     /**

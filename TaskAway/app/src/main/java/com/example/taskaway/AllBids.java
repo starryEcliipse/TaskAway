@@ -2,8 +2,14 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -50,6 +56,8 @@ public class AllBids extends Fragment {
     private CheckBox checkbox;
 
     private AllBidsListViewAdapter listAdapter;
+
+    private double MAXIMUM_FILTER_DISTANCE = 5000;
 
     /**
      * Constructor of AllBids.
@@ -165,11 +173,20 @@ public class AllBids extends Fragment {
         }
 
         if (checkbox.isChecked()){
-            //TODO: Remove results further than 5 km away.
-            Log.i("All Bids","Sort out results further than 5km away.");
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            if (ContextCompat.checkSelfPermission( getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED) {
+                Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                for (Task t : totalHits){
+                    float[] results = new float[1];
+                    Location.distanceBetween(t.getLatitude(), t.getLongitude(), loc.getLatitude(), loc.getLongitude(), results);
+                    if (results[0] > MAXIMUM_FILTER_DISTANCE){
+                        totalHits.removeTask(t);
+                    }
+                }
+            }else{
+                Toast.makeText(getContext(), "Location Permissions are not enabled. Distance filtering will not work.", Toast.LENGTH_SHORT).show();
+            }
         }
-        int size = ServerWrapper.getAllUsers().size();
-        Log.i("Number of users", "" + size);
         lstTask = totalHits;
         updateListAdapter();
     }
@@ -183,5 +200,20 @@ public class AllBids extends Fragment {
         myrecyclerview.setAdapter(listAdapter);
         listAdapter.notifyDataSetChanged();
         myrecyclerview.invalidate();
+    }
+
+
+    private class LocationFetcher implements LocationListener {
+        @Override
+        public void onLocationChanged(Location loc) {}
+
+        @Override
+        public void onProviderDisabled(String provider) {}
+
+        @Override
+        public void onProviderEnabled(String provider) {}
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {}
     }
 }
