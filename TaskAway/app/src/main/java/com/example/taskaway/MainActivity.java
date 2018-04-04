@@ -96,9 +96,7 @@ public class MainActivity extends AppCompatActivity{
                             startActivity(intent);
                             return true;
 
-                        case R.id.Item2:
-                            Toast.makeText(MainActivity.this, "About Us Clicked", Toast.LENGTH_SHORT).show();
-                            return true;
+
                         case R.id.Item3:
                             //Go back to login screen
                             Intent intentLogout = new Intent(MainActivity.this, Login.class);

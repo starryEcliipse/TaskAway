@@ -4,9 +4,6 @@
         android:id="@+id/Item1"
         android:title="Profile"></item>
     <item
-        android:id="@+id/Item2"
-        android:title="About Us"></item>
-    <item
         android:id="@+id/Item3"
         android:title="Logout"></item>
 
