@@ -69,12 +69,12 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
         /* USERNAME DISPLAY */
-       String userid = mData.get(position).getUserId();
+        String userid = mData.get(position).getUserId();
 
-       SaveFileController saveFileController = new SaveFileController();
-       User user = saveFileController.getUserFromUserId(this.mContext, userid);
+        SaveFileController saveFileController = new SaveFileController();
+        User user = saveFileController.getUserFromUserId(this.mContext, userid);
 
-       String username = user.getUsername();
+        String username = user.getUsername();
         holder.tv_name.setText(username);
 
         /* BID AMOUNT DISPLAY */
@@ -135,4 +135,3 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         }
     }
 }
-

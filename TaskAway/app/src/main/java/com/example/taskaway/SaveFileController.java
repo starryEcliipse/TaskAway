@@ -426,8 +426,8 @@ public class SaveFileController {
         loadFromFile(context);
         for(int i=0; i<this.allUsers.size(); i++){
             if(this.allUsers.get(i).getUsername().equals(username)){
-               user = this.allUsers.get(i);
-               break;
+                user = this.allUsers.get(i);
+                break;
             }
         }
         return user;
