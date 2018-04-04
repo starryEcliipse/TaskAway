@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -26,7 +25,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     private static final int RESULT_LOAD_IMAGE = 1;
 
     LinearLayout linearMain;
-    //ImageView imageToUpload;
+    ImageView imageToUpload;
     Button upload;
     Button done;
 
@@ -36,9 +35,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pic);
         linearMain = (LinearLayout) findViewById(R.id.linearImage);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new PicturesImageAdapter(UploadPic.this));
-        //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
+        imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
 
@@ -81,7 +78,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                 e.printStackTrace();
             }
 
-           // imageToUpload.setImageBitmap(bitmap);
+            imageToUpload.setImageBitmap(bitmap);
 
         }
     }
