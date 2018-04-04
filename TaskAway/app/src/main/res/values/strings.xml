@@ -51,5 +51,6 @@
     <string name="view_pic">Photos</string>
     <string name="upload_gallery">Upload from Gallery</string>
     <string name="okay_button">OK</string>
+    <string name="new_bid">New Bid:</string>
 
 </resources>

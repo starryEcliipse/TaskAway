@@ -129,7 +129,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
                     lastPosition = getAdapterPosition();
                     notifyDataSetChanged();
 
-                    Toast.makeText(mContext, "selected bid is " + tv_name.getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(mContext, "selected bidder is: " + tv_name.getText(), Toast.LENGTH_LONG).show();
                 }
             });
         }

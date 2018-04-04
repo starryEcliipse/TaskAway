@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -200,11 +201,25 @@ public class ViewBidTask extends AppCompatActivity {
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
-        // Get user information
+        // Get current user information
         userID = intent.getStringExtra("userid");
         Log.i("ViewBidTask", "userid is: "+userID);
         userName = intent.getStringExtra("userName");
         Log.i("ViewBidTask", "username is: "+userName);
+
+        // GET CURRENT TASK PROVIDER'S PREVIOUS RECENT BID
+        float recentbid = 0;
+        ArrayList<Bid> bidList;
+
+        bidList = task.getBids();
+
+        for (int i=0; i < bidList.size(); i++){
+            if (bidList.get(i).getUserId().equals(userID)){
+                recentbid = bidList.get(i).getAmount();
+                useroldbid.setText(Float.toString(recentbid));
+                break;
+            }
+        }
 
         try {
             if (task.getBids().isEmpty()) {
