@@ -1,39 +1,34 @@
 package com.example.taskaway;
 
-
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.Calendar;
 
 /**
- *
- * This activity is responsible to adding new tasks for the current user.
- * @author Sameerah Wajahat
- *
- * @see EditActivity
- * @see SaveFileController
+ * Created by SJIsmail on 2018-04-04.
  */
 
-public class AddActivity extends AppCompatActivity {
-
+public class AddTaskActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText requirementField;
     private EditText statusField;
     private EditText locationField;
     private Button cancelButton;
     private Button saveButton;
-    private Button uploadPic;
     private final String text = "task";
-    ImageButton toolBarBtn;
+    private ImageButton toolBarSaveBtn;
+    private ImageButton uploadPic;
+    private ImageButton toolBarBackbtn;
 
     /**
      *
@@ -46,34 +41,26 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_add_task);
 
-        toolBarBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
-        toolBarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(),
-                        "Button in ToolBar clicked",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
+
+
+
 
         // EditText layouts
-        nameField = (EditText) findViewById(R.id.editText2);
-        requirementField = (EditText) findViewById(R.id.editText3);
-        statusField = (EditText) findViewById(R.id.editText);
-        locationField = (EditText) findViewById(R.id.editMyTaskLocation);
+        nameField = (EditText) findViewById(R.id.taskname_add);
+        requirementField = (EditText) findViewById(R.id.requirements_add);
+        statusField = (EditText) findViewById(R.id.status_add);
+        locationField = (EditText) findViewById(R.id.loacation_add);
 
 
-        // Button layouts
-        saveButton = (Button) findViewById(R.id.button2);
-        cancelButton = (Button) findViewById(R.id.button);
-        uploadPic = (Button) findViewById(R.id.button4);
 
-        // Cancel activity
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        uploadPic = (ImageButton) findViewById(R.id.image_add_btn);
+
+        toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -87,8 +74,8 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        // READ INPUT AND ADD TASK - SAVE BUTTON
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = nameField.getText().toString();
@@ -156,7 +143,7 @@ public class AddActivity extends AppCompatActivity {
 
 
                 // GO TO MAIN ACTIVITY
-                Intent intent2 = new Intent(AddActivity.this, MainActivity.class);
+                Intent intent2 = new Intent(AddTaskActivity.this, MainActivity.class);
                 intent2.putExtra("user_name", username);
                 intent2.putExtra("user_id", userid);
                 Log.i("AddActivity","Sending name and id to MainActivity!");
@@ -167,3 +154,4 @@ public class AddActivity extends AppCompatActivity {
     } // end of onCreate()
 
 }
+

@@ -30,7 +30,7 @@
         <activity android:name=".ViewBidTask" />
         <activity android:name=".ViewProfile" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".AddActivity" />
+        <activity android:name=".AddTaskActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".ViewOtherBids" />
 

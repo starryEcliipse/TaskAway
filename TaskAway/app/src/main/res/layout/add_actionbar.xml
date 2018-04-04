@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+
+    <ImageButton
+        android:id="@+id/toolbar_back_btn"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|start"
+        android:adjustViewBounds="false"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_action_back" />
+
+    <ImageButton
+        android:id="@+id/toolbar_save_btn"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:adjustViewBounds="false"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/ic_action_save" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Add Task   "
+        android:textColor="@color/colorWhite"
+        android:textSize="25dp" />
+
+
+</android.support.v7.widget.Toolbar>

@@ -77,7 +77,7 @@ public class MyJobs extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "Add Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(getContext(), AddActivity.class);
+                Intent intent1 = new Intent(getContext(), AddTaskActivity.class);
                 intent1.putExtra("username",user_name);
                 intent1.putExtra("userid", user_id);
                 startActivity(intent1);
