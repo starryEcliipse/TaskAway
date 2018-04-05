@@ -6,6 +6,8 @@ package com.example.taskaway;
 
 import android.content.Context;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,9 +51,11 @@ public class PicturesImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+
     // Keep all Images in array
     public Integer[] mThumbIds = {
             // TODO: find a way to display images here - currently using drawable images
+
             /*
                 LINKS
                 https://www.tutorialspoint.com/android/android_grid_view.htm

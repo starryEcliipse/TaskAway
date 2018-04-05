@@ -26,7 +26,7 @@
             android:gravity="center"
             />
 
-        <!-- <ImageView
+<!--        <ImageView
             android:id="@+id/imageToUpload"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"

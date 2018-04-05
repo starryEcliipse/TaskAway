@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.ContactsContract;
@@ -27,6 +28,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
     LinearLayout linearMain;
     //ImageView imageToUpload;
+    //ArrayList<String> imagesPathList;
+    //Bitmap bitmap;
     Button upload;
     Button done;
 
@@ -72,14 +75,37 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
-            Uri selectedImage = data.getClipData().getItemAt(0).getUri();//As of now use static position 0 use as per itemcount.
-            Bitmap bitmap = null;
+
+ /*           ClipData mClipData = data.getClipData();
+            //linearMain.removeAllViews();
+            int pickedImageCount;
+
+            for (pickedImageCount = 0; pickedImageCount < mClipData.getItemCount();
+                 pickedImageCount++) {
+
+                ImageView productImageView =
+                        new ImageView(getApplicationContext());
+
+                productImageView.setAdjustViewBounds(true);
+
+                productImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+                productImageView.setLayoutParams(new LinearLayout
+                        .LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT));
+
+                linearMain.addView(productImageView);
+            }*/
+
+            //Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+
+            /*Bitmap bitmap = null;
             //        Uri selectedImage1 = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             //imageToUpload.setImageBitmap(bitmap);
 
