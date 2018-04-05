@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -179,6 +180,12 @@ public class ViewTask extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
+
+                //Check for an internet connection
+                if(!TestInternetForMaps.checkConnection(getApplicationContext())){
+                    Toast.makeText(getApplicationContext(), "Could not establish internet connection", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // Get task information
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
