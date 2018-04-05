@@ -121,9 +121,12 @@ public class MainActivity extends AppCompatActivity{
         // Adding Fragment here
         MyJobs myjobs = new MyJobs();
         MyBids mybids = new MyBids();
+        // TODO MAKE NEW FRAGMENT
+        MyAssigned myassigned = new MyAssigned();
         AllBids allbids = new AllBids();
         adapter.addFragment(myjobs,"My Jobs");
         adapter.addFragment(mybids, "My Bids");
+        adapter.addFragment(myassigned,"Assigned Jobs");
         adapter.addFragment(allbids,"All Jobs");
 
         // Setup adapters
@@ -133,7 +136,8 @@ public class MainActivity extends AppCompatActivity{
         // PASS USERNAME + USERID TO ALL FRAGMENTS
         passUserData(user_name, userID, myjobs);
         passUserData(user_name, userID, mybids);
-        passUserData(user_name, userID, allbids);
+        passUserData(user_name, userID, myassigned);
+        passUserData(user_name, userID, allbids);;
 
         //Will add icons for the tabs below here
         //tabLayout.getTabAt(2).setIcon(R.drawable.ic_alljobs);

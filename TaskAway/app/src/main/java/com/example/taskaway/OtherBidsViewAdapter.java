@@ -28,7 +28,6 @@ import java.util.ArrayList;
  */
 public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdapter.MyViewHolder>{
     private Context mContext;
-    //ArrayList<Task> mData;
     private ArrayList<Bid> mData;
     private int lastPosition = -1;
     private OnBidClickListener onBidClickListener;
@@ -93,17 +92,8 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         strAmount = Float.toString(amount);
         holder.tv_otherbid.setText(strAmount);
 
+        // If one button clicked, unset another one if already clicked
         holder.radioButton.setChecked(lastPosition == position);
-
-        /*
-        final Bid bid = mData.get(position);
-
-        holder.radioButton.setOnClickListener(new View.OnClickListener(){
-           @Override
-            public void onClick(View view){
-                OnBidClickListener.onBidClick(bid);
-           }
-        }); */
 
         }
 
