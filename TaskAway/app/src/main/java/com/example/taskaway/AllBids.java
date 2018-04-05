@@ -54,7 +54,8 @@ public class AllBids extends Fragment {
 
     private EditText searchbox;
     private ImageButton searchbutton;
-    private CheckBox checkbox;
+    private CheckBox distance_checkbox;
+    private CheckBox allowsBids_checkbox;
 
     private AllBidsListViewAdapter listAdapter;
 
@@ -136,10 +137,12 @@ public class AllBids extends Fragment {
 
         searchbox = view.findViewById(R.id.alljobs_searchbox);
         searchbutton = view.findViewById(R.id.alljobs_search_btn);
-        checkbox = view.findViewById(R.id.alljobs_checkbox);
+        distance_checkbox = view.findViewById(R.id.alljobs_distance_checkbox);
+        allowsBids_checkbox = view.findViewById(R.id.alljobs_allowsBids_checkbox);
 
         searchbox.setText("");
-        checkbox.setChecked(false);
+        distance_checkbox.setChecked(false);
+        allowsBids_checkbox.setChecked(false);
 
         searchbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +151,14 @@ public class AllBids extends Fragment {
             }
         });
 
-        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        distance_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                updateSearchResults();
+            }
+        });
+
+        allowsBids_checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 updateSearchResults();
@@ -175,7 +185,7 @@ public class AllBids extends Fragment {
             totalHits = ServerWrapper.getAllJobs();
         }
 
-        if (checkbox.isChecked()){
+        if (distance_checkbox.isChecked()){
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
             Location loc = getLastKnownLocation();
             TaskList nearby = new TaskList();
@@ -197,6 +207,16 @@ public class AllBids extends Fragment {
             }else{
                     Toast.makeText(getContext(), "Unable to get your current location", Toast.LENGTH_SHORT).show();
                 }
+        }
+
+        if (allowsBids_checkbox.isChecked()){
+            TaskList allowsBids = new TaskList();
+            for (Task t : totalHits){
+                if (allowsBids(t)){
+                    allowsBids.addTask(t);
+                }
+            }
+            totalHits = allowsBids;
         }
         lstTask = totalHits;
         updateListAdapter();
@@ -231,8 +251,13 @@ public class AllBids extends Fragment {
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_LOCATION);
-            checkbox.setChecked(false);
+            distance_checkbox.setChecked(false);
         }
         return bestLocation;
+    }
+
+    private boolean allowsBids(Task t) {
+        String status = t.getStatus().toLowerCase();
+        return (status.equals("requested") || status.equals("bidded"));
     }
 }

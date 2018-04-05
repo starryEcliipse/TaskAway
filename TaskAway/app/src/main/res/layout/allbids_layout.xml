@@ -13,7 +13,7 @@
 
         <EditText
             android:id="@+id/alljobs_searchbox"
-            android:layout_width="wrap_content"
+            android:layout_width="137dp"
             android:layout_height="50dp"
             android:ems="10"
             android:hint="Search"
@@ -21,7 +21,7 @@
 
         <ImageButton
             android:id="@+id/alljobs_search_btn"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:adjustViewBounds="false"
@@ -30,11 +30,18 @@
             android:tint="@color/DarkGrey" />
 
         <CheckBox
-            android:id="@+id/alljobs_checkbox"
-            android:layout_width="wrap_content"
+            android:id="@+id/alljobs_distance_checkbox"
+            android:layout_width="102dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Within 5 km" />
+
+        <CheckBox
+            android:id="@+id/alljobs_allowsBids_checkbox"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Open Bidding" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
