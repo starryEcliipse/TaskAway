@@ -26,7 +26,8 @@ public class TestTask extends ActivityInstrumentationTestCase2{
         ArrayList<String> picturesList = new ArrayList<>();
         Float lowestBid = 15.00f;
 
-        Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid, null);
+        Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid, "new_id");
+
 
         assertEquals(task.getName(), "name");
         assertEquals(task.getDescription(), "I'm a task");
@@ -35,6 +36,7 @@ public class TestTask extends ActivityInstrumentationTestCase2{
         assertEquals(task.getLowestBid(), 15.00);
         assertEquals(task.getBids(), bidsList);
         assertEquals(task.getPictures(), picturesList);
+        assertEquals(task.getId(), "new_id");
 
     }
 
@@ -241,4 +243,32 @@ public class TestTask extends ActivityInstrumentationTestCase2{
         assertEquals(task.getPictures(), newPicturesList);
     }
 
+    /**
+     * Test setId()
+     * @author Punam Woosaree
+     */
+    @Test
+    public void testSetId(){
+        ArrayList<Bid> bidsList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
+        Float lowestBid = 15.00f;
+
+        Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid, null);
+        task.setId("betterID");
+        assertEquals(task.getId(), "betterID");
+    }
+
+    /**
+     * Test setId()
+     * @author Punam Woosaree
+     */
+    @Test
+    public void testGetId(){
+        ArrayList<Bid> bidsList = new ArrayList<>();
+        ArrayList<String> picturesList = new ArrayList<>();
+        Float lowestBid = 15.00f;
+
+        Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid, "coolId");
+        assertEquals(task.getId(), "coolId");
+    }
 }

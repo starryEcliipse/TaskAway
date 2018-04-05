@@ -192,5 +192,25 @@ public class TestSaveFileController extends ActivityInstrumentationTestCase2 {
 
     }
 
+    public void testGetUserIndexFromCreatorId(){
+        SaveFileController saveFileController = new SaveFileController();
+        Context context = activity.getApplicationContext();
+        saveFileController.addNewUser(context, user);
+        TaskList userTasks = user.getReqTasks();
+        userTasks.addTask(task);
+        assertEquals(user.getId(),task.getCreatorId());
+
+    }
+
+    public void testDeleteTaskBids(){
+        SaveFileController saveFileController = new SaveFileController();
+        Context context = activity.getApplicationContext();
+        saveFileController.addNewUser(context, user);
+        TaskList userTasks = user.getReqTasks();
+        userTasks.addTask(task);
+        //To complete upon further information
+    }
+
+
 
 }

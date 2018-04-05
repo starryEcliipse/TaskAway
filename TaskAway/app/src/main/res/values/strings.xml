@@ -53,4 +53,10 @@
     <string name="okay_button">OK</string>
     <string name="new_bid">New Bid:</string>
 
+    <string-array name="phoneOptions">
+        <item>Mobile</item>
+        <item>Home</item>
+        <item>Work</item>
+    </string-array>
+
 </resources>

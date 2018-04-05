@@ -16,7 +16,7 @@ public class TestBid extends ActivityInstrumentationTestCase2 {
      */
     @Test
     public void testBid(){
-        Bid bid = new Bid(new Float(3.14));
+        Bid bid = new Bid("user_id", new Float(3.14));
         assertEquals(bid.getAmount(), 3.14);
     }
 
@@ -25,7 +25,7 @@ public class TestBid extends ActivityInstrumentationTestCase2 {
      */
     @Test
     public void testGetAmount(){
-        Bid bid = new Bid(new Float(1.23));
+        Bid bid = new Bid("user_id", new Float(1.23));
         assertEquals(bid.getAmount(), 1.23);
     }
 
@@ -34,7 +34,8 @@ public class TestBid extends ActivityInstrumentationTestCase2 {
      */
     @Test
     public void testSetAmount(){
-        Bid bid = new Bid( null);
+        Bid bid = new Bid("user_id", null);
+
         bid.setAmount(new Float(45.67));
         assertEquals(bid.getAmount(), 45.67);
     }

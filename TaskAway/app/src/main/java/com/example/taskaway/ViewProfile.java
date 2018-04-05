@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.PhoneNumberUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -29,8 +32,6 @@ import java.util.ArrayList;
  */
 public class ViewProfile extends AppCompatActivity {
 
-    private Boolean lengthReq;
-    private Boolean userTaken;
 
     /**
      * Receive username and userid from Login activity to receive user information from server.
@@ -63,8 +64,9 @@ public class ViewProfile extends AppCompatActivity {
 
         if(current_user.getPhone()!=null) {
             String phonenumber = current_user.getPhone();
+            String phonenumb = PhoneNumberUtils.formatNumber(phonenumber);
             TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
-            phoneTextView.setText(phonenumber);
+            phoneTextView.setText(phonenumb);
         }
 
         if(current_user.getEmail()!=null) {
@@ -85,13 +87,11 @@ public class ViewProfile extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                final EditText editName = (EditText) view.findViewById(R.id.editName);
                 final EditText editPhone = (EditText) view.findViewById(R.id.editPhoneNumber);
                 final EditText editEmail = (EditText) view.findViewById(R.id.editEmail);
 
 
                 //create editable text views
-                editName.setText(current_user.getUsername().toString(), TextView.BufferType.EDITABLE);
 
                 if(current_user.getPhone()!=null){
                     editPhone.setText(current_user.getPhone().toString(), TextView.BufferType.EDITABLE);
@@ -109,61 +109,32 @@ public class ViewProfile extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        Integer usernameLength = editName.getText().toString().length();
-                        if (usernameLength<8){
-                            lengthReq = false;
-                        }else{
-                            lengthReq = true;
-                        }
 
-                        User checkUser = saveFileController.getUserFromUsername(context, editName.getText().toString());
-                        if (checkUser!=null){
-                            userTaken = true;
-                        }else{
-                            userTaken = false;
-                        }
+                        //set phone and email to the new values
+                        String Phone = editPhone.getText().toString();
+                        String Email = editEmail.getText().toString();
 
+                            //format phone number
+                        String phonenum = PhoneNumberUtils.formatNumber(Phone);
 
-                        //executes if name is at least 8 characters
-                        if ((lengthReq) || !(userTaken)) {
+                        //update the user information for file
+                        current_user.setPhone(phonenum);
+                        current_user.setEmail(Email);
 
-                            //set name,phone and email to the new values
-                            String Name = editName.getText().toString();
-                            String Phone = editPhone.getText().toString();
-                            String Email = editEmail.getText().toString();
+                        //update the user information in the server
+                        //ServerWrapper.updateUser(current_user);
 
-                            //update the user information for file
-                            current_user.setUsername(Name);
-                            current_user.setPhone(Phone);
-                            current_user.setEmail(Email);
+                        //update information in server
+                        saveFileController.updateUser(context, userIndex, current_user);
 
-                            //update the user information in the server
-                            //ServerWrapper.updateUser(current_user);
+                        //get the profile TextView values
+                        TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
+                        TextView emailTextView = (TextView)findViewById(R.id.editEmail);
 
-                            //update information in server
-                            saveFileController.updateUser(context, userIndex, current_user);
+                        //set the TextViews to their updated values
+                        phoneTextView.setText(Phone);
+                        emailTextView.setText(Email);
 
-                            //get the profile TextView values
-                            TextView usernameTextView = (TextView)findViewById(R.id.editName);
-                            TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
-                            TextView emailTextView = (TextView)findViewById(R.id.editEmail);
-
-                            //set the TextViews to their updated values
-                            usernameTextView.setText(Name);
-                            phoneTextView.setText(Phone);
-                            emailTextView.setText(Email);
-
-
-                        }
-                        else {
-                            if (!lengthReq) {
-                                //executes if the name is less than 8 characters
-                                Toast.makeText(getApplicationContext(), "Username must be at least 8 characters!", Toast.LENGTH_SHORT).show();
-                            }
-                            if(userTaken){
-                                Toast.makeText(getApplicationContext(), "Username is taken!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
                     }
                 });
                 //Sets up cancel option for user

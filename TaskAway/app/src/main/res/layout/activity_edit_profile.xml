@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,40 +6,32 @@
     android:gravity="center"
     android:padding = "16dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        app:srcCompat="@mipmap/ic_launcher_round" />
-
-    <EditText
-        android:id="@+id/editName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:gravity = "center"
-        android:hint="Username"
-        />
 
     <EditText
         android:id="@+id/editPhoneNumber"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:gravity = "center"
-        android:inputType="phone"
         android:hint="Phone Number"
-        />
+        android:gravity="center"
+        android:inputType="phone"
+        android:paddingBottom="8dp" />
+
+
+
+
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:gravity = "center"
+        android:layout_alignLeft="@+id/editPhoneNumber"
+        android:layout_alignStart="@+id/editPhoneNumber"
+        android:layout_below="@+id/editPhoneNumber"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:hint="Email"
-        />
+        android:paddingBottom="8dp" />
 
 
 
-</LinearLayout>
+
+</RelativeLayout>
