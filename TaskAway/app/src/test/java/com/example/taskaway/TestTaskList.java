@@ -16,7 +16,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
      */
     @Test
     public void testTaskList() {
-        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
+        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f, null);
         TaskList newTaskList = new TaskList();
         newTaskList.addTask(newTask);
         assertEquals(newTaskList.getTask(0), newTask);
@@ -26,7 +26,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
      */
     @Test
     public void testAddTask() {
-        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
+        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f, null);
         TaskList newTaskList = new TaskList();
 
         newTaskList.add(newTask);
@@ -38,7 +38,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
      */
     @Test
     public void testHasTask() {
-        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
+        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f, null);
         TaskList newTaskList = new TaskList();
 
         assertEquals(newTaskList.contains(newTask), true);
@@ -49,7 +49,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
      */
     @Test
     public void testgetTask() {
-        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
+        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f, null);
         TaskList newTaskList = new TaskList();
         newTaskList.addTask(newTask);
 
@@ -61,7 +61,7 @@ public class TestTaskList extends ActivityInstrumentationTestCase2  {
      */
     @Test
     public void testRemoveTask() {
-        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f);
+        Task newTask = new Task("Adam", "Cleaner", "Requested", "Edmonton", null, null, 12.00f, null);
         TaskList newTaskList = new TaskList();
         newTaskList.addTask(newTask);
 

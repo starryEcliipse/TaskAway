@@ -34,7 +34,7 @@ public class TestBid extends ActivityInstrumentationTestCase2 {
      */
     @Test
     public void testSetAmount(){
-        Bid bid = new Bid();
+        Bid bid = new Bid( null);
         bid.setAmount(new Float(45.67));
         assertEquals(bid.getAmount(), 45.67);
     }

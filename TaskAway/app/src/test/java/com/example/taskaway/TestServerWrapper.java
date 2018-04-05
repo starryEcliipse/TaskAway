@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class TestServerWrapper extends ActivityInstrumentationTestCase2 {
     public TestServerWrapper() {super(ServerWrapper.class);}
     User user = new User("superUniqueTestUser", null, null);
-    Task task = new Task("superUniqueTestTask", "description", null, null, null, null, null);
+    Task task = new Task("superUniqueTestTask", "description", null, null, null, null, null, null);
 
     /**
      * NOTE: IF ALL TESTS HERE PASS, THIS GUARANTEES ALL ServerWrapper METHODS WORK, SINCE ALL
