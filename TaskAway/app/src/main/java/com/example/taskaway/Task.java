@@ -1,10 +1,14 @@
 package com.example.taskaway;
 
 import java.io.Serializable;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import 	android.util.Base64;
+import android.util.Log;
+
+import org.json.JSONObject;
 
 /**
  * Represents a task.
@@ -97,19 +101,55 @@ public class Task implements Serializable { // made Serializable to that Task ca
     /**
      * Returns latitude of the task location.
      * @return - latitude
+     * @author - Diane Boytang
      */
     public double getLatitude() {
-        //TODO
-        return 0;
+        if (this.location != null){
+            try{
+                String task_location_encoded = URLEncoder.encode(location, "UTF-8");
+                String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
+                GetLocationJson locationJson = new GetLocationJson();
+                locationJson.execute(location_uri);
+
+                JSONObject jsonObject = new JSONObject(locationJson.get());
+                JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+                String lat = locationGeo.getString("lat");
+
+                Double latitude = Double.parseDouble(lat);
+                return latitude;
+            } catch (Exception e){
+                Log.i("TASK", "COULD NOT GET LATITUDE");
+                e.printStackTrace();
+            }
+        }
+        return -1;
     }
 
     /**
      * Returns longitude of the task location.
      * @return - longitude
+     * @author - Diane Boytang
      */
     public double getLongitude() {
-        //TODO
-        return 0;
+        if (this.location != null){
+            try{
+                String task_location_encoded = URLEncoder.encode(location, "UTF-8");
+                String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
+                GetLocationJson locationJson = new GetLocationJson();
+                locationJson.execute(location_uri);
+
+                JSONObject jsonObject = new JSONObject(locationJson.get());
+                JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+                String lng = locationGeo.getString("lng");
+
+                Double longitude = Double.parseDouble(lng);
+                return longitude;
+            } catch (Exception e){
+                Log.i("TASK", "COULD NOT GET LONGITUDE");
+                e.printStackTrace();
+            }
+        }
+        return -1;
     }
 
     /**
