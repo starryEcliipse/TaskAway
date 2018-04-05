@@ -194,7 +194,7 @@ public class MainActivity extends AppCompatActivity{
         switch (id){
             case R.id.search_id:
                 TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
-                TabLayout.Tab tab = tabLayout.getTabAt(2);//get All Jobs tab
+                TabLayout.Tab tab = tabLayout.getTabAt(3);//get All Jobs tab
                 tab.select();//switch to All Jobs tab
                 break;
         }
