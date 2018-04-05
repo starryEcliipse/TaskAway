@@ -128,7 +128,7 @@ public class TestSaveFileController extends ActivityInstrumentationTestCase2 {
         saveFileController.addNewUser(context, user);
         Integer index = saveFileController.getUserIndex(context, "testUser");
         saveFileController.addRequiredTask(context, index, task);
-        TaskList allTasks = saveFileController.getAllTasks(context);
+        TaskList allTasks = saveFileController.getAllTasks(context, index);
         assertEquals(allTasks.size(), 1);
     }
 
