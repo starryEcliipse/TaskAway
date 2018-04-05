@@ -2,18 +2,15 @@ package com.example.taskaway;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-
-import com.google.android.gms.maps.GoogleMap;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static android.support.v4.app.ActivityCompat.startActivityForResult;
 
 /**
  * This class enables us to get a json object representation of our location
@@ -29,7 +26,6 @@ public class GetLocationJson extends AsyncTask <String, Void, String>{
 
     @Override
     protected String doInBackground(String... strings) {
-
 
         String result = "";
         URL url;
@@ -47,32 +43,27 @@ public class GetLocationJson extends AsyncTask <String, Void, String>{
                 data = inputStreamReader.read();
             }
             return result;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        Log.i("GETLOCATIONJSON", "Async task returned null result");
         return null;
     }
 
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-       // GoogleMap locationMap = new GoogleMap();
-        final int request_code = 1;
-
-
 
         if(result != null) {
+            Log.i("GETLOCATIONJSON", "result was NOT null");
             try {
                 JSONObject locationObject = new JSONObject(result);
                 JSONObject locationGeo = locationObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
                 Intent i = new Intent();
 
 
-
-
             } catch (JSONException e) {
+                Log.i("GETLOCATIONJSON", "result was NOT null BUT catch was called");
                 e.printStackTrace();
             }
         }

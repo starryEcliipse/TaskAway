@@ -79,7 +79,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             address = coder.getFromLocationName(strAddress, 100);
             Log.i("MAPACTIVITY", "Address.get(0) is: "+ address.get(0));
             Log.i("MAPACTIVITY", "Address is: "+ address);
-            Log.i("MAPACTIVITY", "Try was called lol");
             if (address == null) {
                 return null;
             }
@@ -88,11 +87,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             latLng = new LatLng(location.getLatitude(), location.getLongitude() );
 
         } catch (Exception ex) {
-            Log.i("MAPACTIVITY", "Catch was called lol");
+            Log.i("MAPACTIVITY", "Catch was called in getTask_location_coords");
             ex.printStackTrace();
         }
 
-        Log.i("MAPACTIVITY", "Function passed");
+        Log.i("MAPACTIVITY", "Function passed; getTask_location_coords");
         return latLng;
     }
 
@@ -122,7 +121,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
 
-                Log.i("MAPACTIVITYJSON", "wat:" + locationJson.get());
+                Log.i("MAPACTIVITYJSON", "Location info from Google api: " + locationJson.get());
 
 
 
