@@ -1,5 +1,6 @@
 package com.example.taskaway;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,6 +59,8 @@ public class AllBids extends Fragment {
     private AllBidsListViewAdapter listAdapter;
 
     private double MAXIMUM_FILTER_DISTANCE = 5000;
+
+    static final int PERMISSIONS_REQUEST_LOCATION = 99;
 
     /**
      * Constructor of AllBids.
@@ -174,18 +177,26 @@ public class AllBids extends Fragment {
 
         if (checkbox.isChecked()){
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            if (ContextCompat.checkSelfPermission( getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED) {
-                Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location loc = getLastKnownLocation();
+            TaskList nearby = new TaskList();
+            if (loc != null){
+                double latitude = loc.getLatitude();
+                double longitude = loc.getLongitude();
                 for (Task t : totalHits){
                     float[] results = new float[1];
-                    Location.distanceBetween(t.getLatitude(), t.getLongitude(), loc.getLatitude(), loc.getLongitude(), results);
-                    if (results[0] > MAXIMUM_FILTER_DISTANCE){
-                        totalHits.removeTask(t);
+                    try{
+                        Location.distanceBetween(t.getLatitude(), t.getLongitude(), latitude, longitude, results);
+                        if (Math.abs(results[0]) <= MAXIMUM_FILTER_DISTANCE){
+                            nearby.addTask(t);
+                        }
+                    }catch(Exception e){
+                        Log.i("AllBids", e.toString());
                     }
                 }
+                totalHits = nearby;
             }else{
-                Toast.makeText(getContext(), "Location Permissions are not enabled. Distance filtering will not work.", Toast.LENGTH_SHORT).show();
-            }
+                    Toast.makeText(getContext(), "Unable to get your current location", Toast.LENGTH_SHORT).show();
+                }
         }
         lstTask = totalHits;
         updateListAdapter();
@@ -202,18 +213,26 @@ public class AllBids extends Fragment {
         myrecyclerview.invalidate();
     }
 
-
-    private class LocationFetcher implements LocationListener {
-        @Override
-        public void onLocationChanged(Location loc) {}
-
-        @Override
-        public void onProviderDisabled(String provider) {}
-
-        @Override
-        public void onProviderEnabled(String provider) {}
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+    private Location getLastKnownLocation() {
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = locationManager.getProviders(true);
+        Location bestLocation = null;
+        if (ContextCompat.checkSelfPermission( getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION ) == PackageManager.PERMISSION_GRANTED) {
+            for (String provider : providers) {
+                Location l = locationManager.getLastKnownLocation(provider);
+                if (l == null) {
+                    continue;
+                }
+                if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                    bestLocation = l;
+                }
+            }
+        }else{
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_LOCATION);
+            checkbox.setChecked(false);
+        }
+        return bestLocation;
     }
 }

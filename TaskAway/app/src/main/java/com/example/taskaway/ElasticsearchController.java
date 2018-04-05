@@ -301,10 +301,10 @@ public class ElasticsearchController {
      */
     private static String buildQuery(String searchField, String searchParameter) {
         if ((searchField != null && searchParameter != null)&&(searchField.length() >0 && searchParameter.length()>0)){
-            String query = "{\"query\": { \"term\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"from\": 0, \"size\": 1000}";
+            String query = "{\"query\": { \"term\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"size\": 100}";
             return query;
         }else{
-            return "{\"query\": {\"match_all\" : {}}}, \"from\": 0, \"size\": 1000}";
+            return "{\"query\": {\"match_all\" : {}}}, \"size\": 100}";
         }
     }
 
