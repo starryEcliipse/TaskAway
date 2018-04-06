@@ -136,6 +136,13 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 if (MainActivity.isOnline()){
                     ServerWrapper.addJob(task);
+                    Log.i("AddTaskActivity", "Adding Task to server");
+                    User u = ServerWrapper.getUserFromId(userid);
+                    if (u != null){
+                        u.addTask(task);
+                        ServerWrapper.updateUser(u);
+                        Log.i("AddTaskActivity", "Updating User on server");
+                    }
                 }
                 // SAVE TO FILE
                 final Context context = getApplicationContext();
