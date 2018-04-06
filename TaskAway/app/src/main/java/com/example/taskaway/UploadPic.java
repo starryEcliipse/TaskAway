@@ -34,8 +34,10 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
     //private Context mContext;
     LinearLayout linearMain;
-    ArrayList<Uri> arrayU;
+    //ArrayList<Uri> arrayU;
     ImageView imageToUpload;
+    ArrayList<Uri> arrayU = new ArrayList<Uri>();
+    //Uri selectedImage;
     //ArrayList<String> imagesPathList;
     //Bitmap bitmap;
     Button upload;
@@ -68,9 +70,10 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             case R.id.button5:
                 //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                //galleryIntent.setType("image/*");
-                //galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                //galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+                //Intent galleryIntent = new Intent();
+                galleryIntent.setType("image/*");
+                galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
                 break;
         }
@@ -81,26 +84,36 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
+            //ArrayList<Uri> arrayU = null;
+            //Uri selectedImage = null;
 
-            Uri selectedImage = data.getData();
+            for (int i = 0; i < data.getClipData().getItemCount(); i++){
+                //selectedImage = data.getClipData().getItemAt(i).getUri();
+                arrayU.add(data.getClipData().getItemAt(i).getUri());
+            }
 
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            try {
-                BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, options);
-                options.inJustDecodeBounds = false;
-                Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, options);
-                String type = getContentResolver().getType(selectedImage);
-                Log.i("STUPID TYPE",  type);
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                if (type.contains("png")) {
-                    image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                } else if (type.contains("jpg") || type.contains("jpeg")) {
-                    image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            //Uri selectedImage = data.getClipData().getItemAt(1).getUri();
+
+            for (int j = 0; j < arrayU.size(); j++) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                try {
+                    BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
+                    options.inJustDecodeBounds = false;
+                    Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
+                    String type = getContentResolver().getType(arrayU.get(j));
+                    Log.i("STUPID TYPE", type);
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    if (type.contains("png")) {
+                        image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    } else if (type.contains("jpg") || type.contains("jpeg")) {
+                        image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                    }
+                    imageToUpload.setImageBitmap(image);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
-                imageToUpload.setImageBitmap(image);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+
             }
             //Uri selectedImage = data.getClipData().getItemAt(0).getUri();
             //imageToUpload.setImageURI(selectedImage);
@@ -108,14 +121,14 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             //ClipData mClipData = data.getClipData();
             //GridView gridview = (GridView) findViewById(R.id.gridview);
             //gridview.removeAllViews();
-/*            int pickedImageCount;someonee
+/*            int pickedImageCount;
             for (pickedImageCount = 0; pickedImageCount < data.getClipData().getItemCount();
                  pickedImageCount++) {
                 Uri selectedImage = data.getData();
                 arrayU.add(selectedImage);
-            }
-            GridView gridview = (GridView) findViewById(R.id.gridview);
-            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));*/
+            }*/
+            //GridView gridview = (GridView) findViewById(R.id.gridview);
+            //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android

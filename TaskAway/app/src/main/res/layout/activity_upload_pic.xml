@@ -8,12 +8,11 @@
     tools:context="com.example.taskaway.UploadPic">
 
 
-
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linearImage">
+        android:orientation="vertical">
 
 <!--        <GridView
             android:id="@+id/gridview"
@@ -29,9 +28,39 @@
             />-->
         <ImageView
             android:id="@+id/imageToUpload"
-            android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="425dp"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+<!--        <ImageView
+            android:id="@+id/imageToUpload1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imageToUpload2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imageToUpload3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imageToUpload4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageView
+            android:id="@+id/imageToUpload5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />-->
 
         <Button
             android:id="@+id/button5"
