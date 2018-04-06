@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity{
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
 
+    public static String OnlineMode;
+
     /* IMPORTANT - some comments should not be removed! */
 
     /**
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity{
         // USERNAME + USERID
         final String userID = getIntent().getStringExtra("user_id");
         final String user_name = getIntent().getStringExtra("user_name");
+
+        String online = getIntent().getStringExtra("online_mode");
+        if (online != null && online.length() > 0){
+            OnlineMode = online;
+        }
 
         /*
          * TOOLBAR
@@ -199,5 +206,13 @@ public class MainActivity extends AppCompatActivity{
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Returns whether the app is operating in online or offline mode
+     * @return true if online, false otherwise
+     */
+    public static boolean isOnline() {
+        return (OnlineMode.equals("ONLINE"));
     }
 }
