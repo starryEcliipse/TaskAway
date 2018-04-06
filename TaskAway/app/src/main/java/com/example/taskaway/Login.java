@@ -89,6 +89,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);
+                intent.putExtra("online_mode", "ONLINE");
                 startActivity(intent);
 
             }
@@ -159,6 +160,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);
+                intent.putExtra("online_mode", "ONLINE");
                 startActivity(intent);
 
             }
@@ -200,6 +202,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);
+                intent.putExtra("online_mode", "OFFLINE");
                 startActivity(intent);
             }
         });

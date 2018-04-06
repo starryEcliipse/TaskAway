@@ -125,7 +125,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 String userid = intent.getStringExtra("userid");
 
                 // NEW TASK - create with valid input
-                String task_id = Calendar.getInstance().getTime().toString();
+                String task_id = "OFFLINE" + Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, location, null, null, null, task_id);
 
@@ -134,7 +134,10 @@ public class AddTaskActivity extends AppCompatActivity {
                 // belongs to later on
                 task.setCreatorId(userid);
 
-                // SAVE TO FILE TODO: ELASTICSEARCH
+                if (MainActivity.isOnline()){
+                    ServerWrapper.addJob(task);
+                }
+                // SAVE TO FILE
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 int userindex = saveFileController.getUserIndex(context, username); // get userindex
