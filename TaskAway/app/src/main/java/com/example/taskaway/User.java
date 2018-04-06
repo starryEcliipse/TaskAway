@@ -227,7 +227,6 @@ public class User {
      * @author Adrian Schuldhaus
      */
     public void addBid(Task task) {
-        //TODO: by Adrian
         for (Task t : bidTasks){
             if (t.getCreatorId().equals(id)){
                 bidTasks.removeTask(t);
@@ -254,7 +253,6 @@ public class User {
      * @author Adrian Schuldhaus
      */
     public void addTask(Task task) {
-        //TODO: by Adrian
         for (Task t: reqTasks){
             if (t.getCreatorId().equals(id)){
                 reqTasks.removeTask(t);
