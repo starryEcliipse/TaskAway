@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ public class ViewOwnTask extends AppCompatActivity {
     private TextView tasklowestbidamount;
     private Task task;
     private Bid tasklowestbid;
+    private ImageButton toolBarBackbtn;
+    private TextView toolBarTitle;
+    private ImageButton toolBarSaveBtn;
     String id;
     String userID;
     String userName;
@@ -59,6 +63,39 @@ public class ViewOwnTask extends AppCompatActivity {
             user = ServerWrapper.getUserFromId(userid);
             lowest
          */
+
+        // TOOL BAR GO BACK TO MAIN ACTIVITY
+        toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * Goes back to Main Activity.
+             *
+             * Note: If finish() is used, we will end up accidentally going back to the
+             * ViewOtherBids activity. We do not want this, especially if there are no more bids!
+             *
+             * @author Katherine Mae Patenio
+             *
+             * @param v - instance of View
+             */
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewOwnTask.this, MainActivity.class);
+                intent.putExtra("user_name", userName);
+                intent.putExtra("user_id", userID);
+                Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent);
+            }
+        });
+
+        // REMOVE SAVE BUTTON FOR THIS ACTIVITY
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        // SET TITLE OF TOOLBAR
+        toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
+        toolBarTitle.setText("Your Task");
+
 
         // Display lowest bid
         tasklowestbidusername = (TextView) this.findViewById(R.id.lowest_bid_username);
@@ -152,7 +189,7 @@ public class ViewOwnTask extends AppCompatActivity {
             public void onClick(View view) {
 
                 // If bids exist, go to ViewOtherBids Activity
-                if ((task.getBids() != null) && (task.getBids().size() > 1)) {
+                if ((task.getBids() != null) && (!task.getBids().isEmpty())) {
 
                     // Pass relevant information to EditActivity via SaveFileController
                     final Context context = getApplicationContext();
@@ -167,17 +204,13 @@ public class ViewOwnTask extends AppCompatActivity {
                     intent.putExtra("name", name);
                     intent.putExtra("username", userName);
                     intent.putExtra("taskid", id);
+                    //intent.putExtra("lowestbidamount",tasklowestbid.getAmount());
                     startActivity(intent);
                 }
 
                 // No bids
                 else if ((task.getBids() == null) || (task.getBids().isEmpty())){
                     Toast.makeText(ViewOwnTask.this, "Your task currently has no bids!", Toast.LENGTH_SHORT).show();
-                }
-
-                // Only lowest bid available
-                else if (task.getBids().size() == 1){
-                    Toast.makeText(ViewOwnTask.this, "Your task only has one bid!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -194,9 +227,10 @@ public class ViewOwnTask extends AppCompatActivity {
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
         userID = intent.getStringExtra("userid");
-        Log.i("userID", userID);
+        Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName");
-        Log.i("username", userName);
+        //float lowestbidamount =
+        Log.i("username", ""+ userName);
 
         // read and display task info
         taskname.setText(task.getName());

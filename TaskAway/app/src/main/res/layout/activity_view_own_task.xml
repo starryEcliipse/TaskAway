@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.taskaway.AddActivity">
+    tools:context="com.example.taskaway.AddActivity"><include
+        layout="@layout/add_actionbar"
+        android:id="@+id/actionbar"></include>
 
     <Button
         android:id="@+id/edit_button"
@@ -13,11 +15,12 @@
         android:layout_height="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="172dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="72dp"
         android:background="@color/colorEditButton"
         android:text="@string/edit_button"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toEndOf="@+id/button6"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,7 +232,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="72dp"
         android:background="#1f427e"
         android:text="@string/view_pic"
         android:textColor="@color/colorWhite"

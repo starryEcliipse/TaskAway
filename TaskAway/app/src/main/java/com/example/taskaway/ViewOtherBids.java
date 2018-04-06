@@ -48,9 +48,10 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private Bid bidderbid;
     private int posOther;
     private int posList;
+    private float lowestbidamount;
 
     private ImageButton toolBarBackbtn;
-
+    private TextView toolBarTitle;
     private ImageButton toolBarSaveBtn;
 
     //private ArrayList<Task> lstTask;
@@ -63,6 +64,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         tname = (TextView) findViewById(R.id.textView_otherbids);
         Intent intent = getIntent();
         String taskName = intent.getStringExtra("name"); // task name
+        lowestbidamount = intent.getFloatExtra("lowestbidamount", 0);
         tname.setTextSize(48);
         SpannableString content = new SpannableString(taskName);
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
@@ -84,14 +86,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         final Task task = saveFileController.getTask(context, userindex, taskid);
         final ArrayList<Bid> bidList = task.getBids();
 
-        // Get and display all other bids that are not the lowest
-        // assume size > 1
-        // bidListOther will contain all bids that do not include lowest bid
-        //final ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
-        //Bid bid = task.findLowestBid();
-        //bidListOther.remove(bid);
-        //adapter = new OtherBidsViewAdapter(this, bidListOther, this);
-
         adapter = new OtherBidsViewAdapter(this, bidList, this);
 
         myrecyclerview.setAdapter(adapter);
@@ -100,16 +94,30 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         acceptButton = (Button) findViewById(R.id.accept_button);
         declineButton = (Button) findViewById(R.id.decline_button);
 
-        // TOOL BAR GO BACK
+        // TOOL BAR GO BACK TO VIEW OWN TASK
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
+                intent.putExtra("task", task); // put task
+                intent.putExtra("userid", user_id);
+                intent.putExtra("userName", user_name);
+                //lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
+
+                //intent.putExtra("lowestbidamount", lowestbidamount);
+                startActivity(intent);
+                //finish();
             }
         });
+
+        // REMOVE SAVE BUTTON FOR THIS ACTIVITY
         toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
         toolBarSaveBtn.setVisibility(View.GONE);
+
+        // SET TITLE OF TOOLBAR
+        toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
+        toolBarTitle.setText("All Bids");
 
         // ACCEPT
         acceptButton.setOnClickListener(new View.OnClickListener(){
@@ -173,6 +181,8 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 intent.putExtra("task", task); // put task
                 intent.putExtra("userID", user_id);
                 intent.putExtra("userName", user_name);
+                lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
+                intent.putExtra("lowestbidamount", lowestbidamount);
                 startActivity(intent);
 
             } // end of onClick
