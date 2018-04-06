@@ -18,7 +18,7 @@ import org.json.JSONObject;
 public class Task implements Serializable { // made Serializable to that Task can be passed in intents
     private String name;
     private String description;
-    private ArrayList<Bid> bids;
+    private ArrayList<Bid> bids = new ArrayList<>();
     private String status;
     private Float lowestBid;
     private String location;
@@ -294,7 +294,10 @@ public class Task implements Serializable { // made Serializable to that Task ca
      */
     public Bid findLowestBid() {
         Collections.sort(bids);
-        Bid bid = bids.get(0);
+        Bid bid = null;
+        if (bids.size() > 0){
+            bid = bids.get(0);
+        }
         return bid;
     }
 
