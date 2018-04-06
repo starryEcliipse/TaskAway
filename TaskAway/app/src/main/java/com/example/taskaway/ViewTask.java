@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -236,10 +237,20 @@ public class ViewTask extends AppCompatActivity {
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
-        SaveFileController saveFileController = new SaveFileController();
-        User requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
-        String requestername = requester.getUsername();
-        taskusername.setText(requestername);
+        User requester;
+        if (MainActivity.isOnline()){
+            requester = ServerWrapper.getUserFromId(task.getCreatorId());
+        }else{
+            SaveFileController saveFileController = new SaveFileController();
+            requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
+        }
+        String requestername;
+        if (requester != null){
+            requestername = requester.getUsername();
+        }else{
+            requestername = "UNKNOWN";
+            Toast.makeText(getApplicationContext(), "An error occured when resolving job creator's username", Toast.LENGTH_SHORT).show();
+        }
 
         // Get user information
         userID = intent.getStringExtra("userid");
