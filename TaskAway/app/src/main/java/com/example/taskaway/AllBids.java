@@ -172,6 +172,7 @@ public class AllBids extends Fragment {
     private void updateSearchResults() {
         if (!MainActivity.isOnline()){
             lstTask = new TaskList();
+            Toast.makeText(getContext(), "Something went wrong fetching all jobs from server", Toast.LENGTH_SHORT).show();
             return;
         }
         String searchString = searchbox.getText().toString();

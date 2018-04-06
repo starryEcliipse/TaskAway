@@ -122,10 +122,9 @@ public class MyJobs extends Fragment {
             User user = ServerWrapper.getUserFromId(user_id);
             if (user != null){
                 lstTask = user.getReqTasks();
-                Log.i("MyJobs", "user is not null");
             }else{
                 lstTask = new TaskList();
-                Log.i("MyJobs", "user is null");
+                Toast.makeText(getContext(), "Something went wrong fetching your jobs from server", Toast.LENGTH_SHORT).show();
             }
         }else{
             //TODO: REMOVE THIS OFFLINE BEHAVIOR?

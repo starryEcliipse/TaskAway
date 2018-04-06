@@ -95,10 +95,9 @@ public class MyBids extends Fragment{
             Log.i("MyBids", "user_id:" + user_id);
             if (user != null){
                 lstTask = user.getBidTasks();
-                Log.i("MyBids", "user is not null");
             }else{
                 lstTask = new TaskList();
-                Log.i("MyBids", "user is null");
+                Toast.makeText(getContext(), "Something went wrong fetching bids from server", Toast.LENGTH_SHORT).show();
             }
         }else{
             final Context context = getContext();

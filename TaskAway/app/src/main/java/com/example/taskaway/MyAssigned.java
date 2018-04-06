@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Displays tasks of other users. Current user can bid on these tasks.
@@ -89,7 +90,6 @@ public class MyAssigned extends Fragment {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
             if (user != null){
-                Log.i("MyAssigned", "user is not null");
                 TaskList biddedTasks = user.getBidTasks();
                 TaskList assignedTasks = new TaskList();
                 for (Task t : biddedTasks){
@@ -103,7 +103,7 @@ public class MyAssigned extends Fragment {
                 lstTask = assignedTasks;
             }else{
                 lstTask = new TaskList();
-                Log.i("MyAssigned", "user is null");
+                Toast.makeText(getContext(), "Something went wrong fetching assigned jobs from server", Toast.LENGTH_SHORT).show();
             }
         }else{
             //TODO: REMOVE THIS OFFLINE BEHAVIOR?
