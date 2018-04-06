@@ -249,8 +249,9 @@ public class ViewTask extends AppCompatActivity {
             requestername = requester.getUsername();
         }else{
             requestername = "UNKNOWN";
-            Toast.makeText(getApplicationContext(), "An error occured when resolving job creator's username", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "An error occurred when resolving job creator's username", Toast.LENGTH_SHORT).show();
         }
+        taskusername.setText(requestername);
 
         // Get user information
         userID = intent.getStringExtra("userid");
