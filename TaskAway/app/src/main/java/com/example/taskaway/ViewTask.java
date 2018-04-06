@@ -133,12 +133,6 @@ public class ViewTask extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
-                    User u = ServerWrapper.getUserFromId(userID);
-                    if (u != null){
-                        u.addBid(task);
-                        ServerWrapper.updateUser(u);
-                        Log.i("ViewBidTask", "Updating User on server");
-                    }
                 }
 
                 /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
