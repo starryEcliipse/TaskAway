@@ -4,9 +4,15 @@
 
     <item
         android:title=""
+        android:id="@+id/add_id"
+        android:icon="@drawable/ic_action_add_task"
+        app:showAsAction="always" />
+    <item
+        android:title=""
         android:id="@+id/search_id"
         android:icon="@drawable/ic_search"
         app:showAsAction="always" />
+
 
 
 

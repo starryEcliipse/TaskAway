@@ -221,6 +221,14 @@ public class MainActivity extends AppCompatActivity{
                 tab.select();//switch to All Jobs tab
                 break;
         }
+        switch (id){
+            case R.id.add_id:
+                Intent intent1 = new Intent(this, AddTaskActivity.class);
+                intent1.putExtra("username",getIntent().getStringExtra("user_name"));
+                intent1.putExtra("userid", getIntent().getStringExtra("user_id"));
+                startActivity(intent1);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -65,7 +65,7 @@ public class MyJobs extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.myjobs_layout, container, false);
 
-        imgButton = (ImageButton) rootView.findViewById(R.id.img_btn_add);
+
 
         /**
          * Determines behaviour of Add button. Go to AddActivity. Also pass username and user id to
@@ -73,6 +73,8 @@ public class MyJobs extends Fragment {
          *
          * @see AddActivity
          */
+        /*
+        imgButton = (ImageButton) rootView.findViewById(R.id.img_btn_add);
         imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +84,7 @@ public class MyJobs extends Fragment {
                 intent1.putExtra("userid", user_id);
                 startActivity(intent1);
            }
-       });
+       });*/
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
 
