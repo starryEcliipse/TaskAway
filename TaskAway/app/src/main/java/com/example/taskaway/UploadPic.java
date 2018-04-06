@@ -32,7 +32,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     private Context mContext;
     LinearLayout linearMain;
     ArrayList<Uri> arrayU;
-    //ImageView imageToUpload;
+    ImageView imageToUpload;
     //ArrayList<String> imagesPathList;
     //Bitmap bitmap;
     Button upload;
@@ -46,7 +46,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         //linearMain = (LinearLayout) findViewById(R.id.linearImage);
         //GridView gridview = (GridView) findViewById(R.id.gridview);
         //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
-        //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
+        imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
 
@@ -77,18 +77,20 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
-            //Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+            Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+            imageToUpload.setImageURI(selectedImage);
+
             //ClipData mClipData = data.getClipData();
             //GridView gridview = (GridView) findViewById(R.id.gridview);
             //gridview.removeAllViews();
-            int pickedImageCount;
+/*            int pickedImageCount;someonee
             for (pickedImageCount = 0; pickedImageCount < data.getClipData().getItemCount();
                  pickedImageCount++) {
-                Uri selectedImage = data.getClipData().getItemAt(pickedImageCount).getUri();
+                Uri selectedImage = data.getData();
                 arrayU.add(selectedImage);
             }
             GridView gridview = (GridView) findViewById(R.id.gridview);
-            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
+            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));*/
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
@@ -130,27 +132,5 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     }
 
 
-    //https://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
 
-/*    public String getPath(Uri uri) {
-        // just some safety built in
-        if( uri == null ) {
-            // TODO perform some logging or show user feedback
-            return null;
-        }
-        // try to retrieve the image from the media store first
-        // this will only work for images selected from gallery
-        String[] projection = { MediaStore.Images.Media.DATA };
-        Cursor cursor = managedQuery(uri, projection, null, null, null);
-        if( cursor != null ){
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String path = cursor.getString(column_index);
-            cursor.close();
-            return path;
-        }
-        // this is our fallback here
-        return uri.getPath();
-    }*/
 }
