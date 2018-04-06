@@ -223,7 +223,6 @@ public class ViewTask extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
         Log.i("ViewTask","Viewing task!");
-        //TODO: Read from server
 
         // Get task information
         Intent intent = getIntent();

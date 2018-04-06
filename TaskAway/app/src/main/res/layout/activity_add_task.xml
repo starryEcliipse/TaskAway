@@ -37,6 +37,7 @@
         android:layout_marginTop="20dp"
         android:hint="Status"
         android:textSize="14dp"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/taskname_add" />
 
@@ -82,6 +83,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="24dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:srcCompat="@drawable/status_icon" />

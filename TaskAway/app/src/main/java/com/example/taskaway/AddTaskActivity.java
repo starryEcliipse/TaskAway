@@ -100,10 +100,11 @@ public class AddTaskActivity extends AppCompatActivity {
                     requirementField.setError("Description too long");
                     return;
                 }
-                String s = statusField.getText().toString();
+                String s = "REQUESTED";
+               /* String s = statusField.getText().toString();
                 s = s.toUpperCase();
 
-                // Check task status input
+               // Check task status input
                 if (s.isEmpty()){
                     statusField.setError("Assign status");
                     return;
@@ -111,7 +112,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
                     statusField.setError("Invalid status type");
                     return;
-                }
+                }*/
 
                 String location = locationField.getText().toString();
                 // Check location input
