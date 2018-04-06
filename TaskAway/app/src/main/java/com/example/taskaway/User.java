@@ -220,11 +220,23 @@ public class User {
         return this.passwordHash.equals(hash_SHA256(comparisonPassword));
     }
 
+    /**
+     * Adds a Task to the user's bidded tasks. Updates the Task if the one already exists with the same id.
+     * @param t the Task to add or update
+     *
+     * @author Adrian Schuldhaus
+     */
     public void addBid(Task t) {
-
+        //TODO: by Adrian
     }
 
+    /**
+     * Adds a Task to the user's requested tasks. Updates the Task if the one already exists with the same id.
+     * @param t the Task to add or update.
+     *
+     * @author Adrian Schuldhaus
+     */
     public void addTask(Task t) {
-
+        //TODO: by Adrian
     }
 }
