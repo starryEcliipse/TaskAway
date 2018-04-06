@@ -161,16 +161,19 @@ public class EditActivity extends AppCompatActivity {
                     if (MainActivity.isOnline()){
                         ServerWrapper.updateJob(task);
                     }else{
-                        task.setId("OFFLINE_ADD" + task.getId());
+                        // SAVE TO FILE
+                        final Context context = getApplicationContext();
+                        SaveFileController saveFileController = new SaveFileController();
+                        int userindex = saveFileController.getUserIndex(context, userName); // get userindex
+
+                        if (task.getId().startsWith("OFFLINE_ADD")){
+                            // do not change the ID, since it has yet to be added to the server
+                        }else{
+                            task.setId("OFFLINE_UPDATE" + task.getId()); // change ID to signify it needs to be updated on next login
+                        }
+                        // Update user information
+                        saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
                     }
-
-                    // SAVE TO FILE
-                    final Context context = getApplicationContext();
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userindex = saveFileController.getUserIndex(context, userName); // get userindex
-
-                    // Update user information
-                    saveFileController.updateTask(context, userindex, task_id, task); // add task to proper user in savefile
 
                     // GO TO MAIN ACTIVITY
                     Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
@@ -203,16 +206,16 @@ public class EditActivity extends AppCompatActivity {
                     final Context context2 = getApplicationContext();
                     SaveFileController saveFileController2 = new SaveFileController();
                     task.markDeleted();
-                    task.setId("OFFLINE_DELETE" + task.getId());
-                    // Update user information - remove task
-                    saveFileController2.updateTask(context2, index, task_id, task); // updates task to proper user in savefile
-
-                    /*final Context context2 = getApplicationContext();
-                    SaveFileController saveFileController2 = new SaveFileController();
-
-                    // Update user information - remove task
-                    saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
-                    saveFileController2.deleteTaskBids(context2, index, -1, task_id); // update for task providers - delete task*/
+                    if (task.getId().startsWith("OFFLINE_ADD")){
+                        // Can just delete it locally since it has yet to be added to the server
+                        // Update user information - remove task
+                        saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
+                        saveFileController2.deleteTaskBids(context2, index, -1, task_id); // update for task providers - delete task
+                    }else{
+                        task.setId("OFFLINE_DELETE" + task.getId());
+                        // Update user information - remove task
+                        saveFileController2.updateTask(context2, index, task_id, task); // updates task to proper user in savefile
+                    }
                 }
 
                 // GO TO MAIN ACTIVITY
