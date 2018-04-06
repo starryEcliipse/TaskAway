@@ -44,8 +44,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pic);
         //linearMain = (LinearLayout) findViewById(R.id.linearImage);
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
+        //GridView gridview = (GridView) findViewById(R.id.gridview);
+        //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
         //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
@@ -87,6 +87,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                 Uri selectedImage = mClipData.getItemAt(pickedImageCount).getUri();
                 arrayU.add(selectedImage);
             }
+            GridView gridview = (GridView) findViewById(R.id.gridview);
+            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
