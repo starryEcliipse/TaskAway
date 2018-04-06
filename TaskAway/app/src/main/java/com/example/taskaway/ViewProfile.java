@@ -75,8 +75,15 @@ public class ViewProfile extends AppCompatActivity {
             emailTextView.setText(email);
         }
 
-        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
+
+        if (MainActivity.isOnline()){ // if online, show edit button
+            editButton.setVisibility(View.VISIBLE);
+        }else{// if offline, hide edit button
+            editButton.setVisibility(View.INVISIBLE);
+        }
+
+        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
         //executed when the edit button is selected
         editButton.setOnClickListener(new View.OnClickListener(){
             /**
@@ -85,7 +92,6 @@ public class ViewProfile extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-
 
                 final EditText editPhone = (EditText) view.findViewById(R.id.editPhoneNumber);
                 final EditText editEmail = (EditText) view.findViewById(R.id.editEmail);
