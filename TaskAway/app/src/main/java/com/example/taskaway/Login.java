@@ -126,8 +126,6 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                Log.i("LOGIN","Testing register passed-->"+ServerWrapper.getUserFromUsername(userName).getUsername());
-
                 User user = new User(userName, null, null);
 
                 user.setPassword(password);
