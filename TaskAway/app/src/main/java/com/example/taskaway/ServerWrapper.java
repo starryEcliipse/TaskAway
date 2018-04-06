@@ -147,7 +147,7 @@ public class ServerWrapper {
      */
     public static TaskList searchJobsTerms(String term) {
         try{
-            TaskList nameHits = new ElasticsearchController.GetJobsTask().execute("term", "name", term).get();
+            TaskList nameHits = new ElasticsearchController.GetJobsTask().execute("match_phrase", "name", term).get();
             TaskList descriptionHits = new ElasticsearchController.GetJobsTask().execute("term", "description", term).get();
             TaskList totalHits = descriptionHits;
             for (Task a : nameHits){ //combines search results without duplicating
