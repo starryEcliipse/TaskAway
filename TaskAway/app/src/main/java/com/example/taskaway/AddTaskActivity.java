@@ -123,7 +123,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 String userid = intent.getStringExtra("userid");
 
                 // NEW TASK - create with valid input
-                String task_id = "OFFLINE_ADD" + Calendar.getInstance().getTime().toString();
+                String task_id = Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, location, null, null, null, task_id);
 
@@ -135,20 +135,16 @@ public class AddTaskActivity extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     ServerWrapper.addJob(task);
                     Log.i("AddTaskActivity", "Adding Task to server");
-                    User u = ServerWrapper.getUserFromId(userid);
-                    if (u != null){
-                        u.addTask(task);
-                        ServerWrapper.updateUser(u);
-                        Log.i("AddTaskActivity", "Updating User on server");
-                    }
+                    //TODO: Call a sync for local data
+                }else{
+                    task.setSyncInstruction("OFFLINE_ADD");
+                    // SAVE TO FILE
+                    final Context context = getApplicationContext();
+                    SaveFileController saveFileController = new SaveFileController();
+                    int userindex = saveFileController.getUserIndex(context, username); // get userindex
+                    Log.i("AddActivity","userindex is "+userindex);
+                    saveFileController.addRequiredTask(context, userindex, task); // add task to proper user in savefile
                 }
-                // SAVE TO FILE
-                final Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-                int userindex = saveFileController.getUserIndex(context, username); // get userindex
-                Log.i("AddActivity","userindex is "+userindex);
-                saveFileController.addRequiredTask(context, userindex, task); // add task to proper user in savefile
-
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(AddTaskActivity.this, MainActivity.class);

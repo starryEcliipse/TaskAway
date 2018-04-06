@@ -27,6 +27,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String creatorId;
     private boolean deleted = false;
     private boolean hasNewBids = false;
+    private String syncInstruction = "";
 
     /**
      * Constructor of task.
@@ -313,6 +314,29 @@ public class Task implements Serializable { // made Serializable to that Task ca
                 return;
             }
         }
+    }
+
+    /**
+     * Gets the operation the task should complete in order to sync server on next login.
+     * @return the instruction String
+     */
+    public String getSyncInstruction() {
+        return syncInstruction;
+    }
+
+    /**
+     * Sets the operation the task should complete in order to sync server on next login.
+     * @param instruction - the instruction String to assign it to
+     */
+    public void setSyncInstruction(String instruction) {
+        this.syncInstruction = instruction;
+    }
+
+    /**
+     * Clears the sync instruction field. Intended for after a sync has been done.
+     */
+    public void clearSyncInstruction() {
+        this.syncInstruction = "";
     }
 
     /**
