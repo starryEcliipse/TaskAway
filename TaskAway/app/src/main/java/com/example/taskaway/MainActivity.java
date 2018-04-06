@@ -213,6 +213,6 @@ public class MainActivity extends AppCompatActivity{
      * @return true if online, false otherwise
      */
     public static boolean isOnline() {
-        return (OnlineMode.equals("ONLINE"));
+        return ("ONLINE".equals(OnlineMode));
     }
 }

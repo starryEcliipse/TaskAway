@@ -125,7 +125,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 String userid = intent.getStringExtra("userid");
 
                 // NEW TASK - create with valid input
-                String task_id = "OFFLINE" + Calendar.getInstance().getTime().toString();
+                String task_id = "OFFLINE_ADD" + Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, location, null, null, null, task_id);
 

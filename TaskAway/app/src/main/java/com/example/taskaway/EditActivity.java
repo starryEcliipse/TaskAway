@@ -155,7 +155,13 @@ public class EditActivity extends AppCompatActivity {
 
                     Task task = new Task(name, comment, s, loc, null, null, null, task_id);
 
-                    // SAVE TO FILE TODO: ELASTICSEARCH
+                    if (!MainActivity.isOnline()){
+                        ServerWrapper.updateJob(task);
+                    }else{
+                        task.setId("OFFLINE_ADD" + task.getId());
+                    }
+
+                    // SAVE TO FILE
                     final Context context = getApplicationContext();
                     SaveFileController saveFileController = new SaveFileController();
                     int userindex = saveFileController.getUserIndex(context, userName); // get userindex
