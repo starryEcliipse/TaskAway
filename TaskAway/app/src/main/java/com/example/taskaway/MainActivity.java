@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                adapter.getItem(position).onStart();
+                //adapter.getItem(position).onStart();
             }
 
             @Override

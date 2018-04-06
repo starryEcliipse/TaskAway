@@ -130,6 +130,12 @@ public class AllBids extends Fragment {
     public void onStart() {
         super.onStart();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         lstTask = ServerWrapper.getAllJobs();
         updateSearchResults();
     }

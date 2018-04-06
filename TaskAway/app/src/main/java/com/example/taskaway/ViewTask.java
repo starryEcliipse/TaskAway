@@ -40,6 +40,9 @@ public class ViewTask extends AppCompatActivity {
     String userName;
     private ArrayList<Bid> bidList;
 
+    private Button saveButton;
+    private TextView yourPrice;
+
 
 
     /**
@@ -60,10 +63,11 @@ public class ViewTask extends AppCompatActivity {
         taskwinningbid = (TextView) this.findViewById(R.id.accepted_bid);
         userbid = (EditText) this.findViewById(R.id.your_bid_amount);
         taskusername = (TextView) this.findViewById(R.id.task_user_name);
+        yourPrice = (TextView) this.findViewById(R.id.your_price);
 
 
         // SAVE BUTTON - place a bid
-        Button saveButton = (Button) findViewById(R.id.save_button_1);
+        saveButton = (Button) findViewById(R.id.save_button_1);
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             /**
@@ -267,6 +271,17 @@ public class ViewTask extends AppCompatActivity {
         Log.i("userID", userID);
         userName = intent.getStringExtra("userName"); // FIXME username vs userName
         Log.i("userName", userName);
+
+        // If this task was created by the viewer, hide bid options
+        if (userID.equals(task.getCreatorId())){
+            saveButton.setVisibility(View.INVISIBLE);
+            userbid.setVisibility(View.INVISIBLE);
+            yourPrice.setVisibility(View.INVISIBLE);
+        }else{
+            saveButton.setVisibility(View.VISIBLE);
+            userbid.setVisibility(View.VISIBLE);
+            yourPrice.setVisibility(View.VISIBLE);
+        }
 
         // Bid information
         try {

@@ -130,6 +130,11 @@ public class MyJobs extends Fragment {
      */
     public void onStart(){
         super.onStart();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
         updateList();
     }

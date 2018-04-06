@@ -229,12 +229,22 @@ public class User {
     public void addBid(Task task) {
         //TODO: by Adrian
         for (Task t : bidTasks){
-            if (t.getId().equals(id)){
+            if (t.getCreatorId().equals(id)){
                 bidTasks.removeTask(t);
                 break;
             }
         }
         bidTasks.addTask(task);
+    }
+
+    /**
+     * Removes a Task from the user's bidded tasks.
+     * @param task the Task to remove.
+     *
+     * @author Adrian Schuldhaus
+     */
+    public void removeBid(Task task) {
+        bidTasks.removeTask(task);
     }
 
     /**
@@ -246,11 +256,21 @@ public class User {
     public void addTask(Task task) {
         //TODO: by Adrian
         for (Task t: reqTasks){
-            if (t.getId().equals(id)){
+            if (t.getCreatorId().equals(id)){
                 reqTasks.removeTask(t);
                 break;
             }
         }
         reqTasks.addTask(task);
+    }
+
+    /**
+     * Removes a Task from the user's requested tasks.
+     * @param task the Task to remvoe.
+     *
+     * @author Adrian Schuldhaus
+     */
+    public void removeTask(Task task) {
+        reqTasks.removeTask(task);
     }
 }

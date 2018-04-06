@@ -299,6 +299,20 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
+     * Deletes the bid placed by the user with user id provided, if it exists
+     * @param userid - the ID of the user who's bid is to be deleted
+     * @author Adrian Schuldhaus
+     */
+    public void deleteBid(String userid) {
+        for (Bid b : bids){
+            if (b.getUserId().equals(userid)){
+                bids.remove(b);
+                return;
+            }
+        }
+    }
+
+    /**
      * Represents attributes and information of a task as a string
      * @return - attributes of a task as a string
      */

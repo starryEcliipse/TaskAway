@@ -18,7 +18,11 @@ public class ServerWrapper {
     public static void addJob(Task task) {
         try{
             new ElasticsearchController.AddJobsTask().execute(task);
+            User u = getUserFromId(task.getCreatorId());
+            u.addTask(task);
+            updateUser(u);
         }catch(Exception e){
+            Log.i("ServerWrapper", e.toString());
         }finally{
             new ElasticsearchController.UpdateJobsTask().execute(task); //Ensures id is defined
         }
@@ -30,9 +34,27 @@ public class ServerWrapper {
      */
     public static void updateJob(Task task) {
         if (task.isDeleted()) {
-            new ElasticsearchController.DeleteJobsTask().execute(task);
+            deleteJob(task);
         }else{
-            new ElasticsearchController.UpdateJobsTask().execute(task);
+            try{
+                if (task.getBids() != null){
+                    for (Bid b : task.getBids()){
+                        User u = getUserFromId(b.getUserId());
+                        u.addBid(task);
+                        updateUser(u);
+                    }
+                }
+                User u = getUserFromId(task.getCreatorId());
+                u.addTask(task);
+                updateUser(u);
+            }catch(Exception e){
+                Log.i("ServerWrapper", e.toString());
+            }
+            try{
+                new ElasticsearchController.UpdateJobsTask().execute(task);
+            }catch(Exception e){
+                Log.i("ServerWrapper", e.toString());
+            }
         }
     }
 
@@ -41,7 +63,25 @@ public class ServerWrapper {
      * @param task - the task to delete
      */
     public static void deleteJob(Task task) {
-        new ElasticsearchController.DeleteJobsTask().execute(task);
+        try{
+            if (task.getBids() != null){
+                for (Bid b : task.getBids()){
+                    User u = getUserFromId(b.getUserId());
+                    u.removeBid(task);
+                    updateUser(u);
+                }
+            }
+            User u = getUserFromId(task.getCreatorId());
+            u.removeTask(task);
+            updateUser(u);
+        }catch(Exception e){
+            Log.i("ServerWrapper", e.toString());
+        }
+        try{
+            new ElasticsearchController.DeleteJobsTask().execute(task);
+        }catch(Exception e){
+            Log.i("ServerWrapper", e.toString());
+        }
     }
 
     /**
@@ -133,7 +173,26 @@ public class ServerWrapper {
      * @param user - the user to delete
      */
     public static void deleteUser(User user) {
-        new ElasticsearchController.DeleteUsersTask().execute(user);
+        try{
+            if (user.getReqTasks() != null){
+                for (Task t : user.getReqTasks()){
+                    deleteJob(t);
+                }
+            }
+            if (user.getBidTasks() != null){
+                for (Task t : user.getBidTasks()){
+                    t.deleteBid(user.getId());
+                    updateJob(t);
+                }
+            }
+        }catch(Exception e){
+            Log.i("ServerWrapper", e.toString());
+        }
+        try{
+            new ElasticsearchController.DeleteUsersTask().execute(user);
+        }catch(Exception e){
+            Log.i("ServerWrapper", e.toString());
+        }
     }
 
     /**
