@@ -1,19 +1,15 @@
 package com.example.taskaway;
 
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.widget.EditText;
-import android.widget.ListView;
-
-import com.robotium.solo.Solo;
-
-import junit.framework.TestCase;
-
-
 /**
  * Created by PunamWoosaree on 2018-04-05.
  */
+
+import android.app.Activity;
+import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
+
+import com.robotium.solo.Solo;
+
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
 
@@ -24,7 +20,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
     }
 
     public void setUp() throws Exception{
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -33,18 +28,23 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
     }
 
     public void testLoginNewUser() {
-        Login activity = (Login) solo.getCurrentActivity();
+        Login activity = (Login)solo.getCurrentActivity();
+
         solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "testnewuser");
+
         solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
 
-        solo.clickOnButton("registerButton");
+        solo.sleep(100000);
+
+        solo.clickOnView(solo.getView(R.id.newregisterButton));
+        //solo.clickOnButton("Register");
 
         solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
         solo.clearEditText((EditText) solo.getView(R.id.neweditTextPassword));
 
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         assertTrue(solo.waitForText("user_name"));
         assertTrue(solo.waitForText("user_id"));
@@ -57,7 +57,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
     @Override
     public void tearDown() throws Exception {
         solo.finishOpenedActivities();
-        super.tearDown();
     }
 
 }
