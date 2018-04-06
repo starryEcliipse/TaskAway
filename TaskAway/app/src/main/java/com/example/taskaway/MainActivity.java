@@ -123,6 +123,22 @@ public class MainActivity extends AppCompatActivity{
         // Create tab layout - add fragments
         tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
         viewPager = (ViewPager) findViewById(R.id.viewpager_id);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                adapter.getItem(position).onStart();
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Adding Fragment here
