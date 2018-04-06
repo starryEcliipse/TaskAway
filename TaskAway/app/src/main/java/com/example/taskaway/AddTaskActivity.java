@@ -48,14 +48,13 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // EditText layouts
-        nameField = (EditText) findViewById(R.id.taskname_add);
-        requirementField = (EditText) findViewById(R.id.requirements_add);
-        statusField = (EditText) findViewById(R.id.status_add);
-        locationField = (EditText) findViewById(R.id.loacation_add);
+        nameField = (EditText) findViewById(R.id.name_add_text);
+        requirementField = (EditText) findViewById(R.id.requirements_add_text);
+        locationField = (EditText) findViewById(R.id.location_add_text);
 
 
 
-        uploadPic = (ImageButton) findViewById(R.id.image_add_btn);
+        uploadPic = (ImageButton) findViewById(R.id.image_camera_btn);
 
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
