@@ -149,6 +149,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="8dp"
         android:text="@string/lowest_bid_username"
+        android:textColor="@color/Black"
         app:layout_constraintBottom_toTopOf="@+id/lowest_bid_amount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.586"
@@ -176,7 +177,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="48dp"
         android:background="@color/colorOtherBids"
-        android:text="@string/other_bids_button"
+        android:text="@string/all_bids"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

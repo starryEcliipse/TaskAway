@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Acts as activity that displays a tasks information when a user selects a task
@@ -31,6 +29,7 @@ public class ViewTask extends AppCompatActivity {
     private TextView taskdescription;
     private TextView tasklocation;
     private TextView taskwinningbid;
+    private TextView taskusername;
     private EditText userbid;
     private Task task;
     private Bid winningbid;
@@ -57,8 +56,9 @@ public class ViewTask extends AppCompatActivity {
         taskdescription = (TextView) this.findViewById(R.id.task_details);
         taskstatus = (TextView) this.findViewById(R.id.task_status);
         tasklocation = (TextView) this.findViewById(R.id.task_location);
-        taskwinningbid = (TextView) this.findViewById(R.id.winning_bid_amount);
+        taskwinningbid = (TextView) this.findViewById(R.id.accepted_bid);
         userbid = (EditText) this.findViewById(R.id.your_bid_amount);
+        taskusername = (TextView) this.findViewById(R.id.task_user_name);
 
 
         // SAVE BUTTON - place a bid
@@ -181,12 +181,6 @@ public class ViewTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //Check for an internet connection
-                if(!TestInternetForMaps.checkConnection(getApplicationContext())){
-                    Toast.makeText(getApplicationContext(), "Could not establish internet connection", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 // Get task information
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
                 String name = taskname.getText().toString();
@@ -241,6 +235,11 @@ public class ViewTask extends AppCompatActivity {
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+
+        SaveFileController saveFileController = new SaveFileController();
+        User requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
+        String requestername = requester.getUsername();
+        taskusername.setText(requestername);
 
         // Get user information
         userID = intent.getStringExtra("userid");

@@ -7,6 +7,22 @@
     tools:context="com.example.taskaway.ViewBidTask">
 
     <TextView
+        android:id="@+id/task_user_name"
+        android:layout_width="184dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/task_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/task_bid_name"
         android:layout_width="184dp"
         android:layout_height="25dp"
@@ -94,7 +110,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_bid_location" />
 
     <TextView
-        android:id="@+id/winning_bid"
+        android:id="@+id/accepted_bid_label"
         android:layout_width="84dp"
         android:layout_height="22dp"
         android:layout_marginStart="45dp"
@@ -114,7 +130,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/Black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/winning_bid"
+        app:layout_constraintStart_toEndOf="@+id/accepted_bid_label"
         app:layout_constraintTop_toBottomOf="@id/old_price_amount" />
 
     <TextView
@@ -127,7 +143,7 @@
         android:textColor="@color/Black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winning_bid" />
+        app:layout_constraintTop_toBottomOf="@+id/accepted_bid_label" />
 
     <EditText
         android:id="@+id/new_bid_amount"

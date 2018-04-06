@@ -20,6 +20,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/task_user_name"
+        android:layout_width="184dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/task_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/task_details"
         android:layout_width="185dp"
         android:layout_height="121dp"
@@ -93,7 +109,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_location" />
 
     <TextView
-        android:id="@+id/winning_bid"
+        android:id="@+id/accepted_bid_label"
         android:layout_width="84dp"
         android:layout_height="22dp"
         android:layout_marginStart="45dp"
@@ -105,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <TextView
-        android:id="@+id/winning_bid_amount"
+        android:id="@+id/accepted_bid"
         android:layout_width="156dp"
         android:layout_height="19dp"
         android:layout_marginEnd="20dp"
@@ -114,7 +130,7 @@
         android:textColor="@color/Black"
         android:text="@string/winning_bid_amount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/winning_bid"
+        app:layout_constraintStart_toEndOf="@+id/accepted_bid_label"
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
     <TextView
@@ -127,7 +143,7 @@
         android:textColor="@color/Black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/winning_bid" />
+        app:layout_constraintTop_toBottomOf="@+id/accepted_bid_label" />
 
     <EditText
         android:id="@+id/your_bid_amount"
@@ -143,7 +159,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toEndOf="@+id/your_price"
-        app:layout_constraintTop_toBottomOf="@+id/winning_bid_amount" />
+        app:layout_constraintTop_toBottomOf="@+id/accepted_bid" />
 
     <Button
         android:id="@+id/cancel_button_1"

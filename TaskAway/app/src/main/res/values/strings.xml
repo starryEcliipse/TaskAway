@@ -52,6 +52,8 @@
     <string name="upload_gallery">Upload from Gallery</string>
     <string name="okay_button">OK</string>
     <string name="new_bid">New Bid:</string>
+    <string name="decline">Decline</string>
+    <string name="all_bids">All Bids</string>
 
     <string-array name="phoneOptions">
         <item>Mobile</item>

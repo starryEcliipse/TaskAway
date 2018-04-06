@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -31,6 +30,7 @@ public class ViewBidTask extends AppCompatActivity {
     private TextView tasklocation;
     private TextView taskwinningbid;
     private TextView useroldbid;
+    private TextView taskusername;
     private EditText userbid;
     private Task task;
     String id;
@@ -53,18 +53,13 @@ public class ViewBidTask extends AppCompatActivity {
         taskwinningbid = (TextView) this.findViewById(R.id.winning_bid_amount_2);
         useroldbid = (TextView) this.findViewById(R.id.old_price_amount);
         userbid = (EditText) this.findViewById(R.id.new_bid_amount);
+        taskusername = (TextView) this.findViewById(R.id.task_user_name);
 
         //Location Details
         Button locationButton = (Button) findViewById(R.id.location_detail_button);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //Check for an internet connection
-                if(!TestInternetForMaps.checkConnection(getApplicationContext())){
-                    Toast.makeText(getApplicationContext(), "Could not establish internet connection", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 // Get task information
                 Intent intent = new Intent(getBaseContext(), MapActivity.class);
@@ -154,12 +149,20 @@ public class ViewBidTask extends AppCompatActivity {
 
                 ArrayList<Bid> bidList = task.getBids();
 
+                /* CHECK IF BID IN BIDLIST ALREADY CAUSE NOT DECLINED  */
+                boolean bidExists = false; // default assume task exists
+
                 for (int i = 0; i < bidList.size(); i++) {
                     if (bidList.get(i).getUserId().equals(userID)) {
-                        bidList.set(i, bid);
+                        bidList.set(i, bid); // updating bid if exists
+                        bidExists = true;
                         break;
                     }
                 } // end of for
+
+                if (!bidExists){
+                    bidList.add(bid);
+                }
 
                 task.setBids(bidList);
 
@@ -206,6 +209,11 @@ public class ViewBidTask extends AppCompatActivity {
         taskname.setText(task.getName());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
+
+        SaveFileController saveFileController = new SaveFileController();
+        User requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
+        String requestername = requester.getUsername();
+        taskusername.setText(requestername);
 
         // Get current user information
         userID = intent.getStringExtra("userid");

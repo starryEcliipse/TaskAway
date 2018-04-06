@@ -2,25 +2,20 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 /**
@@ -48,11 +43,15 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private String user_name;
     private String user_id;
     private Button acceptButton;
-    private Button deleteButton;
+    private Button declineButton;
     private OnBidClickListener onBidClickListener;
     private Bid bidderbid;
     private int posOther;
     private int posList;
+
+    private ImageButton toolBarBackbtn;
+
+    private ImageButton toolBarSaveBtn;
 
     //private ArrayList<Task> lstTask;
 
@@ -88,21 +87,37 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         // Get and display all other bids that are not the lowest
         // assume size > 1
         // bidListOther will contain all bids that do not include lowest bid
-        final ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
-        Bid bid = task.findLowestBid();
-        bidListOther.remove(bid);
-        adapter = new OtherBidsViewAdapter(this, bidListOther, this);
+        //final ArrayList<Bid> bidListOther = new ArrayList<Bid>(bidList);
+        //Bid bid = task.findLowestBid();
+        //bidListOther.remove(bid);
+        //adapter = new OtherBidsViewAdapter(this, bidListOther, this);
 
-
+        adapter = new OtherBidsViewAdapter(this, bidList, this);
 
         myrecyclerview.setAdapter(adapter);
 
         /* BUTTONS */
         acceptButton = (Button) findViewById(R.id.accept_button);
-        deleteButton = (Button) findViewById(R.id.delete_button);
+        declineButton = (Button) findViewById(R.id.decline_button);
 
+        // TOOL BAR GO BACK
+        toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        // ACCEPT
         acceptButton.setOnClickListener(new View.OnClickListener(){
 
+            /**
+             * Lets the user accept a bid. All other bids in this task are DELETED.
+             * @param view
+             */
             @Override
             public void onClick(View view){
                 // TODO: accept a bid
@@ -146,7 +161,9 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), bidderbid);
                 User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
                 int bidderindex = saveFileController.getUserIndex(getApplicationContext(), bidder.getUsername());
-                //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
+
+                // TODO: how to update a bidder's list of task bids once a task is status assigned?
+                // TODO: to update task or nah?
 
                 // Update view
                 //adapter.notifyItemRemoved(posOther);
@@ -163,10 +180,12 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         }); // end of onClickListener Accept
 
 
-        deleteButton.setOnClickListener(new View.OnClickListener(){
+        // DECLINE
+        declineButton.setOnClickListener(new View.OnClickListener(){
 
             /**
-             * Deletes a selected bid from the current task.
+             * Lets the user decline a bid.
+             * Deletes a selected bid from the current task's list of bids, but NOT from the bidder.
              *
              * @param view - instance of View
              */
@@ -175,20 +194,22 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 // Just get username stuff
                 User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
                 String biddername = bidder.getUsername();
-                Toast.makeText(getApplicationContext(), "You have deleted "+ biddername +"\'s $"+ bidderbid.getAmount()+ " bid!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "You have declined "+ biddername +"\'s $"+ bidderbid.getAmount()+ " bid!",Toast.LENGTH_LONG).show();
 
+                /*
                 // Get position of task in the actual task's list of bids
                 for (int i=0;i<bidList.size();i++){
                     if (bidList.get(i).getUserId().equals(bidderbid.getUserId())){
                         posList = i;
                         break;
                     }
-                }
+                } */
 
                 // Remove the bid from the view
-                bidListOther.remove(posOther);
+                // bidListOther.remove(posOther);
+                bidList.remove(posOther);
                 // Remove the bid from the task itself
-                bidList.remove(posList);
+                //bidList.remove(posList);
                 task.setBids(bidList);
 
                 // Update task info
@@ -196,7 +217,9 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), bidderbid);
                 User user = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
                 int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
-                saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
+
+                // TODO: how to update bidder's info when task is status ASSIGNED?
+                //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
 
                 // Update view
                 adapter.notifyItemRemoved(posOther);
@@ -204,7 +227,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
             } // end of onClick
 
-        }); // end of onClickListener delete
+        }); // end of onClickListener decline
 
 
     } // end of onCreate
@@ -228,4 +251,3 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     }
 
 } // end of class
-

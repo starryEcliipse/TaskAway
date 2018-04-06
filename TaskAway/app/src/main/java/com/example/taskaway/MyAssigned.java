@@ -1,3 +1,5 @@
+
+
 package com.example.taskaway;
 
 import android.content.Context;
@@ -31,7 +33,7 @@ public class MyAssigned extends Fragment {
     private String user_id;
 
     /**
-     * Constructor of AllBids.
+     * Constructor of MyBids.
      */
     public MyAssigned() {
     }
@@ -72,15 +74,15 @@ public class MyAssigned extends Fragment {
 
         // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
         if (getArguments() != null){
-            Log.i("All Bids","getArguments NOT null!");
+            Log.i("My Assigned","getArguments NOT null!");
             //Bundle bundle = new Bundle();
             user_name = getArguments().getString("username");
-            Log.i("All Bids",getArguments().getString("username")+"");
+            Log.i("My Assigned",getArguments().getString("username")+"");
             user_id = getArguments().getString("userid");
-            Log.i("All Bids", getArguments().getString("userid")+"");
+            Log.i("My Assigned", getArguments().getString("userid")+"");
         }
         else{
-            Log.i("All Bids","getArguments is null!");
+            Log.i("My Assigned","getArguments is null!");
 
         }
 
@@ -88,9 +90,10 @@ public class MyAssigned extends Fragment {
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);
-        Log.i("All Bids","Currently getting all other tasks");
+        Log.i("My Assigned","Currently getting all other tasks");
         //changed this from getEveryonesTask to getAllTasks
-        lstTask = saveFileController.getAllTasks(context, userIndex);
+        lstTask = saveFileController.getUserAssignedTasks(context, userIndex);
 
     }
+
 }
