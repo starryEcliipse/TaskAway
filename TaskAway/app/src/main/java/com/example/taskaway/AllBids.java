@@ -191,19 +191,7 @@ public class AllBids extends Fragment {
         String searchString = searchbox.getText().toString();
         TaskList totalHits;
         if (searchString != null && searchString.length() > 0){
-            TaskList descriptionHits = ServerWrapper.searchJobs("description", searchString);
-            TaskList nameHits = ServerWrapper.searchJobs("name", searchString);
-            totalHits = descriptionHits;
-            for (Task a : nameHits){ //combines search results without duplicating
-                boolean duplicate = false;
-                for (Task b : totalHits){
-                    if (b.getId().equals(a.getId())){
-                        duplicate = true;
-                        break;
-                    }
-                }
-                if (!duplicate) totalHits.add(a);
-            }
+            totalHits = ServerWrapper.searchJobsTerms(searchString);
         }else{
             totalHits = ServerWrapper.getAllJobs();
         }

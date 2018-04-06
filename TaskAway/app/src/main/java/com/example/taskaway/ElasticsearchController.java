@@ -134,16 +134,21 @@ public class ElasticsearchController {
          */
         protected TaskList doInBackground(String... parameters) {
             String parameter1, parameter2;
-            if (parameters.length < 2){
-                parameter1 = "";
-                parameter2 = "";
-            }else{
+            String queryType = "match";
+            if (parameters.length < 2) {
+                parameter1 = null;
+                parameter2 = null;
+            }else if (parameters.length < 3){
                 parameter1 = parameters[0];
                 parameter2 = parameters[1];
+            }else{
+                queryType = parameters[0];
+                parameter1 = parameters[1];
+                parameter2 = parameters[2];
             }
             verifySettings();
             TaskList tasks = new TaskList();
-            Search search = new Search.Builder(buildQuery(parameter1, parameter2)).addIndex(DBIndex).addType(DBTaskType).build();
+            Search search = new Search.Builder(buildQuery(queryType, parameter1, parameter2)).addIndex(DBIndex).addType(DBTaskType).build();
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
@@ -266,16 +271,21 @@ public class ElasticsearchController {
          */
         protected ArrayList<User> doInBackground(String... parameters) {
             String parameter1, parameter2;
-            if (parameters.length < 2){
+            String queryType = "match";
+            if (parameters.length < 2) {
                 parameter1 = null;
                 parameter2 = null;
-            }else{
+            }else if (parameters.length < 3){
                 parameter1 = parameters[0];
                 parameter2 = parameters[1];
+            }else{
+                queryType = parameters[0];
+                parameter1 = parameters[1];
+                parameter2 = parameters[2];
             }
             verifySettings();
             ArrayList<User> users = new ArrayList<User>();
-            Search search = new Search.Builder(buildQuery(parameter1, parameter2)).addIndex(DBIndex).addType(DBUserType).build();
+            Search search = new Search.Builder(buildQuery(queryType, parameter1, parameter2)).addIndex(DBIndex).addType(DBUserType).build();
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
@@ -294,14 +304,15 @@ public class ElasticsearchController {
     }
 
     /**
-     * Builds an Elasticsearch query String with provided parameters
+     * Builds an Elasticsearch term query String with provided parameters
+     * @param queryType - the type of query
      * @param searchField - the field to search in each object
      * @param searchParameter - the value required in the field to return a hit
      * @return A String formatted as an Elasticsearch query
      */
-    private static String buildQuery(String searchField, String searchParameter) {
-        if ((searchField != null && searchParameter != null)&&(searchField.length() >0 && searchParameter.length()>0)){
-            String query = "{\"query\": { \"term\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"size\": 100}";
+    private static String buildQuery(String queryType, String searchField, String searchParameter) {
+        if ((searchField != null && searchParameter != null && queryType != null)&&(searchField.length() >0 && searchParameter.length()>0)){
+            String query = "{\"query\": { \"" + queryType + "\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"size\": 100}";
             return query;
         }else{
             return "{\"query\": {\"match_all\" : {}}}, \"size\": 100}";

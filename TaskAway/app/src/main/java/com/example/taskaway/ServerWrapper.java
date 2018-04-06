@@ -140,6 +140,33 @@ public class ServerWrapper {
         return null;
     }
 
+    /**
+     * Fetches all tasks for provided keyword(s) in name and description
+     * @param term - the search term(s)
+     * @return A TaskList of all task that have 'value' in the provided 'field'
+     */
+    public static TaskList searchJobsTerms(String term) {
+        try{
+            TaskList nameHits = new ElasticsearchController.GetJobsTask().execute("term", "name", term).get();
+            TaskList descriptionHits = new ElasticsearchController.GetJobsTask().execute("term", "description", term).get();
+            TaskList totalHits = descriptionHits;
+            for (Task a : nameHits){ //combines search results without duplicating
+                boolean duplicate = false;
+                for (Task b : totalHits){
+                    if (b.getId().equals(a.getId())){
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) totalHits.add(a);
+            }
+            return totalHits;
+        }catch(Exception e){
+            Log.i("Error", "Something went wrong trying to search jobs for keyword(s) on server");
+        }
+        return null;
+    }
+
 
 
 
