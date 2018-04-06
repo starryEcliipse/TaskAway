@@ -293,15 +293,20 @@ public class SaveFileController {
      *
      * @param context - instance of Context
      * @param userIndexCreator - user index of task requester
+     * @param userIndexAccepted - user index of the task provider whose bid has been accepted; -1 if only after deleting task
+     *                          - otherwise, user index of accepted bidder when a bid is accepted for a task
      * @param ID - the task id
      */
-    public void deleteTaskBids(Context context, int userIndexCreator, String ID) {
+    public void deleteTaskBids(Context context, int userIndexCreator, int userIndexAccepted, String ID) {
         loadFromFile(context);
 
         // Read all other users
         for(int i=0; i<allUsers.size(); i++){
             // Ignore recent bidder bidder and task requester
             if((i==userIndexCreator)){ // ignore task requester
+                // do nothing
+            }
+            else if ((i==userIndexAccepted) && (userIndexAccepted != -1)){
                 // do nothing
             }
             // Update all other users' list of tasks they've bidded on
@@ -324,6 +329,7 @@ public class SaveFileController {
             } // end of if
         } // end of for
     }
+
 
    /* public void deleteSingleTaskBid(Context context, int userIndexCreator, String userIDBidder, String taskID) {
         loadFromFile(context);

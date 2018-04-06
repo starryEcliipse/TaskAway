@@ -198,7 +198,7 @@ public class EditActivity extends AppCompatActivity {
 
                 // Update user information - remove task
                 saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
-                saveFileController2.deleteTaskBids(context2, index, task_id); // update for task providers - delete task
+                saveFileController2.deleteTaskBids(context2, index, -1, task_id); // update for task providers - delete task
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);

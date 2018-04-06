@@ -46,7 +46,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private Button declineButton;
     private OnBidClickListener onBidClickListener;
     private Bid bidderbid;
-    private int posOther;
+    private int pos;
     private int posList;
     private float lowestbidamount;
 
@@ -129,23 +129,15 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             @Override
             public void onClick(View view){
                 // TODO: accept a bid
-                // Get position of task in the actual task's list of bids
-                for (int i=0;i<bidList.size();i++){
-                    if (bidList.get(i).getUserId().equals(bidderbid.getUserId())){
-                        posList = i;
-                        break;
-                    }
-                }
 
                 // TODO
                 // Go to back to viewowntask
 
-                // remove all bids except that one
+                // REMOVE NON ACCEPTED BIDS
                 for (int i=0; i < bidList.size(); i++){
-                    if (bidList.get(i).getUserId().equals(bidList.get(posList).getUserId())){
-                        // ignore
-                    }
-                    else{
+                    String bidListID = bidList.get(i).getUserId();
+                    String adapterBidListID = bidList.get(pos).getUserId();
+                    if (!bidListID.equals(adapterBidListID)){ // if not the accepted bid, remove
                         bidList.remove(i);
                     }
                 }
@@ -154,9 +146,10 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 task.setStatus("ASSIGNED");
 
                 // Update user
+                // FIXME: requester is returning null!
                 User requester = saveFileController.getUserFromUserId(getApplicationContext(), user_id);
 
-                TaskList assignedList = new TaskList();
+                TaskList assignedList = requester.getAssignedTasks();
 
                 // Todo new function?
                 //requester.getAssignedTasks().isEmpty()
@@ -166,23 +159,18 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 // Update task info
                 saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
+                // Update task to be viewed by
                 saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), bidderbid);
-                User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
-                int bidderindex = saveFileController.getUserIndex(getApplicationContext(), bidder.getUsername());
-
-                // TODO: how to update a bidder's list of task bids once a task is status assigned?
-                // TODO: to update task or nah?
-
-                // Update view
-                //adapter.notifyItemRemoved(posOther);
-                //adapter.notifyItemRangeChanged(posOther, adapter.getItemCount());
+                //User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
+                //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), bidder.getUsername());
 
                 Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
                 intent.putExtra("task", task); // put task
-                intent.putExtra("userID", user_id);
+                intent.putExtra("userid", user_id);
                 intent.putExtra("userName", user_name);
-                lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
-                intent.putExtra("lowestbidamount", lowestbidamount);
+                //lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
+
+                //intent.putExtra("lowestbidamount", lowestbidamount);
                 startActivity(intent);
 
             } // end of onClick
@@ -205,21 +193,9 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
                 String biddername = bidder.getUsername();
                 Toast.makeText(getApplicationContext(), "You have declined "+ biddername +"\'s $"+ bidderbid.getAmount()+ " bid!",Toast.LENGTH_LONG).show();
+                
+                bidList.remove(pos);
 
-                /*
-                // Get position of task in the actual task's list of bids
-                for (int i=0;i<bidList.size();i++){
-                    if (bidList.get(i).getUserId().equals(bidderbid.getUserId())){
-                        posList = i;
-                        break;
-                    }
-                } */
-
-                // Remove the bid from the view
-                // bidListOther.remove(posOther);
-                bidList.remove(posOther);
-                // Remove the bid from the task itself
-                //bidList.remove(posList);
                 task.setBids(bidList);
 
                 // Update task info
@@ -232,8 +208,8 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
 
                 // Update view
-                adapter.notifyItemRemoved(posOther);
-                adapter.notifyItemRangeChanged(posOther, adapter.getItemCount());
+                adapter.notifyItemRemoved(pos);
+                adapter.notifyItemRangeChanged(pos, adapter.getItemCount());
 
             } // end of onClick
 
@@ -257,7 +233,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     public void onBidClick(Bid bid, int position){
         //Toast.makeText(getApplicationContext(), "Our bid amount is: "+bid.getAmount(), Toast.LENGTH_LONG).show();
         bidderbid = bid;
-        posOther = position;
+        pos = position;
     }
 
 } // end of class
