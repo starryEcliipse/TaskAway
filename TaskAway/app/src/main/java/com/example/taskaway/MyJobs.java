@@ -118,12 +118,23 @@ public class MyJobs extends Fragment {
             Log.i("My Jobs", getArguments().getString("userid")+"");
         }
 
-        final Context context = getContext();
-        SaveFileController saveFileController = new SaveFileController();
-        int userIndex = saveFileController.getUserIndex(context, user_name);
-        Log.i("My Jobs","userindex is "+userIndex);
-        lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
-
+        if (MainActivity.isOnline()){
+            User user = ServerWrapper.getUserFromId(user_id);
+            if (user != null){
+                lstTask = user.getReqTasks();
+                Log.i("MyJobs", "user is not null");
+            }else{
+                lstTask = new TaskList();
+                Log.i("MyJobs", "user is null");
+            }
+        }else{
+            //TODO: REMOVE THIS OFFLINE BEHAVIOR?
+            final Context context = getContext();
+            SaveFileController saveFileController = new SaveFileController();
+            int userIndex = saveFileController.getUserIndex(context, user_name);
+            Log.i("My Jobs","userindex is "+userIndex);
+            lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
+        }
     }
 
     /**
@@ -137,10 +148,6 @@ public class MyJobs extends Fragment {
 
 
     }
-
-    // TODO: Implement Reading Data from ElasticSearch.
-    // user = ServerWrapper.getUserFromID(someIDfromMain);  // always pass id
-    // tasklist = user.getReqTasks();
 
 
 }

@@ -170,6 +170,10 @@ public class AllBids extends Fragment {
      * Executes a search query to the server with the current search parameters.
      */
     private void updateSearchResults() {
+        if (!MainActivity.isOnline()){
+            lstTask = new TaskList();
+            return;
+        }
         String searchString = searchbox.getText().toString();
         TaskList totalHits;
         if (searchString != null && searchString.length() > 0){

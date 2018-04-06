@@ -86,14 +86,34 @@ public class MyAssigned extends Fragment {
 
         }
 
-        // DISPLAY OTHER USER TASKS - uses SaveFileController
-        final Context context = getContext();
-        SaveFileController saveFileController = new SaveFileController();
-        int userIndex = saveFileController.getUserIndex(context, user_name);
-        Log.i("My Assigned","Currently getting all other tasks");
-        //changed this from getEveryonesTask to getAllTasks
-        lstTask = saveFileController.getUserAssignedTasks(context, userIndex);
-
+        if (MainActivity.isOnline()){
+            User user = ServerWrapper.getUserFromId(user_id);
+            if (user != null){
+                Log.i("MyAssigned", "user is not null");
+                TaskList biddedTasks = user.getBidTasks();
+                TaskList assignedTasks = new TaskList();
+                for (Task t : biddedTasks){
+                    String status = t.getStatus().toLowerCase();
+                    if (status.equals("assigned") || status.equals("done")){
+                        if (t.findLowestBid().getUserId().equals(user_id)){
+                            assignedTasks.addTask(t);
+                        }
+                    }
+                }
+                lstTask = assignedTasks;
+            }else{
+                lstTask = new TaskList();
+                Log.i("MyAssigned", "user is null");
+            }
+        }else{
+            //TODO: REMOVE THIS OFFLINE BEHAVIOR?
+            final Context context = getContext();
+            SaveFileController saveFileController = new SaveFileController();
+            int userIndex = saveFileController.getUserIndex(context, user_name);
+            Log.i("My Assigned","Currently getting all other tasks");
+            //changed this from getEveryonesTask to getAllTasks
+            lstTask = saveFileController.getUserAssignedTasks(context, userIndex);
+        }
     }
 
 }

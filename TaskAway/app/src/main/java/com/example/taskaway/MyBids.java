@@ -90,12 +90,22 @@ public class MyBids extends Fragment{
 
         }
 
-        // DISPLAY TASKS - uses SaveFileController
-        final Context context = getContext();
-        SaveFileController saveFileController = new SaveFileController();
-        int userIndex = saveFileController.getUserIndex(context, user_name);
-        Log.i("My Jobs","userindex is "+userIndex);
-        lstTask = saveFileController.getUserBiddedTasks(context, userIndex);
-
+        if (MainActivity.isOnline()){
+            User user = ServerWrapper.getUserFromId(user_id);
+            Log.i("MyBids", "user_id:" + user_id);
+            if (user != null){
+                lstTask = user.getBidTasks();
+                Log.i("MyBids", "user is not null");
+            }else{
+                lstTask = new TaskList();
+                Log.i("MyBids", "user is null");
+            }
+        }else{
+            final Context context = getContext();
+            SaveFileController saveFileController = new SaveFileController();
+            int userIndex = saveFileController.getUserIndex(context, user_name);
+            Log.i("My Jobs","userindex is "+userIndex);
+            lstTask = saveFileController.getUserBiddedTasks(context, userIndex);
+        }
     }
 }

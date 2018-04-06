@@ -78,9 +78,9 @@ public class ServerWrapper {
      */
     public static Task getJobFromId(String taskId) {
         try{
-            return searchJobs("_id", taskId).getTask(0);
+            return searchJobs("id", taskId).getTask(0);
         }catch(Exception e){
-            Log.i("Error", "Something went wrong trying to get job with _id from server");
+            Log.i("Error", "Something went wrong trying to get job with id from server");
         }
         return null;
     }
@@ -145,6 +145,7 @@ public class ServerWrapper {
             return new ElasticsearchController.GetUsersTask().execute().get();
         }catch(Exception e){
             Log.i("Error", "Something went wrong trying to get all users from server");
+            Log.i("Exception", e.toString());
         }
         return null;
     }
@@ -156,9 +157,10 @@ public class ServerWrapper {
      */
     public static User getTaskCreator(Task task) {
         try{
-            return searchUsers("_id", task.getCreatorId()).get(0);
+            return searchUsers("id", task.getCreatorId()).get(0);
         }catch(Exception e){
             Log.i("Error", "Something went wrong trying to get job creator's User object from server");
+            Log.i("Exception", e.toString());
         }
         return null;
     }
@@ -170,9 +172,10 @@ public class ServerWrapper {
      */
     public static User getUserFromId(String userId) {
         try{
-            return searchUsers("_id", userId).get(0);
+            return searchUsers("id", userId).get(0);
         }catch(Exception e){
-            Log.i("Error", "Something went wrong trying to get user with _id from server");
+            Log.i("Error", "Something went wrong trying to get user with id from server");
+            Log.i("Exception", e.toString());
         }
         return null;
     }
@@ -187,6 +190,7 @@ public class ServerWrapper {
             return searchUsers("username", username).get(0);
         }catch(Exception e){
             Log.i("Error", "Something went wrong trying to get user with username from server");
+            Log.i("Exception", e.toString());
         }
         return null;
     }
@@ -201,8 +205,8 @@ public class ServerWrapper {
         try{
             return new ElasticsearchController.GetUsersTask().execute(field, value).get();
         }catch(Exception e){
-            Log.i("Exception", e.toString());
             Log.i("Error", "Something went wrong trying to search users on server");
+            Log.i("Exception", e.toString());
         }
         return null;
     }
