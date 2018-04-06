@@ -49,10 +49,9 @@
     <EditText
         android:id="@+id/requirements_edit_text"
         android:layout_width="370dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="150dp"
+        android:layout_below="@+id/textview_requirment_edit"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
         android:background="@drawable/box"
         android:gravity="top"
         android:hint="Duties..."
@@ -67,9 +66,10 @@
         android:id="@+id/textview_requirment_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/requirements_edit_text"
         android:layout_alignLeft="@+id/requirements_edit_text"
         android:layout_alignStart="@+id/requirements_edit_text"
+        android:layout_below="@+id/location_edit_text"
+        android:layout_marginTop="9dp"
         android:text="Requirements"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent" />
@@ -93,7 +93,7 @@
         app:srcCompat="@drawable/loaction_icon" />
 
     <ImageButton
-        android:id="@+id/image_camera_btn"
+        android:id="@+id/image_camera_edit_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_above="@+id/name_edit_text"
@@ -104,6 +104,37 @@
         android:background="?android:attr/selectableItemBackground"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/camera_icon" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="26dp"
+        android:layout_toEndOf="@+id/location_image_edit"
+        android:layout_toRightOf="@+id/location_image_edit"
+        app:cardBackgroundColor="@color/colorRedCancelButton"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+
+        <RelativeLayout
+            android:id="@+id/DeleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/cardView"
+            android:layout_alignStart="@+id/cardView"
+            android:layout_alignTop="@+id/cardView">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Delete"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 
 </RelativeLayout>

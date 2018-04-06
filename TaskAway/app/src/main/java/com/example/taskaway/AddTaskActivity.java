@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import java.util.Calendar;
 
@@ -48,9 +46,9 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         // EditText layouts
-        nameField = (EditText) findViewById(R.id.name_add_text);
-        requirementField = (EditText) findViewById(R.id.requirements_add_text);
-        locationField = (EditText) findViewById(R.id.location_add_text);
+        nameField = (EditText) findViewById(R.id.name_edit_text);
+        requirementField = (EditText) findViewById(R.id.requirements_edit_text);
+        locationField = (EditText) findViewById(R.id.location_edit_text);
 
 
 
