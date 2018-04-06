@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity{
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
 
-    public static String OnlineMode;
+    private static String OnlineMode;
 
     /* IMPORTANT - some comments should not be removed! */
 
