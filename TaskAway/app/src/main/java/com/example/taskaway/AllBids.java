@@ -124,7 +124,14 @@ public class AllBids extends Fragment {
 
         // DISPLAY OTHER USER TASKS - uses ServerWrapper
         lstTask = ServerWrapper.getAllJobs();
+    }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        lstTask = ServerWrapper.getAllJobs();
+        updateSearchResults();
     }
 
     /**

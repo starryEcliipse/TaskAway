@@ -126,8 +126,18 @@ public class ViewTask extends AppCompatActivity {
                     Log.i("ViewTask", "Reading: " + temp.getAmount());
                 } */
 
+                if (MainActivity.isOnline()){
+                    ServerWrapper.updateJob(task);
+                    Log.i("ViewBidTask", "Updating Task on server");
+                    User u = ServerWrapper.getUserFromId(userID);
+                    if (u != null){
+                        u.addBid(task);
+                        ServerWrapper.updateUser(u);
+                        Log.i("ViewBidTask", "Updating User on server");
+                    }
+                }
 
-                // SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
+                /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 // get userindex of the task requester
@@ -140,7 +150,7 @@ public class ViewTask extends AppCompatActivity {
                 int userindexBidder = saveFileController.getUserIndex(context, userName);
 
                 saveFileController.addBiddedTask(context, userindexBidder, task);
-                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);
+                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);*/
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewTask.this, MainActivity.class);

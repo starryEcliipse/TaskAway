@@ -87,9 +87,19 @@ public class MyBids extends Fragment{
             Log.i("My Bids",getArguments().getString("username")+"");
             user_id = getArguments().getString("userid");
             Log.i("My Bids", getArguments().getString("userid")+"");
-
         }
 
+        updateList();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        updateList();
+    }
+
+    public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
             Log.i("MyBids", "user_id:" + user_id);

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -177,7 +178,7 @@ public class ViewBidTask extends AppCompatActivity {
                     }
                 }
 
-                // SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
+                /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
 
@@ -192,7 +193,7 @@ public class ViewBidTask extends AppCompatActivity {
                 int userindexBidder = saveFileController.getUserIndex(context, userName);
 
                 // Update bids on tasks that other users bidded on
-                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);
+                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);*/
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewBidTask.this, MainActivity.class);
@@ -221,9 +222,22 @@ public class ViewBidTask extends AppCompatActivity {
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
-        SaveFileController saveFileController = new SaveFileController();
-        User requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
-        String requestername = requester.getUsername();
+        User requester;
+        String requestername;
+        if (MainActivity.isOnline()){
+            requester = ServerWrapper.getUserFromId(task.getCreatorId());
+            if (requester != null){
+                requestername = requester.getUsername();
+            }else{
+                requestername = "UNKNOWN";
+                Toast.makeText(getApplicationContext(), "An error occurred while trying to get task creator's username", Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            SaveFileController saveFileController = new SaveFileController();
+            requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
+            requestername = requester.getUsername();
+        }
+
         taskusername.setText(requestername);
 
         // Get current user information

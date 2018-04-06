@@ -87,6 +87,17 @@ public class MyAssigned extends Fragment {
 
         }
 
+        updateList();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        updateList();
+    }
+
+    public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
             if (user != null){

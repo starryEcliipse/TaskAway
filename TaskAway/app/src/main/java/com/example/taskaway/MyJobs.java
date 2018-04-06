@@ -118,6 +118,21 @@ public class MyJobs extends Fragment {
             Log.i("My Jobs", getArguments().getString("userid")+"");
         }
 
+        updateList();
+    }
+
+    /**
+     * Calls superclass onStart
+     *
+     * @see android.support.v7.app.AppCompatActivity
+     */
+    public void onStart(){
+        super.onStart();
+
+        updateList();
+    }
+
+    public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
             if (user != null){
@@ -134,18 +149,6 @@ public class MyJobs extends Fragment {
             Log.i("My Jobs","userindex is "+userIndex);
             lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
         }
-    }
-
-    /**
-     * Calls superclass onStart
-     *
-     * @see android.support.v7.app.AppCompatActivity
-     */
-    public void onStart(){
-        super.onStart();
-        Log.i("onStart SIZE",lstTask.size()+"");
-
-
     }
 
 
