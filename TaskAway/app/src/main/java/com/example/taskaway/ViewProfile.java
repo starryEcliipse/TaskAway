@@ -77,9 +77,7 @@ public class ViewProfile extends AppCompatActivity {
 
         ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
 
-        if (MainActivity.isOnline()){ // if online, show edit button
-            editButton.setVisibility(View.VISIBLE);
-        }else{// if offline, hide edit button
+        if (!MainActivity.isOnline()){ // if offline, hide edit button
             editButton.setVisibility(View.INVISIBLE);
         }
 
