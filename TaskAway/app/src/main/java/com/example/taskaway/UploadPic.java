@@ -77,14 +77,14 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
-
-            ClipData mClipData = data.getClipData();
+            //Uri selectedImage = data.getClipData().getItemAt(0).getUri();
+            //ClipData mClipData = data.getClipData();
             //GridView gridview = (GridView) findViewById(R.id.gridview);
             //gridview.removeAllViews();
             int pickedImageCount;
-            for (pickedImageCount = 0; pickedImageCount < mClipData.getItemCount();
+            for (pickedImageCount = 0; pickedImageCount < data.getClipData().getItemCount();
                  pickedImageCount++) {
-                Uri selectedImage = mClipData.getItemAt(pickedImageCount).getUri();
+                Uri selectedImage = data.getClipData().getItemAt(pickedImageCount).getUri();
                 arrayU.add(selectedImage);
             }
             GridView gridview = (GridView) findViewById(R.id.gridview);
