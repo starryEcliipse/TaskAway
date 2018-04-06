@@ -222,21 +222,35 @@ public class User {
 
     /**
      * Adds a Task to the user's bidded tasks. Updates the Task if the one already exists with the same id.
-     * @param t the Task to add or update
+     * @param task the Task to add or update
      *
      * @author Adrian Schuldhaus
      */
-    public void addBid(Task t) {
+    public void addBid(Task task) {
         //TODO: by Adrian
+        for (Task t : bidTasks){
+            if (t.getId().equals(id)){
+                bidTasks.removeTask(t);
+                break;
+            }
+        }
+        bidTasks.addTask(task);
     }
 
     /**
      * Adds a Task to the user's requested tasks. Updates the Task if the one already exists with the same id.
-     * @param t the Task to add or update.
+     * @param task the Task to add or update.
      *
      * @author Adrian Schuldhaus
      */
-    public void addTask(Task t) {
+    public void addTask(Task task) {
         //TODO: by Adrian
+        for (Task t: reqTasks){
+            if (t.getId().equals(id)){
+                reqTasks.removeTask(t);
+                break;
+            }
+        }
+        reqTasks.addTask(task);
     }
 }
