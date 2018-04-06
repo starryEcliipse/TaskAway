@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 /**
@@ -39,6 +41,9 @@ public class EditActivity extends AppCompatActivity {
     String user_id;
     String task_id;
     int index;
+    private ImageButton toolBarSaveBtn;
+    private ImageButton uploadPic;
+    private ImageButton toolBarBackbtn;
 
     /**
      * Upon creating activity, create EditText and Button layouts.
@@ -50,13 +55,13 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit);
+        setContentView(R.layout.activity_edit_task);
 
         // EditText layout
-        tname = (EditText) findViewById(R.id.editText2);
-        des = (EditText) findViewById(R.id.editText3);
-        status = (EditText) findViewById(R.id.editText);
-        location = (EditText) findViewById(R.id.Edit_Location);
+        tname = (EditText) findViewById(R.id.name_edit_text);
+        des = (EditText) findViewById(R.id.requirements_edit_text);
+        //status = (EditText) findViewById(R.id.editText);
+        location = (EditText) findViewById(R.id.location_edit_text);
 
         // Get information needed to update task
         Intent intent = getIntent();
@@ -84,28 +89,30 @@ public class EditActivity extends AppCompatActivity {
         // Get task information
         new_name = task.getName();
         new_des = task.getDescription();
-        new_status = task.getStatus();
+        //new_status = task.getStatus();
         new_location = task.getLocation();
 
         // setText
         tname.setText(new_name);
         des.setText(new_des);
-        status.setText(new_status);
+        //status.setText(new_status);
         location.setText(new_location);
 
 
         // Cancel button - cancel activity
-        cancel = (Button) findViewById(R.id.button);
-        cancel.setOnClickListener(new View.OnClickListener() {
+        toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 finish();
             }
         });
 
+
+
         // Save button - save changes and update task
-        save = (Button) findViewById(R.id.button2);
-        save.setOnClickListener(new View.OnClickListener() {
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setOnClickListener(new View.OnClickListener() {
             /**
              * Determines behaviour of save button.
              * Reads inputted text fields (if valid) and updates task information
@@ -138,8 +145,10 @@ public class EditActivity extends AppCompatActivity {
                         des.setError("Description too long");
                         return;
                     }
+                    String s = "REQUESTED";
 
                     // Task status
+                    /*
                     String s = status.getText().toString();
                     if (s.isEmpty()) {
                         status.setError("Assign status");
@@ -148,7 +157,7 @@ public class EditActivity extends AppCompatActivity {
                     if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
                         status.setError("Invalid status type");
                         return;
-                    }
+                    }*/
 
                     // Task location
                     String loc = location.getText().toString();
@@ -186,7 +195,7 @@ public class EditActivity extends AppCompatActivity {
         });
 
         // Delete button - deletes the task being viewed
-        Button delete = (Button) findViewById(R.id.button3);
+        RelativeLayout delete = (RelativeLayout) findViewById(R.id.DeleteButton);
         delete.setOnClickListener(new View.OnClickListener() {
             /**
              * Determines delete button behaviour.
