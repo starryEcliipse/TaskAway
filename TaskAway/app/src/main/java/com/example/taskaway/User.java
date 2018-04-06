@@ -220,4 +220,11 @@ public class User {
         return this.passwordHash.equals(hash_SHA256(comparisonPassword));
     }
 
+    public void addBid(Task t) {
+
+    }
+
+    public void addTask(Task t) {
+
+    }
 }
