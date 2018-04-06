@@ -1,6 +1,7 @@
 package com.example.taskaway;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -21,12 +22,16 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.IOException;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UploadPic extends AppCompatActivity implements View.OnClickListener{
     private static final int RESULT_LOAD_IMAGE = 1;
 
+    private Context mContext;
     LinearLayout linearMain;
+    ArrayList<Uri> arrayU;
     //ImageView imageToUpload;
     //ArrayList<String> imagesPathList;
     //Bitmap bitmap;
@@ -38,9 +43,9 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pic);
-        linearMain = (LinearLayout) findViewById(R.id.linearImage);
+        //linearMain = (LinearLayout) findViewById(R.id.linearImage);
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new PicturesImageAdapter(UploadPic.this));
+        gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
         //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
@@ -72,6 +77,16 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
+
+            ClipData mClipData = data.getClipData();
+            //GridView gridview = (GridView) findViewById(R.id.gridview);
+            //gridview.removeAllViews();
+            int pickedImageCount;
+            for (pickedImageCount = 0; pickedImageCount < mClipData.getItemCount();
+                 pickedImageCount++) {
+                Uri selectedImage = mClipData.getItemAt(pickedImageCount).getUri();
+                arrayU.add(selectedImage);
+            }
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android

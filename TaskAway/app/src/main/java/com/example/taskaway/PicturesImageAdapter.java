@@ -15,16 +15,21 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class PicturesImageAdapter extends BaseAdapter {
     private Context mContext;
+    ArrayList<Uri> arrayU;
 
     // Constructor
-    public PicturesImageAdapter(Context c) {
+    public PicturesImageAdapter(Context c, ArrayList<Uri> a) {
         mContext = c;
+        arrayU = a;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return arrayU.size();
     }
 
     public Object getItem(int position) {
@@ -47,29 +52,34 @@ public class PicturesImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-        imageView.setImageResource(mThumbIds[position]);
+        for (int i = 0; i < arrayU.size(); i++) {
+            Uri uri = arrayU.get(i);
+            imageView.setImageURI(uri);
+           // return imageView;
+        }
         return imageView;
     }
 
+}
 
     // Keep all Images in array
-    public Integer[] mThumbIds = {
+/*    public Integer[] mThumbIds = {
             // TODO: find a way to display images here - currently using drawable images
 
-            /*
+            *//*
                 LINKS
                 https://www.tutorialspoint.com/android/android_grid_view.htm
                 https://developer.android.com/guide/topics/ui/layout/gridview.html#example
                 Maybe useful?: https://dzone.com/articles/download-and-display-image-in-android-gridview
 
-             */
+             *//*
 
             // TEST STUFF ONLY - delete cat photo later
             R.drawable.cat, R.drawable.cat,
             R.drawable.cat, R.drawable.cat,
             R.drawable.cat, R.drawable.cat,
 
-           /* R.drawable.sample_2, R.drawable.sample_3,
+           *//* R.drawable.sample_2, R.drawable.sample_3,
             R.drawable.sample_4, R.drawable.sample_5,
             R.drawable.sample_6, R.drawable.sample_7,
             R.drawable.sample_0, R.drawable.sample_1,
@@ -79,7 +89,6 @@ public class PicturesImageAdapter extends BaseAdapter {
             R.drawable.sample_0, R.drawable.sample_1,
             R.drawable.sample_2, R.drawable.sample_3,
             R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7 */
+            R.drawable.sample_6, R.drawable.sample_7 *//*
 
-    };
-}
+    };*/
