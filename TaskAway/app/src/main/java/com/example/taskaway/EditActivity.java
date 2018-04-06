@@ -64,19 +64,22 @@ public class EditActivity extends AppCompatActivity {
         user_id = intent.getStringExtra("userid");
         task_id = intent.getStringExtra("task_id");
 
-        // Get userindex
-        final String i = intent.getStringExtra("userindex");
-        Log.i("EditActivity","Received string User Index is "+i);
-        index = Integer.parseInt(i);
-        Log.i("EditActivity","User index as int is "+index);
+        if (MainActivity.isOnline()){
+            task = ServerWrapper.getJobFromId(task_id);
+        }else {
+            // Get userindex
+            final String i = intent.getStringExtra("userindex");
+            Log.i("EditActivity", "Received string User Index is " + i);
+            index = Integer.parseInt(i);
+            Log.i("EditActivity", "User index as int is " + index);
 
-        // SaveFileController - getTask
-        final Context context1 = getApplicationContext();
-        SaveFileController saveFileController1 = new SaveFileController();
-        task = saveFileController1.getTask(context1, index, task_id);
-        Log.i("USER INDEX", index+"");
-        Log.i("TASK ID:", task_id+"");
-
+            // SaveFileController - getTask
+            final Context context1 = getApplicationContext();
+            SaveFileController saveFileController1 = new SaveFileController();
+            task = saveFileController1.getTask(context1, index, task_id);
+            Log.i("USER INDEX", index + "");
+            Log.i("TASK ID:", task_id + "");
+        }
 
         // Get task information
         new_name = task.getName();
@@ -155,7 +158,7 @@ public class EditActivity extends AppCompatActivity {
 
                     Task task = new Task(name, comment, s, loc, null, null, null, task_id);
 
-                    if (!MainActivity.isOnline()){
+                    if (MainActivity.isOnline()){
                         ServerWrapper.updateJob(task);
                     }else{
                         task.setId("OFFLINE_ADD" + task.getId());
@@ -193,12 +196,24 @@ public class EditActivity extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                final Context context2 = getApplicationContext();
-                SaveFileController saveFileController2 = new SaveFileController();
 
-                // Update user information - remove task
-                saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
-                saveFileController2.deleteTaskBids(context2, index, -1, task_id); // update for task providers - delete task
+                if (MainActivity.isOnline()){
+                    ServerWrapper.deleteJob(task);
+                }else{
+                    final Context context2 = getApplicationContext();
+                    SaveFileController saveFileController2 = new SaveFileController();
+                    task.markDeleted();
+                    task.setId("OFFLINE_DELETE" + task.getId());
+                    // Update user information - remove task
+                    saveFileController2.updateTask(context2, index, task_id, task); // updates task to proper user in savefile
+
+                    /*final Context context2 = getApplicationContext();
+                    SaveFileController saveFileController2 = new SaveFileController();
+
+                    // Update user information - remove task
+                    saveFileController2.deleteTask(context2, index, task_id); // add task to proper user in savefile
+                    saveFileController2.deleteTaskBids(context2, index, -1, task_id); // update for task providers - delete task*/
+                }
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
