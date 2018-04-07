@@ -52,11 +52,7 @@ public class PicturesImageAdapter extends BaseAdapter {
         } else {
             imageView = (ImageView) convertView;
         }
-/*        for (int i = 0; i < arrayU.size(); i++) {
-            Uri uri = arrayU.get(i);
-            imageView.setImageURI(uri);
-           // return imageView;
-        }*/
+
         imageView.setImageURI(arrayU.get(position));
         return imageView;
     }

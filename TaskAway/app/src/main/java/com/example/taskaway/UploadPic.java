@@ -27,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.lang.reflect.Array;
+import java.net.URI;
 import java.util.ArrayList;
 
 public class UploadPic extends AppCompatActivity implements View.OnClickListener{
@@ -34,7 +35,6 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
     //private Context mContext;
     LinearLayout linearMain;
-    //ArrayList<Uri> arrayU;
     //ImageView imageToUpload;
     ArrayList<Uri> arrayU = new ArrayList<Uri>();
     //Uri selectedImage;
@@ -67,6 +67,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
                 break;
 
+            // upload button
             case R.id.button5:
                 //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
                 Intent galleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -87,9 +88,24 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             //ArrayList<Uri> arrayU = null;
             //Uri selectedImage = null;
 
+
+            Log.i("UPLOAD PIC","IS EMPTY: "+arrayU.isEmpty());
+
+            // reset array
+            // TODO: make new instance?
+            if (!arrayU.isEmpty()){
+                Log.i("UPLOAD PIC","NOT EMPTY IS CALLED");
+                arrayU.clear();
+            }
+
             for (int i = 0; i < data.getClipData().getItemCount(); i++){
-                //selectedImage = data.getClipData().getItemAt(i).getUri();
-                arrayU.add(data.getClipData().getItemAt(i).getUri());
+                // check if same URI
+                Uri uri = data.getClipData().getItemAt(i).getUri();
+                Log.i("UPLOAD PIC","URI " + uri +" AT POSITION " + i);
+
+                arrayU.add(uri);
+
+                Log.i("UPLOAD PIC","arrayU is currently: "+arrayU.toString());
             }
 
             //Uri selectedImage = data.getClipData().getItemAt(1).getUri();
