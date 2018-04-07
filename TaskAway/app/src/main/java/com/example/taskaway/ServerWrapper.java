@@ -22,7 +22,9 @@ public class ServerWrapper {
         try{
             new ElasticsearchController.AddJobsTask().execute(task);
             User u = getUserFromId(task.getCreatorId());
+            Log.i("===NOTICE ME===", "About to add job to user " + u.getUsername() + " with " + u.getReqTasks().size() + " total req tasks");
             u.addTask(task);
+            Log.i("===NOTICE ME===", "Added job to user " + u.getUsername() + " with " + u.getReqTasks().size() + " total req tasks");
             updateUser(u);
         }catch(Exception e){
             Log.i("ServerWrapper", e.toString());
@@ -382,6 +384,7 @@ public class ServerWrapper {
         Log.i("SWrapper Sync", "Syncing with server...");
         try{
             syncJobs(context, userName);
+            TimeUnit.SECONDS.sleep(1);//Allow time for server to be updated
             syncUser(context, userName);
         }catch(Exception e){
             Toast.makeText(context, "Something went wrong when trying to sync local data with the server", Toast.LENGTH_SHORT).show();

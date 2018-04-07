@@ -135,7 +135,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     ServerWrapper.addJob(task);
                     Log.i("AddTaskActivity", "Adding Task to server");
-                    //TODO: Call a sync for local data
+
                     ServerWrapper.syncWithServer(getApplicationContext(), username);
                 }else{
                     task.setSyncInstruction("OFFLINE_ADD");

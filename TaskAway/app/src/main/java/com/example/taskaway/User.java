@@ -228,7 +228,7 @@ public class User {
      */
     public void addBid(Task task) {
         for (Task t : bidTasks){
-            if (t.getCreatorId().equals(id)){
+            if (t.getId().equals(task.getId())){
                 bidTasks.removeTask(t);
                 break;
             }
@@ -254,7 +254,7 @@ public class User {
      */
     public void addTask(Task task) {
         for (Task t: reqTasks){
-            if (t.getCreatorId().equals(id)){
+            if (t.getId().equals(task.getId())){
                 reqTasks.removeTask(t);
                 break;
             }
