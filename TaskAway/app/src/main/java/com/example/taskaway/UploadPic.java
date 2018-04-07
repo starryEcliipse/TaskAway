@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -40,6 +41,9 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     Button cancel;
     Button upload;
     Button done;
+    byte b[]; // byte array for image - sent to AddTask
+    String username;
+    String userid;
 
 
     @Override
@@ -61,7 +65,11 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             case R.id.button7:
                 Intent in = new Intent(this, AddTaskActivity.class);
                 //in.putStringArrayListExtra("images", arrayS);
-                in.putParcelableArrayListExtra("images", arrayN);
+                in.putExtra("bytearray",b);
+                //in.putParcelableArrayListExtra("images", arrayN);
+
+                in.putExtra("username", username);
+                in.putExtra("userid",userid);
                 startActivity(in);
                 break;
 
@@ -80,20 +88,32 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
-    //https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
-    //https://stackoverflow.com/questions/13511356/android-image-selected-from-gallery-orientation-is-always-0-exif-tag
+    /**
+     * Receives photos from gallery. The photos received are then sent to AddTaskActivity in bytes.
+     * Ensures that the photos are less than 65536
+     *
+     * https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
+     * https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
+     * https://stackoverflow.com/questions/13511356/android-image-selected-from-gallery-orientation-is-always-0-exif-tag
+     *
+     * @param requestCode - the request code
+     * @param resultCode - the result code
+     * @param data - will contain the Uri stuff of photos
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && data != null){
 
             // Ensures that we don't accidentally append to the array of images if the user changes mind
-            // TODO: make new instance of array for better performance BIG O wise?
             if (!arrayU.isEmpty()){
                 arrayU.clear();
-                arrayS.clear();
+            }
+            if (!arrayN.isEmpty()){
                 arrayN.clear();
+            }
+            if (!arrayS.isEmpty()){
+                arrayS.clear();
             }
 
             // If single photo, the photo will NOT be in ClipData - just return it
@@ -101,16 +121,13 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             if (data.getClipData() == null){
                 Uri uri = data.getData();
                 arrayU.add(uri);
-                Log.i("UPLOAD UPLOAD","uri is "+arrayU.get(0).getPath());
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 try {
-                    //BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(0)), null, options);
+                    //options.inSampleSize = calculateInSampleSize(options, 125, 125 );
                     options.inJustDecodeBounds = false;
                     Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(0)), null, options);
-                    Log.i("UPLOADPIC","Pass first decode");
                     String type = getContentResolver().getType(arrayU.get(0));
-                    Log.i("STUPID TYPE", type);
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                     if (type.contains("png")) {
                         image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -119,10 +136,18 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                     }
 
 
+                    // Image size is fine
                     arrayN.add(image);
-                    byte [] b = byteArrayOutputStream.toByteArray();
+                    b = byteArrayOutputStream.toByteArray();
+                    // Check image size - ensure image is under 65.536 kb
+                    if ((b.length/4) > 65536){
+                        Toast.makeText(getApplicationContext(), "One of your images is too large!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     String temp= Base64.encodeToString(b, Base64.DEFAULT);
                     arrayS.add(temp);
+
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -139,19 +164,23 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inJustDecodeBounds = true;
                     try {
-                        BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
                         options.inJustDecodeBounds = false;
                         Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
                         String type = getContentResolver().getType(arrayU.get(j));
-                        Log.i("STUPID TYPE", type);
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         if (type.contains("png")) {
                             image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         } else if (type.contains("jpg") || type.contains("jpeg")) {
                             image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                         }
+
                         arrayN.add(image);
-                        byte [] b = byteArrayOutputStream.toByteArray();
+                        b = byteArrayOutputStream.toByteArray();
+                        // Check image size - ensure image is under 65.536 kb
+                        if ((b.length/4) > 65536){
+                            Toast.makeText(getApplicationContext(), "One of your images is too large!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         String temp= Base64.encodeToString(b, Base64.DEFAULT);
                         arrayS.add(temp);
                     } catch (FileNotFoundException e) {
@@ -165,6 +194,14 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
 
         }
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        userid = intent.getStringExtra("userid");
     }
 
 

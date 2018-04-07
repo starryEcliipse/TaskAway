@@ -16,8 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -68,7 +70,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Intent intent = new Intent(AddTaskActivity.this, MainActivity.class);
                 intent.putExtra("user_name", username);
                 intent.putExtra("user_id", userid);
-                //Log.i("AddActivity","Sending name and id to MainActivity!");
+                Log.i("AddActivity","name is "+username+" and id is "+userid);
                 startActivity(intent);
             }
         });
@@ -77,7 +79,8 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent0 = new Intent(getBaseContext(), UploadPic.class);
-                //Intent intent0 = new Intent(getBaseContext(), PicturesDisplay.class);
+                intent0.putExtra("username", username);
+                intent0.putExtra("userid",userid);
                 startActivity(intent0);
             }
         });
@@ -175,24 +178,19 @@ public class AddTaskActivity extends AppCompatActivity {
         userid = intent.getStringExtra("userid");
 
 
-        if (intent.getStringArrayListExtra("images") != null) {
-            //arrayB = getIntent().getStringArrayListExtra("images");
-            ArrayList<Bitmap> arrayBitMap = getIntent().getParcelableArrayListExtra("images");
-            Bitmap bitmap = arrayBitMap.get(0);
+        //if (intent.getStringArrayListExtra("images") != null) {
+        if (intent.getByteArrayExtra("bytearray") != null){
+            byte b[] = getIntent().getByteArrayExtra("bytearray");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
 
             // SOURCE:
             imageSet.measure(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
             int width = imageSet.getMeasuredWidth();
             int height = imageSet.getMeasuredHeight();
             bitmap = getResizedBitmap(bitmap, height, width);
-            //bitmap = Bitmap.createBitmap(bitmap, width/2, height/2, bitmap.getWidth()/2, bitmap.getHeight()/2);
-            //Uri uri = Uri.parse(arrayB.get(0));
-            //Bitmap b = StringToBitMap(arrayB.get(0));
-            Log.i("ADDTASK","arrayBitMap is: "+arrayBitMap.toString());
+
             imageSet.setImageBitmap(bitmap);
-            //imageSet.setImageURI(uri);
-            //Bitmap bit = BitmapFactory.decodeFile(arrayB.get(0));
-            //imageSet.setImageBitmap(bit);
+
         }
         else{
             Log.i("ADDTASK"," null!");
@@ -200,6 +198,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     }
 
+    // Makes sure image fits imageview
     // SOURCE: https://thinkandroid.wordpress.com/2009/12/25/resizing-a-bitmap/
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
 

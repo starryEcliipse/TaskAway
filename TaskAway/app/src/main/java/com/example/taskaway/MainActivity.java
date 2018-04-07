@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity{
     private static String OnlineMode;
     private static String UserName;
 
+    private String userID;
+    private String user_name;
+
     /* IMPORTANT - some comments should not be removed! */
 
     /**
@@ -61,8 +64,8 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
 
         // USERNAME + USERID
-        final String userID = getIntent().getStringExtra("user_id");
-        final String user_name = getIntent().getStringExtra("user_name");
+        userID = getIntent().getStringExtra("user_id");
+        user_name = getIntent().getStringExtra("user_name");
 
         String online = getIntent().getStringExtra("online_mode");
         if (online != null && online.length() > 0){
@@ -219,8 +222,8 @@ public class MainActivity extends AppCompatActivity{
         switch (id){
             case R.id.add_id:
                 Intent intent1 = new Intent(this, AddTaskActivity.class);
-                intent1.putExtra("username",getIntent().getStringExtra("user_name"));
-                intent1.putExtra("userid", getIntent().getStringExtra("user_id"));
+                intent1.putExtra("username",user_name);
+                intent1.putExtra("userid", userID);
                 startActivity(intent1);
                 break;
         }
