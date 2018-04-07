@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity{
     private ViewPagerAdapter adapter;
 
     private static String OnlineMode;
+    private static String UserName;
 
     /* IMPORTANT - some comments should not be removed! */
 
@@ -68,7 +69,9 @@ public class MainActivity extends AppCompatActivity{
             OnlineMode = online;
         }
 
-        ServerWrapper.syncWithServer(getApplicationContext(), user_name);
+        if (isOnline()){
+            UserName = user_name;
+        }
 
         /*
          * TOOLBAR
@@ -125,20 +128,7 @@ public class MainActivity extends AppCompatActivity{
         // Create tab layout - add fragments
         tabLayout = (TabLayout) findViewById(R.id.tablayout_id);
         viewPager = (ViewPager) findViewById(R.id.viewpager_id);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                adapter.getItem(position).onResume();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Adding Fragment here
@@ -164,6 +154,12 @@ public class MainActivity extends AppCompatActivity{
         //Will add icons for the tabs below here
         //tabLayout.getTabAt(2).setIcon(R.drawable.ic_alljobs);
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        ServerWrapper.syncWithServer(getApplicationContext(), UserName);
     }
 
     /**

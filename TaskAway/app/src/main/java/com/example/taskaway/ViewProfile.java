@@ -47,10 +47,6 @@ public class ViewProfile extends AppCompatActivity {
         final String user_name = getIntent().getStringExtra("user_name");
         final String userID = getIntent().getStringExtra("user_id");
 
-        //Get user from server
-        // TODO SaveFileController
-        final User current_user_server = ServerWrapper.getUserFromId(userID);
-
         //Get user from file
         final Context context = getApplicationContext();
         final SaveFileController saveFileController = new SaveFileController();
@@ -129,7 +125,12 @@ public class ViewProfile extends AppCompatActivity {
                         //ServerWrapper.updateUser(current_user);
 
                         //update information in server
-                        saveFileController.updateUser(context, userIndex, current_user);
+                        if (MainActivity.isOnline()){
+                            ServerWrapper.updateUser(current_user);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"You must be online to edit your profile",Toast.LENGTH_SHORT).show();
+                        }
+                        //saveFileController.updateUser(context, userIndex, current_user);
 
                         //get the profile TextView values
                         TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);

@@ -40,6 +40,8 @@ public class EditActivity extends AppCompatActivity {
     String userName;
     String user_id;
     String task_id;
+    String creator_id;
+    String assigned_id;
     int index;
     private ImageButton toolBarSaveBtn;
     private ImageButton uploadPic;
@@ -91,6 +93,9 @@ public class EditActivity extends AppCompatActivity {
         new_des = task.getDescription();
         //new_status = task.getStatus();
         new_location = task.getLocation();
+
+        creator_id = task.getCreatorId();
+        assigned_id = task.getAssignedId();
 
         // setText
         tname.setText(new_name);
@@ -166,10 +171,11 @@ public class EditActivity extends AppCompatActivity {
                     }
 
                     Task task = new Task(name, comment, s, loc, null, null, null, task_id);
+                    task.setCreatorId(creator_id);
+                    task.setAssignedId(assigned_id);
 
                     if (MainActivity.isOnline()){
                         ServerWrapper.updateJob(task);
-                        //TODO: Call a sync for local data
                         ServerWrapper.syncWithServer(getApplicationContext(), userName);
                     }else{
                         // SAVE TO FILE
@@ -213,8 +219,8 @@ public class EditActivity extends AppCompatActivity {
 
                 if (MainActivity.isOnline()){
                     ServerWrapper.deleteJob(task);
-                    //TODO: Call a sync for local data
-                    ServerWrapper.syncWithServer(getApplicationContext(), userName);
+
+                    //ServerWrapper.syncWithServer(getApplicationContext(), userName);
                 }else{
                     final Context context2 = getApplicationContext();
                     SaveFileController saveFileController2 = new SaveFileController();
