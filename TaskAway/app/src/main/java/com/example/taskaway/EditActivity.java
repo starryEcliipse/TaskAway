@@ -170,6 +170,7 @@ public class EditActivity extends AppCompatActivity {
                     if (MainActivity.isOnline()){
                         ServerWrapper.updateJob(task);
                         //TODO: Call a sync for local data
+                        ServerWrapper.syncWithServer(getApplicationContext(), userName);
                     }else{
                         // SAVE TO FILE
                         final Context context = getApplicationContext();
@@ -213,6 +214,7 @@ public class EditActivity extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     ServerWrapper.deleteJob(task);
                     //TODO: Call a sync for local data
+                    ServerWrapper.syncWithServer(getApplicationContext(), userName);
                 }else{
                     final Context context2 = getApplicationContext();
                     SaveFileController saveFileController2 = new SaveFileController();

@@ -149,7 +149,6 @@ public class MyJobs extends Fragment {
                 Toast.makeText(getContext(), "Something went wrong fetching your jobs from server", Toast.LENGTH_SHORT).show();
             }
         }else{
-            //TODO: REMOVE THIS OFFLINE BEHAVIOR?
             final Context context = getContext();
             SaveFileController saveFileController = new SaveFileController();
             int userIndex = saveFileController.getUserIndex(context, user_name);

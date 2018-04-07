@@ -1,8 +1,11 @@
 package com.example.taskaway;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Handles interactions with the Elasticsearch server.
@@ -297,8 +300,89 @@ public class ServerWrapper {
         return null;
     }
 
+    /**
+     * Syncs the local job data with the server
+     * @param context - the application context
+     * @param userName - userName of the current user
+     */
+    public static void syncJobs(Context context, String userName) {
+        if (!MainActivity.isOnline()) return;
 
-    //For testing purposes only, will not be in final version
+        try{
+            SaveFileController saveFileController = new SaveFileController();
+            int userIndex = saveFileController.getUserIndex(context, userName);
+            TaskList loadedTasks = saveFileController.getUserRequiredTasks(context, userIndex);
+            for (Task t : loadedTasks){
+                if (t.getSyncInstruction() == null) t.clearSyncInstruction();
+                if (t.getSyncInstruction().equals("OFFLINE_ADD")){
+                    t.clearSyncInstruction();
+                    addJob(t);
+                }else if (t.getSyncInstruction().equals("OFFLINE_UPDATE")){
+                    t.clearSyncInstruction();
+                    updateJob(t);
+                }else if (t.getSyncInstruction().equals("OFFLINE_DELETE")){
+                    t.clearSyncInstruction();
+                    deleteJob(t);
+                }else{
+                    t.clearSyncInstruction();
+                }
+                saveFileController.deleteTask(context, userIndex, t.getId());
+            }
+            //Wait 2 seconds before pulling changes from server
+            try{
+                TimeUnit.SECONDS.sleep(2);
+            }catch(Exception e){
+                Log.i("SWrapper SyncJ", "Something happened when trying to stop thread. Aborting.");
+                return;
+            }
+            TaskList userTasks = getUserFromUsername(userName).getReqTasks();
+            for (Task t : userTasks){
+                saveFileController.addRequiredTask(context, userIndex, t);
+            }
+        }catch(Exception e){
+            Toast.makeText(context, "Something went wrong when trying to sync local jobs with the server", Toast.LENGTH_SHORT).show();
+            Log.i("SWrapper SyncJ", e.toString());
+        }
+    }
+
+    /**
+     * Syncs the local user data with the server
+     * @param context - the application context
+     * @param userName - userName of the current user
+     */
+    public static void syncUser(Context context, String userName) {
+        if (!MainActivity.isOnline()) return;
+
+        try{
+            SaveFileController saveFileController = new SaveFileController();
+            int userIndex = saveFileController.getUserIndex(context, userName);
+            User u = getUserFromUsername(userName);
+            saveFileController.updateUser(context, userIndex, u);
+        }catch(Exception e){
+            Toast.makeText(context, "Something went wrong when trying to sync local user with the server", Toast.LENGTH_SHORT).show();
+            Log.i("SWrapper SyncU", e.toString());
+        }
+    }
+
+    /**
+     * Syncs the local data with the server
+     * by calling syncJobs(...) followed by syncUser(...)
+     * @param context - the application context
+     * @param userName - userName of the current user
+     */
+    public static void syncWithServer(Context context, String userName) {
+        if (!MainActivity.isOnline()) return;
+
+        try{
+            syncJobs(context, userName);
+            syncUser(context, userName);
+        }catch(Exception e){
+            Toast.makeText(context, "Something went wrong when trying to sync local data with the server", Toast.LENGTH_SHORT).show();
+            Log.i("SWrapper Sync", e.toString());
+        }
+    }
+
+    //For testing purposes only
     public static void deleteAllJobs() {
         TaskList taskList = ServerWrapper.getAllJobs();
         for (Task t : taskList){
@@ -308,7 +392,7 @@ public class ServerWrapper {
         if (taskList.size() > 0) deleteAllJobs();//guarantees the server is wiped
     }
 
-    //For testing purposes only, will not be in final version
+    //For testing purposes only
     public static void deleteAllUsers() {
         ArrayList<User> userList = ServerWrapper.getAllUsers();
         for (User u : userList){
