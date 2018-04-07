@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -31,7 +32,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private ImageButton uploadPic;
     private ImageButton toolBarBackbtn;
     private ImageView imageSet;
-    ArrayList<String> arrayB;
+    ArrayList<String> arrayB = new ArrayList<String>();
 
     /**
      *
@@ -109,8 +110,9 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 if (getIntent().getStringArrayListExtra("images") != null) {
                     arrayB = getIntent().getStringArrayListExtra("images");
-                    Bitmap b = StringToBitMap(arrayB.get(0));
-                    imageSet.setImageBitmap(b);
+                    Uri uri = Uri.parse(arrayB.get(0));
+                    //Bitmap b = StringToBitMap(arrayB.get(0));
+                    imageSet.setImageURI(uri);
                 }
 
                 // READ USERNAME AND USER ID FROM MAIN
@@ -161,7 +163,7 @@ public class AddTaskActivity extends AppCompatActivity {
             Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
         }catch(Exception e){
-            e.getMessage();
+            e.printStackTrace();
             return null;
         }
     }
