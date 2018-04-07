@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/editName"
+        android:id="@+id/editOtherName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/userView"
@@ -57,7 +57,7 @@
         app:srcCompat="@drawable/ic_phone" />
 
     <TextView
-        android:id="@+id/editPhoneNumber"
+        android:id="@+id/editOtherPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignBottom="@+id/phonePic"
@@ -85,7 +85,7 @@
         app:srcCompat="@drawable/ic_email" />
 
     <TextView
-        android:id="@+id/editEmail"
+        android:id="@+id/editOtherEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp"
