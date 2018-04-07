@@ -8,9 +8,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.google.android.gms.maps.model.LatLng;
 import com.robotium.solo.Solo;
 
+import org.json.JSONObject;
 import org.junit.Test;
 
 
+import java.net.URLEncoder;
 import java.util.List;
 
 
@@ -81,6 +83,36 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivit
         assertEquals(latlng_3, location_3_latlng);
     }
 
+    /**
+     * Tests if we can POST to Google api server and fetch JSON with the correct location data
+     * @throws Exception
+     * @author Diane Boytang
+     */
+    public void testFetchFromGoogle() throws Exception{
+        String task_location = "59 Main Boulevard, Sherwood Park, AB, Canada";
+        LatLng location_coord_correct = new LatLng(53.5374022, -113.3087432);
+
+        String task_location_encoded = URLEncoder.encode(task_location, "UTF-8");
+        String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
+        GetLocationJson locationJson = new GetLocationJson();
+        locationJson.execute(location_uri);
+
+        String json = locationJson.get();
+
+        JSONObject jsonObject = new JSONObject(json);
+
+        JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
+        String lat = locationGeo.getString("lat");
+        String lng = locationGeo.getString("lng");
+
+        Double latitude = Double.parseDouble(lat);
+        Double longitude = Double.parseDouble(lng);
+
+        LatLng location_coords = new LatLng(latitude, longitude);
+
+        assertEquals(location_coord_correct, location_coords);
+
+    }
 
     @Override
     public void tearDown() throws Exception{

@@ -7,12 +7,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import org.junit.Test;
 
 /**
- * Created by PunamWoosaree on 2018-02-21.
- */
-
-
-/**
  * Tests all methods contained in the Task class
+ * @author Punam Woosaree
  */
 public class TestTask extends ActivityInstrumentationTestCase2{
     public TestTask() {super(Task.class);}
