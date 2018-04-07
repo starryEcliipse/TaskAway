@@ -25,11 +25,8 @@ public class ViewOtherProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_other_profile);
 
-        //Get user_id and user_name
-        final String user_name = getIntent().getStringExtra("user_name");
+        //Get user ID
         final String userID = getIntent().getStringExtra("user_id");
-
-        Log.i("We got here:", userID);
 
         User current_user = ServerWrapper.getUserFromId(userID);
 

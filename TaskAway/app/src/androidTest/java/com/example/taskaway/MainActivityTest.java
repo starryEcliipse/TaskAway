@@ -43,15 +43,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         MainActivity activity = (MainActivity) solo.getCurrentActivity();
 
         //Test if activity goes to profile page
-        solo.clickOnView(solo.getView(R.id.toolbar));
+        solo.clickOnView(solo.getView(R.drawable.ic_menu));
         solo.clickOnMenuItem("Profile");
-        solo.assertCurrentActivity("Profile", ViewProfile.class);
+        solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
         solo.goBack();
 
         //Test if activity goes to logout page
-        solo.clickOnView(solo.getView(R.id.toolbar));
+        solo.clickOnView(solo.getView(R.drawable.ic_menu));
         solo.clickOnMenuItem("Logout");
-        solo.assertCurrentActivity("Login screen", Login.class);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
     }
 
@@ -62,20 +62,20 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         MainActivity activity = (MainActivity) solo.getCurrentActivity();
 
         //Swtich to My Bids screen
-        solo.clickOnView(solo.getView(R.id.viewpager_id, 1));
-        solo.assertCurrentActivity("My Bids", MyBids.class);
+        solo.clickInRecyclerView(1);
+        solo.assertCurrentActivity("Wrong Activity", MyBids.class);
 
         //Switch to My Assigned Jobs screen
-        solo.clickOnView(solo.getView(R.id.viewpager_id, 2));
-        solo.assertCurrentActivity("My Assigned Jobs", MyAssigned.class);
+        solo.clickInRecyclerView(2);
+        solo.assertCurrentActivity("Wrong Activity", MyAssigned.class);
 
         //Switch to All Bids screen
-        solo.clickOnView(solo.getView(R.id.viewpager_id, 3));
-        solo.assertCurrentActivity("My Bids", AllBids.class);
+        solo.clickInRecyclerView(3);
+        solo.assertCurrentActivity("Wrong Activity", AllBids.class);
 
         //Switch to My Jobs screen
-        solo.clickOnView(solo.getView(R.id.viewpager_id, 0));
-        solo.assertCurrentActivity("My Jobs", MyJobs.class);
+        solo.clickInRecyclerView(0);
+        solo.assertCurrentActivity("Wrong Activity", MyJobs.class);
         
     }
 
@@ -85,7 +85,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testAddActivity(){
         MainActivity activity = (MainActivity) solo.getCurrentActivity();
         solo.clickOnView(solo.getView(R.id.add_id));
-        solo.assertCurrentActivity("Add Task", AddTaskActivity.class);
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
 
     }
 

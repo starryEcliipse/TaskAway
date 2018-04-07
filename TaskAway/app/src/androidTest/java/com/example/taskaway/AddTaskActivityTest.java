@@ -120,7 +120,7 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         //Check if can Delete a task
-        solo.clickInRecyclerView(0);
+        solo.clickInList(0);
         solo.assertCurrentActivity("Wrong Activity", EditActivity.class);
         solo.clickOnView(solo.getView(R.id.DeleteButton));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -134,6 +134,7 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
     public void testBackOption(){
         AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
         solo.clickOnView(solo.getView(R.id.toolbar_back_btn));
+        solo.sleep(100000);
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
     }
@@ -144,6 +145,7 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
     public void testUploadPic(){
         AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
         solo.clickOnView(solo.getView(R.id.image_camera_btn));
+        solo.sleep(100000);
         solo.assertCurrentActivity("Wrong Activity", UploadPic.class);
 
     }
