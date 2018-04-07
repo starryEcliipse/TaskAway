@@ -57,7 +57,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view){
         switch (view.getId()){
             case R.id.button7:
-                Intent in = new Intent(this, AddActivity.class);
+                Intent in = new Intent(this, AddTaskActivity.class);
                 in.putParcelableArrayListExtra("bitmap", arrayN);
                 startActivity(in);
                 break;

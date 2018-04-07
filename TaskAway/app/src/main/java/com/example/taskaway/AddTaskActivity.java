@@ -19,10 +19,7 @@ import java.util.Calendar;
 public class AddTaskActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText requirementField;
-    private EditText statusField;
     private EditText locationField;
-    private Button cancelButton;
-    private Button saveButton;
     private final String text = "task";
     private ImageButton toolBarSaveBtn;
     private ImageButton uploadPic;
@@ -98,18 +95,6 @@ public class AddTaskActivity extends AppCompatActivity {
                     return;
                 }
                 String s = "REQUESTED";
-               /* String s = statusField.getText().toString();
-                s = s.toUpperCase();
-
-               // Check task status input
-                if (s.isEmpty()){
-                    statusField.setError("Assign status");
-                    return;
-                }
-                if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
-                    statusField.setError("Invalid status type");
-                    return;
-                }*/
 
                 String location = locationField.getText().toString();
                 // Check location input
@@ -143,7 +128,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     final Context context = getApplicationContext();
                     SaveFileController saveFileController = new SaveFileController();
                     int userindex = saveFileController.getUserIndex(context, username); // get userindex
-                    Log.i("AddActivity","userindex is "+userindex);
+                    //Log.i("AddActivity","userindex is "+userindex);
                     saveFileController.addRequiredTask(context, userindex, task); // add task to proper user in savefile
                 }
 
@@ -151,7 +136,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(AddTaskActivity.this, MainActivity.class);
                 intent2.putExtra("user_name", username);
                 intent2.putExtra("user_id", userid);
-                Log.i("AddActivity","Sending name and id to MainActivity!");
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
                 startActivity(intent2);
 
             } // end of onClick

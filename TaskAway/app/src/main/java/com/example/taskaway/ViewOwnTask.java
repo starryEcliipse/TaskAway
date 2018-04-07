@@ -83,7 +83,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 Intent intent = new Intent(ViewOwnTask.this, MainActivity.class);
                 intent.putExtra("user_name", userName);
                 intent.putExtra("user_id", userID);
-                Log.i("AddActivity","Sending name and id to MainActivity!");
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
                 startActivity(intent);
             }
         });

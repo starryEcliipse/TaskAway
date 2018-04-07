@@ -190,7 +190,7 @@ public class EditActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
                     intent2.putExtra("user_name", userName);
                     intent2.putExtra("user_id", user_id);
-                    Log.i("AddActivity", "Sending name and id to MainActivity!");
+                    //Log.i("AddActivity", "Sending name and id to MainActivity!");
                     startActivity(intent2);
                 } // end of if
                 else if (task.getBids() != null){
@@ -235,7 +235,7 @@ public class EditActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", user_id);
-                Log.i("AddActivity","Sending name and id to MainActivity!");
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
                 startActivity(intent2);
             }
         });
