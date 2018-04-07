@@ -7,6 +7,7 @@ package com.example.taskaway;
 import android.content.Context;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class PicturesImageAdapter extends BaseAdapter {
     private Context mContext;
-    ArrayList<Uri> arrayU;
+    ArrayList<Bitmap> arrayU;
 
     // Constructor
-    public PicturesImageAdapter(Context c, ArrayList<Uri> a) {
+    public PicturesImageAdapter(Context c, ArrayList<Bitmap> a) {
         mContext = c;
         arrayU = a;
     }
@@ -53,39 +54,9 @@ public class PicturesImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageURI(arrayU.get(position));
+        imageView.setImageBitmap(arrayU.get(position));
         return imageView;
     }
 
 }
 
-    // Keep all Images in array
-/*    public Integer[] mThumbIds = {
-            // TODO: find a way to display images here - currently using drawable images
-
-            *//*
-                LINKS
-                https://www.tutorialspoint.com/android/android_grid_view.htm
-                https://developer.android.com/guide/topics/ui/layout/gridview.html#example
-                Maybe useful?: https://dzone.com/articles/download-and-display-image-in-android-gridview
-
-             *//*
-
-            // TEST STUFF ONLY - delete cat photo later
-            R.drawable.cat, R.drawable.cat,
-            R.drawable.cat, R.drawable.cat,
-            R.drawable.cat, R.drawable.cat,
-
-           *//* R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7,
-            R.drawable.sample_0, R.drawable.sample_1,
-            R.drawable.sample_2, R.drawable.sample_3,
-            R.drawable.sample_4, R.drawable.sample_5,
-            R.drawable.sample_6, R.drawable.sample_7 *//*
-
-    };*/
