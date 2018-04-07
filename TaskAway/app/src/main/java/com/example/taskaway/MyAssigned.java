@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
@@ -32,6 +33,8 @@ public class MyAssigned extends Fragment {
     private static TaskList lstTask;
     private String user_name;
     private String user_id;
+
+    private ImageView unavailableIcon;
 
     /**
      * Constructor of MyBids.
@@ -122,13 +125,20 @@ public class MyAssigned extends Fragment {
                 Toast.makeText(getContext(), "Something went wrong fetching assigned jobs from server", Toast.LENGTH_SHORT).show();
             }
         }else{
-            //TODO: REMOVE THIS OFFLINE BEHAVIOR?
-            final Context context = getContext();
+            lstTask = new TaskList();
+
+            View view = getView();
+            if (view != null){
+                unavailableIcon = view.findViewById(R.id.unavailableIcon);
+                unavailableIcon.setVisibility(View.VISIBLE);
+            }
+
+            /*final Context context = getContext();
             SaveFileController saveFileController = new SaveFileController();
             int userIndex = saveFileController.getUserIndex(context, user_name);
             Log.i("My Assigned","Currently getting all other tasks");
             //changed this from getEveryonesTask to getAllTasks
-            lstTask = saveFileController.getUserAssignedTasks(context, userIndex);
+            lstTask = saveFileController.getUserAssignedTasks(context, userIndex);*/
         }
     }
 

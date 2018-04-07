@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
@@ -39,6 +40,8 @@ public class MyBids extends Fragment{
     TaskList lstTask;
     private String user_name;
     private String user_id;
+
+    private ImageView unavailableIcon;
 
     /**
      * Constructor of MyBids.
@@ -115,11 +118,19 @@ public class MyBids extends Fragment{
                 Toast.makeText(getContext(), "Something went wrong fetching bids from server", Toast.LENGTH_SHORT).show();
             }
         }else{
-            final Context context = getContext();
+            lstTask = new TaskList();
+
+            View view = getView();
+            if (view != null){
+                unavailableIcon = view.findViewById(R.id.unavailableIcon);
+                unavailableIcon.setVisibility(View.VISIBLE);
+            }
+
+            /*final Context context = getContext();
             SaveFileController saveFileController = new SaveFileController();
             int userIndex = saveFileController.getUserIndex(context, user_name);
             Log.i("My Jobs","userindex is "+userIndex);
-            lstTask = saveFileController.getUserBiddedTasks(context, userIndex);
+            lstTask = saveFileController.getUserBiddedTasks(context, userIndex);*/
         }
     }
 }

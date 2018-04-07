@@ -22,9 +22,7 @@ public class ServerWrapper {
         try{
             new ElasticsearchController.AddJobsTask().execute(task);
             User u = getUserFromId(task.getCreatorId());
-            Log.i("===NOTICE ME===", "About to add job to user " + u.getUsername() + " with " + u.getReqTasks().size() + " total req tasks");
             u.addTask(task);
-            Log.i("===NOTICE ME===", "Added job to user " + u.getUsername() + " with " + u.getReqTasks().size() + " total req tasks");
             updateUser(u);
         }catch(Exception e){
             Log.i("ServerWrapper", e.toString());

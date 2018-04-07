@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -14,3 +20,16 @@
     </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
+
+    <ImageView
+        android:id="@+id/unavailableIcon"
+        android:layout_width="119dp"
+        android:layout_height="114dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="20dip"
+        android:padding="12dip"
+        android:tint="@color/DarkGrey"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/stat_notify_error" />
+
+</FrameLayout>

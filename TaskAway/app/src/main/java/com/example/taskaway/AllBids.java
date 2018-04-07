@@ -23,6 +23,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
@@ -56,6 +57,8 @@ public class AllBids extends Fragment {
     private ImageButton searchbutton;
     private CheckBox distance_checkbox;
     private CheckBox allowsBids_checkbox;
+
+    private ImageView unavailableIcon;
 
     private AllBidsListViewAdapter listAdapter;
 
@@ -136,7 +139,6 @@ public class AllBids extends Fragment {
     public void onResume() {
         super.onResume();
 
-        lstTask = ServerWrapper.getAllJobs();
         updateSearchResults();
     }
 
@@ -185,7 +187,12 @@ public class AllBids extends Fragment {
     private void updateSearchResults() {
         if (!MainActivity.isOnline()){
             lstTask = new TaskList();
-            Toast.makeText(getContext(), "Something went wrong fetching all jobs from server", Toast.LENGTH_SHORT).show();
+            View view = getView();
+            if (view != null){
+                unavailableIcon = view.findViewById(R.id.unavailableIcon);
+                unavailableIcon.setVisibility(View.VISIBLE);
+            }
+            updateListAdapter();
             return;
         }
         String searchString = searchbox.getText().toString();

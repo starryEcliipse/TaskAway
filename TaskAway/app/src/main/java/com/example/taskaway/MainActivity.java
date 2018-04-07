@@ -128,17 +128,15 @@ public class MainActivity extends AppCompatActivity{
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                adapter.getItem(position).onResume();
             }
 
             @Override
             public void onPageSelected(int position) {
-
+                adapter.getItem(position).onResume();
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
