@@ -2,10 +2,16 @@ package com.example.taskaway;
 
 import android.app.Activity;
 import android.location.Geocoder;
+import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.robotium.solo.Solo;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
 /**
@@ -13,7 +19,7 @@ import com.robotium.solo.Solo;
  * @author Diane Boytang
  */
 
-public class MapActivityTest extends ActivityInstrumentationTestCase2 {
+public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivity> {
 
     private Solo solo;
 
@@ -21,10 +27,13 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2 {
         super(com.example.taskaway.MapActivity.class);
     }
 
+
+
     public void setUp() throws Exception{
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
+    @Test
     public void testStart() throws Exception {
         Activity activity = getActivity();
     }

@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -104,7 +105,14 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 GetLocationJson locationJson = new GetLocationJson();
                 locationJson.execute(location_uri);
 
-                JSONObject jsonObject = new JSONObject(locationJson.get());
+                String json = locationJson.get();
+
+                if (json == null){
+                    Toast.makeText(getApplicationContext(), "Could not get data from Google Maps server", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                JSONObject jsonObject = new JSONObject(json);
+
                 JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
                 String lat = locationGeo.getString("lat");
                 String lng = locationGeo.getString("lng");
@@ -122,8 +130,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
 
                 Log.i("MAPACTIVITYJSON", "Location info from Google api: " + locationJson.get());
-
-
 
 
             } catch (Exception e){
