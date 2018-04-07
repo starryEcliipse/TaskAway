@@ -243,7 +243,12 @@ public class User {
      * @author Adrian Schuldhaus
      */
     public void removeBid(Task task) {
-        bidTasks.removeTask(task);
+        for (Task t : bidTasks){
+            if (t.getId().equals(task.getId())){
+                bidTasks.removeTask(t);
+                return;
+            }
+        }
     }
 
     /**
@@ -269,6 +274,11 @@ public class User {
      * @author Adrian Schuldhaus
      */
     public void removeTask(Task task) {
-        reqTasks.removeTask(task);
+        for (Task t: reqTasks){
+            if (t.getId().equals(task.getId())){
+                reqTasks.removeTask(t);
+                return;
+            }
+        }
     }
 }
