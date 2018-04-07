@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * @see MainActivity
  * @see TaskListViewAdapter
  * @see SaveFileController
- * @see AddActivity
+ * @see AddTaskActivity
  */
 public class MyJobs extends Fragment {
 

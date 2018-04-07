@@ -283,7 +283,8 @@ public class ViewTask extends AppCompatActivity {
                 taskwinningbid.setText("No bids yet!");
             } else {
                 winningbid = task.findLowestBid();
-                taskwinningbid.setText(String.valueOf(winningbid.getAmount()));
+                taskwinningbid.setText(String.format("$%.2f", winningbid.getAmount()));
+
             }
         }
         catch (Exception e){
