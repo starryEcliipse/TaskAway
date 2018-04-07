@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
     ArrayList<Uri> arrayU = new ArrayList<Uri>();
     ArrayList<Bitmap> arrayN = new ArrayList<Bitmap>();
+    ArrayList<String> arrayS = new ArrayList<String>();
     Button cancel;
     Button upload;
     Button done;
@@ -58,7 +60,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()){
             case R.id.button7:
                 Intent in = new Intent(this, AddTaskActivity.class);
-                in.putParcelableArrayListExtra("bitmap", arrayN);
+                in.putStringArrayListExtra("images", arrayS);
                 startActivity(in);
                 break;
 
@@ -78,7 +80,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     }
 
     //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android
-
+    //https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
     //https://stackoverflow.com/questions/13511356/android-image-selected-from-gallery-orientation-is-always-0-exif-tag
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,6 +113,9 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                         image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                     }
                     arrayN.add(image);
+                    byte [] b = byteArrayOutputStream.toByteArray();
+                    String temp= Base64.encodeToString(b, Base64.DEFAULT);
+                    arrayS.add(temp);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -139,6 +144,9 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                             image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                         }
                         arrayN.add(image);
+                        byte [] b = byteArrayOutputStream.toByteArray();
+                        String temp= Base64.encodeToString(b, Base64.DEFAULT);
+                        arrayS.add(temp);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -151,7 +159,6 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
         }
     }
-
-
+    
 
 }

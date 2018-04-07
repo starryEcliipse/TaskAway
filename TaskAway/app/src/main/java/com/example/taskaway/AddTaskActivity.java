@@ -2,14 +2,20 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -24,6 +30,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private ImageButton toolBarSaveBtn;
     private ImageButton uploadPic;
     private ImageButton toolBarBackbtn;
+    private ImageView imageSet;
+    ArrayList<String> arrayB;
 
     /**
      *
@@ -38,11 +46,8 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
-
-
-
-
         // EditText layouts
+        imageSet = (ImageView) findViewById(R.id.imageView_edit);
         nameField = (EditText) findViewById(R.id.name_edit_text);
         requirementField = (EditText) findViewById(R.id.requirements_edit_text);
         locationField = (EditText) findViewById(R.id.location_edit_text);
@@ -102,6 +107,12 @@ public class AddTaskActivity extends AppCompatActivity {
                     location = "N/A";
                 }
 
+                if (getIntent().getStringArrayListExtra("images") != null) {
+                    arrayB = getIntent().getStringArrayListExtra("images");
+                    Bitmap b = StringToBitMap(arrayB.get(0));
+                    imageSet.setImageBitmap(b);
+                }
+
                 // READ USERNAME AND USER ID FROM MAIN
                 Intent intent = getIntent();
                 String username = intent.getStringExtra("username");
@@ -142,6 +153,19 @@ public class AddTaskActivity extends AppCompatActivity {
             } // end of onClick
         });
     } // end of onCreate()
+
+    //https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
+    public static Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
 
 }
 
