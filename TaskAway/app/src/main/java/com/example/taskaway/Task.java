@@ -219,6 +219,13 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
+     * Clears assignedId of task - The Id of the User who's bid was accepted
+     */
+    public void clearAssignedId(){
+        this.assignedId = "";
+    }
+
+    /**
      * Sets description of task.
      * @param description - description to be set for task
      */
