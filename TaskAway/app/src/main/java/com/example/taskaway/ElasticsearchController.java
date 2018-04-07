@@ -312,10 +312,10 @@ public class ElasticsearchController {
      */
     private static String buildQuery(String queryType, String searchField, String searchParameter) {
         if ((searchField != null && searchParameter != null && queryType != null)&&(searchField.length() >0 && searchParameter.length()>0)){
-            String query = "{\"query\": { \"" + queryType + "\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}, \"size\": 100}";
+            String query = "{\"from\": 0, \"size\": 100, \"query\": { \"" + queryType + "\" : { \"" + searchField.toLowerCase() + "\" : \"" + searchParameter.toLowerCase() + "\" }}}";
             return query;
         }else{
-            return "{\"query\": {\"match_all\" : {}}}, \"size\": 100}";
+            return "{\"from\": 0, \"size\": 100, \"query\": {\"match_all\" : {}}}}";
         }
     }
 
