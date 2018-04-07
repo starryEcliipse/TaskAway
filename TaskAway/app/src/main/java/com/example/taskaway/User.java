@@ -269,7 +269,7 @@ public class User {
 
     /**
      * Removes a Task from the user's requested tasks.
-     * @param task the Task to remvoe.
+     * @param task the Task to remove.
      *
      * @author Adrian Schuldhaus
      */
@@ -277,6 +277,37 @@ public class User {
         for (Task t: reqTasks){
             if (t.getId().equals(task.getId())){
                 reqTasks.removeTask(t);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Adds a Task to the user's assigned tasks. Updates the Task if the one already exists with the same id.
+     * @param task the Task to add or update.
+     *
+     * @author Adrian Schuldhaus
+     */
+    public void addAssigned(Task task) {
+        for (Task t: assignedTasks){
+            if (t.getId().equals(task.getId())){
+                assignedTasks.removeTask(t);
+                break;
+            }
+        }
+        assignedTasks.addTask(task);
+    }
+
+    /**
+     * Removes a Task from the user's assigned tasks.
+     * @param task the Task to remove.
+     *
+     * @author Adrian Schuldhaus
+     */
+    public void removeAssigned(Task task) {
+        for (Task t: assignedTasks){
+            if (t.getId().equals(task.getId())){
+                assignedTasks.removeTask(t);
                 return;
             }
         }

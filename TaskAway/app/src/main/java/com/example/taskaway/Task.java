@@ -25,6 +25,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private ArrayList<String> pictures;
     private String id;
     private String creatorId;
+    private String assignedId = "";
     private boolean deleted = false;
     private boolean hasNewBids = false;
     private String syncInstruction = "";
@@ -73,6 +74,14 @@ public class Task implements Serializable { // made Serializable to that Task ca
      */
     public String getCreatorId(){
         return creatorId;
+    }
+
+    /**
+     * Returns assignedId of task - The Id of the User who's bid was accepted
+     * @return - assignedId of the task
+     */
+    public String getAssignedId(){
+        return assignedId;
     }
 
     /**
@@ -199,6 +208,14 @@ public class Task implements Serializable { // made Serializable to that Task ca
      */
     public void setCreatorId(String id){
         this.creatorId = id;
+    }
+
+    /**
+     * Sets assignedId of task - The Id of the User who's bid was accepted
+     * @param id - assignedId to be set for task
+     */
+    public void setAssignedId(String id){
+        this.assignedId = id;
     }
 
     /**

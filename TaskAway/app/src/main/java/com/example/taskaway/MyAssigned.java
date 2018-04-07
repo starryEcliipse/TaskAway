@@ -108,18 +108,9 @@ public class MyAssigned extends Fragment {
     public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
+            Log.i("MyBids", "user_id:" + user_id);
             if (user != null){
-                TaskList biddedTasks = user.getBidTasks();
-                TaskList assignedTasks = new TaskList();
-                for (Task t : biddedTasks){
-                    String status = t.getStatus().toLowerCase();
-                    if (status.equals("assigned") || status.equals("done")){
-                        if (t.findLowestBid().getUserId().equals(user_id)){
-                            assignedTasks.addTask(t);
-                        }
-                    }
-                }
-                lstTask = assignedTasks;
+                lstTask = user.getAssignedTasks();
             }else{
                 lstTask = new TaskList();
                 Toast.makeText(getContext(), "Something went wrong fetching assigned jobs from server", Toast.LENGTH_SHORT).show();

@@ -44,6 +44,11 @@ public class ServerWrapper {
                     for (Bid b : task.getBids()){
                         User u = getUserFromId(b.getUserId());
                         u.addBid(task);
+                        if (task.getAssignedId().equals(u.getId())){
+                            u.addAssigned(task);
+                        }else{
+                            u.removeAssigned(task);
+                        }
                         updateUser(u);
                     }
                 }
@@ -71,6 +76,9 @@ public class ServerWrapper {
                 for (Bid b : task.getBids()){
                     User u = getUserFromId(b.getUserId());
                     u.removeBid(task);
+                    if (task.getAssignedId().equals(u.getId())){
+                        u.removeAssigned(task);
+                    }
                     updateUser(u);
                 }
             }
