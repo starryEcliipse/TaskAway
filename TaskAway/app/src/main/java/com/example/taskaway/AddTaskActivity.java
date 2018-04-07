@@ -33,6 +33,8 @@ public class AddTaskActivity extends AppCompatActivity {
     private ImageButton toolBarBackbtn;
     private ImageView imageSet;
     ArrayList<String> arrayB = new ArrayList<String>();
+    private String username;
+    private String userid;
 
     /**
      *
@@ -53,15 +55,34 @@ public class AddTaskActivity extends AppCompatActivity {
         requirementField = (EditText) findViewById(R.id.requirements_edit_text);
         locationField = (EditText) findViewById(R.id.location_edit_text);
 
-
-
         uploadPic = (ImageButton) findViewById(R.id.image_camera_btn);
+
+        Intent intent = getIntent();
+
+        if (intent.getStringArrayListExtra("images") != null) {
+            arrayB = getIntent().getStringArrayListExtra("images");
+            Uri uri = Uri.parse(arrayB.get(0));
+            //Bitmap b = StringToBitMap(arrayB.get(0));
+
+            imageSet.setImageURI(uri);
+            Log.i("ADDTASK","get is: "+arrayB.get(0));
+            //Bitmap bit = BitmapFactory.decodeFile(arrayB.get(0));
+            //imageSet.setImageBitmap(bit);
+        }
+        else{
+            Log.i("ADDTASK"," null!");
+        }
+
 
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(AddTaskActivity.this, MainActivity.class);
+                intent.putExtra("user_name", username);
+                intent.putExtra("user_id", userid);
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent);
             }
         });
 
@@ -108,17 +129,6 @@ public class AddTaskActivity extends AppCompatActivity {
                     location = "N/A";
                 }
 
-                if (getIntent().getStringArrayListExtra("images") != null) {
-                    arrayB = getIntent().getStringArrayListExtra("images");
-                    Uri uri = Uri.parse(arrayB.get(0));
-                    //Bitmap b = StringToBitMap(arrayB.get(0));
-                    imageSet.setImageURI(uri);
-                }
-
-                // READ USERNAME AND USER ID FROM MAIN
-                Intent intent = getIntent();
-                String username = intent.getStringExtra("username");
-                String userid = intent.getStringExtra("userid");
 
                 // NEW TASK - create with valid input
                 String task_id = Calendar.getInstance().getTime().toString();
@@ -154,6 +164,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
             } // end of onClick
         });
+
     } // end of onCreate()
 
     //https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
@@ -168,6 +179,14 @@ public class AddTaskActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        // READ USERNAME AND USER ID FROM MAIN
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        userid = intent.getStringExtra("userid");
+    }
 
 }
 

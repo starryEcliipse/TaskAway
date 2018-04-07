@@ -91,6 +91,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             // TODO: make new instance of array for better performance BIG O wise?
             if (!arrayU.isEmpty()){
                 arrayU.clear();
+                arrayS.clear();
+                arrayN.clear();
             }
 
             // If single photo, the photo will NOT be in ClipData - just return it

@@ -19,6 +19,8 @@
         android:layout_below="@+id/actionbar"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/placeholder" />
+        <!--android:src="@drawable/placeholder" />-->
+
 
     <EditText
         android:id="@+id/name_edit_text"
