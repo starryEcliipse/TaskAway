@@ -59,12 +59,11 @@
     <TextView
         android:id="@+id/editPhoneNumber"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/phonePic"
         android:layout_alignTop="@+id/phonePic"
         android:layout_toEndOf="@+id/phonePic"
         android:layout_toRightOf="@+id/phonePic"
-        android:layout_marginBottom="24dp"
         android:paddingTop="8dp"
         android:textSize="20sp" />
 
