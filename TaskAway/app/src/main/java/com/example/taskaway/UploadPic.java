@@ -91,21 +91,26 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
             Log.i("UPLOAD PIC","IS EMPTY: "+arrayU.isEmpty());
 
-            // reset array
-            // TODO: make new instance?
+            // Ensures that we don't accidentally append to the array of images if the user changes mind
+            // TODO: make new instance of array for better performance BIG O wise?
             if (!arrayU.isEmpty()){
-                Log.i("UPLOAD PIC","NOT EMPTY IS CALLED");
                 arrayU.clear();
             }
 
-            for (int i = 0; i < data.getClipData().getItemCount(); i++){
-                // check if same URI
-                Uri uri = data.getClipData().getItemAt(i).getUri();
-                Log.i("UPLOAD PIC","URI " + uri +" AT POSITION " + i);
-
+            // If single photo, the photo will NOT be in ClipData - just return it
+            // SOURCE: https://stackoverflow.com/a/40475323
+            if (data.getClipData() == null){
+                Uri uri = data.getData();
                 arrayU.add(uri);
+            }
 
-                Log.i("UPLOAD PIC","arrayU is currently: "+arrayU.toString());
+            // Else, use ClipData
+            else {
+                for (int i = 0; i < data.getClipData().getItemCount(); i++) {
+                    // check if same URI
+                    Uri uri = data.getClipData().getItemAt(i).getUri();
+                    arrayU.add(uri);
+                }
             }
 
             //Uri selectedImage = data.getClipData().getItemAt(1).getUri();
