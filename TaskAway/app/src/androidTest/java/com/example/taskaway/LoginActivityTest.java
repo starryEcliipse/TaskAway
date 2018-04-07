@@ -49,7 +49,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "goodNewUser");
         solo.sleep(100000);
-        solo.clickOnButton("Register");
+        solo.clickOnView(solo.getView(R.id.newregisterButton));
         solo.assertCurrentActivity("Switch to MainActivity", MainActivity.class);
     }
 
