@@ -144,7 +144,6 @@ public class MainActivity extends AppCompatActivity{
         // Adding Fragment here
         MyJobs myjobs = new MyJobs();
         MyBids mybids = new MyBids();
-        // TODO MAKE NEW FRAGMENT
         MyAssigned myassigned = new MyAssigned();
         AllBids allbids = new AllBids();
         adapter.addFragment(myjobs,"My Jobs");

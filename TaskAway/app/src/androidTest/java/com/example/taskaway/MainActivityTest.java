@@ -30,8 +30,63 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
+
     public void testStart() throws Exception{
         Activity activity = getActivity();
+    }
+
+    /**
+     * Used to test the intents and actions of the Toolbar
+     */
+    public void testToolbar(){
+
+        MainActivity activity = (MainActivity) solo.getCurrentActivity();
+
+        //Test if activity goes to profile page
+        solo.clickOnView(solo.getView(R.id.toolbar));
+        solo.clickOnMenuItem("Profile");
+        solo.assertCurrentActivity("Profile", ViewProfile.class);
+        solo.goBack();
+
+        //Test if activity goes to logout page
+        solo.clickOnView(solo.getView(R.id.toolbar));
+        solo.clickOnMenuItem("Logout");
+        solo.assertCurrentActivity("Login screen", Login.class);
+
+    }
+
+    /**
+     * Used to test switching to fragments
+     */
+    public void testFragments(){
+        MainActivity activity = (MainActivity) solo.getCurrentActivity();
+
+        //Swtich to My Bids screen
+        solo.clickOnView(solo.getView(R.id.viewpager_id, 1));
+        solo.assertCurrentActivity("My Bids", MyBids.class);
+
+        //Switch to My Assigned Jobs screen
+        solo.clickOnView(solo.getView(R.id.viewpager_id, 2));
+        solo.assertCurrentActivity("My Assigned Jobs", MyAssigned.class);
+
+        //Switch to All Bids screen
+        solo.clickOnView(solo.getView(R.id.viewpager_id, 3));
+        solo.assertCurrentActivity("My Bids", AllBids.class);
+
+        //Switch to My Jobs screen
+        solo.clickOnView(solo.getView(R.id.viewpager_id, 0));
+        solo.assertCurrentActivity("My Jobs", MyJobs.class);
+        
+    }
+
+    /**
+     * Tests if the Add Task Activity appears when clicked
+     */
+    public void testAddActivity(){
+        MainActivity activity = (MainActivity) solo.getCurrentActivity();
+        solo.clickOnView(solo.getView(R.id.add_id));
+        solo.assertCurrentActivity("Add Task", AddTaskActivity.class);
+
     }
 
     @Override

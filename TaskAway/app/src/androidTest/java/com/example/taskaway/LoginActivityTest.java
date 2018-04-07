@@ -50,7 +50,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "goodNewUser");
         solo.sleep(100000);
         solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.assertCurrentActivity("Switch to MainActivity", MainActivity.class);
     }
 
     public void testLogin(){
@@ -61,6 +61,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUser");
         solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
         solo.clickOnButton("Register");
+        solo.assertCurrentActivity("Switch to MainActivity", MainActivity.class);
         solo.goBack();
 
         //No Login Info provided
