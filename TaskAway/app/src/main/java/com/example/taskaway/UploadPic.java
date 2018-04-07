@@ -35,7 +35,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     //private Context mContext;
     LinearLayout linearMain;
     //ArrayList<Uri> arrayU;
-    ImageView imageToUpload;
+    //ImageView imageToUpload;
     ArrayList<Uri> arrayU = new ArrayList<Uri>();
     //Uri selectedImage;
     //ArrayList<String> imagesPathList;
@@ -51,7 +51,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         //linearMain = (LinearLayout) findViewById(R.id.linearImage);
         //GridView gridview = (GridView) findViewById(R.id.gridview);
         //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
-        imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
+        //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         done = (Button) findViewById(R.id.button7);
 
@@ -94,27 +94,27 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
             //Uri selectedImage = data.getClipData().getItemAt(1).getUri();
 
-            for (int j = 0; j < arrayU.size(); j++) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                try {
-                    BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
-                    options.inJustDecodeBounds = false;
-                    Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
-                    String type = getContentResolver().getType(arrayU.get(j));
-                    Log.i("STUPID TYPE", type);
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                    if (type.contains("png")) {
-                        image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                    } else if (type.contains("jpg") || type.contains("jpeg")) {
-                        image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                    }
-                    imageToUpload.setImageBitmap(image);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-            }
+//            for (int j = 0; j < arrayU.size(); j++) {
+//                BitmapFactory.Options options = new BitmapFactory.Options();
+//                options.inJustDecodeBounds = true;
+//                try {
+//                    BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
+//                    options.inJustDecodeBounds = false;
+//                    Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(j)), null, options);
+//                    String type = getContentResolver().getType(arrayU.get(j));
+//                    Log.i("STUPID TYPE", type);
+//                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                    if (type.contains("png")) {
+//                        image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+//                    } else if (type.contains("jpg") || type.contains("jpeg")) {
+//                        image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+//                    }
+//                    imageToUpload.setImageBitmap(image);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
             //Uri selectedImage = data.getClipData().getItemAt(0).getUri();
             //imageToUpload.setImageURI(selectedImage);
 
@@ -127,8 +127,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                 Uri selectedImage = data.getData();
                 arrayU.add(selectedImage);
             }*/
-            //GridView gridview = (GridView) findViewById(R.id.gridview);
-            //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
+            GridView gridview = (GridView) findViewById(R.id.gridview);
+            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
             //Uri selectedImage = data.getData();
             //imageToUpload.setImageURI(selectedImage);
             //https://stackoverflow.com/questions/23426113/how-to-select-multiple-images-from-gallery-in-android

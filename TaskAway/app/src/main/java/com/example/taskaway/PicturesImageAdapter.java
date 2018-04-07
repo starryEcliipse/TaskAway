@@ -57,6 +57,7 @@ public class PicturesImageAdapter extends BaseAdapter {
             imageView.setImageURI(uri);
            // return imageView;
         }*/
+        imageView.setImageURI(arrayU.get(position));
         return imageView;
     }
 
