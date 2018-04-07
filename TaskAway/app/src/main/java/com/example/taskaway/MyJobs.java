@@ -140,7 +140,7 @@ public class MyJobs extends Fragment {
     }
 
     public void updateList() {
-        if (MainActivity.isOnline()){
+        /*if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
             if (user != null){
                 lstTask = user.getReqTasks();
@@ -148,13 +148,13 @@ public class MyJobs extends Fragment {
                 lstTask = new TaskList();
                 Toast.makeText(getContext(), "Something went wrong fetching your jobs from server", Toast.LENGTH_SHORT).show();
             }
-        }else{
+        }else{*/
             final Context context = getContext();
             SaveFileController saveFileController = new SaveFileController();
             int userIndex = saveFileController.getUserIndex(context, user_name);
             Log.i("My Jobs","userindex is "+userIndex);
             lstTask = saveFileController.getUserRequiredTasks(context, userIndex);
-        }
+        //}
     }
 
 

@@ -311,18 +311,25 @@ public class ServerWrapper {
         try{
             SaveFileController saveFileController = new SaveFileController();
             int userIndex = saveFileController.getUserIndex(context, userName);
+            User user = ServerWrapper.getUserFromUsername(userName);
             TaskList loadedTasks = saveFileController.getUserRequiredTasks(context, userIndex);
             for (Task t : loadedTasks){
                 if (t.getSyncInstruction() == null) t.clearSyncInstruction();
                 if (t.getSyncInstruction().equals("OFFLINE_ADD")){
+                    t.setCreatorId(user.getId());
                     t.clearSyncInstruction();
                     addJob(t);
+                    Log.i("SWrapper SyncJ", "Offline-Created Job Sent to Server");
                 }else if (t.getSyncInstruction().equals("OFFLINE_UPDATE")){
+                    t.setCreatorId(user.getId());
                     t.clearSyncInstruction();
                     updateJob(t);
+                    Log.i("SWrapper SyncJ", "Offline-Edited Job Updated on Server");
                 }else if (t.getSyncInstruction().equals("OFFLINE_DELETE")){
+                    t.setCreatorId(user.getId());
                     t.clearSyncInstruction();
                     deleteJob(t);
+                    Log.i("SWrapper SyncJ", "Offline-Deleted Job Deleted from Server");
                 }else{
                     t.clearSyncInstruction();
                 }
@@ -372,7 +379,7 @@ public class ServerWrapper {
      */
     public static void syncWithServer(Context context, String userName) {
         if (!MainActivity.isOnline()) return;
-
+        Log.i("SWrapper Sync", "Syncing with server...");
         try{
             syncJobs(context, userName);
             syncUser(context, userName);

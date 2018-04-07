@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity{
             OnlineMode = online;
         }
 
+        ServerWrapper.syncWithServer(getApplicationContext(), user_name);
+
         /*
          * TOOLBAR
          * The following below creates the layout for the Toolbar.

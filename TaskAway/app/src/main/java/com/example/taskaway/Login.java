@@ -86,8 +86,6 @@ public class Login extends AppCompatActivity {
                 SaveFileController saveFileController = new SaveFileController();
                 saveFileController.addNewUser(context, current_user);
 
-                ServerWrapper.syncWithServer(getApplicationContext(), userName);
-
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);
@@ -156,8 +154,6 @@ public class Login extends AppCompatActivity {
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 saveFileController.addNewUser(context, current_user);
-
-                ServerWrapper.syncWithServer(getApplicationContext(), userName);
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
