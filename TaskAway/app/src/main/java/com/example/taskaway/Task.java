@@ -81,7 +81,10 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * @return - assignedId of the task
      */
     public String getAssignedId(){
-        return assignedId;
+        if (assignedId != null){
+            return assignedId;
+        }
+        return "";
     }
 
     /**
