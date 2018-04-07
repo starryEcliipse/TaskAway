@@ -254,15 +254,13 @@ public class ViewOwnTask extends AppCompatActivity {
 
         tasklowestbid = task.findLowestBid();
 
-        User requester;
+        // Get bidder information
         User bidder;
-        if (MainActivity.isOnline()){
-            requester = ServerWrapper.getUserFromId(task.getCreatorId());
+        if (MainActivity.isOnline()){ // online
             bidder =  ServerWrapper.getUserFromId(tasklowestbid.getUserId());
-        }else{
+        }else{ // offline
             SaveFileController saveFileController = new SaveFileController();
             Context context = getApplicationContext();
-            requester = saveFileController.getUserFromUserId(context, task.getCreatorId());
             bidder = saveFileController.getUserFromUserId(context,tasklowestbid.getUserId());
         }
 
@@ -275,9 +273,9 @@ public class ViewOwnTask extends AppCompatActivity {
 
         // Get user information
         userID = intent.getStringExtra("userid");
-        Log.i("userID", userID);
+        Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName"); // FIXME username vs userName
-        Log.i("userName", userName);
+        Log.i("userName", ""+userName);
 
         // Display the lowest bid
         try {

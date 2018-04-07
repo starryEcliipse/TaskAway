@@ -54,8 +54,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private TextView toolBarTitle;
     private ImageButton toolBarSaveBtn;
 
-    //private ArrayList<Task> lstTask;
-
     @Override
     public void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,11 +101,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 intent.putExtra("task", task); // put task
                 intent.putExtra("userid", user_id);
                 intent.putExtra("userName", user_name);
-                //lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
-
-                //intent.putExtra("lowestbidamount", lowestbidamount);
                 startActivity(intent);
-                //finish();
             }
         });
 
