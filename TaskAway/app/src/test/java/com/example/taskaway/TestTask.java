@@ -271,4 +271,34 @@ public class TestTask extends ActivityInstrumentationTestCase2{
         Task task = new Task("name", "I'm a task", "requested", "Edmonton", bidsList, picturesList, lowestBid, "coolId");
         assertEquals(task.getId(), "coolId");
     }
+
+    /**
+     * Test getLatitude()
+     * @author Diane Boytang
+     */
+    @Test
+    public void testGetLatitude(){
+        String locationString = "59 Main Boulevard, Sherwood Park, AB, Canada";
+        Task task = new Task("name", "I'm a task", "requested", locationString, null, null, null, "coolId");
+
+        Double latitudeCorrect = 53.5374022;
+
+        Double latitudeTest = task.getLatitude();
+        assertEquals(latitudeCorrect, latitudeTest);
+    }
+
+    /**
+     * Test getLongitude()
+     * @author Diane Boytang
+     */
+    @Test
+    public void testGetLongitude(){
+        String locationString = "59 Main Boulevard, Sherwood Park, AB, Canada";
+        Task task = new Task("name", "I'm a task", "requested", locationString, null, null, null, "coolId");
+
+        Double longitudeCorrect = -113.3087432;
+        Double longitudeTest = task.getLongitude();
+
+        assertEquals(longitudeCorrect, longitudeTest);
+    }
 }

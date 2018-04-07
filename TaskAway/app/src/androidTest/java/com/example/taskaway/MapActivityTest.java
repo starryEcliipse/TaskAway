@@ -38,6 +38,11 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivit
         Activity activity = getActivity();
     }
 
+    /**
+     * Test to check if geocoder in MapActivity is getting correct location data
+     * @throws Exception
+     * @author Diane Boytang
+     */
     public void testGetTask_location_coords() throws Exception{
         Geocoder geocoder = new Geocoder(getActivity());
 
@@ -82,5 +87,5 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivit
         solo.finishOpenedActivities();
     }
 
-    
+
 }
