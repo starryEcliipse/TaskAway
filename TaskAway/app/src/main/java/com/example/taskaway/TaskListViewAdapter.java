@@ -79,7 +79,6 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
             @Override
             // Go to a requester's own task
             public void onClick(View view) {
-                Toast.makeText(mContext, "Item Clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewOwnTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));

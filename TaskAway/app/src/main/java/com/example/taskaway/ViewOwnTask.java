@@ -57,13 +57,6 @@ public class ViewOwnTask extends AppCompatActivity {
         taskdescription = (TextView) this.findViewById(R.id.my_task_details);
         tasklocation = (TextView) this.findViewById(R.id.my_task_location);
 
-
-        /* TODO: use with elasticsearch:
-            userid = task.getCreatorId();
-            user = ServerWrapper.getUserFromId(userid);
-            lowest
-         */
-
         // TOOL BAR GO BACK TO MAIN ACTIVITY
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
@@ -246,35 +239,53 @@ public class ViewOwnTask extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // TODO: read from server
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
         userID = intent.getStringExtra("userid");
         Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName");
-        //float lowestbidamount =
         Log.i("username", ""+ userName);
 
-        // read and display task info
+        // Read and display task info
         taskname.setText(task.getName());
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
+        tasklowestbid = task.findLowestBid();
+
+        User requester;
+        User bidder;
+        if (MainActivity.isOnline()){
+            requester = ServerWrapper.getUserFromId(task.getCreatorId());
+            bidder =  ServerWrapper.getUserFromId(tasklowestbid.getUserId());
+        }else{
+            SaveFileController saveFileController = new SaveFileController();
+            Context context = getApplicationContext();
+            requester = saveFileController.getUserFromUserId(context, task.getCreatorId());
+            bidder = saveFileController.getUserFromUserId(context,tasklowestbid.getUserId());
+        }
+
+        try {
+            String userBidderName = bidder.getUsername();
+            tasklowestbidusername.setText(userBidderName);
+        }
+        catch (Exception e) {
+        }
+
+        // Get user information
+        userID = intent.getStringExtra("userid");
+        Log.i("userID", userID);
+        userName = intent.getStringExtra("userName"); // FIXME username vs userName
+        Log.i("userName", userName);
+
+        // Display the lowest bid
         try {
             if (task.getBids().isEmpty()) {
                 tasklowestbidamount.setText("No bids yet!");
             } else {
-                tasklowestbid = task.findLowestBid();
+
                 tasklowestbidamount.setText(String.format("$%.2f", tasklowestbid.getAmount()));
-
-                // Get username of bidder with lowest bid
-                SaveFileController saveFileController = new SaveFileController();
-                Context context = getApplicationContext();
-                User userBidder = saveFileController.getUserFromUserId(context,tasklowestbid.getUserId());
-
-                String userBidderName = userBidder.getUsername();
-                tasklowestbidusername.setText(userBidderName);
             }
         } catch (Exception e) {
             tasklowestbidamount.setText("No bids yet!");

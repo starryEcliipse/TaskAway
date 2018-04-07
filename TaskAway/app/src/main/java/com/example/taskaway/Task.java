@@ -165,13 +165,13 @@ public class Task implements Serializable { // made Serializable to that Task ca
         return -1;
     }
 
-    /**
-     * Returns lowest bid (of all bids) of task
-     * @return - lowest bid for task
-     */
-    public Float getLowestBid(){
-        return lowestBid;
-    }
+//    /**
+//     * Returns lowest bid (of all bids) of task
+//     * @return - lowest bid for task
+//     */
+//    public Float getLowestBid(){
+//        return lowestBid;
+//    }
 
     /**
      * Returns pictures related to task.
@@ -245,13 +245,13 @@ public class Task implements Serializable { // made Serializable to that Task ca
         this.bids = bids;
     }
 
-    /**
-     * Sets the lowest bid (of all bids) for task.
-     * @param lowestBid - lowest bid (of all bids) to be set for task
-     */
-    public void setLowestBid(Float lowestBid){
-        this.lowestBid = lowestBid;
-    }
+//    /**
+//     * Sets the lowest bid (of all bids) for task.
+//     * @param lowestBid - lowest bid (of all bids) to be set for task
+//     */
+//    public void setLowestBid(Float lowestBid){
+//        this.lowestBid = lowestBid;
+//    }
 
     /**
      * Sets a status for task.

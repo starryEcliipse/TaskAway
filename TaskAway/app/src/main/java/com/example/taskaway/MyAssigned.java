@@ -108,7 +108,7 @@ public class MyAssigned extends Fragment {
     public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
-            Log.i("MyBids", "user_id:" + user_id);
+            Log.i("MyAssigned", "user_id:" + user_id);
             if (user != null){
                 lstTask = user.getAssignedTasks();
             }else{
