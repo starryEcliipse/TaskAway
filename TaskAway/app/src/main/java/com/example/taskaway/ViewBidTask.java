@@ -190,6 +190,9 @@ public class ViewBidTask extends AppCompatActivity {
                 task.setBids(bidList);
 
                 if (MainActivity.isOnline()){
+                    //Set information for notifications
+                    task.setHasNewBids(true);
+
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
                     User u = ServerWrapper.getUserFromId(userID);

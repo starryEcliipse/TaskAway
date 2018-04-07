@@ -131,6 +131,8 @@ public class ViewTask extends AppCompatActivity {
                 } */
 
                 if (MainActivity.isOnline()){
+                    //Set information for notifications
+                    task.setHasNewBids(true);
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
                 }
@@ -256,6 +258,11 @@ public class ViewTask extends AppCompatActivity {
         // Get task information
         Intent intent = getIntent();
         task = (Task) intent.getSerializableExtra("task");
+
+        //change new bids to false
+        if(task.hasNewBids()){
+            task.setHasNewBids(false);
+        }
 
         Log.i("ViewTask","Now reading task id: "+task.getId());
 
