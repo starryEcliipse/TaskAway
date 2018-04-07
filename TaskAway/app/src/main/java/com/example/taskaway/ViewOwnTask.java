@@ -243,7 +243,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 tasklowestbidamount.setText("No bids yet!");
             } else {
                 tasklowestbid = task.findLowestBid();
-                tasklowestbidamount.setText(String.valueOf(tasklowestbid.getAmount()));
+                tasklowestbidamount.setText(String.format("$%.2f", tasklowestbid.getAmount()));
 
                 // Get username of bidder with lowest bid
                 SaveFileController saveFileController = new SaveFileController();

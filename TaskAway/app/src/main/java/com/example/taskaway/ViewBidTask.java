@@ -255,7 +255,7 @@ public class ViewBidTask extends AppCompatActivity {
         for (int i=0; i < bidList.size(); i++){
             if (bidList.get(i).getUserId().equals(userID)){
                 recentbid = bidList.get(i).getAmount();
-                useroldbid.setText(Float.toString(recentbid));
+                useroldbid.setText(String.format("$%.2f", recentbid));
                 break;
             }
         }
@@ -267,7 +267,7 @@ public class ViewBidTask extends AppCompatActivity {
                 taskwinningbid.setText("No bids yet!");
             } else {
                 winningbid = task.findLowestBid();
-                taskwinningbid.setText(String.valueOf(winningbid.getAmount()));
+                taskwinningbid.setText(String.format("$%.2f", winningbid.getAmount()));
                 Log.i("ViewTask", "On start");
                 // Just for reading all bids in IDE Console - for debugging purposes
                 for (Bid temp : task.getBids()) {

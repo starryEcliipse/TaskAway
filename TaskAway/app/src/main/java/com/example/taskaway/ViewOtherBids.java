@@ -192,7 +192,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 // Just get username stuff
                 User bidder = saveFileController.getUserFromUserId(getApplicationContext(), bidderbid.getUserId());
                 String biddername = bidder.getUsername();
-                Toast.makeText(getApplicationContext(), "You have declined "+ biddername +"\'s $"+ bidderbid.getAmount()+ " bid!",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "You have declined "+ biddername +"\'s " + String.format("$%.2f", bidderbid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
                 
                 bidList.remove(pos);
 
