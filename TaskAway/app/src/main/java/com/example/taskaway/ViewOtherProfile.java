@@ -14,6 +14,8 @@ package com.example.taskaway;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.widget.TextView;
 
 public class ViewOtherProfile extends AppCompatActivity {
@@ -21,11 +23,18 @@ public class ViewOtherProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        setContentView(R.layout.view_other_profile);
 
-        /* retrieve creatorID and get selected user from creatorID
+        //Get user_id and user_name
+        final String user_name = getIntent().getStringExtra("user_name");
+        final String userID = getIntent().getStringExtra("user_id");
+
+        Log.i("We got here:", userID);
+
+        User current_user = ServerWrapper.getUserFromId(userID);
+
         TextView usernameTextView = (TextView)findViewById(R.id.editOtherName);
-        usernameTextView.setText(username);
+        usernameTextView.setText(current_user.getUsername());
 
         if(current_user.getPhone()!=null) {
             String phonenumber = current_user.getPhone();
@@ -39,7 +48,7 @@ public class ViewOtherProfile extends AppCompatActivity {
             TextView emailTextView = (TextView) findViewById(R.id.editOtherEmail);
             emailTextView.setText(email);
         }
-        */
+
     }
 
 

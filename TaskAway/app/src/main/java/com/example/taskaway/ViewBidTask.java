@@ -106,6 +106,28 @@ public class ViewBidTask extends AppCompatActivity {
             }
         });
 
+        /* PROFILE Textview
+        @author Punam Woosaree
+        When task requester username is selected, their profile shows up
+         */
+        TextView requestUser = (TextView) findViewById(R.id.task_user_name);
+        requestUser.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                User requesterUser = ServerWrapper.getUserFromId(task.getCreatorId());
+
+                //Sending info to ViewOtherProfile
+                Intent intent = new Intent(ViewBidTask.this, ViewOtherProfile.class);
+                intent.putExtra("user_name", requesterUser.getUsername());
+                intent.putExtra("user_id", requesterUser.getId());
+                Log.i("ViewTask", "Sending name and id to ViewOtherProfile!");
+                startActivity(intent);
+            }
+
+        });
+
+
 
 
         // SAVE BUTTON

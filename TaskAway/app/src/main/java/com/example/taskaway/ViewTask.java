@@ -159,6 +159,27 @@ public class ViewTask extends AppCompatActivity {
             }
         });
 
+        /*
+        @author Punam Woosaree
+        When task requester username is selected, their profile shows up
+         */
+        TextView requestUser = (TextView) findViewById(R.id.task_user_name);
+        requestUser.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View view) {
+
+               User requesterUser = ServerWrapper.getUserFromId(task.getCreatorId());
+
+               //Sending info to ViewOtherProfile
+               Intent intent = new Intent(ViewTask.this, ViewOtherProfile.class);
+               intent.putExtra("user_name", requesterUser.getUsername());
+               intent.putExtra("user_id", requesterUser.getId());
+               Log.i("ViewTask", "Sending name and id to ViewOtherProfile!");
+               startActivity(intent);
+           }
+
+        });
+
         // CANCEL BUTTON - cancel activity
         Button cancelButton = (Button) findViewById(R.id.cancel_button_1);
         cancelButton.setOnClickListener(new View.OnClickListener() {

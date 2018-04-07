@@ -53,13 +53,13 @@
         android:visibility="visible"
         android:paddingStart="8dp"
         android:paddingLeft="8dp"
-        android:layout_below="@id/editName"
+        android:layout_below="@id/editOtherName"
         app:srcCompat="@drawable/ic_phone" />
 
     <TextView
         android:id="@+id/editOtherPhoneNumber"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/phonePic"
         android:layout_alignTop="@+id/phonePic"
         android:layout_toEndOf="@+id/phonePic"
@@ -86,13 +86,15 @@
 
     <TextView
         android:id="@+id/editOtherEmail"
-        android:layout_width="wrap_content"
+        android:layout_width="12dp"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
         android:layout_alignBottom="@+id/emailPic"
         android:layout_alignTop="@+id/emailPic"
+        android:layout_marginLeft="-11dp"
+        android:layout_marginStart="-11dp"
         android:layout_toEndOf="@+id/emailPic"
         android:layout_toRightOf="@+id/emailPic"
+        android:paddingBottom="8dp"
         android:textSize="20sp" />
 
 
