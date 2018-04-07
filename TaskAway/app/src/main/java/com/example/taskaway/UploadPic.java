@@ -63,6 +63,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view){
         switch (view.getId()){
             case R.id.button7:
+                // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
                 Intent in = new Intent(this, AddTaskActivity.class);
                 //in.putStringArrayListExtra("images", arrayS);
                 in.putExtra("bytearray",b);
@@ -115,7 +116,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             if (!arrayS.isEmpty()){
                 arrayS.clear();
             }
-
+            // IN THE ELSE CONDITION ONE BYTE ARRAY IS BEING OVERWRITTEN IN THE FOR LOOP- HAVE TO FIGURE OUT HOW TO PASS
+            // MULTIPLE PHOTOS BYTES ARRAYSSSSSSSS
             // If single photo, the photo will NOT be in ClipData - just return it
             // SOURCE: https://stackoverflow.com/a/40475323
             if (data.getClipData() == null){
