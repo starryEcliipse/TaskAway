@@ -31,7 +31,7 @@ public class AddActivity extends AppCompatActivity {
     private EditText locationField;
     private Button cancelButton;
     private Button saveButton;
-    private Button uploadPic;
+    private ImageButton uploadPic;
     private final String text = "task";
     ImageButton toolBarBtn;
 
@@ -46,7 +46,7 @@ public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
+        setContentView(R.layout.activity_add_task);
 
         toolBarBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
         toolBarBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,13 +62,13 @@ public class AddActivity extends AppCompatActivity {
         nameField = (EditText) findViewById(R.id.editText2);
         requirementField = (EditText) findViewById(R.id.editText3);
         statusField = (EditText) findViewById(R.id.editText);
-        locationField = (EditText) findViewById(R.id.editMyTaskLocation);
+        locationField = (EditText) findViewById(R.id.location_edit_text);
 
 
         // Button layouts
         saveButton = (Button) findViewById(R.id.button2);
         cancelButton = (Button) findViewById(R.id.button);
-        uploadPic = (Button) findViewById(R.id.button4);
+        uploadPic = (ImageButton) findViewById(R.id.image_camera_btn);
 
         // Cancel activity
         cancelButton.setOnClickListener(new View.OnClickListener() {

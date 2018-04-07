@@ -44,10 +44,6 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_pic);
-        //linearMain = (LinearLayout) findViewById(R.id.linearImage);
-        //GridView gridview = (GridView) findViewById(R.id.gridview);
-        //gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayU));
-        //imageToUpload = (ImageView) findViewById(R.id.imageToUpload);
         upload = (Button) findViewById(R.id.button5);
         cancel = (Button) findViewById(R.id.button8);
         done = (Button) findViewById(R.id.button7);
@@ -61,9 +57,9 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     public void onClick(View view){
         switch (view.getId()){
             case R.id.button7:
-                Intent in = new Intent();
-                
-
+                Intent in = new Intent(this, AddActivity.class);
+                in.putParcelableArrayListExtra("bitmap", arrayN);
+                startActivity(in);
                 break;
 
             // upload button
@@ -141,7 +137,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                             image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         } else if (type.contains("jpg") || type.contains("jpeg")) {
                             image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-                        };
+                        }
                         arrayN.add(image);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
