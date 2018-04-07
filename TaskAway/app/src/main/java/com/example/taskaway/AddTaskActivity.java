@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class AddTaskActivity extends AppCompatActivity {
     ArrayList<String> arrayB = new ArrayList<String>();
     private String username;
     private String userid;
+    private RelativeLayout rl;
 
     /**
      *
@@ -54,24 +57,8 @@ public class AddTaskActivity extends AppCompatActivity {
         nameField = (EditText) findViewById(R.id.name_edit_text);
         requirementField = (EditText) findViewById(R.id.requirements_edit_text);
         locationField = (EditText) findViewById(R.id.location_edit_text);
-
         uploadPic = (ImageButton) findViewById(R.id.image_camera_btn);
-
-        Intent intent = getIntent();
-
-        if (intent.getStringArrayListExtra("images") != null) {
-            arrayB = getIntent().getStringArrayListExtra("images");
-            Uri uri = Uri.parse(arrayB.get(0));
-            //Bitmap b = StringToBitMap(arrayB.get(0));
-
-            imageSet.setImageURI(uri);
-            Log.i("ADDTASK","get is: "+arrayB.get(0));
-            //Bitmap bit = BitmapFactory.decodeFile(arrayB.get(0));
-            //imageSet.setImageBitmap(bit);
-        }
-        else{
-            Log.i("ADDTASK"," null!");
-        }
+        rl = (RelativeLayout) findViewById(R.id.relative_lay);
 
 
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
@@ -186,7 +173,60 @@ public class AddTaskActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
+
+
+        if (intent.getStringArrayListExtra("images") != null) {
+            //arrayB = getIntent().getStringArrayListExtra("images");
+            ArrayList<Bitmap> arrayBitMap = getIntent().getParcelableArrayListExtra("images");
+            Bitmap bitmap = arrayBitMap.get(0);
+
+            // SOURCE:
+            imageSet.measure(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            int width = imageSet.getMeasuredWidth();
+            int height = imageSet.getMeasuredHeight();
+            bitmap = getResizedBitmap(bitmap, height, width);
+            //bitmap = Bitmap.createBitmap(bitmap, width/2, height/2, bitmap.getWidth()/2, bitmap.getHeight()/2);
+            //Uri uri = Uri.parse(arrayB.get(0));
+            //Bitmap b = StringToBitMap(arrayB.get(0));
+            Log.i("ADDTASK","arrayBitMap is: "+arrayBitMap.toString());
+            imageSet.setImageBitmap(bitmap);
+            //imageSet.setImageURI(uri);
+            //Bitmap bit = BitmapFactory.decodeFile(arrayB.get(0));
+            //imageSet.setImageBitmap(bit);
+        }
+        else{
+            Log.i("ADDTASK"," null!");
+        }
+
     }
+
+    // SOURCE: https://thinkandroid.wordpress.com/2009/12/25/resizing-a-bitmap/
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+
+        int width = bm.getWidth();
+
+        int height = bm.getHeight();
+
+        float scaleWidth = ((float) newWidth) / width;
+
+        float scaleHeight = ((float) newHeight) / height;
+
+// create a matrix for the manipulation
+
+        Matrix matrix = new Matrix();
+
+// resize the bit map
+
+        matrix.postScale(scaleWidth, scaleHeight);
+
+// recreate the new Bitmap
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+
+    }
+
 
 }
 

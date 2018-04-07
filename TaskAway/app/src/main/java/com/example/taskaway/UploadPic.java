@@ -60,7 +60,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()){
             case R.id.button7:
                 Intent in = new Intent(this, AddTaskActivity.class);
-                in.putStringArrayListExtra("images", arrayS);
+                //in.putStringArrayListExtra("images", arrayS);
+                in.putParcelableArrayListExtra("images", arrayN);
                 startActivity(in);
                 break;
 
@@ -100,12 +101,14 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             if (data.getClipData() == null){
                 Uri uri = data.getData();
                 arrayU.add(uri);
+                Log.i("UPLOAD UPLOAD","uri is "+arrayU.get(0).getPath());
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
                 try {
-                    BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(0)), null, options);
+                    //BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(0)), null, options);
                     options.inJustDecodeBounds = false;
                     Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(arrayU.get(0)), null, options);
+                    Log.i("UPLOADPIC","Pass first decode");
                     String type = getContentResolver().getType(arrayU.get(0));
                     Log.i("STUPID TYPE", type);
                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -114,6 +117,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                     } else if (type.contains("jpg") || type.contains("jpeg")) {
                         image.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                     }
+
+
                     arrayN.add(image);
                     byte [] b = byteArrayOutputStream.toByteArray();
                     String temp= Base64.encodeToString(b, Base64.DEFAULT);

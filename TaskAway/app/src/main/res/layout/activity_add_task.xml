@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative_lay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
@@ -19,7 +20,7 @@
         android:layout_below="@+id/actionbar"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/placeholder" />
-        <!--android:src="@drawable/placeholder" />-->
+    <!--android:src="@drawable/placeholder" />-->
 
 
     <EditText
@@ -32,8 +33,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="31dp"
         android:layout_toRightOf="@id/name_image_edit"
-        android:textSize="14sp"
-        android:hint="Task Name"/>
+        android:hint="Task Name"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/location_edit_text"
