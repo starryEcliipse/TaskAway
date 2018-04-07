@@ -1,17 +1,17 @@
 package com.example.taskaway;
 
 import android.app.Activity;
+import android.location.Address;
 import android.location.Geocoder;
-import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.robotium.solo.Solo;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+
+
+import java.util.List;
 
 
 /**
@@ -42,24 +42,39 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivit
         Geocoder geocoder = new Geocoder(getActivity());
 
         //Test specific address
+        List<Address> address;
+        LatLng latLng;
+
         String location_1 = "59 Main Boulevard, Sherwood Park, AB, Canada";
+        address = geocoder.getFromLocationName(location_1, 100);
+        Address location = address.get(0);
+        latLng = new LatLng(location.getLatitude(), location.getLongitude() );
         LatLng location_1_latlng = new LatLng(53.5374022, -113.3087432);
-        assertEquals(geocoder.getFromLocationName(location_1, 1), location_1_latlng);
+        assertEquals(latLng, location_1_latlng);
+
 
         //Test an airport code
+        List<Address> address_2;
+        LatLng latlng_2;
+
         String location_2 = "YEG";
         LatLng location_2_latlng = new LatLng(53.307103, -113.5760576) ;
-        assertEquals(geocoder.getFromLocationName(location_2, 1), location_2_latlng);
+        address_2 = geocoder.getFromLocationName(location_1, 100);
+        Address location_12 = address.get(0);
+        latlng_2 = new LatLng(location_12.getLatitude(), location_12.getLongitude());
+        assertEquals(latlng_2, location_2_latlng);
+
 
         //Test a general location
+        List<Address> address_3;
+        LatLng latlng_3;
+
         String location_3 = "Edmonton, AB";
         LatLng location_3_latlng = new LatLng(53.544389, -113.4909267);
-        assertEquals(geocoder.getFromLocationName(location_3, 1), location_3_latlng);
-
+        Address location_13 = address.get(0);
+        latlng_3 = new LatLng(location_12.getLatitude(), location_12.getLongitude());
+        assertEquals(latlng_3, location_3_latlng);
     }
-
-
-
 
 
     @Override
@@ -67,7 +82,5 @@ public class MapActivityTest extends ActivityInstrumentationTestCase2<MapActivit
         solo.finishOpenedActivities();
     }
 
-
-
-
+    
 }
