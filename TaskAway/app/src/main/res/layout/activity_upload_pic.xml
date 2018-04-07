@@ -17,50 +17,14 @@
         <GridView
             android:id="@+id/gridview"
             android:layout_width="fill_parent"
-            android:layout_height="450dp"
+            android:layout_height="350dp"
             android:columnWidth="90dp"
             android:numColumns="auto_fit"
             android:verticalSpacing="10dp"
             android:horizontalSpacing="10dp"
             android:padding="4px"
             android:stretchMode="columnWidth"
-            android:gravity="center"
-            />
-        <!--<ImageView-->
-            <!--android:id="@+id/imageToUpload"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal" />-->
-
-<!--        <ImageView
-            android:id="@+id/imageToUpload1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <ImageView
-            android:id="@+id/imageToUpload2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <ImageView
-            android:id="@+id/imageToUpload3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <ImageView
-            android:id="@+id/imageToUpload4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
-
-        <ImageView
-            android:id="@+id/imageToUpload5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />-->
+            android:gravity="center" />
 
         <Button
             android:id="@+id/button5"
@@ -68,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="#494949"
-            android:text="@string/upload_gallery"
+            android:text="Browse Photos"
             android:textColor="@color/colorWhite" />
 
         <Button
@@ -80,6 +44,18 @@
             android:background="#494949"
             android:text="@string/okay_button"
             android:textColor="@color/colorWhite" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="165dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="#494949"
+            android:text="Cancel"
+            android:textColor="@color/colorWhite" />
+
+
 
     </LinearLayout>
 </ScrollView>
