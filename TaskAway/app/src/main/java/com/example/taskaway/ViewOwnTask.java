@@ -313,7 +313,7 @@ public class ViewOwnTask extends AppCompatActivity {
         /**
          *
          */
-        RelativeLayout selectDone = (RelativeLayout) findViewById(R.id.selectDone);
+       /* RelativeLayout selectDone = (RelativeLayout) findViewById(R.id.selectDone);
         Log.i("TASK IS", "Task is" + task);
         if(!task.getStatus().equals("ASSIGNED")){
             selectDone.setVisibility(View.GONE);
@@ -322,7 +322,7 @@ public class ViewOwnTask extends AppCompatActivity {
         RelativeLayout saveStatus = (RelativeLayout) findViewById(R.id.saveStatus);
         if(!task.getStatus().equals("ASSIGNED")){
             saveStatus.setVisibility(View.GONE);
-        }
+        } */
 
 
 
