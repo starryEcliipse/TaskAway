@@ -180,8 +180,17 @@ public class AddTaskActivity extends AppCompatActivity {
 
         //THIS IS WHERE WE HAVE TO RECEIVE THE BYTE ARRAYSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
         //if (intent.getStringArrayListExtra("images") != null) {
-        if (intent.getByteArrayExtra("bytearray") != null){
-            byte b[] = getIntent().getByteArrayExtra("bytearray");
+        int size = intent.getIntExtra("byteArraySize", 0);
+        Log.i("RECEIVE SIZE", "size: "+ size);
+        if (intent.getByteArrayExtra("barray0") != null){
+            ArrayList<byte[]> barray = new ArrayList<>();
+            //int size = intent.getIntExtra("byteArraySize", 0);
+            for (int i = 0; i < size; i++) {
+                barray.add(intent.getByteArrayExtra("barray"+i));
+                Log.i("RECIEVED", "barray(i)"+barray.get(i));
+            }
+            //byte b[] = getIntent().getByteArrayExtra("bytearray");
+            byte b[] = barray.get(0);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
 
             // SOURCE:
@@ -193,7 +202,7 @@ public class AddTaskActivity extends AppCompatActivity {
             imageSet.setImageBitmap(bitmap);
 
         }
-        else{
+        else if (intent.getByteArrayExtra("bytearray") == null){
             Log.i("ADDTASK"," null!");
         }
 

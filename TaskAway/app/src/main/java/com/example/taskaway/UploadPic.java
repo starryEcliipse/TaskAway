@@ -38,6 +38,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     ArrayList<Uri> arrayU = new ArrayList<Uri>();
     ArrayList<Bitmap> arrayN = new ArrayList<Bitmap>();
     ArrayList<String> arrayS = new ArrayList<String>();
+    ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     Button cancel;
     Button upload;
     Button done;
@@ -64,14 +65,22 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         switch (view.getId()){
             case R.id.button7:
                 // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
-                Intent in = new Intent(this, AddTaskActivity.class);
-                //in.putStringArrayListExtra("images", arrayS);
-                in.putExtra("bytearray",b);
-                //in.putParcelableArrayListExtra("images", arrayN);
 
+                Intent in = new Intent(this, AddTaskActivity.class);
+
+                //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
+                //arrayB.add(b);
+                in.putExtra("byteArraySize", arrayB.size());
+                for (int i = 0; i < arrayB.size(); i++) {
+                    in.putExtra("barray"+i, arrayB.get(i));
+                    Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                }
                 in.putExtra("username", username);
                 in.putExtra("userid",userid);
                 startActivity(in);
+
+                //in.putStringArrayListExtra("images", arrayS);
+                //in.putParcelableArrayListExtra("images", arrayN);
                 break;
 
             // upload button
@@ -147,6 +156,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                         return;
                     }
                     String temp= Base64.encodeToString(b, Base64.DEFAULT);
+                    arrayB.add(b);
                     arrayS.add(temp);
 
 
@@ -185,6 +195,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                         }
                         String temp= Base64.encodeToString(b, Base64.DEFAULT);
                         arrayS.add(temp);
+                        arrayB.add(b);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
