@@ -177,6 +177,13 @@ public class Login extends AppCompatActivity {
 
         // If server is unavailable
         continueOffline.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Allows the user to continue using the app offline if the server is unavailable.
+             *
+             * @param v - instance of View
+             *
+             * @see SaveFileController
+             */
             @Override
             public void onClick(View v) {
 
@@ -213,6 +220,7 @@ public class Login extends AppCompatActivity {
                 SaveFileController saveFileController = new SaveFileController();
                 saveFileController.addNewUser(context, current_user);
 
+                // Go to Main Activity
                 Intent intent = new Intent(Login.this, MainActivity.class);
                 intent.putExtra("user_id", current_ID);
                 intent.putExtra("user_name", userName);

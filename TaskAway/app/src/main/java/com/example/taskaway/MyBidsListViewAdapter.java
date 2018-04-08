@@ -21,7 +21,6 @@ import java.util.List;
  * Used in conjuction with the item_jobs.xml layout.
  * As each item in the layout holds a specifc Textview position, we are able to change the data accordingly.
  *
- * WORK IN PROGRESS
  * @author Jonathan Ismail
  *
  *
@@ -72,7 +71,6 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
              */
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "My Bids Item Clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewBidTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));

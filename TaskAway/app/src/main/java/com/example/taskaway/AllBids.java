@@ -39,7 +39,7 @@ import java.util.List;
  *      https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html
  *      https://www.youtube.com/watch?v=oBhgyiBVd3k <- More examples/explanation
  *
- * @author Jonathan Ismail
+ * @author Jonathan Ismail, Edited by Adrian Schuldhaus
  *
  * @see MainActivity
  * @see AllBidsListViewAdapter
@@ -124,12 +124,11 @@ public class AllBids extends Fragment {
         lstTask = ServerWrapper.getAllJobs();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
-
+    /**
+     * Updates the search results in realtime.
+     *
+     * @author Adrian Schuldhaus
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -138,9 +137,9 @@ public class AllBids extends Fragment {
     }
 
     /**
-     * Sets up the view objects once the view is created.
-     * @param view
-     * @param savedInstanceState
+     * Sets up the view objects once the view is created - loading, search
+     * @param view - instance of View
+     * @param savedInstanceState - saved state
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -179,6 +178,8 @@ public class AllBids extends Fragment {
 
     /**
      * Executes a search query to the server with the current search parameters.
+     *
+     * @author Adrian Schuldhaus
      */
     private void updateSearchResults() {
         if (loadingCircle != null) loadingCircle.setVisibility(View.VISIBLE);
@@ -241,6 +242,8 @@ public class AllBids extends Fragment {
 
     /**
      * Updates the AllBidsListViewAdapter contained in this fragment, and notifies it of a data set change.
+     *
+     * @author Adrian Schuldhaus
      */
     private void updateListAdapter() {
         listAdapter = new AllBidsListViewAdapter(getContext(), lstTask, user_name, user_id);
@@ -250,6 +253,10 @@ public class AllBids extends Fragment {
         myrecyclerview.invalidate();
     }
 
+    /**
+     * Get last known location (for search)
+     * @return location
+     */
     private Location getLastKnownLocation() {
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
         List<String> providers = locationManager.getProviders(true);
@@ -273,6 +280,13 @@ public class AllBids extends Fragment {
         return bestLocation;
     }
 
+    /**
+     * Condition that determines if a task is biddable (status requested, bidded) or not (status
+     * assigned, done)
+     *
+     * @param t - current task
+     * @return boolean value true if biddable; false if not
+     */
     private boolean allowsBids(Task t) {
         String status = t.getStatus().toLowerCase();
         return (status.equals("requested") || status.equals("bidded"));

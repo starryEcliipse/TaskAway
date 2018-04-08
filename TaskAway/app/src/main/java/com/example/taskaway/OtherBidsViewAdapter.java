@@ -89,7 +89,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
 
         // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
         amount = mData.get(position).getAmount();
-        strAmount = Float.toString(amount);
+        strAmount = String.format("$%.2f", amount);
         holder.tv_otherbid.setText(strAmount);
 
         // If one button clicked, unset another one if already clicked
@@ -109,7 +109,8 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
 
 
     /**
-     * Sets the layouts to be set to the current adapter holder.
+     * Sets the layouts to be set to the current adapter holder. Also determines radio button
+     * behaviour.
      *
      * tv_name = container that holds the bidder's name
      * tv_otherbid = container that holds the bidder's amount
@@ -123,6 +124,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
         private RadioButton radioButton;
 
         public MyViewHolder(final View itemView) {
+
             // SOURCE: https://stackoverflow.com/a/47183251
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.name_other);
@@ -131,15 +133,21 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
             // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
             radioButton = (RadioButton) itemView.findViewById(R.id.img_status);
             radioButton.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * When a radio button is clicked, pass information on which item was selected to
+                 * ViewOtherBids activity. This will simply be used for the Decline and Accept buttons.
+                 *
+                 * @param v - instance of View
+                 *
+                 * @see ViewOtherBids
+                 * @see OnBidClickListener
+                 */
                 @Override
                 public void onClick(View v) {
                     lastPosition = getAdapterPosition();
                     notifyDataSetChanged();
                     final Bid bid = mData.get(lastPosition);
                     onBidClickListener.onBidClick(bid,lastPosition);
-                    //Toast.makeText(mContext, "selected bidder is: " + tv_name.getText(), Toast.LENGTH_LONG).show();
-
-
                 }
             });
         }

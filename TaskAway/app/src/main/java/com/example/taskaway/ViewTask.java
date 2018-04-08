@@ -17,14 +17,15 @@ import java.util.ArrayList;
  * Acts as activity that displays a tasks information when a user selects a task
  * that they HAVE NOT previously bid on.
  *
- * @author Diane Boytang
+ * @author Diane Boytang, Edited by Katherine Mae Patenio, Adrian Schuldhaus
  *
  * @see AllBids
  * @see MyBids
  */
 
 public class ViewTask extends AppCompatActivity {
-    //Declare vars
+
+    // Views
     private TextView taskname;
     private TextView taskstatus;
     private TextView taskdescription;
@@ -32,17 +33,18 @@ public class ViewTask extends AppCompatActivity {
     private TextView taskwinningbid;
     private TextView taskusername;
     private EditText userbid;
+    private TextView yourPrice;
+
+    private Button saveButton;
+
     private Task task;
     private Bid winningbid;
     private float bidamount;
+    private ArrayList<Bid> bidList;
+
     String id;
     String userID;
     String userName;
-    private ArrayList<Bid> bidList;
-
-    private Button saveButton;
-    private TextView yourPrice;
-
 
 
     /**
@@ -129,12 +131,8 @@ public class ViewTask extends AppCompatActivity {
                     task.setBids(bidList);
                 }
 
-                /*
-                // Just for reading all bids in IDE Console - for debugging purposes
-                for (Bid temp : task.getBids()) {
-                    Log.i("ViewTask", "Reading: " + temp.getAmount());
-                } */
 
+                // Update task to bidded
                 if (MainActivity.isOnline()){
                     //Set information for notifications
                     task.setHasNewBids(true);
@@ -153,12 +151,16 @@ public class ViewTask extends AppCompatActivity {
             }
         });
 
-        /*
-        @author Punam Woosaree
-        When task requester username is selected, their profile shows up
-         */
+        /* PROFILE OPENED WHEN SELECTING USERNAME */
         TextView requestUser = (TextView) findViewById(R.id.task_user_name);
         requestUser.setOnClickListener(new View.OnClickListener(){
+
+            /**
+             *
+             * When task requester username is selected, their profile shows up
+             *
+             * @author Punam Woosaree
+             */
            @Override
            public void onClick(View view) {
 
@@ -264,14 +266,18 @@ public class ViewTask extends AppCompatActivity {
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
+        /* DISPLAY REQUESTER INFO */
         User requester;
-        if (MainActivity.isOnline()){
+        if (MainActivity.isOnline()){ // online
             requester = ServerWrapper.getUserFromId(task.getCreatorId());
-        }else{
+        }else{ // offline
             SaveFileController saveFileController = new SaveFileController();
             requester = saveFileController.getUserFromUserId(getApplicationContext(), task.getCreatorId());
         }
+
         String requestername;
+
+        // Display name of requester
         if (requester != null){
             requestername = requester.getUsername();
         }else{
@@ -280,12 +286,11 @@ public class ViewTask extends AppCompatActivity {
         }
         taskusername.setText(requestername);
 
-        // Get user information
+        // Get current user information
         userID = intent.getStringExtra("userid");
-        Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName"); // FIXME username vs userName
-        Log.i("userName", ""+userName);
 
+        /* HIDE CERTAIN OPTIONS DEPENDING ON WHO VIEWS THE TASK */
         // If this task was created by the viewer, hide bid options
         if (userID.equals(task.getCreatorId())||!task.allowsBids()){
             saveButton.setVisibility(View.INVISIBLE);
@@ -310,15 +315,5 @@ public class ViewTask extends AppCompatActivity {
         catch (Exception e){
             taskwinningbid.setText("No bids yet!");
         }
-    }
-
-    /**
-     * Calls superclass's onDestroy.
-     *
-     * @see AppCompatActivity
-     */
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
     }
 }

@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Is responsible for manipulating user information saved locally in device.
+ * Is responsible for manipulating user information saved locally in device. This is used only when
+ * the server is offline/unreachable.
+ *
  * @author Punam Woosaree, Katherine Mae Patenio
  * Created on 2018-03-16
  *

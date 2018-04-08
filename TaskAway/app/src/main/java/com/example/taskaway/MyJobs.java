@@ -124,21 +124,19 @@ public class MyJobs extends Fragment {
     }
 
     /**
-     * Calls superclass onStart
+     * Update the list view in real time
      *
-     * @see android.support.v7.app.AppCompatActivity
      */
-    public void onStart(){
-        super.onStart();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-
         updateList();
     }
 
+    /**
+     * Updates the current list view // TODO: make this an interface instead?
+     *
+     */
     public void updateList() {
         Log.i("MYJOBS","current user is: "+user_name);
         final Context context = getContext();
