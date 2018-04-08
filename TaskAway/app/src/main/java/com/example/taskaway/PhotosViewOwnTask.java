@@ -11,10 +11,14 @@ package com.example.taskaway;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,11 +28,30 @@ public class PhotosViewOwnTask extends AppCompatActivity {
     //ArrayList<byte[]> barray = new ArrayList<byte[]>();
     private String userID;
     private String user_name;
+    private ImageButton back;
+    private ImageButton mark;
+    private TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos_view_own_task);
+
+/*        back = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            finish();
+            }
+        });
+
+        *//* SAVE TOOLBAR BUTTON - REMOVE FOR THIS ACTIVITY *//*
+        mark = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        mark.setVisibility(View.GONE);
+
+        *//* SET TITLE OF TOOLBAR *//*
+        title = (TextView)findViewById(R.id.toolbar_title);
+        title.setText("All Bids");*/
 
         Intent intent = getIntent();
         user_name = intent.getStringExtra("username");

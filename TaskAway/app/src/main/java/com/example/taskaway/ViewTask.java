@@ -2,8 +2,11 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapRegionDecoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,9 +37,10 @@ public class ViewTask extends AppCompatActivity {
     private TextView taskusername;
     private EditText userbid;
     private TextView yourPrice;
-
+    private Button photos;
     private Button saveButton;
-
+    ArrayList<String> pictures = new ArrayList<String>();
+    ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     private Task task;
     private Bid winningbid;
     private float bidamount;
@@ -66,6 +70,34 @@ public class ViewTask extends AppCompatActivity {
         userbid = (EditText) this.findViewById(R.id.your_bid_amount);
         taskusername = (TextView) this.findViewById(R.id.task_user_name);
         yourPrice = (TextView) this.findViewById(R.id.your_price);
+        photos = (Button) this.findViewById(R.id.button6);
+
+        photos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewTask.this, PhotosViewOwnTask.class);
+                intent.putExtra("username", userName);
+                intent.putExtra("userid",userID);
+                pictures = task.getPictures();
+                if (pictures != null) {
+                    for (int n = 0; n < pictures.size(); n++) {
+                        byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
+                        //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                        arrayB.add(encodeByte);
+                    }
+                    intent.putExtra("byteArraySize", arrayB.size());
+                    for (int i = 0; i < arrayB.size(); i++) {
+                        intent.putExtra("barray"+i, arrayB.get(i));
+                        Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                    }
+                }
+                else {
+                    Log.i("ADDTASK"," null!");
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
 
 
         // SAVE BUTTON - place a bid

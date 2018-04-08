@@ -2,8 +2,10 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +35,9 @@ public class ViewBidTask extends AppCompatActivity {
     private TextView useroldbid;
     private TextView taskusername;
     private EditText userbid;
+    private Button photos;
+    ArrayList<String> pictures = new ArrayList<String>();
+    ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     private Task task;
     String id;
     String userName;
@@ -56,6 +61,34 @@ public class ViewBidTask extends AppCompatActivity {
         useroldbid = (TextView) this.findViewById(R.id.old_price_amount);
         userbid = (EditText) this.findViewById(R.id.new_bid_amount);
         taskusername = (TextView) this.findViewById(R.id.task_user_name);
+        photos = (Button) this.findViewById(R.id.button6);
+
+        photos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewBidTask.this, PhotosViewOwnTask.class);
+                intent.putExtra("username", userName);
+                intent.putExtra("userid",userID);
+                pictures = task.getPictures();
+                if (pictures != null) {
+                    for (int n = 0; n < pictures.size(); n++) {
+                        byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
+                        //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                        arrayB.add(encodeByte);
+                    }
+                    intent.putExtra("byteArraySize", arrayB.size());
+                    for (int i = 0; i < arrayB.size(); i++) {
+                        intent.putExtra("barray"+i, arrayB.get(i));
+                        Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                    }
+                }
+                else {
+                    Log.i("ADDTASK"," null!");
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
 
         //Location Details
         Button locationButton = (Button) findViewById(R.id.location_detail_button);
