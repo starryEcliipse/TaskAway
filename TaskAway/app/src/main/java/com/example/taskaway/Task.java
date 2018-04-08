@@ -30,6 +30,9 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private boolean hasNewBids = false;
     private String syncInstruction = "";
 
+    private double longitude = 0;
+    private double latitude = 0;
+
     /**
      * Constructor of task.
      * @param name - name of task
@@ -112,11 +115,10 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
-     * Returns latitude of the task location.
-     * @return - latitude
-     * @author - Diane Boytang
+     * Updates the coordinates of the task location via Google Maps
+     * @author - Diane Boytang & Adrian Schuldhaus
      */
-    public double getLatitude() {
+    public void updateCoordinates() {
         if (this.location != null){
             try{
                 String task_location_encoded = URLEncoder.encode(location, "UTF-8");
@@ -127,42 +129,33 @@ public class Task implements Serializable { // made Serializable to that Task ca
                 JSONObject jsonObject = new JSONObject(locationJson.get());
                 JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
                 String lat = locationGeo.getString("lat");
+                String lng = locationGeo.getString("lng");
 
                 Double latitude = Double.parseDouble(lat);
-                return latitude;
+                Double longitude = Double.parseDouble(lng);
+                this.latitude = latitude;
+                this.longitude = longitude;
             } catch (Exception e){
-                Log.i("TASK", "COULD NOT GET LATITUDE");
+                Log.i("TASK", "COULD NOT GET TASK COORDINATES");
                 e.printStackTrace();
             }
         }
-        return -1;
+    }
+
+    /**
+     * Returns latitude of the task location.
+     * @return - latitude
+     */
+    public double getLatitude() {
+        return this.latitude;
     }
 
     /**
      * Returns longitude of the task location.
      * @return - longitude
-     * @author - Diane Boytang
      */
     public double getLongitude() {
-        if (this.location != null){
-            try{
-                String task_location_encoded = URLEncoder.encode(location, "UTF-8");
-                String location_uri ="https://maps.googleapis.com/maps/api/geocode/json?address=" + task_location_encoded + "&key=AIzaSyBOflugbssWI1J6qUsPPt7-rEeF01MKOuY";
-                GetLocationJson locationJson = new GetLocationJson();
-                locationJson.execute(location_uri);
-
-                JSONObject jsonObject = new JSONObject(locationJson.get());
-                JSONObject locationGeo = jsonObject.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
-                String lng = locationGeo.getString("lng");
-
-                Double longitude = Double.parseDouble(lng);
-                return longitude;
-            } catch (Exception e){
-                Log.i("TASK", "COULD NOT GET LONGITUDE");
-                e.printStackTrace();
-            }
-        }
-        return -1;
+        return this.longitude;
     }
 
 //    /**

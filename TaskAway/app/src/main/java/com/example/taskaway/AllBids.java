@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.support.v4.app.Fragment;
 import android.widget.Toast;
@@ -61,6 +62,8 @@ public class AllBids extends Fragment {
     private ImageView unavailableIcon;
 
     private AllBidsListViewAdapter listAdapter;
+
+    private RelativeLayout loadingCircle;
 
     private double MAXIMUM_FILTER_DISTANCE = 5000;
 
@@ -117,14 +120,6 @@ public class AllBids extends Fragment {
 
         }
 
-        /*// DISPLAY OTHER USER TASKS - uses SaveFileController
-        final Context context = getContext();
-        SaveFileController saveFileController = new SaveFileController();
-        int userIndex = saveFileController.getUserIndex(context, user_name);
-        Log.i("All Bids","Currently getting all other tasks");
-        //changed this from getEveryonesTask to getAllTasks
-        lstTask = saveFileController.getAllTasks(context, userIndex);*/
-
         // DISPLAY OTHER USER TASKS - uses ServerWrapper
         lstTask = ServerWrapper.getAllJobs();
     }
@@ -154,6 +149,7 @@ public class AllBids extends Fragment {
         searchbutton = view.findViewById(R.id.alljobs_search_btn);
         distance_checkbox = view.findViewById(R.id.alljobs_distance_checkbox);
         allowsBids_checkbox = view.findViewById(R.id.alljobs_allowsBids_checkbox);
+        loadingCircle = view.findViewById(R.id.loadingCircle);
 
         searchbox.setText("");
         distance_checkbox.setChecked(false);
@@ -185,6 +181,7 @@ public class AllBids extends Fragment {
      * Executes a search query to the server with the current search parameters.
      */
     private void updateSearchResults() {
+        if (loadingCircle != null) loadingCircle.setVisibility(View.VISIBLE);
         if (!MainActivity.isOnline()){
             lstTask = new TaskList();
             View view = getView();
@@ -193,6 +190,7 @@ public class AllBids extends Fragment {
                 unavailableIcon.setVisibility(View.VISIBLE);
             }
             updateListAdapter();
+            if (loadingCircle != null) loadingCircle.setVisibility(View.GONE);
             return;
         }
         String searchString = searchbox.getText().toString();
@@ -238,6 +236,7 @@ public class AllBids extends Fragment {
         }
         lstTask = totalHits;
         updateListAdapter();
+        if (loadingCircle != null) loadingCircle.setVisibility(View.GONE);
     }
 
     /**

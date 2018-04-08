@@ -175,6 +175,7 @@ public class EditActivity extends AppCompatActivity {
                     task.setAssignedId(assigned_id);
 
                     if (MainActivity.isOnline()){
+                        task.updateCoordinates();
                         ServerWrapper.updateJob(task);
                         ServerWrapper.syncWithServer(getApplicationContext(), userName);
                     }else{

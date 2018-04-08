@@ -325,11 +325,13 @@ public class ServerWrapper {
                 if (t.getSyncInstruction() == null) t.clearSyncInstruction();
                 if (t.getSyncInstruction().equals("OFFLINE_ADD")){
                     t.setCreatorId(user.getId());
+                    t.updateCoordinates();
                     t.clearSyncInstruction();
                     addJob(t);
                     Log.i("SWrapper SyncJ", "Offline-Created Job Sent to Server");
                 }else if (t.getSyncInstruction().equals("OFFLINE_UPDATE")){
                     t.setCreatorId(user.getId());
+                    t.updateCoordinates();
                     t.clearSyncInstruction();
                     updateJob(t);
                     Log.i("SWrapper SyncJ", "Offline-Edited Job Updated on Server");
@@ -402,7 +404,11 @@ public class ServerWrapper {
     public static void deleteAllJobs() {
         TaskList taskList = ServerWrapper.getAllJobs();
         for (Task t : taskList){
-            ServerWrapper.deleteJob(t);
+            try{
+                new ElasticsearchController.DeleteJobsTask().execute(t);
+            }catch(Exception e){
+                Log.i("ServerWrapper", e.toString());
+            }
         }
         taskList = ServerWrapper.getAllJobs();
         if (taskList.size() > 0) deleteAllJobs();//guarantees the server is wiped
@@ -412,9 +418,19 @@ public class ServerWrapper {
     public static void deleteAllUsers() {
         ArrayList<User> userList = ServerWrapper.getAllUsers();
         for (User u : userList){
-            ServerWrapper.deleteUser(u);
+            try{
+                new ElasticsearchController.DeleteUsersTask().execute(u);
+            }catch(Exception e){
+                Log.i("ServerWrapper", e.toString());
+            }
         }
         userList = ServerWrapper.getAllUsers();
         if (userList.size() > 0) deleteAllUsers();//guarantees the server is wiped
+    }
+
+    //For testing purposes only
+    public static void cleanServer() {
+        deleteAllUsers();
+        deleteAllJobs();
     }
 }

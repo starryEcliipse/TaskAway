@@ -131,6 +131,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 task.setCreatorId(userid);
 
                 if (MainActivity.isOnline()){
+                    task.updateCoordinates();
                     ServerWrapper.addJob(task);
                     Log.i("AddTaskActivity", "Adding Task to server");
 
