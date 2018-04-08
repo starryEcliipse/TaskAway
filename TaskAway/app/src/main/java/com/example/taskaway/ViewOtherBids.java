@@ -66,7 +66,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         Intent intent = getIntent();
         String taskName = intent.getStringExtra("name"); // task name
         lowestbidamount = intent.getFloatExtra("lowestbidamount", 0);
-        tname.setTextSize(48);
+        tname.setTextSize(20);
         SpannableString content = new SpannableString(taskName);
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         tname.setText(content);
