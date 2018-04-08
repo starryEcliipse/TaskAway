@@ -73,6 +73,20 @@ public class EditActivity extends AppCompatActivity {
 
         if (MainActivity.isOnline()){
             task = ServerWrapper.getJobFromId(task_id);
+
+            //Task is a ghost somehow. Must be exterminated
+            if (task == null){
+                User u = ServerWrapper.getUserFromId(user_id);
+                u.removeTask(new Task(null, null, null, null, null, null, null , task_id));
+                ServerWrapper.updateUser(u);
+                Toast.makeText(getApplicationContext(), "This task should not still exist", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", user_id);
+                startActivity(intent2);
+                return;
+            }
         }else {
             // Get userindex
             final String i = intent.getStringExtra("userindex");
@@ -181,7 +195,6 @@ public class EditActivity extends AppCompatActivity {
                     if (MainActivity.isOnline()){
                         task.updateCoordinates();
                         ServerWrapper.updateJob(task);
-                        ServerWrapper.syncWithServer(getApplicationContext(), userName);
                     }else{
                         // SAVE TO FILE
                         final Context context = getApplicationContext();
@@ -225,8 +238,7 @@ public class EditActivity extends AppCompatActivity {
 
                 if (MainActivity.isOnline()){
                     ServerWrapper.deleteJob(task);
-
-                    //ServerWrapper.syncWithServer(getApplicationContext(), userName);
+                    Log.i("NOTICEME!", "Attempting to delete task");
                 }else{
                     final Context context2 = getApplicationContext();
                     SaveFileController saveFileController2 = new SaveFileController();

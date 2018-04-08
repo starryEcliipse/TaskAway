@@ -89,7 +89,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
 
         // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
         amount = mData.get(position).getAmount();
-        strAmount = Float.toString(amount);
+        strAmount = String.format("$%.2f", amount);
         holder.tv_otherbid.setText(strAmount);
 
         // If one button clicked, unset another one if already clicked
