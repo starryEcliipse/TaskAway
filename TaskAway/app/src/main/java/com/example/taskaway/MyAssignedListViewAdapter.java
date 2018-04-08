@@ -14,7 +14,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by KatherineMae on 4/4/2018.
+ * /**
+ * Displays appropriate data when user goes go view all tasks the user has been assigned to (MyAssigned).
+ * Used in conjuction with the item_jobs.xml layout.
+ * As each item in the layout holds a specifc Textview position, we are able to change the data accordingly.
+ *
+ * @author Katherine Mae Patenio
+ *
+ * @see MyAssigned
+ * @see MainActivity
+ * @see RecyclerView.Adapter
  */
 
 public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedListViewAdapter.MyViewHolder>{
@@ -42,8 +51,8 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
      * Creates View Holder of MyAssignedListViewAdapter.
      * Also determines behaviour when a task is selected by user.
      *
-     * @param parent
-     * @param viewType
+     * @param parent - parent view
+     * @param viewType - instance of View
      * @return MyViewHolder
      */
     @Override
@@ -59,13 +68,12 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
              * View current task when task is selected. Go to ViewTask activity.
              * Also pass username and userid to ViewTask.
              *
-             * @param view
+             * @param view - instance of view
              *
              * @see ViewTask
              */
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "My Assigned Item Clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));

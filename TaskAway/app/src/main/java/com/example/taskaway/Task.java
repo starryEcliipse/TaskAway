@@ -158,13 +158,6 @@ public class Task implements Serializable { // made Serializable to that Task ca
         return this.longitude;
     }
 
-//    /**
-//     * Returns lowest bid (of all bids) of task
-//     * @return - lowest bid for task
-//     */
-//    public Float getLowestBid(){
-//        return lowestBid;
-//    }
 
     /**
      * Returns pictures related to task.
@@ -238,13 +231,6 @@ public class Task implements Serializable { // made Serializable to that Task ca
         this.bids = bids;
     }
 
-//    /**
-//     * Sets the lowest bid (of all bids) for task.
-//     * @param lowestBid - lowest bid (of all bids) to be set for task
-//     */
-//    public void setLowestBid(Float lowestBid){
-//        this.lowestBid = lowestBid;
-//    }
 
     /**
      * Sets a status for task.
@@ -367,13 +353,5 @@ public class Task implements Serializable { // made Serializable to that Task ca
         return (status.equals("REQUESTED")||status.equals("BIDDED"));
     }
 
-    /**
-     * Represents attributes and information of a task as a string
-     * @return - attributes of a task as a string
-     */
-    @Override
-    public String toString(){
-        // TODO: 18/02/18
-        return "";
-    }
+
 }

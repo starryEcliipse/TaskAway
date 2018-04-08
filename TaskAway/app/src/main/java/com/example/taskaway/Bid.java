@@ -81,16 +81,6 @@ public class Bid implements Comparable<Bid>, Serializable { //implement comparab
     }
 
     /**
-     * Represents bid information as a string.
-     * @return - string form of bid information
-     */
-    @Override
-    public String toString(){
-        // TODO: 18/02/18
-        return "";
-    }
-
-    /**
      * Compares 2 bids to one another
      * @param bid bid object to compare to
      * @return -1 if this.amount < bid.amount; +1 if this.amount >= bid.amount

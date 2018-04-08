@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 /**
- * Acts a activity that displays user's profile information.
+ * Acts as activity that displays user's profile information.
  *
  * @author Punam Woosaree
  */

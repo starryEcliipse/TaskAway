@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by SJIsmail.
- * Splits the fragments into three sections which becomes the three main classes.
+ * Splits the fragments into four sections which becomes the four main classes: MyJobs, MyBids, AllBids, MyAssigned
  *
  * @author Jonathan Ismail
  *
@@ -17,6 +16,7 @@ import java.util.List;
  * @see MyJobs
  * @see MyBids
  * @see AllBids
+ * @see MyAssigned
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 

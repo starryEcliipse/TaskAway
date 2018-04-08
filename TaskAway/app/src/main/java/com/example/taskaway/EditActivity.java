@@ -25,27 +25,34 @@ import android.widget.Toast;
  *
  */
 public class EditActivity extends AppCompatActivity {
+
     private EditText tname;
     private EditText des;
     private EditText status;
     private EditText location;
+
     private Button cancel;
     private Button delete;
     private Button save;
+
+    private ImageButton toolBarSaveBtn;
+    private ImageButton uploadPic;
+    private ImageButton toolBarBackbtn;
+
     private Task task;
+
     private String new_name;
     private String new_des;
     private String new_status;
     private String new_location;
+
     String userName;
     String user_id;
     String task_id;
     String creator_id;
     String assigned_id;
     int index;
-    private ImageButton toolBarSaveBtn;
-    private ImageButton uploadPic;
-    private ImageButton toolBarBackbtn;
+
 
     /**
      * Upon creating activity, create EditText and Button layouts.
@@ -168,19 +175,7 @@ public class EditActivity extends AppCompatActivity {
                         des.setError("Description too long");
                         return;
                     }
-                    String s = "REQUESTED";
-
-                    // Task status
-                    /*
-                    String s = status.getText().toString();
-                    if (s.isEmpty()) {
-                        status.setError("Assign status");
-                        return;
-                    }
-                    if ((!s.equals("REQUESTED")) && (!s.equals("ASSIGNED")) && (!s.equals("BIDDED")) && (!s.equals("DONE"))){
-                        status.setError("Invalid status type");
-                        return;
-                    }*/
+                    String s = "REQUESTED"; // default value
 
                     // Task location
                     String loc = location.getText().toString();

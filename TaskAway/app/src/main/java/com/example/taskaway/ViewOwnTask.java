@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * Acts as activity that displays a tasks information when a user selects a task *they have created*.
  * DIFFERENT from ViewTask as this implements an Edit button.
  *
- * @author Diane Boytang, Katherine Mae Patenio, Jonathan Ismail
+ * @author Diane Boytang, Edited by Katherine Mae Patenio, Jonathan Ismail, Adrian Schuldhaus, Punam Woosaree
  * Created on 2018-03-14
  *
  * @see AllBids
@@ -59,7 +59,7 @@ public class ViewOwnTask extends AppCompatActivity {
         taskdescription = (TextView) this.findViewById(R.id.my_task_details);
         tasklocation = (TextView) this.findViewById(R.id.my_task_location);
 
-        // TOOL BAR GO BACK TO MAIN ACTIVITY
+        /* TOOL BAR GO BACK TO MAIN ACTIVITY */
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
 
@@ -84,11 +84,11 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
-        // REMOVE SAVE BUTTON FOR THIS ACTIVITY
+        /* REMOVE TOOLBAR SAVE BUTTON FOR THIS ACTIVITY */
         toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
         toolBarSaveBtn.setVisibility(View.GONE);
 
-        // SET TITLE OF TOOLBAR
+        /* SET TITLE OF TOOLBAR */
         toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
         toolBarTitle.setText("Your Task");
 
@@ -97,7 +97,7 @@ public class ViewOwnTask extends AppCompatActivity {
         tasklowestbidusername = (TextView) this.findViewById(R.id.lowest_bid_username);
         tasklowestbidamount = (TextView) this.findViewById(R.id.lowest_bid_amount);
 
-        // EDIT BUTTON
+        /* EDIT BUTTON */
         Button editButton = (Button) findViewById(R.id.edit_button);
         editButton.setOnClickListener(new View.OnClickListener() {
 
@@ -126,15 +126,13 @@ public class ViewOwnTask extends AppCompatActivity {
                 // id of task
                 id = task.getId();
 
-                // Send task info
+                // Send task info // TODO: refactor using just one task to pass? or is this better perfomance?
                 String index = Integer.toString(userIndex);
                 intent.putExtra("name", name);
                 intent.putExtra("des", description);
                 intent.putExtra("status", status);
                 intent.putExtra("userindex", index);
                 intent.putExtra("task_id", id);
-
-                Log.i("ViewOwnTask","User index is "+index);
 
                 // Send user info
                 intent.putExtra("userid", userID);
@@ -144,7 +142,7 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
-        //Location Details
+        /* LOCATION DETAILS */
         Button locationButton = (Button) findViewById(R.id.location_detail_button);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,9 +203,16 @@ public class ViewOwnTask extends AppCompatActivity {
 
         });
 
-        // ACCEPT LOWEST BID BUTTON
+        /* ACCEPT LOWEST BID BUTTON */
         Button acceptButton = (Button) findViewById(R.id.accept_button);
         acceptButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Accepts the current lowest bid for the task.
+             *
+             * @author Adrian Schuldhaus
+             *
+             * @param view - instance of View
+             */
             @Override
             public void onClick(View view) {
 
@@ -251,31 +256,41 @@ public class ViewOwnTask extends AppCompatActivity {
                     ServerWrapper.updateJob(task);
 
                     Intent i = new Intent(ViewOwnTask.this, MainActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // for notification conditions
                     i.putExtra("user_name", userName);
                     i.putExtra("user_id", userID);
                     startActivity(i);
-                }else{
+                }else{ // no bids - cannot accept
                     Toast.makeText(getApplicationContext(), "There are currently no bids on this task", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        // OTHER BIDS BUTTON
-        Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
-        otherbidsButton.setOnClickListener(new View.OnClickListener() {
+        /* ALL BIDS BUTTON */
+        Button allBidsButton = (Button) findViewById(R.id.other_bids_button);
+        allBidsButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Displays all bids for the current task, especially the lowest bid.
+             * Selecting this button will lead the user to ViewOtherBids activity, where the user
+             * can accept ONE bid or decline multiple bids.
+             *
+             * @param view - instance of View
+             */
             @Override
             public void onClick(View view) {
 
+                /* EXCEPTION HANDLING */
+                // Offline - cannot accept bids
                 if (!MainActivity.isOnline()){
                     Toast.makeText(getApplicationContext(), "You must be online to accept bids", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // If bids exist, go to ViewOtherBids Activity
+                /* RETURN TO VIEWOWNTASK - after accepting a bid */
                 if ((task.getBids() != null) && (!task.getBids().isEmpty())) {
 
+                    // Cannot accept bid - done or assigned status
                     if (!task.getStatus().equals("BIDDED")){
                         Toast.makeText(getApplicationContext(), "You can no longer accept bids on this task", Toast.LENGTH_SHORT).show();
                         return;
@@ -291,7 +306,7 @@ public class ViewOwnTask extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                // No bids
+                // No bids selected - notify user
                 else if ((task.getBids() == null) || (task.getBids().isEmpty())){
                     Toast.makeText(ViewOwnTask.this, "Your task currently has no bids!", Toast.LENGTH_SHORT).show();
                 }
@@ -300,25 +315,23 @@ public class ViewOwnTask extends AppCompatActivity {
     }
 
     /**
-     * Display task information. Also receive user information.
+     * Display task information. Also receive user information from MainActivity.
      *
      */
     @Override
     protected void onStart() {
         super.onStart();
+
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
         userID = intent.getStringExtra("userid");
-        Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName");
-        Log.i("username", ""+ userName);
 
         // Read and display task info
         taskname.setText(task.getName());
         taskstatus.setText(task.getStatus());
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
-
 
         tasklowestbid = task.findLowestBid();
 
@@ -360,16 +373,5 @@ public class ViewOwnTask extends AppCompatActivity {
             tasklowestbidamount.setText("No bids yet!");
         }
     }
-
-    /**
-     * Calls superclass onDestroy
-     *
-     * @see AppCompatActivity
-     */
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
 }
 

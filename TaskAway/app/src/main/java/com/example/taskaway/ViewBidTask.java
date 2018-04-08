@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Acts as activity that displays a tasks information when a user selects a task
  * that they have previously bid on.
  *
- * @author Diane Boytang
+ * @author Created by Diane Boytang, Edited by Punam Woosaree, Katherine Mae Patenio, Adrian Schuldhaus
  * Created on 2018-03-16
  */
 
@@ -40,6 +40,7 @@ public class ViewBidTask extends AppCompatActivity {
 
     /**
      * Create layout and buttons. Determine button behaviours.
+     *
      * @param savedInstanceState - saved state
      */
     @Override
@@ -106,12 +107,17 @@ public class ViewBidTask extends AppCompatActivity {
             }
         });
 
-        /* PROFILE Textview
-        @author Punam Woosaree
-        When task requester username is selected, their profile shows up
-         */
+
         TextView requestUser = (TextView) findViewById(R.id.task_user_name);
         requestUser.setOnClickListener(new View.OnClickListener(){
+            /**
+             * When task requester username is selected, their profile shows up
+             *
+             * @author Punam Woosaree
+             *
+             * @see ViewProfile
+             * @see ViewOtherProfile
+            */
             @Override
             public void onClick(View view) {
 
@@ -126,9 +132,6 @@ public class ViewBidTask extends AppCompatActivity {
             }
 
         });
-
-
-
 
         // SAVE BUTTON
         Button saveButton = (Button) findViewById(R.id.save_button_2);
@@ -148,8 +151,7 @@ public class ViewBidTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-
-
+                // Let use know that bids are no longer accepted - assigned or done task
                 if (!task.allowsBids()){
                     Toast.makeText(getApplicationContext(), "This job is no longer accepting bids", Toast.LENGTH_SHORT).show();
                     return;
@@ -158,7 +160,7 @@ public class ViewBidTask extends AppCompatActivity {
                 String inputbid = userbid.getText().toString();
                 float bidamount;
 
-                // Check if input is valid
+                /* CHECK USER INPUT */
                 try {
                     // No bid entered
                     if (inputbid.isEmpty()) {
@@ -173,7 +175,7 @@ public class ViewBidTask extends AppCompatActivity {
                     Log.i("ViewTask", "Invalid bid entered!");
                     userbid.setError("Invalid bid entered!");
                     return;
-                } // end of catch
+                }
 
                 Bid bid = new Bid(userID, bidamount);
 
@@ -196,6 +198,7 @@ public class ViewBidTask extends AppCompatActivity {
 
                 task.setBids(bidList);
 
+                /* UPDATE NOTIFICATION CONDITIONS */
                 if (MainActivity.isOnline()){
                     //Set information for notifications
                     task.setHasNewBids(true);
@@ -204,23 +207,6 @@ public class ViewBidTask extends AppCompatActivity {
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
                 }
-
-                /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
-                final Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-
-                // get userindex of the task requester
-                int userindexCreator = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
-                saveFileController.updateTask(context, userindexCreator, task.getId(), task);
-
-
-                // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
-
-                // A task the user has bid on should now appear in the middle menu
-                int userindexBidder = saveFileController.getUserIndex(context, userName);
-
-                // Update bids on tasks that other users bidded on
-                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);*/
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewBidTask.this, MainActivity.class);
@@ -234,7 +220,7 @@ public class ViewBidTask extends AppCompatActivity {
     } // end of method
 
     /**
-     * Displays Task information.
+     * Displays Task information upon starting activity.
      *
      * @see Task
      */
@@ -269,9 +255,7 @@ public class ViewBidTask extends AppCompatActivity {
 
         // Get current user information
         userID = intent.getStringExtra("userid");
-        Log.i("ViewBidTask", "userid is: "+userID);
         userName = intent.getStringExtra("userName");
-        Log.i("ViewBidTask", "username is: "+userName);
 
         // GET CURRENT TASK PROVIDER'S PREVIOUS RECENT BID
         float recentbid = 0;
@@ -287,8 +271,8 @@ public class ViewBidTask extends AppCompatActivity {
             }
         }
 
+        /* DISPLAY WINNING BID */
         Bid winningbid;
-
         try {
             if (task.getBids().isEmpty()) {
                 taskwinningbid.setText("No bids yet!");

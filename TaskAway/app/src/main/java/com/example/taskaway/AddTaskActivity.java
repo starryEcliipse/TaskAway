@@ -24,9 +24,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Created by SJIsmail on 2018-04-04.
+ *
+ * This activity is responsible to adding new tasks for the current user.
+ * @author Sameerah Wajahat, Edited by Jonathan Ismail, Katherine Mae Patenio
+ *
+ * @see EditActivity
+ * @see SaveFileController
  */
-
 public class AddTaskActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText requirementField;
@@ -126,7 +130,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 task_id = task_id.replaceAll(" ", "");
                 Task task = new Task(name, comment, s, location, null, null, null, task_id);
 
-                // Added by Katherine Mae Patenio March 30 2018
                 // Include current user's ID into the task so that we can identify to whom the task
                 // belongs to later on
                 task.setCreatorId(userid);
@@ -160,7 +163,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     } // end of onCreate()
 
-    //https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
+    // SOURCE: https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
     public static Bitmap StringToBitMap(String encodedString){
         try{
             byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);

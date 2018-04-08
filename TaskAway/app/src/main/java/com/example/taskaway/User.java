@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 /**
  * Represents a user.
  *
- * @author Sameerah Wajahat
+ * @author Sameerah Wajahat, edited by Adrian Schuldhaus
  * Created on 18/02/18
  */
 public class User {
@@ -13,8 +13,8 @@ public class User {
     private String email;
     private String phone;
     private TaskList reqTasks;
-    private TaskList bidTasks; //updated var name to be more descriptive - 20/02/18
-    private TaskList assignedTasks; //updated var name to be more descriptive - 20/02/18
+    private TaskList bidTasks;
+    private TaskList assignedTasks;
     private String passwordHash;
     private String id;
     private boolean deleted = false;

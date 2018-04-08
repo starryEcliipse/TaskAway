@@ -85,21 +85,18 @@ public class MyBids extends Fragment{
         // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
         if (getArguments() != null){
             Log.i("My Bids","getArguments NOT null!");
-            //Bundle bundle = new Bundle();
             user_name = getArguments().getString("username");
-            Log.i("My Bids",getArguments().getString("username")+"");
             user_id = getArguments().getString("userid");
-            Log.i("My Bids", getArguments().getString("userid")+"");
         }
 
         updateList();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
+    /**
+     * Update the list view in real time
+     *
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -107,6 +104,10 @@ public class MyBids extends Fragment{
         updateList();
     }
 
+    /**
+     * Updates the current list view // TODO: make this an interface instead?
+     *
+     */
     public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);
@@ -125,12 +126,6 @@ public class MyBids extends Fragment{
                 unavailableIcon = view.findViewById(R.id.unavailableIcon);
                 unavailableIcon.setVisibility(View.VISIBLE);
             }
-
-            /*final Context context = getContext();
-            SaveFileController saveFileController = new SaveFileController();
-            int userIndex = saveFileController.getUserIndex(context, user_name);
-            Log.i("My Jobs","userindex is "+userIndex);
-            lstTask = saveFileController.getUserBiddedTasks(context, userIndex);*/
         }
     }
 }
