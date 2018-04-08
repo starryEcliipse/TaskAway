@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.content.Intent;
@@ -298,6 +299,8 @@ public class ViewOwnTask extends AppCompatActivity {
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // for notification conditions
                     i.putExtra("user_name", userName);
                     i.putExtra("user_id", userID);
+
+
                     startActivity(i);
                 }else{ // no bids - cannot accept
                     Toast.makeText(getApplicationContext(), "There are currently no bids on this task", Toast.LENGTH_SHORT).show();
@@ -305,6 +308,23 @@ public class ViewOwnTask extends AppCompatActivity {
 
             }
         });
+
+        // SETTING TASK STATUS TO DONE
+        /**
+         *
+         */
+        RelativeLayout selectDone = (RelativeLayout) findViewById(R.id.selectDone);
+        Log.i("TASK IS", "Task is" + task);
+        if(!task.getStatus().equals("ASSIGNED")){
+            selectDone.setVisibility(View.GONE);
+        }
+
+        RelativeLayout saveStatus = (RelativeLayout) findViewById(R.id.saveStatus);
+        if(!task.getStatus().equals("ASSIGNED")){
+            saveStatus.setVisibility(View.GONE);
+        }
+
+
 
         // OTHER BIDS BUTTON
         /**

@@ -211,7 +211,8 @@
                 android:id="@+id/newaccept_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:text="Accept"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
@@ -272,6 +273,24 @@
         android:scaleType="centerCrop"
         android:tint="@color/colorCoolGrey"
         app:srcCompat="@android:drawable/ic_dialog_info" />
+
+    <RelativeLayout
+        android:id="@+id/selectDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/photos_btn"
+        android:layout_toRightOf="@+id/photos_btn"
+        android:text="Task Done" />
+
+    <RelativeLayout
+        android:id="@+id/saveStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/edit_btn"
+        android:layout_toStartOf="@+id/edit_btn"
+        android:text="Save" />
 
 
 </RelativeLayout>
