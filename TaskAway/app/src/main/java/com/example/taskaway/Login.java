@@ -26,6 +26,8 @@ import java.util.regex.*;
  */
 public class Login extends AppCompatActivity {
 
+    private RelativeLayout loadingCircle;
+
     /**
      * Creates and initializes login button and EditText of login page.
      * @param savedInstanceState - previously saved state of app
@@ -41,16 +43,22 @@ public class Login extends AppCompatActivity {
         final EditText userNameEdit = (EditText)findViewById(R.id.neweditTextUsername);
         final EditText passwordEdit = (EditText)findViewById(R.id.neweditTextPassword);
 
+        loadingCircle = (RelativeLayout) findViewById(R.id.loadingCircle);
+
+
         //login button clicked
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                loadingCircle.setVisibility(View.VISIBLE);
 
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
                 if(userName.length()<8){
                     userNameEdit.setError("Username must be 8 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -58,11 +66,13 @@ public class Login extends AppCompatActivity {
                 Matcher m = p.matcher(userName);
                 if (!m.matches()){
                     userNameEdit.setError("Username must consist only of letters");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
                 if(password.length()<1){
                     passwordEdit.setError("A password is required");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -70,6 +80,7 @@ public class Login extends AppCompatActivity {
                 if (current_user == null) {
                     userNameEdit.setError("We could not find a user with that username");
                     continueOffline.setVisibility(View.VISIBLE);
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -77,6 +88,7 @@ public class Login extends AppCompatActivity {
 
                 if (!current_user.validatePassword(password)){
                     passwordEdit.setError("Incorrect password");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -100,11 +112,14 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                loadingCircle.setVisibility(View.VISIBLE);
+
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
                 if(userName.length()<8){
                     userNameEdit.setError("Username must be 8 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -112,17 +127,20 @@ public class Login extends AppCompatActivity {
                 Matcher m = p.matcher(userName);
                 if (!m.matches()){
                     userNameEdit.setError("Username must consist only of letters");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
                 if(password.length()<1){
                     passwordEdit.setError("A password is required");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
                 if(ServerWrapper.getUserFromUsername(userName)!= null){
                     Log.i("LOGIN","Testing register FAILED-->"+ServerWrapper.getUserFromUsername(userName).getUsername());
                     userNameEdit.setError("Username is already taken");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -140,11 +158,13 @@ public class Login extends AppCompatActivity {
                         TimeUnit.SECONDS.sleep(2);
                     }catch(Exception e){
                         Log.i("LOGIN", "Something happened when trying to stop thread. Aborting.");
+                        loadingCircle.setVisibility(View.GONE);
                         return;
                     }
                     current_user = ServerWrapper.getUserFromUsername(userName);
                     if (current_user == null) {
                         Log.i("LOGIN", "User still not on server. Aborting.");
+                        loadingCircle.setVisibility(View.GONE);
                         return;
                     }
                 }
@@ -168,11 +188,15 @@ public class Login extends AppCompatActivity {
         continueOffline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                loadingCircle.setVisibility(View.VISIBLE);
+
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
                 if(userName.length()<8){
                     userNameEdit.setError("Username must be 8 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
@@ -180,18 +204,19 @@ public class Login extends AppCompatActivity {
                 Matcher m = p.matcher(userName);
                 if (!m.matches()){
                     userNameEdit.setError("Username must consist only of letters");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
                 if(password.length()<1){
                     passwordEdit.setError("A password is required");
+                    loadingCircle.setVisibility(View.GONE);
                     return;
                 }
 
-                //TODO configure this user object so it doesn't crash
                 User current_user = new User(userName, null, null);
                 current_user.setPassword(password);
-                String current_ID = null;//TODO what should go here?
+                String current_ID = null;
 
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
