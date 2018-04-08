@@ -109,7 +109,11 @@ public class EditActivity extends AppCompatActivity {
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent2.putExtra("user_name", userName);
+                intent2.putExtra("user_id", user_id);
+                startActivity(intent2);
             }
         });
 
@@ -195,6 +199,7 @@ public class EditActivity extends AppCompatActivity {
 
                     // GO TO MAIN ACTIVITY
                     Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent2.putExtra("user_name", userName);
                     intent2.putExtra("user_id", user_id);
                     //Log.i("AddActivity", "Sending name and id to MainActivity!");
@@ -240,6 +245,7 @@ public class EditActivity extends AppCompatActivity {
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", user_id);
                 //Log.i("AddActivity","Sending name and id to MainActivity!");
