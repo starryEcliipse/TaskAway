@@ -130,10 +130,11 @@ public class EditActivity extends AppCompatActivity {
         toolBarBackbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
+                Intent intent2 = new Intent(EditActivity.this, ViewOwnTask.class);
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent2.putExtra("user_name", userName);
                 intent2.putExtra("user_id", user_id);
+                intent2.putExtra("task",task);
                 startActivity(intent2);
             }
         });
