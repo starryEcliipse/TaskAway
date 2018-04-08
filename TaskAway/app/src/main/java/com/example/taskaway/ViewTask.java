@@ -281,9 +281,9 @@ public class ViewTask extends AppCompatActivity {
 
         // Get user information
         userID = intent.getStringExtra("userid");
-        Log.i("userID", userID);
+        Log.i("userID", ""+userID);
         userName = intent.getStringExtra("userName"); // FIXME username vs userName
-        Log.i("userName", userName);
+        Log.i("userName", ""+userName);
 
         // If this task was created by the viewer, hide bid options
         if (userID.equals(task.getCreatorId())||!task.allowsBids()){

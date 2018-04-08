@@ -145,7 +145,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 // No bid selected
                 if (selectedBid == null){
-                    Toast.makeText(context, "Please select a bid to decline!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please select a bid to accept!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -198,55 +198,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     int userindex = saveFileController.getUserIndex(context, user_name);
                     saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
                     saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
-                    //User user = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
-                    //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
-                    //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
-
                 }
-
-                // TODO
-                // Go to back to viewowntask
-
-                // REMOVE NON ACCEPTED BIDS
-//                for (int i=0; i < bidList.size(); i++){
-//                    String bidListID = bidList.get(i).getUserId();
-//                    String adapterBidListID = bidList.get(pos).getUserId();
-//                    if (!bidListID.equals(adapterBidListID)){ // if not the accepted bid, remove
-//                        bidList.remove(i);
-//                    }
-//                }
-//
-//                task.setBids(bidList);
-//                task.setStatus("ASSIGNED");
-//
-//                // Update user
-//                // FIXME: requester is returning null!
-//                User requester = saveFileController.getUserFromUserId(getApplicationContext(), user_id);
-//
-//                TaskList assignedList = requester.getAssignedTasks();
-//
-//                // Todo new function?
-//                //requester.getAssignedTasks().isEmpty()
-//                //assignedList.add(task);
-//                //requester.setAssignedTasks(assignedList);
-//                // TODO: saveFileController.addAssignedTask(context, );
-//
-//                // Update task info
-//                saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
-//                // Update task to be viewed by
-//                saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
-//                //User bidder = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
-//                //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), bidder.getUsername());
-//
-//                Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
-//                intent.putExtra("task", task); // put task
-//                intent.putExtra("userid", user_id);
-//                intent.putExtra("userName", user_name);
-//                //lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
-//
-//                //intent.putExtra("lowestbidamount", lowestbidamount);
-//                startActivity(intent);
-
             } // end of onClick
 
         }); // end of onClickListener Accept
@@ -318,9 +270,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     for (int i=0; i < bidderBidTaskList.size() ; i++){
                         // Task found - update it
                         if (bidderBidTaskList.get(i).getId().equals(taskid)){
-                            Log.i("VIEWOTHERBIDS","TASK FOUND");
                             bidderBidTaskList.set(i,task);
-                            Log.i("VIEWOWNTASK",""+bidderBidTaskList);
                             bidder.setBidTasks(bidderBidTaskList);
                             ServerWrapper.updateUser(bidder);
                             break;
