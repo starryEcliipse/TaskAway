@@ -247,6 +247,12 @@ public class ViewOwnTask extends AppCompatActivity {
                     task.setBids(bidList);
 
                     ServerWrapper.updateJob(task);
+
+                    Intent i = new Intent(ViewOwnTask.this, MainActivity.class);
+                    i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    i.putExtra("user_name", userName);
+                    i.putExtra("user_id", userID);
+                    startActivity(i);
                 }else{
                     Toast.makeText(getApplicationContext(), "There are currently no bids on this task", Toast.LENGTH_SHORT).show();
                 }

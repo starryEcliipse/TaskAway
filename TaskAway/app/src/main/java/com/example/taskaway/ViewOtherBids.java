@@ -183,8 +183,11 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 ServerWrapper.updateJob(task);
 
-                // TODO
-                // Go to back to MainActivity
+                Intent i = new Intent(ViewOtherBids.this, MainActivity.class);
+                i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                i.putExtra("user_name", user_name);
+                i.putExtra("user_id", user_id);
+                startActivity(i);
 
             } // end of onClick
 
