@@ -49,7 +49,7 @@ public class Task implements Serializable { // made Serializable to that Task ca
         this.status = status;
         this.location = location;
         this.lowestBid = lowestBid;
-        this.bids = bids;
+        if (bids != null) this.bids = bids;
         this.pictures = pictures;
         this.id = id;
 
