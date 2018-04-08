@@ -123,7 +123,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 // NEW TASK - create with valid input
                 String task_id = Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
-                Task task = new Task(name, comment, s, location, null, null, null, task_id);
+                Task task = new Task(name, comment, s, location, null, arrayB, null, task_id);
 
                 // Include current user's ID into the task so that we can identify to whom the task
                 // belongs to later on
@@ -190,8 +190,14 @@ public class AddTaskActivity extends AppCompatActivity {
                 Log.i("RECIEVED", "barray(i)"+barray.get(i));
             }
             //byte b[] = getIntent().getByteArrayExtra("bytearray");
+
             byte b[] = barray.get(0);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+
+            for (int n = 0; n < size; n++){
+                String temp= Base64.encodeToString(barray.get(n), Base64.DEFAULT);
+                arrayB.add(temp);
+            }
 
             // SOURCE:
             imageSet.measure(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);

@@ -1,8 +1,11 @@
 package com.example.taskaway;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +43,9 @@ public class ViewOwnTask extends AppCompatActivity {
     private ImageButton toolBarBackbtn;
     private TextView toolBarTitle;
     private ImageButton toolBarSaveBtn;
+    private Button photos;
+    ArrayList<String> pictures = new ArrayList<String>();
+    ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     String id;
     String userID;
     String userName;
@@ -59,6 +65,33 @@ public class ViewOwnTask extends AppCompatActivity {
         taskstatus = (TextView) this.findViewById(R.id.viewown_status_textview);
         taskdescription = (TextView) this.findViewById(R.id.requirements_owntask_text);
         tasklocation = (TextView) this.findViewById(R.id.viewown_loc_textview);
+        photos = (Button) this.findViewById(R.id.photos_btn);
+        photos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewOwnTask.this, PhotosViewOwnTask.class);
+                intent.putExtra("username", userName);
+                intent.putExtra("userid",userID);
+                pictures = task.getPictures();
+                if (pictures != null) {
+                    for (int n = 0; n < pictures.size(); n++) {
+                        byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
+                        //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                        arrayB.add(encodeByte);
+                    }
+                    intent.putExtra("byteArraySize", arrayB.size());
+                    for (int i = 0; i < arrayB.size(); i++) {
+                        intent.putExtra("barray"+i, arrayB.get(i));
+                        Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                    }
+                }
+                else {
+                    Log.i("ADDTASK"," null!");
+                    return;
+                }
+                startActivity(intent);
+            }
+        });
 
         /* TOOL BAR GO BACK TO MAIN ACTIVITY */
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
