@@ -140,6 +140,7 @@ public class MyJobs extends Fragment {
     }
 
     public void updateList() {
+        Log.i("MYJOBS","current user is: "+user_name);
         final Context context = getContext();
         SaveFileController saveFileController = new SaveFileController();
         int userIndex = saveFileController.getUserIndex(context, user_name);
