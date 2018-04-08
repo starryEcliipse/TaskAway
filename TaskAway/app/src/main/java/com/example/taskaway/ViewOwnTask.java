@@ -175,11 +175,14 @@ public class ViewOwnTask extends AppCompatActivity {
             }
         });
 
-        /* PROFILE Textview
-        @author Punam Woosaree
-        When task requester username is selected, their profile shows up
-         */
+
         tasklowestbidusername.setOnClickListener(new View.OnClickListener() {
+            /**
+             * PROFILE Textview
+             * When task requester username is selected, their profile shows up
+             @author Punam Woosaree
+
+             */
             @Override
             public void onClick(View view) {
 
@@ -207,20 +210,13 @@ public class ViewOwnTask extends AppCompatActivity {
                 // If bids exist, go to ViewOtherBids Activity
                 if ((task.getBids() != null) && (!task.getBids().isEmpty())) {
 
-                    // Pass relevant information to EditActivity via SaveFileController
-                    final Context context = getApplicationContext();
-                    final SaveFileController saveFileController = new SaveFileController();
-                    final int userIndex = saveFileController.getUserIndex(context, userName);
-
                     id = task.getId();
-
                     String name = taskname.getText().toString();
 
                     Intent intent = new Intent(ViewOwnTask.this, ViewOtherBids.class);
                     intent.putExtra("name", name);
                     intent.putExtra("username", userName);
                     intent.putExtra("taskid", id);
-                    //intent.putExtra("lowestbidamount",tasklowestbid.getAmount());
                     startActivity(intent);
                 }
 
