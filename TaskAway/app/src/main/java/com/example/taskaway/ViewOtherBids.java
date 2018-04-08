@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -147,7 +148,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 // No bid selected
                 if (selectedBid == null){
-                    Toast.makeText(context, "Please select a bid to decline!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Please select a bid to accept!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
@@ -184,7 +185,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 // TODO
                 // Go to back to viewowntask
-
 
             } // end of onClick
 
@@ -228,6 +228,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 String biddername = bidder.getUsername();
                 Toast.makeText(context, "You have declined "+ biddername +"\'s " + String.format("$%.2f", selectedBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
 
+
                 /* DELETE BID FROM TASK */
                 /* UPDATE BIDDER */
                 Bid b = bidList.get(pos);
@@ -235,8 +236,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 u.removeBid(task);
                 ServerWrapper.updateUser(u);
                 bidList.remove(pos);
-                task.setBids(bidList);
-
+                
                 ServerWrapper.updateJob(task);
 
                 /* UPDATE VIEW */

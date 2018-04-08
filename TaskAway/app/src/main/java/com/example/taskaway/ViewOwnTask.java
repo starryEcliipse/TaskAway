@@ -311,6 +311,7 @@ public class ViewOwnTask extends AppCompatActivity {
         tasklocation.setText(task.getLocation());
         taskdescription.setText(task.getDescription());
 
+
         tasklowestbid = task.findLowestBid();
 
         if (task.hasNewBids()){
@@ -322,6 +323,7 @@ public class ViewOwnTask extends AppCompatActivity {
         try { // ensure bidder or a bid exists
             User bidder;
             if (MainActivity.isOnline()) { // online
+                tasklowestbid = task.findLowestBid();
                 bidder = ServerWrapper.getUserFromId(tasklowestbid.getUserId());
             } else { // offline
                 SaveFileController saveFileController = new SaveFileController();
@@ -334,18 +336,19 @@ public class ViewOwnTask extends AppCompatActivity {
 
         }
         catch (Exception e){
-            // do nothing
+            Log.e("VIEWOWNTASK","CATCH HAS BEEN CALLED");
+            e.printStackTrace();
         }
 
         // Display the lowest bid
         try {
             if (task.getBids().isEmpty()) {
-                tasklowestbidamount.setText("No bids yet!");
+                tasklowestbidamount.setText("No bids at the moment!");
             } else {
 
                 tasklowestbidamount.setText(String.format("$%.2f", tasklowestbid.getAmount()));
             }
-        } catch (Exception e) {
+        } catch (Exception e) { // list of bids is null
             tasklowestbidamount.setText("No bids yet!");
         }
     }
