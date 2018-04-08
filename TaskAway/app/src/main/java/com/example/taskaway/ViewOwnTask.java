@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Acts as activity that displays a tasks information when a user selects a task *they have created*.
  * DIFFERENT from ViewTask as this implements an Edit button.
@@ -201,14 +203,75 @@ public class ViewOwnTask extends AppCompatActivity {
 
         });
 
+        // ACCEPT LOWEST BID BUTTON
+        Button acceptButton = (Button) findViewById(R.id.accept_button);
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!MainActivity.isOnline()){
+                    Toast.makeText(getApplicationContext(), "You must be online to accept bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // If bids exist, accept lowest bid
+                if ((task.getBids() != null) && (!task.getBids().isEmpty())) {
+
+                    if (!task.getStatus().equals("BIDDED")){
+                        Toast.makeText(getApplicationContext(), "You can no longer accept bids on this task", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    ArrayList<Bid> bidList = task.getBids();
+                    Bid lowestBid = task.findLowestBid();
+
+                    String CurrentBidderId = lowestBid.getUserId();
+                    task.setStatus("ASSIGNED");
+                    task.setAssignedId(CurrentBidderId);
+                    User bidder = ServerWrapper.getUserFromId(CurrentBidderId);
+
+                    // Display toast to tell user that they deleted a bid
+                    String biddername = bidder.getUsername();
+                    Toast.makeText(getApplicationContext(), "You have accepted "+ biddername +"\'s " + String.format("$%.2f", lowestBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
+
+                /* DELETE BIDS FROM TASK */
+                /* UPDATE BIDDERS */
+                    for (int i = 0; i < bidList.size(); i++){
+                        Bid b = bidList.get(i);
+                        User u = ServerWrapper.getUserFromId(b.getUserId());
+                        u.removeBid(task);
+                        ServerWrapper.updateUser(u);
+                        bidList.remove(i);
+                    }
+                    bidList.add(lowestBid);
+                    task.setBids(bidList);
+
+                    ServerWrapper.updateJob(task);
+                }else{
+                    Toast.makeText(getApplicationContext(), "There are currently no bids on this task", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
         // OTHER BIDS BUTTON
         Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
         otherbidsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if (!MainActivity.isOnline()){
+                    Toast.makeText(getApplicationContext(), "You must be online to accept bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // If bids exist, go to ViewOtherBids Activity
                 if ((task.getBids() != null) && (!task.getBids().isEmpty())) {
+
+                    if (!task.getStatus().equals("BIDDED")){
+                        Toast.makeText(getApplicationContext(), "You can no longer accept bids on this task", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
 
                     id = task.getId();
                     String name = taskname.getText().toString();

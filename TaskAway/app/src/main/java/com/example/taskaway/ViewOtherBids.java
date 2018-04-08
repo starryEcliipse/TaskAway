@@ -138,7 +138,10 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
              */
             @Override
             public void onClick(View view){
-                // TODO: accept a bid
+                if (!MainActivity.isOnline()){
+                    Toast.makeText(getApplicationContext(), "You must be online to accept bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Context context = getApplicationContext();
 
@@ -148,39 +151,27 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     return;
                 }
 
-                /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
-                if (MainActivity.isOnline()){ // online
-                    task = ServerWrapper.getJobFromId(taskid);
-                    bidList = task.getBids();
-                }else{ // offline
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userindex = saveFileController.getUserIndex(context, user_name);
-                    task = saveFileController.getTask(context, userindex, taskid);
-                    bidList = task.getBids();
-                }
+                task = ServerWrapper.getJobFromId(taskid);
+                bidList = task.getBids();
 
                 /* GET BIDDER INFORMATION FOR EACH BID */
                 String CurrentBidderId = selectedBid.getUserId();
                 task.setStatus("ASSIGNED");
                 task.setAssignedId(CurrentBidderId);
-                String bidderName;
-                User bidder;
-
-                if (MainActivity.isOnline()){ // Online
-                    bidder = ServerWrapper.getUserFromId(CurrentBidderId);
-                }
-                else{ // Offline
-                    SaveFileController saveFileController = new SaveFileController();
-                    bidder = saveFileController.getUserFromUserId(context, selectedBid.getUserId());
-                }
+                User bidder = ServerWrapper.getUserFromId(CurrentBidderId);
 
                 // Display toast to tell user that they deleted a bid
                 String biddername = bidder.getUsername();
                 Toast.makeText(context, "You have accepted "+ biddername +"\'s " + String.format("$%.2f", selectedBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
 
-                /* DELETE BID FROM TASK */
+                /* DELETE BIDS FROM TASK */
                 /* UPDATE VIEW */
+                /* UPDATE BIDDERS */
                 for (int i = 0; i < bidList.size(); i++){
+                    Bid b = bidList.get(i);
+                    User u = ServerWrapper.getUserFromId(b.getUserId());
+                    u.removeBid(task);
+                    ServerWrapper.updateUser(u);
                     if (i != pos){
                         bidList.remove(i);
                         adapter.notifyItemRemoved(i);
@@ -189,62 +180,11 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 }
                 task.setBids(bidList);
 
-                if (MainActivity.isOnline()){
-                    ServerWrapper.updateJob(task);
-                }
-                else{
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userindex = saveFileController.getUserIndex(context, user_name);
-                    saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
-                    saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
-                    //User user = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
-                    //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
-                    //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
-
-                }
+                ServerWrapper.updateJob(task);
 
                 // TODO
                 // Go to back to viewowntask
 
-                // REMOVE NON ACCEPTED BIDS
-//                for (int i=0; i < bidList.size(); i++){
-//                    String bidListID = bidList.get(i).getUserId();
-//                    String adapterBidListID = bidList.get(pos).getUserId();
-//                    if (!bidListID.equals(adapterBidListID)){ // if not the accepted bid, remove
-//                        bidList.remove(i);
-//                    }
-//                }
-//
-//                task.setBids(bidList);
-//                task.setStatus("ASSIGNED");
-//
-//                // Update user
-//                // FIXME: requester is returning null!
-//                User requester = saveFileController.getUserFromUserId(getApplicationContext(), user_id);
-//
-//                TaskList assignedList = requester.getAssignedTasks();
-//
-//                // Todo new function?
-//                //requester.getAssignedTasks().isEmpty()
-//                //assignedList.add(task);
-//                //requester.setAssignedTasks(assignedList);
-//                // TODO: saveFileController.addAssignedTask(context, );
-//
-//                // Update task info
-//                saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
-//                // Update task to be viewed by
-//                saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
-//                //User bidder = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
-//                //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), bidder.getUsername());
-//
-//                Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
-//                intent.putExtra("task", task); // put task
-//                intent.putExtra("userid", user_id);
-//                intent.putExtra("userName", user_name);
-//                //lowestbidamount = task.findLowestBid().getAmount(); // get current lowest amount to display stuff
-//
-//                //intent.putExtra("lowestbidamount", lowestbidamount);
-//                startActivity(intent);
 
             } // end of onClick
 
@@ -263,6 +203,11 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             @Override
             public void onClick(View view){
 
+                if (!MainActivity.isOnline()){
+                    Toast.makeText(getApplicationContext(), "You must be online to decline bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Context context = getApplicationContext();
 
                 // No bid selected
@@ -272,50 +217,28 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 }
 
                 /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
-                if (MainActivity.isOnline()){ // online
-                    task = ServerWrapper.getJobFromId(taskid);
-                    bidList = task.getBids();
-                }else{ // offline
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userindex = saveFileController.getUserIndex(context, user_name);
-                    task = saveFileController.getTask(context, userindex, taskid);
-                    bidList = task.getBids();
-                }
+                task = ServerWrapper.getJobFromId(taskid);
+                bidList = task.getBids();
 
                 /* GET BIDDER INFORMATION FOR EACH BID */
                 String CurrentBidderId = selectedBid.getUserId();
-                String bidderName;
-                User bidder;
-
-                if (MainActivity.isOnline()){ // Online
-                    bidder = ServerWrapper.getUserFromId(CurrentBidderId);
-                }
-                else{ // Offline
-                    SaveFileController saveFileController = new SaveFileController();
-                    bidder = saveFileController.getUserFromUserId(context, selectedBid.getUserId());
-                }
+                User bidder = ServerWrapper.getUserFromId(CurrentBidderId);
 
                 // Display toast to tell user that they deleted a bid
                 String biddername = bidder.getUsername();
                 Toast.makeText(context, "You have declined "+ biddername +"\'s " + String.format("$%.2f", selectedBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
 
                 /* DELETE BID FROM TASK */
+                /* UPDATE BIDDER */
+                Bid b = bidList.get(pos);
+                User u = ServerWrapper.getUserFromId(b.getUserId());
+                u.removeBid(task);
+                ServerWrapper.updateUser(u);
                 bidList.remove(pos);
                 task.setBids(bidList);
 
-                if (MainActivity.isOnline()){
-                    ServerWrapper.updateJob(task);
-                }
-                else{
-                    SaveFileController saveFileController = new SaveFileController();
-                    int userindex = saveFileController.getUserIndex(context, user_name);
-                    saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
-                    saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
-                    //User user = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
-                    //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
-                    //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
+                ServerWrapper.updateJob(task);
 
-                }
                 /* UPDATE VIEW */
                 adapter.notifyItemRemoved(pos);
                 adapter.notifyItemRangeChanged(pos, adapter.getItemCount());
