@@ -115,6 +115,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("task", task); // put task
                 intent.putExtra("userid", user_id);
                 intent.putExtra("userName", user_name);
@@ -183,11 +184,12 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
                 ServerWrapper.updateJob(task);
 
-                Intent i = new Intent(ViewOtherBids.this, MainActivity.class);
-                i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-                i.putExtra("user_name", user_name);
-                i.putExtra("user_id", user_id);
-                startActivity(i);
+                Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("task", task); // put task
+                intent.putExtra("userid", user_id);
+                intent.putExtra("userName", user_name);
+                startActivity(intent);
 
             } // end of onClick
 

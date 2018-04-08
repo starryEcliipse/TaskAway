@@ -68,6 +68,7 @@ public class AddTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AddTaskActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("user_name", username);
                 intent.putExtra("user_id", userid);
                 Log.i("AddActivity","name is "+username+" and id is "+userid);
@@ -148,6 +149,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
                 // GO TO MAIN ACTIVITY
                 Intent intent2 = new Intent(AddTaskActivity.this, MainActivity.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent2.putExtra("user_name", username);
                 intent2.putExtra("user_id", userid);
                 //Log.i("AddActivity","Sending name and id to MainActivity!");

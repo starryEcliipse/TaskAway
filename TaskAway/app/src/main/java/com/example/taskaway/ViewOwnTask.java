@@ -112,6 +112,7 @@ public class ViewOwnTask extends AppCompatActivity {
 
                 // Get task information
                 Intent intent = new Intent(getBaseContext(), EditActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 String name = taskname.getText().toString();
                 String description = taskdescription.getText().toString();
                 String status = taskstatus.getText().toString();
@@ -249,7 +250,7 @@ public class ViewOwnTask extends AppCompatActivity {
                     ServerWrapper.updateJob(task);
 
                     Intent i = new Intent(ViewOwnTask.this, MainActivity.class);
-                    i.setFlags(i.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     i.putExtra("user_name", userName);
                     i.putExtra("user_id", userID);
                     startActivity(i);
