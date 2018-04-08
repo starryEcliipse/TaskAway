@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/add_actionbar"></include>
+        layout="@layout/edit_actionbar"></include>
 
     <ImageView
         android:id="@+id/imageView_edit"
