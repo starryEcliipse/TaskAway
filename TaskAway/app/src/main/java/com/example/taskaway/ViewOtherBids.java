@@ -184,7 +184,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 ServerWrapper.updateJob(task);
 
                 // TODO
-                // Go to back to viewowntask
+                // Go to back to MainActivity
 
             } // end of onClick
 
@@ -236,7 +236,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 u.removeBid(task);
                 ServerWrapper.updateUser(u);
                 bidList.remove(pos);
-                
+
                 ServerWrapper.updateJob(task);
 
                 /* UPDATE VIEW */
