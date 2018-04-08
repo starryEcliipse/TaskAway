@@ -92,15 +92,13 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                String current_ID = current_user.getId();
-
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 saveFileController.addNewUser(context, current_user);
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.putExtra("user_id", current_ID);
-                intent.putExtra("user_name", userName);
+                intent.putExtra("user_id", current_user.getId());
+                intent.putExtra("user_name", current_user.getUsername());
                 intent.putExtra("online_mode", "ONLINE");
                 startActivity(intent);
 
@@ -169,15 +167,13 @@ public class Login extends AppCompatActivity {
                     }
                 }
 
-                String current_ID = current_user.getId();
-
                 final Context context = getApplicationContext();
                 SaveFileController saveFileController = new SaveFileController();
                 saveFileController.addNewUser(context, current_user);
 
                 Intent intent = new Intent(Login.this, MainActivity.class);
-                intent.putExtra("user_id", current_ID);
-                intent.putExtra("user_name", userName);
+                intent.putExtra("user_id", current_user.getId());
+                intent.putExtra("user_name", current_user.getUsername());
                 intent.putExtra("online_mode", "ONLINE");
                 startActivity(intent);
 
