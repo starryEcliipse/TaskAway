@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Toast;
@@ -51,13 +52,13 @@ public class ViewOwnTask extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_own_task);
+        setContentView(R.layout.activity_view_owntask);
 
         // Text layouts
-        taskname = (TextView) this.findViewById(R.id.my_task_name);
-        taskstatus = (TextView) this.findViewById(R.id.my_task_status);
-        taskdescription = (TextView) this.findViewById(R.id.my_task_details);
-        tasklocation = (TextView) this.findViewById(R.id.my_task_location);
+        taskname = (TextView) this.findViewById(R.id.textview_taskname);
+        taskstatus = (TextView) this.findViewById(R.id.viewown_status_textview);
+        taskdescription = (TextView) this.findViewById(R.id.requirements_owntask_text);
+        tasklocation = (TextView) this.findViewById(R.id.viewown_loc_textview);
 
         // TOOL BAR GO BACK TO MAIN ACTIVITY
         toolBarBackbtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
@@ -94,11 +95,11 @@ public class ViewOwnTask extends AppCompatActivity {
 
 
         // Display lowest bid
-        tasklowestbidusername = (TextView) this.findViewById(R.id.lowest_bid_username);
-        tasklowestbidamount = (TextView) this.findViewById(R.id.lowest_bid_amount);
+        tasklowestbidusername = (TextView) this.findViewById(R.id.lowestbid_textview_name);
+        tasklowestbidamount = (TextView) this.findViewById(R.id.lowestbid_textview_price);
 
         // EDIT BUTTON
-        Button editButton = (Button) findViewById(R.id.edit_button);
+        Button editButton = (Button) findViewById(R.id.edit_btn);
         editButton.setOnClickListener(new View.OnClickListener() {
 
             /**
@@ -145,7 +146,7 @@ public class ViewOwnTask extends AppCompatActivity {
         });
 
         //Location Details
-        Button locationButton = (Button) findViewById(R.id.location_detail_button);
+        ImageButton locationButton = (ImageButton) findViewById(R.id.info_btn);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +207,7 @@ public class ViewOwnTask extends AppCompatActivity {
         });
 
         // ACCEPT LOWEST BID BUTTON
-        Button acceptButton = (Button) findViewById(R.id.accept_button);
+        RelativeLayout acceptButton = (RelativeLayout) findViewById(R.id.newaccept_button);
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -263,7 +264,7 @@ public class ViewOwnTask extends AppCompatActivity {
         });
 
         // OTHER BIDS BUTTON
-        Button otherbidsButton = (Button) findViewById(R.id.other_bids_button);
+        RelativeLayout otherbidsButton = (RelativeLayout) findViewById(R.id.newother_button);
         otherbidsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

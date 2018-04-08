@@ -5,16 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import java.util.concurrent.TimeUnit;
 import java.util.regex.*;
@@ -38,7 +33,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_new_login);
 
         RelativeLayout loginButton = (RelativeLayout) findViewById(R.id.newloginButton);
-        Button registerButton = (Button) findViewById(R.id.newregisterButton);
+        Button registerButton = (Button) findViewById(R.id.edit_btn);
         final TextView continueOffline = (TextView) findViewById(R.id.newcontinueOfflineTextView);
         final EditText userNameEdit = (EditText)findViewById(R.id.neweditTextUsername);
         final EditText passwordEdit = (EditText)findViewById(R.id.neweditTextPassword);
