@@ -30,7 +30,6 @@ public class AddTaskActivity extends AppCompatActivity {
     private EditText nameField;
     private EditText requirementField;
     private EditText locationField;
-    private final String text = "task";
     private ImageButton toolBarSaveBtn;
     private ImageButton uploadPic;
     private ImageButton toolBarBackbtn;

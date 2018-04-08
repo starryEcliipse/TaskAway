@@ -49,24 +49,17 @@ import java.util.List;
 public class AllBids extends Fragment {
     View rootView;
     private RecyclerView myrecyclerview;
-    //private ArrayList<Task> lstTask;
     private static TaskList lstTask;
     private String user_name;
     private String user_id;
-
     private EditText searchbox;
     private ImageButton searchbutton;
     private CheckBox distance_checkbox;
     private CheckBox allowsBids_checkbox;
-
     private ImageView unavailableIcon;
-
     private AllBidsListViewAdapter listAdapter;
-
     private RelativeLayout loadingCircle;
-
     private double MAXIMUM_FILTER_DISTANCE = 5000;
-
     static final int PERMISSIONS_REQUEST_LOCATION = 99;
 
     /**

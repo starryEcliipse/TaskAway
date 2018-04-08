@@ -28,22 +28,16 @@ public class EditActivity extends AppCompatActivity {
 
     private EditText tname;
     private EditText des;
-    private EditText status;
     private EditText location;
 
-    private Button cancel;
-    private Button delete;
-    private Button save;
 
     private ImageButton toolBarSaveBtn;
-    private ImageButton uploadPic;
     private ImageButton toolBarBackbtn;
 
     private Task task;
 
     private String new_name;
     private String new_des;
-    private String new_status;
     private String new_location;
 
     String userName;
