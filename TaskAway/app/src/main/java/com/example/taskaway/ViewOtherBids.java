@@ -140,6 +140,69 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             public void onClick(View view){
                 // TODO: accept a bid
 
+                Context context = getApplicationContext();
+
+                // No bid selected
+                if (selectedBid == null){
+                    Toast.makeText(context, "Please select a bid to decline!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
+                if (MainActivity.isOnline()){ // online
+                    task = ServerWrapper.getJobFromId(taskid);
+                    bidList = task.getBids();
+                }else{ // offline
+                    SaveFileController saveFileController = new SaveFileController();
+                    int userindex = saveFileController.getUserIndex(context, user_name);
+                    task = saveFileController.getTask(context, userindex, taskid);
+                    bidList = task.getBids();
+                }
+
+                /* GET BIDDER INFORMATION FOR EACH BID */
+                String CurrentBidderId = selectedBid.getUserId();
+                task.setStatus("ASSIGNED");
+                task.setAssignedId(CurrentBidderId);
+                String bidderName;
+                User bidder;
+
+                if (MainActivity.isOnline()){ // Online
+                    bidder = ServerWrapper.getUserFromId(CurrentBidderId);
+                }
+                else{ // Offline
+                    SaveFileController saveFileController = new SaveFileController();
+                    bidder = saveFileController.getUserFromUserId(context, selectedBid.getUserId());
+                }
+
+                // Display toast to tell user that they deleted a bid
+                String biddername = bidder.getUsername();
+                Toast.makeText(context, "You have accepted "+ biddername +"\'s " + String.format("$%.2f", selectedBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
+
+                /* DELETE BID FROM TASK */
+                /* UPDATE VIEW */
+                for (int i = 0; i < bidList.size(); i++){
+                    if (i != pos){
+                        bidList.remove(i);
+                        adapter.notifyItemRemoved(i);
+                        adapter.notifyItemRangeChanged(i, adapter.getItemCount());
+                    }
+                }
+                task.setBids(bidList);
+
+                if (MainActivity.isOnline()){
+                    ServerWrapper.updateJob(task);
+                }
+                else{
+                    SaveFileController saveFileController = new SaveFileController();
+                    int userindex = saveFileController.getUserIndex(context, user_name);
+                    saveFileController.updateTask(getApplicationContext(), userindex, task.getId(), task);
+                    saveFileController.updateTaskBids(getApplicationContext(), userindex, task, task.getId(), selectedBid);
+                    //User user = saveFileController.getUserFromUserId(getApplicationContext(), selectedBid.getUserId());
+                    //int bidderindex = saveFileController.getUserIndex(getApplicationContext(), user.getUsername());
+                    //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
+
+                }
+
                 // TODO
                 // Go to back to viewowntask
 

@@ -250,6 +250,11 @@ public class ViewOwnTask extends AppCompatActivity {
 
         tasklowestbid = task.findLowestBid();
 
+        if (task.hasNewBids()){
+            task.setHasNewBids(false);
+            ServerWrapper.updateJob(task);
+        }
+
         // Get bidder information
         try { // ensure bidder or a bid exists
             User bidder;

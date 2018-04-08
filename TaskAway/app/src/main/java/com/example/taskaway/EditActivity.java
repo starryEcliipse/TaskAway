@@ -200,8 +200,8 @@ public class EditActivity extends AppCompatActivity {
                     //Log.i("AddActivity", "Sending name and id to MainActivity!");
                     startActivity(intent2);
                 } // end of if
-                else if (task.getBids() != null){
-                    Toast.makeText(EditActivity.this, "Unable to save changes: this task already has bids!", Toast.LENGTH_SHORT).show();
+                else if (!task.getStatus().equals("REQUESTED")){
+                    Toast.makeText(EditActivity.this, "Unable to save changes: this task has already received bids!", Toast.LENGTH_SHORT).show();
                 }
             } // end of onclick
         });

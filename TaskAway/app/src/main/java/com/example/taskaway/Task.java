@@ -360,6 +360,14 @@ public class Task implements Serializable { // made Serializable to that Task ca
     }
 
     /**
+     * Returns whether the task currently allows new bids
+     * @returns True if it accepts bids, False otherwise
+     */
+    public boolean allowsBids() {
+        return (status.equals("REQUESTED")||status.equals("BIDDED"));
+    }
+
+    /**
      * Represents attributes and information of a task as a string
      * @return - attributes of a task as a string
      */

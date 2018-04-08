@@ -84,6 +84,11 @@ public class ViewTask extends AppCompatActivity {
             public void onClick(View view) {
                 String inputbid = userbid.getText().toString();
 
+                if (!task.allowsBids()){
+                    Toast.makeText(getApplicationContext(), "This job is no longer accepting bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Check if input is valid
                 try {
                     // No bid entered
@@ -133,24 +138,10 @@ public class ViewTask extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     //Set information for notifications
                     task.setHasNewBids(true);
+                    task.setStatus("BIDDED");
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
                 }
-
-                /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
-                final Context context = getApplicationContext();
-                SaveFileController saveFileController = new SaveFileController();
-                // get userindex of the task requester
-                int userindexCreator = saveFileController.getUserIndexFromCreatorID(context, task.getCreatorId());
-                saveFileController.updateTask(context, userindexCreator, task.getId(), task);
-
-
-                // SAVEFILECONTROLLER FOR UPDATING MYBIDS MENU
-                // A task the user has bid on should now appear in the middle menu
-                int userindexBidder = saveFileController.getUserIndex(context, userName);
-
-                saveFileController.addBiddedTask(context, userindexBidder, task);
-                saveFileController.updateTaskBids(context, userindexCreator, task, task.getId(), bid);*/
 
                 // GO BACK TO MAIN
                 Intent intent2 = new Intent(ViewTask.this, MainActivity.class);
@@ -295,7 +286,7 @@ public class ViewTask extends AppCompatActivity {
         Log.i("userName", userName);
 
         // If this task was created by the viewer, hide bid options
-        if (userID.equals(task.getCreatorId())){
+        if (userID.equals(task.getCreatorId())||!task.allowsBids()){
             saveButton.setVisibility(View.INVISIBLE);
             userbid.setVisibility(View.INVISIBLE);
             yourPrice.setVisibility(View.INVISIBLE);

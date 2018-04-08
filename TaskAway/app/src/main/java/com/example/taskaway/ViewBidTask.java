@@ -148,6 +148,11 @@ public class ViewBidTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (!task.allowsBids()){
+                    Toast.makeText(getApplicationContext(), "This job is no longer accepting bids", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 String inputbid = userbid.getText().toString();
                 float bidamount;
 
@@ -192,15 +197,10 @@ public class ViewBidTask extends AppCompatActivity {
                 if (MainActivity.isOnline()){
                     //Set information for notifications
                     task.setHasNewBids(true);
+                    task.setStatus("BIDDED");
 
                     ServerWrapper.updateJob(task);
                     Log.i("ViewBidTask", "Updating Task on server");
-                    User u = ServerWrapper.getUserFromId(userID);
-                    if (u != null){
-                        u.addBid(task);
-                        ServerWrapper.updateUser(u);
-                        Log.i("ViewBidTask", "Updating User on server");
-                    }
                 }
 
                 /*// SAVEFILECONTROLLER FOR UPDATING THE TASK'S LIST OF BIDS
