@@ -148,6 +148,8 @@ public class ViewBidTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+
                 if (!task.allowsBids()){
                     Toast.makeText(getApplicationContext(), "This job is no longer accepting bids", Toast.LENGTH_SHORT).show();
                     return;

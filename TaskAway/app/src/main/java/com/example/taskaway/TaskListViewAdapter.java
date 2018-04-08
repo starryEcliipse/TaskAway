@@ -102,9 +102,13 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.tv_name.setText(mData.get(position).getName());
-        holder.tv_img.setImageResource(R.drawable.ic_bids);
+        holder.tv_img.setImageResource(R.mipmap.ic_workicon);
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
+        holder.status_img.setImageResource(R.mipmap.ic_messengerbw);
+        if (mData.get(position).hasNewBids() == true){
+            holder.status_img.setImageResource(R.mipmap.ic_message_notification);
+        }
 
 
     }
@@ -123,6 +127,7 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
         private LinearLayout item;
         private TextView tv_name;
         private ImageView tv_img;
+        private ImageView status_img;
         //private TextView tv_status;
         //private TextView img; <- For images
         public MyViewHolder(View itemView) {
@@ -130,6 +135,7 @@ public class TaskListViewAdapter extends RecyclerView.Adapter<TaskListViewAdapte
             item = (LinearLayout) itemView.findViewById(R.id.item_task);
             tv_name = (TextView) itemView.findViewById(R.id.name_jobs);
             tv_img = (ImageView) itemView.findViewById(R.id.img_jobs);
+            status_img = (ImageView) itemView.findViewById(R.id.img_status);
 
 
         }

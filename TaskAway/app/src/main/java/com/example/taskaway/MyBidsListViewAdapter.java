@@ -96,6 +96,9 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv_name.setText(mData.get(position).getName());
         holder.tv_img.setImageResource(R.drawable.ic_mybids);
+        holder.status_img.setImageResource(R.mipmap.ic_bidsicon);
+
+
 
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
         //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
@@ -116,6 +119,7 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
         private LinearLayout item;
         private TextView tv_name;
         private ImageView tv_img;
+        private ImageView status_img;
         //private TextView tv_status;
         //private TextView img; <- For images
 
@@ -124,6 +128,7 @@ public class MyBidsListViewAdapter extends RecyclerView.Adapter<MyBidsListViewAd
             item = (LinearLayout) itemView.findViewById(R.id.item_task);
             tv_name = (TextView) itemView.findViewById(R.id.name_jobs);
             tv_img = (ImageView) itemView.findViewById(R.id.img_jobs);
+            status_img = (ImageView) itemView.findViewById(R.id.img_status);
             //tv_img = (ImageView) itemView.findViewById(R.id.img_jobs);
         }
     }

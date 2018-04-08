@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,6 +89,8 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
     @Override
     public void onBindViewHolder( MyAssignedListViewAdapter.MyViewHolder holder, int position) {
         holder.tv_name.setText(mData.get(position).getName());
+        holder.status_img.setImageResource(R.mipmap.ic_assigned);
+
 
         // TODO - img status and img jobs
         //holder.img_status.setText(mTasks.getTask(position).getStatus());
@@ -106,6 +109,7 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout item;
         private TextView tv_name;
+        private ImageView status_img;
         //private ImageView tv_img;
         //private TextView tv_status;
         //private TextView img; <- For images
@@ -114,6 +118,7 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
 
             item = (LinearLayout) itemView.findViewById(R.id.item_task);
             tv_name = (TextView) itemView.findViewById(R.id.name_jobs);
+            status_img = (ImageView) itemView.findViewById(R.id.img_status);
 
             // TODO - img
             //tv_img = (ImageView) itemView.findViewById(R.id.img_jobs);
