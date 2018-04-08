@@ -253,7 +253,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     //saveFileController.deleteSingleTaskBid(getApplicationContext(), bidderindex, task.getId());
 
                 }
-                // Update view
+                /* UPDATE VIEW */
                 adapter.notifyItemRemoved(pos);
                 adapter.notifyItemRangeChanged(pos, adapter.getItemCount());
 

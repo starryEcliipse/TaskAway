@@ -251,27 +251,23 @@ public class ViewOwnTask extends AppCompatActivity {
         tasklowestbid = task.findLowestBid();
 
         // Get bidder information
-        User bidder;
-        if (MainActivity.isOnline()){ // online
-            bidder =  ServerWrapper.getUserFromId(tasklowestbid.getUserId());
-        }else{ // offline
-            SaveFileController saveFileController = new SaveFileController();
-            Context context = getApplicationContext();
-            bidder = saveFileController.getUserFromUserId(context,tasklowestbid.getUserId());
-        }
+        try { // ensure bidder or a bid exists
+            User bidder;
+            if (MainActivity.isOnline()) { // online
+                bidder = ServerWrapper.getUserFromId(tasklowestbid.getUserId());
+            } else { // offline
+                SaveFileController saveFileController = new SaveFileController();
+                Context context = getApplicationContext();
+                bidder = saveFileController.getUserFromUserId(context, tasklowestbid.getUserId());
+            }
 
-        try {
             String userBidderName = bidder.getUsername();
             tasklowestbidusername.setText(userBidderName);
-        }
-        catch (Exception e) {
-        }
 
-        // Get user information
-        userID = intent.getStringExtra("userid");
-        Log.i("userID", ""+userID);
-        userName = intent.getStringExtra("userName"); // FIXME username vs userName
-        Log.i("userName", ""+userName);
+        }
+        catch (Exception e){
+            // do nothing
+        }
 
         // Display the lowest bid
         try {
