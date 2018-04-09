@@ -50,7 +50,7 @@
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/viewtask_requirementsk"
+        android:id="@+id/assigned_requirementsk"
         android:layout_width="370dp"
         android:layout_height="200dp"
         android:layout_alignParentBottom="true"
@@ -70,9 +70,9 @@
         android:id="@+id/textview_requirment_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/viewtask_requirementsk"
-        android:layout_alignLeft="@+id/viewtask_requirementsk"
-        android:layout_alignStart="@+id/viewtask_requirementsk"
+        android:layout_above="@+id/assigned_requirementsk"
+        android:layout_alignLeft="@+id/assigned_requirementsk"
+        android:layout_alignStart="@+id/assigned_requirementsk"
         android:text="Requirements"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent" />

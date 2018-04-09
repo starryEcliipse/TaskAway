@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,10 @@ public class ViewBidTask extends AppCompatActivity {
     String userName;
     String userID;
 
+    private ImageButton toolBarBackbtn;
+    private TextView toolBarTitle;
+    private ImageButton toolBarSaveBtn;
+
     /**
      * Create layout and buttons. Determine button behaviours.
      *
@@ -51,17 +57,29 @@ public class ViewBidTask extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_bid_task);
+        setContentView(R.layout.activity_assigned_jobs);
+
+        /* REMOVE TOOLBAR SAVE BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* REMOVE TOOLBAR BACK BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* SET TITLE OF TOOLBAR */
+        toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
+        toolBarTitle.setText("My Bid");
 
         // Text layouts
-        taskname = (TextView) this.findViewById(R.id.task_bid_name);
-        taskdescription = (TextView) this.findViewById(R.id.task_bid_details);
-        tasklocation = (TextView) this.findViewById(R.id.task_bid_location);
-        taskwinningbid = (TextView) this.findViewById(R.id.winning_bid_amount_2);
-        useroldbid = (TextView) this.findViewById(R.id.old_price_amount);
-        userbid = (EditText) this.findViewById(R.id.new_bid_amount);
-        taskusername = (TextView) this.findViewById(R.id.task_user_name);
-        photos = (Button) this.findViewById(R.id.button6);
+        taskname = (TextView) this.findViewById(R.id.assigned_name);
+        taskdescription = (TextView) this.findViewById(R.id.assigned_requirementsk);
+        tasklocation = (TextView) this.findViewById(R.id.assigned_loc_textview);
+        taskwinningbid = (TextView) this.findViewById(R.id.assigned_lowestbid);
+        useroldbid = (TextView) this.findViewById(R.id.assigned_status);
+        userbid = (EditText) this.findViewById(R.id.assigned_newbid);
+        taskusername = (TextView) this.findViewById(R.id.assigned_username);
+        photos = (Button) this.findViewById(R.id.assigned_photobtn);
 
         photos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +111,7 @@ public class ViewBidTask extends AppCompatActivity {
         });
 
         //Location Details
-        Button locationButton = (Button) findViewById(R.id.location_detail_button);
+        ImageButton locationButton = (ImageButton) findViewById(R.id.assigned_location_detailbtn);
         locationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +147,7 @@ public class ViewBidTask extends AppCompatActivity {
         });
 
         // CANCEL button - cancel activity
-        Button cancelButton = (Button) findViewById(R.id.cancel_button_2);
+        RelativeLayout cancelButton = (RelativeLayout) findViewById(R.id.assigned_cancelbtn);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             /**
              * Lets user stop viewing bid on a task.
@@ -143,7 +161,7 @@ public class ViewBidTask extends AppCompatActivity {
         });
 
 
-        TextView requestUser = (TextView) findViewById(R.id.task_user_name);
+        TextView requestUser = (TextView) findViewById(R.id.assigned_username);
         requestUser.setOnClickListener(new View.OnClickListener(){
             /**
              * When task requester username is selected, their profile shows up
@@ -169,7 +187,7 @@ public class ViewBidTask extends AppCompatActivity {
         });
 
         // SAVE BUTTON
-        Button saveButton = (Button) findViewById(R.id.save_button_2);
+        RelativeLayout saveButton = (RelativeLayout) findViewById(R.id.assigned_savebtn);
         saveButton.setOnClickListener(new View.OnClickListener() {
 
             /**

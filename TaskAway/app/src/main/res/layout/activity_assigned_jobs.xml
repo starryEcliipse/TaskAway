@@ -11,15 +11,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#c8cedd">
+    android:layout_height="match_parent">
 
     tools:context="com.example.taskaway.AddActivity"><include
     layout="@layout/add_actionbar"
     android:id="@+id/actionbar"></include>
 
     <Button
-        android:id="@+id/viewtask_photobtn"
+        android:id="@+id/assigned_photobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -44,7 +43,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/viewtask_requirementsk"
+        android:id="@+id/assigned_requirementsk"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_below="@+id/textView5"
@@ -60,13 +59,13 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/viewtask_photobtn"
+        android:layout_alignBottom="@+id/assigned_photobtn"
         android:layout_alignEnd="@+id/textView5"
         android:layout_alignRight="@+id/textView5"
         app:srcCompat="@drawable/ic_action_user" />
 
     <TextView
-        android:id="@+id/viewtask_username"
+        android:id="@+id/assigned_username"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView"
@@ -75,10 +74,10 @@
         android:layout_toRightOf="@+id/textView5" />
 
     <TextView
-        android:id="@+id/viewtask_name"
+        android:id="@+id/assigned_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/viewtask_requirementsk"
+        android:layout_above="@+id/assigned_requirementsk"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
         android:textSize="24sp"
@@ -88,9 +87,9 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/viewtask_requirementsk"
-        android:layout_alignStart="@+id/viewtask_requirementsk"
-        android:layout_below="@+id/viewtask_requirementsk"
+        android:layout_alignLeft="@+id/assigned_requirementsk"
+        android:layout_alignStart="@+id/assigned_requirementsk"
+        android:layout_below="@+id/assigned_requirementsk"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="55dp"
@@ -111,7 +110,7 @@
         app:srcCompat="@drawable/loaction_icon" />
 
     <TextView
-        android:id="@+id/viewtask_loc_textview"
+        android:id="@+id/assigned_loc_textview"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView_loc"
@@ -119,12 +118,12 @@
         android:layout_alignStart="@+id/textView5" />
 
     <ImageButton
-        android:id="@+id/taskview_loaction_detailbtn"
+        android:id="@+id/assigned_location_detailbtn"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/viewtask_loc_textview"
-        android:layout_toEndOf="@+id/viewtask_loc_textview"
-        android:layout_toRightOf="@+id/viewtask_loc_textview"
+        android:layout_alignTop="@+id/assigned_loc_textview"
+        android:layout_toEndOf="@+id/assigned_loc_textview"
+        android:layout_toRightOf="@+id/assigned_loc_textview"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:tint="@color/colorCoolGrey"
@@ -148,7 +147,7 @@
         android:layout_alignStart="@+id/textView6"
         android:layout_below="@+id/view"
         android:layout_marginTop="24dp"
-        android:text="Status:"
+        android:text="Old:"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
@@ -165,21 +164,21 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/viewtask_status"
+        android:id="@+id/assigned_status"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView12"
-        android:layout_alignLeft="@+id/viewtask_loc_textview"
-        android:layout_alignStart="@+id/viewtask_loc_textview" />
+        android:layout_alignLeft="@+id/assigned_loc_textview"
+        android:layout_alignStart="@+id/assigned_loc_textview" />
 
     <TextView
-        android:id="@+id/viewtask_lowestbid"
+        android:id="@+id/assigned_lowestbid"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView12"
         android:layout_alignBottom="@+id/textView12"
-        android:layout_alignLeft="@+id/viewtask_status"
-        android:layout_alignStart="@+id/viewtask_status" />
+        android:layout_alignLeft="@+id/assigned_status"
+        android:layout_alignStart="@+id/assigned_status" />
 
     <TextView
         android:id="@+id/taskview_yourprice"
@@ -194,29 +193,29 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/viewtask_newbid"
+        android:id="@+id/assigned_newbid"
         android:layout_width="218dp"
         android:layout_height="39dp"
         android:layout_alignBottom="@+id/taskview_yourprice"
-        android:layout_alignLeft="@+id/viewtask_lowestbid"
-        android:layout_alignStart="@+id/viewtask_lowestbid"
+        android:layout_alignLeft="@+id/assigned_lowestbid"
+        android:layout_alignStart="@+id/assigned_lowestbid"
         android:ems="10"
         android:hint="@string/your_price_amount"
         android:inputType="numberDecimal"
         android:textColor="@color/Black" />
 
     <android.support.v7.widget.CardView
-        android:id="@+id/taskview_cardview2"
+        android:id="@+id/assigned_cardview2"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_alignEnd="@+id/viewtask_newbid"
-        android:layout_alignRight="@+id/viewtask_newbid"
-        android:layout_alignTop="@+id/taskview_cardview"
+        android:layout_alignEnd="@+id/assigned_newbid"
+        android:layout_alignRight="@+id/assigned_newbid"
+        android:layout_alignTop="@+id/assigned_cardview"
         app:cardBackgroundColor="@color/colorGreenSaveButton"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp">
         <RelativeLayout
-            android:id="@+id/taskview_savebtn"
+            android:id="@+id/assigned_savebtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignLeft="@+id/cardView"
@@ -224,7 +223,7 @@
             android:layout_alignTop="@+id/cardView">
 
             <TextView
-                android:id="@+id/taskview_savetextview"
+                android:id="@+id/assigned_savetextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -245,13 +244,13 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/imageView_loc"
         android:layout_marginBottom="45dp"
-        android:id="@+id/taskview_cardview"
+        android:id="@+id/assigned_cardview"
         app:cardBackgroundColor="@color/colorRedCancelButton"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
         android:layout_marginTop="60dp">
         <RelativeLayout
-            android:id="@+id/taskview_cancelbtn"
+            android:id="@+id/assigned_cancelbtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignLeft="@+id/cardView"
@@ -259,7 +258,7 @@
             android:layout_alignTop="@+id/cardView">
 
             <TextView
-                android:id="@+id/taskview_canceltextview"
+                android:id="@+id/assigned_canceltextview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"

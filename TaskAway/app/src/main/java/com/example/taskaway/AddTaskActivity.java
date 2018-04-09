@@ -55,7 +55,7 @@ public class AddTaskActivity extends AppCompatActivity {
         // EditText layouts
         imageSet = (ImageView) findViewById(R.id.imageView_edit);
         nameField = (EditText) findViewById(R.id.name_edit_text);
-        requirementField = (EditText) findViewById(R.id.viewtask_requirementsk);
+        requirementField = (EditText) findViewById(R.id.assigned_requirementsk);
         locationField = (EditText) findViewById(R.id.location_edit_text);
         uploadPic = (ImageButton) findViewById(R.id.image_camera_btn);
         rl = (RelativeLayout) findViewById(R.id.relative_lay);

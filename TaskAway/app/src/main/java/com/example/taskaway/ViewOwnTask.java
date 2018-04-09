@@ -63,9 +63,9 @@ public class ViewOwnTask extends AppCompatActivity {
         // Text layouts
         taskname = (TextView) this.findViewById(R.id.textview_taskname);
         taskstatus = (TextView) this.findViewById(R.id.viewown_status_textview);
-        taskdescription = (TextView) this.findViewById(R.id.viewtask_requirementsk);
-        tasklocation = (TextView) this.findViewById(R.id.viewown_loc_textview);
-        photos = (Button) this.findViewById(R.id.taskview_photobtn);
+        taskdescription = (TextView) this.findViewById(R.id.assigned_requirementsk);
+        tasklocation = (TextView) this.findViewById(R.id.assigned_loc_textview);
+        photos = (Button) this.findViewById(R.id.assigned_photobtn);
         photos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

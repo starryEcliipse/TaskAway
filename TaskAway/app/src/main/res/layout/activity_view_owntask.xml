@@ -32,7 +32,7 @@
         android:textSize="12sp" />
 
     <Button
-        android:id="@+id/taskview_photobtn"
+        android:id="@+id/assigned_photobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/viewtask_requirementsk"
+        android:id="@+id/assigned_requirementsk"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_below="@+id/textView5"
@@ -75,9 +75,9 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/viewtask_requirementsk"
-        android:layout_alignStart="@+id/viewtask_requirementsk"
-        android:layout_below="@+id/viewtask_requirementsk"
+        android:layout_alignLeft="@+id/assigned_requirementsk"
+        android:layout_alignStart="@+id/assigned_requirementsk"
+        android:layout_below="@+id/assigned_requirementsk"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="55dp"
@@ -98,7 +98,7 @@
         app:srcCompat="@drawable/loaction_icon" />
 
     <TextView
-        android:id="@+id/viewown_loc_textview"
+        android:id="@+id/assigned_loc_textview"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView_loc"
@@ -141,15 +141,15 @@
         android:layout_width="218dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignLeft="@+id/viewown_loc_textview"
-        android:layout_alignStart="@+id/viewown_loc_textview" />
+        android:layout_alignLeft="@+id/assigned_loc_textview"
+        android:layout_alignStart="@+id/assigned_loc_textview" />
 
     <ImageView
         android:id="@+id/imageView7"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_alignLeft="@+id/viewtask_requirementsk"
-        android:layout_alignStart="@+id/viewtask_requirementsk"
+        android:layout_alignLeft="@+id/assigned_requirementsk"
+        android:layout_alignStart="@+id/assigned_requirementsk"
         android:layout_below="@+id/view"
         android:layout_marginTop="25dp"
         android:background="@android:color/transparent"
@@ -266,9 +266,9 @@
         android:id="@+id/info_btn"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignTop="@+id/viewown_loc_textview"
-        android:layout_toEndOf="@+id/viewown_loc_textview"
-        android:layout_toRightOf="@+id/viewown_loc_textview"
+        android:layout_alignTop="@+id/assigned_loc_textview"
+        android:layout_toEndOf="@+id/assigned_loc_textview"
+        android:layout_toRightOf="@+id/assigned_loc_textview"
         android:background="@android:color/transparent"
         android:scaleType="centerCrop"
         android:tint="@color/colorCoolGrey"

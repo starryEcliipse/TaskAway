@@ -2,10 +2,9 @@ package com.example.taskaway;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -82,12 +81,12 @@ public class ViewTask extends AppCompatActivity {
         taskname = (TextView) this.findViewById(R.id.viewtask_name);
         taskdescription = (TextView) this.findViewById(R.id.viewtask_requirementsk);
         taskstatus = (TextView) this.findViewById(R.id.viewtask_status);
-        tasklocation = (TextView) this.findViewById(R.id.viewown_loc_textview);
+        tasklocation = (TextView) this.findViewById(R.id.viewtask_loc_textview);
         taskwinningbid = (TextView) this.findViewById(R.id.viewtask_lowestbid);
         userbid = (EditText) this.findViewById(R.id.viewtask_newbid);
         taskusername = (TextView) this.findViewById(R.id.viewtask_username);
         yourPrice = (TextView) this.findViewById(R.id.taskview_yourprice);
-        photos = (Button) this.findViewById(R.id.taskview_photobtn);
+        photos = (Button) this.findViewById(R.id.viewtask_photobtn);
 
         photos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,7 +343,9 @@ public class ViewTask extends AppCompatActivity {
         /* HIDE CERTAIN OPTIONS DEPENDING ON WHO VIEWS THE TASK */
         // If this task was created by the viewer, hide bid options
         if (userID.equals(task.getCreatorId())||!task.allowsBids()){
-            saveButton.setVisibility(View.INVISIBLE);
+            CardView cv_ingredient = (CardView) findViewById(R.id.taskview_cardview2);
+            cv_ingredient.setVisibility(View.GONE);
+            //saveButton.setVisibility(View.INVISIBLE);
             userbid.setVisibility(View.INVISIBLE);
             yourPrice.setVisibility(View.INVISIBLE);
         }else{

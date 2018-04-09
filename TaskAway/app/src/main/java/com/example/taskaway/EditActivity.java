@@ -82,7 +82,7 @@ public class EditActivity extends AppCompatActivity {
 
         // EditText layout
         tname = (EditText) findViewById(R.id.name_edit_text);
-        des = (EditText) findViewById(R.id.viewtask_requirementsk);
+        des = (EditText) findViewById(R.id.assigned_requirementsk);
         //status = (EditText) findViewById(R.id.editText);
         imageV = (ImageView) findViewById(R.id.imageView_edit);
         location = (EditText) findViewById(R.id.location_edit_text);

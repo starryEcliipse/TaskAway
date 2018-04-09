@@ -49,7 +49,7 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
 
         //Add sample task
         solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Testing!!");
-        solo.enterText((EditText) solo.getView(R.id.viewtask_requirementsk), "Testing is integral to the app");
+        solo.enterText((EditText) solo.getView(R.id.assigned_requirementsk), "Testing is integral to the app");
         solo.enterText((EditText) solo.getView(R.id.location_edit_text), "University of Alberta");
         solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
