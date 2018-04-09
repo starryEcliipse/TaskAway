@@ -88,11 +88,10 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
 
 
-
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button7:
                 // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
 
@@ -102,15 +101,15 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 //arrayB.add(b);
                 in.putExtra("byteArraySize", arrayB.size());
                 for (int i = 0; i < arrayB.size(); i++) {
-                    in.putExtra("barray"+i, arrayB.get(i));
-                    Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                    in.putExtra("barray" + i, arrayB.get(i));
+                    Log.i("UPLOAD", "barray(i)" + arrayB.get(i));
                 }
 //                arrayS.clear();
 //                arrayN
                 in.putExtra("userName", username);
-                in.putExtra("userid",userid);
-                in.putExtra("task_id",task_id);
-                Log.i("UPLOADACTBUTTON7",""+task_id);
+                in.putExtra("userid", userid);
+                in.putExtra("task_id", task_id);
+                Log.i("UPLOADACTBUTTON7", "" + task_id);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
 
@@ -129,36 +128,39 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button8:
-                if (!arrayU.isEmpty()){
+                if (!arrayU.isEmpty()) {
                     arrayU.clear();
                 }
-                if (!arrayN.isEmpty()){
+                if (!arrayN.isEmpty()) {
                     arrayN.clear();
                 }
-                if (!arrayS.isEmpty()){
+                if (!arrayS.isEmpty()) {
                     arrayS.clear();
                 }
 
                 Intent in2 = new Intent(this, EditActivity.class);
+                Intent in2Get = getIntent();
                 in2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
-                in2.putExtra("byteArraySize", arrayB.size());
-                for (int i = 0; i < arrayB.size(); i++) {
-                    in2.putExtra("barray"+i, arrayB.get(i));
-                    Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+
+                // Send back the array bytes so that image will display
+                int size = in2Get.getIntExtra("byteArraySize", 0);
+                ArrayList<byte[]> b = new ArrayList<byte[]>();
+                for (int i = 0; i < size; i++) {
+                    b.add(in2Get.getByteArrayExtra("barray" + i));
+                    in2.putExtra("barray"+i, b.get(i));
                 }
-//                arrayS.clear();
-//                arrayN
+
+                // send back array size, username, userid, and task id for edit activity to not crash
+                in2.putExtra("byteArraySize", size);
                 in2.putExtra("userName", username);
-                in2.putExtra("userid",userid);
-                in2.putExtra("task_id",task_id);
+                in2.putExtra("userid", userid);
+                in2.putExtra("task_id", task_id);
                 startActivity(in2);
 
-
-      //          finish();
-        }
-    }
+                    //          finish();
+                }
+            }
 
     /**
      * Receives photos from gallery. The photos received are then sent to AddTaskActivity in bytes.
@@ -278,9 +280,6 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
         task_id = intent.getStringExtra("task_id");
-        Log.i("UPLOADACT",""+username);
-        Log.i("UPLOADACT",""+userid);
-        Log.i("UPLOADACT",""+task_id);
     }
 
 

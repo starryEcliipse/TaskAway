@@ -97,7 +97,7 @@ public class EditActivity extends AppCompatActivity {
                     intent.putExtra("userid", user_id);
                     intent.putExtra("username", userName);
                     intent.putExtra("task_id", task_id);
-                    Log.i("EDITACTCLICKED",""+task_id);
+
                     //intent.putExtra("task",task);
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
@@ -128,7 +128,6 @@ public class EditActivity extends AppCompatActivity {
                 barray.add(intent.getByteArrayExtra("barray"+i));
                 Log.i("RECIEVED", "barray(i)"+barray.get(i));
             }
-            //byte b[] = getIntent().getByteArrayExtra("bytearray");
 
             byte b[] = barray.get(0);
             Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
