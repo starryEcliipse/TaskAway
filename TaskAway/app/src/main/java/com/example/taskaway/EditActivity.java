@@ -43,7 +43,7 @@ public class EditActivity extends AppCompatActivity {
     private ImageView imageV;
 
     private Task task;
-
+    private ImageButton uploadPic;
     private String new_name;
     private String new_des;
     private String new_location;
