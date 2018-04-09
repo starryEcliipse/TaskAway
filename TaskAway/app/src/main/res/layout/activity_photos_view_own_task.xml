@@ -15,14 +15,21 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-<!--    <include
+    <include
         android:id="@+id/actionbar"
-        layout="@layout/add_actionbar"></include>-->
+        layout="@layout/add_actionbar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="529dp"></include>
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/actionbar"
         android:columnWidth="90dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"

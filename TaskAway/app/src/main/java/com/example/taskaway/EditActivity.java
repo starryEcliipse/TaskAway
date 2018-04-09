@@ -84,7 +84,7 @@ public class EditActivity extends AppCompatActivity {
                 if (pictures != null) {
                     Intent intent = new Intent(EditActivity.this, UploadPicEdit.class);
                     intent.putExtra("userid", user_id);
-                    intent.putExtra("userName", userName);
+                    intent.putExtra("username", userName);
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -199,8 +199,8 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent2 = new Intent(EditActivity.this, ViewOwnTask.class);
                 intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent2.putExtra("user_name", userName);
-                intent2.putExtra("user_id", user_id);
+                intent2.putExtra("userName", userName);
+                intent2.putExtra("userid", user_id);
                 intent2.putExtra("task",task);
                 startActivity(intent2);
             }
@@ -220,7 +220,7 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (task.getBids() == null) {
+                if (!task.getStatus().equals("REQUESTED")) {
 
                     // Task name
                     String name = tname.getText().toString();
@@ -253,7 +253,7 @@ public class EditActivity extends AppCompatActivity {
 
                     ArrayList<Bid> bidlist = task.getBids();
 
-
+                    // TODO: remove null
                     Task task = new Task(name, comment, s, loc, bidlist, pictures, null, task_id);
                     task.setCreatorId(creator_id);
                     task.setAssignedId(assigned_id);
