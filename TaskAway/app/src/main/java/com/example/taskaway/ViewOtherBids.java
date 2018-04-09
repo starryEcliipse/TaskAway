@@ -163,6 +163,12 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     Toast.makeText(context, "Please select a bid to accept!", Toast.LENGTH_LONG).show();
                     return;
                 }
+                // No bid selected
+                if ((bidList.isEmpty() && (pos <= 0))){
+                    Toast.makeText(context, "There are no more bids!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
 
                 /* GET BIDDER INFORMATION FOR EACH BID */
                 String CurrentBidderId = selectedBid.getUserId();
@@ -224,7 +230,11 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     Toast.makeText(context, "Please select a bid to decline!", Toast.LENGTH_LONG).show();
                     return;
                 }
-
+                // No bid selected
+                if ((bidList.isEmpty() && (pos <= 0))){
+                    Toast.makeText(context, "There are no more bids!", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
                 bidList = task.getBids();
@@ -242,15 +252,9 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 Bid b = bidList.get(pos);
                 User u = ServerWrapper.getUserFromId(b.getUserId());
 
-                /**
-                 * NEW CODE -- TESTING changing back ground of bid to grey
-                 */
-
-
-
-                u.removeBid(task);
+               // u.removeBid(task);
                 bidList.remove(pos);
-                ServerWrapper.updateUser(u);
+                //ServerWrapper.updateUser(u);
 
                 task.setBids(bidList);
 
@@ -260,6 +264,9 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 ServerWrapper.updateJob(task);
 
                 bidList = task.getBids();
+
+                Log.i("bidList size",""+bidList.size());
+                Log.i("pos is:",""+pos);
 
 
             } // end of onClick
