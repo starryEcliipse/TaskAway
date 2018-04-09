@@ -68,7 +68,7 @@ public class PhotosViewOwnTask extends AppCompatActivity {
                 // VIEWTASK/ASSIGNED
                 else if (intentGet.getStringExtra("viewTaskType").equals("ViewTask")){
                     Intent intent = new Intent(PhotosViewOwnTask.this, ViewTask.class);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("userName", user_name);
                     intent.putExtra("userid", userID);
                     intent.putExtra("task",task);
