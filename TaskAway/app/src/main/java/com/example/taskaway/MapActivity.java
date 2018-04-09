@@ -96,6 +96,11 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         return latLng;
     }
 
+    /**
+     * Does the parsing of the address using the google api
+     * @param googleMap
+     */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         if (task_location_coords == null){

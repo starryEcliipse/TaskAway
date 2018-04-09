@@ -102,6 +102,11 @@ public class MyAssigned extends Fragment {
         updateList();
     }
 
+    /**
+     * Updates the tasklist on the server
+     * @author Adrian Schuldhaus
+     */
+
     public void updateList() {
         if (MainActivity.isOnline()){
             User user = ServerWrapper.getUserFromId(user_id);

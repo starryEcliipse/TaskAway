@@ -32,6 +32,12 @@ import java.lang.reflect.Array;
 import java.net.URI;
 import java.util.ArrayList;
 
+/**
+ * Represents an activity that allows access to gallery and retrieving images from gallery
+ * Used to add photos when creating a task
+ * @author Sameerah Wajahat
+ */
+
 public class UploadPic extends AppCompatActivity implements View.OnClickListener{
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -60,6 +66,11 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         upload.setOnClickListener(this);
 
     }
+
+    /**
+     * Implements onClick for all the buttons on the activity
+     * @param view
+     */
 
     @Override
     public void onClick(View view){

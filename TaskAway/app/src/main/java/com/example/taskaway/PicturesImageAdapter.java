@@ -1,8 +1,5 @@
 package com.example.taskaway;
 
-/**
- * Created by KatherineMae on 4/3/2018.
- */
 
 import android.content.Context;
 
@@ -18,6 +15,14 @@ import android.widget.ImageView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+/**
+ * Adapter used by all the Activity classes that use grid views
+ * @authors Created by KatherineMae, Edited by Sameerah Wajahat
+ * @see UploadPic
+ * @see UploadPicEdit
+ * @see PhotosViewOwnTask
+ */
 
 public class PicturesImageAdapter extends BaseAdapter {
     private Context mContext;
@@ -49,7 +54,7 @@ public class PicturesImageAdapter extends BaseAdapter {
             imageView = new ImageView(mContext);
             imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(3, 3, 3, 3);
+            imageView.setPadding(5, 5, 5, 5);
         } else {
             imageView = (ImageView) convertView;
         }
@@ -58,12 +63,22 @@ public class PicturesImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+    /**
+     * The inflaters for images (upon clicking the grid item) uses this to
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @authors Punam Woosaree and Sameerah Wajahat
+     * @return imageView
+     */
+
     public View getSingleView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
 
         if (convertView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+            imageView.setLayoutParams(new GridView.LayoutParams(500, 500));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(3, 3, 3, 3);
         } else {

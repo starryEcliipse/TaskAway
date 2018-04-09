@@ -20,7 +20,7 @@ import android.widget.TextView;
  *
  * View shown when username
  *
- * @ Author: Punam Woosaree
+ * @author  Punam Woosaree
  *
  * @see ViewProfile
  */

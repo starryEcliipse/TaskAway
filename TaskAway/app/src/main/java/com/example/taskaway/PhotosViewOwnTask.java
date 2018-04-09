@@ -27,6 +27,17 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Contains the gridview that displays the images of associated with every kind of task
+ *
+ * @author Created by Sameerah Wajahat
+ * Created on 2018-04-08.
+ *
+ * @see ViewOwnTask
+ * @see ViewBidTask
+ * @see ViewTask
+ */
+
 public class PhotosViewOwnTask extends AppCompatActivity {
 
     ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
@@ -37,6 +48,11 @@ public class PhotosViewOwnTask extends AppCompatActivity {
     private ImageButton mark;
     private TextView title;
     private Task task;
+
+    /**
+     * Gets the pictures associated with the task and displays them in a gridView
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

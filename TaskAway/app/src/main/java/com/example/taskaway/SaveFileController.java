@@ -331,40 +331,12 @@ public class SaveFileController {
         } // end of for
     }
 
-
-   /* public void deleteSingleTaskBid(Context context, int userIndexCreator, String userIDBidder, String taskID) {
-        loadFromFile(context);
-
-        // Read all other users
-        for (int i = 0; i < allUsers.size(); i++) {
-            // Ignore recent bidder bidder and task requester
-            if ((i == userIndexCreator)) { // ignore task requester
-                // do nothing
-            }
-            // Find specific user
-            else if (!allUsers.get(i).getBidTasks().isEmpty()) {
-                if (allUsers.get(i).getId().equals(userIDBidder)) {
-                    TaskList biddedtasks = allUsers.get(i).getBidTasks();
-
-                    // Find task
-                    for (int j = 0; j < biddedtasks.size(); j++) {
-                        Task aTask = biddedtasks.getTask(j);
-
-                        // Update task bids - remove the task
-                        if (aTask.getId().equals(taskID)) {
-                            biddedtasks.removeTask(aTask);
-                            //allUsers.get(i).setBidTasks(biddedtasks); // TODO: added recently
-                            saveToFile(context);
-                            break;
-                        }
-
-                    } // end of for
-
-                } // end of if
-
-            }
-        } // end of if
-    } //end of method */
+    /**
+     * deletes a single task from the my bids Task list
+     * @param context
+     * @param userIndex
+     * @param id
+     */
 
     public void deleteSingleTaskBid(Context context, int userIndex, String id){
         loadFromFile(context);

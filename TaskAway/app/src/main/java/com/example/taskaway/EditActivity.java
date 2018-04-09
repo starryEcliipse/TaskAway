@@ -148,10 +148,7 @@ public class EditActivity extends AppCompatActivity {
 
 
         }
-//        //else if (intent.getByteArrayExtra("bytearray") == null){
-//        else if (intent.getByteArrayExtra("barry0") == null){
-//            Log.i("ADDTASK"," null!");
-//        }
+
 
         if (MainActivity.isOnline()){
             task = ServerWrapper.getJobFromId(task_id);

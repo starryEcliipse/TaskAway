@@ -26,6 +26,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+/**
+ * Represents an activity that allows access to gallery and retrieving images from gallery
+ * Used to edits photos in an already existing task
+ * @author Sameerah Wajahat
+ */
+
 public class UploadPicEdit extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE = 1;
 
@@ -86,6 +92,11 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
             return;
         }
     }
+
+    /**
+     * Implements onClick for all the buttons on the activity
+     * @param view
+     */
 
     @Override
     public void onClick(View view) {

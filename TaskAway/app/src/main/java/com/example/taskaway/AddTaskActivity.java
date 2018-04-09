@@ -155,17 +155,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
     } // end of onCreate()
 
-    // SOURCE: https://stackoverflow.com/questions/4989182/converting-java-bitmap-to-byte-array
-    public static Bitmap StringToBitMap(String encodedString){
-        try{
-            byte [] encodeByte=Base64.decode(encodedString,Base64.DEFAULT);
-            Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-            return bitmap;
-        }catch(Exception e){
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     @Override
     public void onStart(){
@@ -211,7 +200,13 @@ public class AddTaskActivity extends AppCompatActivity {
 
     }
 
-    // Makes sure image fits imageview
+    /**
+     * This function resizes the bitmap that is to be viewed on the imageView
+     * @param bm
+     * @param newHeight
+     * @param newWidth
+     * @return resizedBitmap
+     */
     // SOURCE: https://thinkandroid.wordpress.com/2009/12/25/resizing-a-bitmap/
     public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
 

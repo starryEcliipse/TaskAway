@@ -33,6 +33,7 @@
         android:columnWidth="90dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
+        android:paddingHorizontal="40dp"
         android:numColumns="auto_fit"
         android:padding="4px"
         android:stretchMode="columnWidth"
