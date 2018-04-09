@@ -72,20 +72,27 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+
+        /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
+        String userid;
+        User user;
+        int userindex;
+        if (MainActivity.isOnline()){ // online
+            user = ServerWrapper.getUserFromId(mData.get(position).getUserId());
+        }else{ // offline
+            userid = mData.get(position).getUserId();
+            SaveFileController saveFileController = new SaveFileController();
+            user = saveFileController.getUserFromUserId(this.mContext, userid);
+            userindex = saveFileController.getUserIndexFromCreatorID(mContext, userid);
+        }
+
         /* USERNAME DISPLAY */
-        String userid = mData.get(position).getUserId();
-
-        SaveFileController saveFileController = new SaveFileController();
-        User user = saveFileController.getUserFromUserId(this.mContext, userid);
-
         String username = user.getUsername();
         holder.tv_name.setText(username);
 
         /* BID AMOUNT DISPLAY */
-        int userindex = saveFileController.getUserIndexFromCreatorID(mContext, userid);
         float amount;
         String strAmount;
-
 
         // SOURCE: http://www.zoftino.com/android-recyclerview-radiobutton
         amount = mData.get(position).getAmount();

@@ -166,7 +166,7 @@ public class ViewOwnTask extends AppCompatActivity {
                 // id of task
                 id = task.getId();
 
-                // Send task info // TODO: refactor using just one task to pass? or is this better perfomance?
+                // Send task info
                 String index = Integer.toString(userIndex);
                 intent.putExtra("name", name);
                 intent.putExtra("des", description);
