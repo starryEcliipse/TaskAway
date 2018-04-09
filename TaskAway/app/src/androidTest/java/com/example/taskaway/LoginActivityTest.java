@@ -78,14 +78,10 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
         solo.clickOnButton("Register");
         solo.assertCurrentActivity("Switch to MainActivity", MainActivity.class);
-        solo.goBack();
 
-
-        //Delete user if exists
-        User user1 = ServerWrapper.getUserFromUsername("imnotright");
-        if (user1!=null){
-            ServerWrapper.deleteUser(user1);
-        }
+        //Logout
+        solo.clickOnActionBarItem(2);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         //Incorrect Login Info Provided
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "imnotright");

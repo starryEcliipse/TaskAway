@@ -14,11 +14,11 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-public class BidActivityTest extends ActivityInstrumentationTestCase2 {
+public class testViewAllBids extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
 
-    public BidActivityTest() {
+    public testViewAllBids() {
         super(com.example.taskaway.Login.class);
     }
 
@@ -28,65 +28,6 @@ public class BidActivityTest extends ActivityInstrumentationTestCase2 {
 
     public void testStart() throws Exception{
         Activity activity = getActivity();
-    }
-
-    public void testBid(){
-        //Delete user if Exists
-        User user = ServerWrapper.getUserFromUsername("goodNewUser");
-        if (user!=null){
-            ServerWrapper.deleteUser(user);
-        }
-
-        //Test if correct username and password allows login
-        solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
-        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "goodNewUser");
-        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
-        solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        solo.clickOnView(solo.getView(R.id.add_id));
-        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
-
-        //Correct inputs for edited Task
-        solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Homework");
-        solo.enterText((EditText) solo.getView(R.id.requirements_owntask_text), "Testing is integral to the app");
-        solo.enterText((EditText) solo.getView(R.id.location_edit_text), "University of Alberta");
-        solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        //Logout
-        solo.clickOnActionBarItem(2);
-        solo.assertCurrentActivity("Wrong Activity", Login.class);
-
-        //Delete user if Exists
-        User user1 = ServerWrapper.getUserFromUsername("seconduser");
-        if (user1!=null){
-            ServerWrapper.deleteUser(user1);
-        }
-
-        //Test if correct username and password allows login
-        solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
-        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "seconduser");
-        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
-        solo.clickOnButton("Register");
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-        //test search and go to all bids page
-        solo.clickOnView(solo.getView(R.id.search_id));
-        solo.assertCurrentActivity("Wrong Activity", AllBids.class);
-
-        //Place bid
-        solo.clickInRecyclerView(0);
-        solo.assertCurrentActivity("Wrong Activity", AllBids.class);
-
-        //Enter no bid and save
-        solo.clickOnView(solo.getView(R.id.save_button_2));
-        solo.assertCurrentActivity("Wrong Activity", ViewBidTask.class);
-
-        //Enter correct bid
-        solo.enterText((EditText) solo.getView(R.id.new_bid_amount), "5.00");
-        solo.clickOnView(solo.getView(R.id.save_button_2));
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
     public void testAcceptBid(){
@@ -156,13 +97,12 @@ public class BidActivityTest extends ActivityInstrumentationTestCase2 {
         solo.clickOnView(solo.getView(R.id.newloginButton));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-        //Accept Bid
+        //View all bids
         solo.clickInRecyclerView(1);
-        solo.clickOnView(solo.getView(R.id.newaccept_button));
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+        solo.clickOnView(solo.getView(R.id.newother_button));
+        solo.assertCurrentActivity("Wrong Activity", ViewOtherBids.class);
+        
 
     }
-
-
 
 }
