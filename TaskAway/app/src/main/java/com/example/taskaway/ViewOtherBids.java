@@ -84,6 +84,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         tname.setTextSize(20);
 
         user_name = intent.getStringExtra("username");
+        user_id = intent.getStringExtra("userid");
         taskid = intent.getStringExtra("taskid");
 
         SpannableString content = new SpannableString(taskName);

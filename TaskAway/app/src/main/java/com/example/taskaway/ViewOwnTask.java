@@ -408,6 +408,7 @@ public class ViewOwnTask extends AppCompatActivity {
                     intent.putExtra("username", userName);
                     intent.putExtra("taskid", id);
                     intent.putExtra("task",task);
+                    intent.putExtra("userid",userID);
                     startActivity(intent);
                 }
 
