@@ -120,6 +120,15 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button8:
+                if (!arrayU.isEmpty()){
+                    arrayU.clear();
+                }
+                if (!arrayN.isEmpty()){
+                    arrayN.clear();
+                }
+                if (!arrayS.isEmpty()){
+                    arrayS.clear();
+                }
                 finish();
         }
     }
