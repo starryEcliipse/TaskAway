@@ -101,7 +101,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                     in.putExtra("barray"+i, arrayB.get(i));
                     Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
                 }
-                in.putExtra("username", username);
+                in.putExtra("userName", username);
                 in.putExtra("userid",userid);
                 startActivity(in);
 

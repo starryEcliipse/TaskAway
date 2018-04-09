@@ -31,47 +31,51 @@ public class PhotosViewOwnTask extends AppCompatActivity {
     private ImageButton back;
     private ImageButton mark;
     private TextView title;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photos_view_own_task);
 
-/*        back = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        back = (ImageButton)findViewById(R.id.toolbar_back_btn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            finish();
+                Intent intent = new Intent(PhotosViewOwnTask.this, ViewOwnTask.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("userName", user_name);
+                intent.putExtra("userid", userID);
+                intent.putExtra("task",task);
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent);
             }
         });
 
-        *//* SAVE TOOLBAR BUTTON - REMOVE FOR THIS ACTIVITY *//*
+        /* SAVE TOOLBAR BUTTON - REMOVE FOR THIS ACTIVITY */
         mark = (ImageButton)findViewById(R.id.toolbar_save_btn);
         mark.setVisibility(View.GONE);
 
-        *//* SET TITLE OF TOOLBAR *//*
+        /* SET TITLE OF TOOLBAR */
         title = (TextView)findViewById(R.id.toolbar_title);
-        title.setText("All Bids");*/
+        title.setText("Task Photos");
 
         Intent intent = getIntent();
-        user_name = intent.getStringExtra("username");
+        user_name = intent.getStringExtra("userName");
         userID = intent.getStringExtra("userid");
+        task = (Task) intent.getSerializableExtra("task");
 
-        //THIS IS WHERE WE HAVE TO RECEIVE THE BYTE ARRAYSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+        //THIS IS WHERE WE HAVE TO RECEIVE THE BYTE ARRAYS
         //if (intent.getStringArrayListExtra("images") != null) {
         int size = intent.getIntExtra("byteArraySize", 0);
         Log.i("RECEIVE SIZE", "size: "+ size);
         if (intent.getByteArrayExtra("barray0") != null) {
-            //ArrayList<byte[]> barray = new ArrayList<>();
-            //int size = intent.getIntExtra("byteArraySize", 0);
             for (int i = 0; i < size; i++) {
                 byte b[] = intent.getByteArrayExtra("barray" + i);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
                 bitmaps.add(bitmap);
                 Log.i("RECIEVED", "one bitmap" + bitmap);
             }
-
-            //byte b[] = getIntent().getByteArrayExtra("bytearray");
         }
         GridView gridview = (GridView) findViewById(R.id.gridView);
         gridview.setAdapter(new PicturesImageAdapter(PhotosViewOwnTask.this, bitmaps));

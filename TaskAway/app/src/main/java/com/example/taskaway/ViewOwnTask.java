@@ -76,8 +76,9 @@ public class ViewOwnTask extends AppCompatActivity {
                 pictures = task.getPictures();
                 if (pictures != null) {
                     Intent intent = new Intent(ViewOwnTask.this, PhotosViewOwnTask.class);
-                    intent.putExtra("username", userName);
+                    intent.putExtra("userName", userName);
                     intent.putExtra("userid",userID);
+                    intent.putExtra("task",task);
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
