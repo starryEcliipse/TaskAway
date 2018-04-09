@@ -31,6 +31,9 @@ import java.util.ArrayList;
  * Those lines are for when we have server connectivity
  */
 public class ViewProfile extends AppCompatActivity {
+    private ImageButton toolBarBackbtn;
+    private TextView toolBarTitle;
+    private ImageButton toolBarSaveBtn;
 
 
     /**
@@ -41,7 +44,19 @@ public class ViewProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_profile);
+        setContentView(R.layout.activity_profile);
+
+        /* REMOVE TOOLBAR SAVE BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* REMOVE TOOLBAR BACK BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* SET TITLE OF TOOLBAR */
+        toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
+        toolBarTitle.setText("Profile");
 
         //Get user_id and user_name
         final String user_name = getIntent().getStringExtra("user_name");
@@ -55,29 +70,29 @@ public class ViewProfile extends AppCompatActivity {
 
         String username = current_user.getUsername();
         Log.i("User_name:", username);
-        TextView usernameTextView = (TextView)findViewById(R.id.editName);
+        TextView usernameTextView = (TextView)findViewById(R.id.profile_name);
         usernameTextView.setText(username);
 
         if(current_user.getPhone()!=null) {
             String phonenumber = current_user.getPhone();
             String phonenumb = PhoneNumberUtils.formatNumber(phonenumber);
-            TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
+            TextView phoneTextView = (TextView)findViewById(R.id.profile_phonenumber);
             phoneTextView.setText(phonenumb);
         }
 
         if(current_user.getEmail()!=null) {
             String email = current_user.getEmail();
-            TextView emailTextView = (TextView) findViewById(R.id.editEmail);
+            TextView emailTextView = (TextView) findViewById(R.id.profile_email);
             emailTextView.setText(email);
         }
 
-        ImageButton editButton = (ImageButton) findViewById(R.id.editProfileButton);
+        ImageButton editButton = (ImageButton) findViewById(R.id.profile_editbtn);
 
         if (!MainActivity.isOnline()){ // if offline, hide edit button
             editButton.setVisibility(View.INVISIBLE);
         }
 
-        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
+        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_profile, null);
         //executed when the edit button is selected
         editButton.setOnClickListener(new View.OnClickListener(){
             /**
@@ -87,8 +102,8 @@ public class ViewProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final EditText editPhone = (EditText) view.findViewById(R.id.editPhoneNumber);
-                final EditText editEmail = (EditText) view.findViewById(R.id.editEmail);
+                final EditText editPhone = (EditText) view.findViewById(R.id.profile_phonenumber);
+                final EditText editEmail = (EditText) view.findViewById(R.id.profile_email);
 
 
                 //create editable text views
@@ -133,8 +148,8 @@ public class ViewProfile extends AppCompatActivity {
                         //saveFileController.updateUser(context, userIndex, current_user);
 
                         //get the profile TextView values
-                        TextView phoneTextView = (TextView)findViewById(R.id.editPhoneNumber);
-                        TextView emailTextView = (TextView)findViewById(R.id.editEmail);
+                        TextView phoneTextView = (TextView)findViewById(R.id.profile_phonenumber);
+                        TextView emailTextView = (TextView)findViewById(R.id.profile_email);
 
                         //set the TextViews to their updated values
                         phoneTextView.setText(Phone);

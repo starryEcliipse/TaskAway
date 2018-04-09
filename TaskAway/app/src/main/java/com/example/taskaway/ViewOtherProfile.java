@@ -32,28 +32,28 @@ public class ViewOtherProfile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_other_profile);
+        setContentView(R.layout.activity_profile);
 
         //Get user ID
         final String userID = getIntent().getStringExtra("user_id");
 
         User current_user = ServerWrapper.getUserFromId(userID);
 
-        TextView usernameTextView = (TextView)findViewById(R.id.editOtherName);
+        TextView usernameTextView = (TextView)findViewById(R.id.profile_name);
         usernameTextView.setText(current_user.getUsername());
 
         // Set phone number info on screen
         if(current_user.getPhone()!=null) {
             String phonenumber = current_user.getPhone();
             String phonenumb = PhoneNumberUtils.formatNumber(phonenumber);
-            TextView phoneTextView = (TextView)findViewById(R.id.editOtherPhoneNumber);
+            TextView phoneTextView = (TextView)findViewById(R.id.profile_phonenumber);
             phoneTextView.setText(phonenumb);
         }
 
         // Set email info on screen
         if(current_user.getEmail()!=null) {
             String email = current_user.getEmail();
-            TextView emailTextView = (TextView) findViewById(R.id.editOtherEmail);
+            TextView emailTextView = (TextView) findViewById(R.id.profile_email);
             emailTextView.setText(email);
         }
 

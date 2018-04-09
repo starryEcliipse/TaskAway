@@ -25,7 +25,7 @@
         android:cropToPadding="true"
         android:layout_below="@+id/headerView"
         android:layout_marginBottom="16dp"
-        app:srcCompat="@drawable/ic_user1" />
+        app:srcCompat="@drawable/ic_userone" />
 
 
     <TextView
