@@ -69,6 +69,18 @@ public class EditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_task);
 
+        // Get information needed to update task
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("userName");
+        Log.i("EDITACT",""+userName);
+        user_id = intent.getStringExtra("userid");
+        //userName = intent.getStringExtra("userName");
+        Log.i("EDITACT",""+user_id);
+        task_id = intent.getStringExtra("task_id");
+        Log.i("EDITACT",""+task_id);
+        Log.i("EDITACT",""+ServerWrapper.getJobFromId(task_id).getName());
+        Log.i("EDITACT",""+ServerWrapper.getJobFromId(task_id).getPictures());
+
         // EditText layout
         tname = (EditText) findViewById(R.id.name_edit_text);
         des = (EditText) findViewById(R.id.requirements_owntask_text);
@@ -85,6 +97,9 @@ public class EditActivity extends AppCompatActivity {
                     Intent intent = new Intent(EditActivity.this, UploadPicEdit.class);
                     intent.putExtra("userid", user_id);
                     intent.putExtra("username", userName);
+                    intent.putExtra("task_id", task_id);
+                    Log.i("EDITACTCLICKED",""+task_id);
+                    //intent.putExtra("task",task);
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -104,12 +119,6 @@ public class EditActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // Get information needed to update task
-        Intent intent = getIntent();
-        userName = intent.getStringExtra("userName");
-        user_id = intent.getStringExtra("userid");
-        task_id = intent.getStringExtra("task_id");
 
         int size = intent.getIntExtra("byteArraySize", 0);
         Log.i("RECEIVE SIZE", "size: "+ size);
@@ -141,9 +150,10 @@ public class EditActivity extends AppCompatActivity {
 
 
         }
-        else if (intent.getByteArrayExtra("bytearray") == null){
-            Log.i("ADDTASK"," null!");
-        }
+//        //else if (intent.getByteArrayExtra("bytearray") == null){
+//        else if (intent.getByteArrayExtra("barry0") == null){
+//            Log.i("ADDTASK"," null!");
+//        }
 
         if (MainActivity.isOnline()){
             task = ServerWrapper.getJobFromId(task_id);
@@ -188,7 +198,6 @@ public class EditActivity extends AppCompatActivity {
         // setText
         tname.setText(new_name);
         des.setText(new_des);
-        //status.setText(new_status);
         location.setText(new_location);
 
 
