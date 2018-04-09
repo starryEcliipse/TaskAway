@@ -92,7 +92,7 @@ public class ViewProfile extends AppCompatActivity {
             editButton.setVisibility(View.INVISIBLE);
         }
 
-        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_profile, null);
+        final View view = LayoutInflater.from(ViewProfile.this).inflate(R.layout.activity_edit_profile, null);
         //executed when the edit button is selected
         editButton.setOnClickListener(new View.OnClickListener(){
             /**

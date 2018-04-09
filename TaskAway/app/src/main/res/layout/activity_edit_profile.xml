@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/editPhoneNumber"
+        android:id="@+id/profile_phonenumber"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Phone Number"
@@ -20,12 +20,12 @@
 
 
     <EditText
-        android:id="@+id/editEmail"
+        android:id="@+id/profile_email"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editPhoneNumber"
-        android:layout_alignStart="@+id/editPhoneNumber"
-        android:layout_below="@+id/editPhoneNumber"
+        android:layout_alignLeft="@+id/profile_phonenumber"
+        android:layout_alignStart="@+id/profile_phonenumber"
+        android:layout_below="@+id/profile_phonenumber"
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:hint="Email"
