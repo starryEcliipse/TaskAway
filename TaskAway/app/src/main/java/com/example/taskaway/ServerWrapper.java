@@ -347,7 +347,7 @@ public class ServerWrapper {
             }
             //Wait 2 seconds before pulling changes from server
             try{
-                TimeUnit.SECONDS.sleep(2);
+                TimeUnit.SECONDS.sleep(2);//Any shorter than 2 seconds and sometimes the information pulled will be old
             }catch(Exception e){
                 Log.i("SWrapper SyncJ", "Something happened when trying to stop thread. Aborting.");
                 return;

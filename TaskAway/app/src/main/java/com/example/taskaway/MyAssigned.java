@@ -75,7 +75,6 @@ public class MyAssigned extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // GET USERNAME AND ID FROM LOGIN - TO BE PASSED TO SOME ACTIVITIES
         if (getArguments() != null){
             Log.i("My Assigned","getArguments NOT null!");
@@ -87,9 +86,7 @@ public class MyAssigned extends Fragment {
         }
         else{
             Log.i("My Assigned","getArguments is null!");
-
         }
-
         updateList();
     }
 
@@ -123,14 +120,6 @@ public class MyAssigned extends Fragment {
                 unavailableIcon = view.findViewById(R.id.unavailableIcon);
                 unavailableIcon.setVisibility(View.VISIBLE);
             }
-
-            /*final Context context = getContext();
-            SaveFileController saveFileController = new SaveFileController();
-            int userIndex = saveFileController.getUserIndex(context, user_name);
-            Log.i("My Assigned","Currently getting all other tasks");
-            //changed this from getEveryonesTask to getAllTasks
-            lstTask = saveFileController.getUserAssignedTasks(context, userIndex);*/
         }
     }
-
 }

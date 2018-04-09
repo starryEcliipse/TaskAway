@@ -147,8 +147,9 @@ public class Login extends AppCompatActivity {
 
                 if (current_user == null){
                     Log.i("LOGIN", "User not yet on server. Will attempt to fetch again in 2 seconds");
+                    //Wait 2 seconds before pulling changes from server
                     try{
-                        TimeUnit.SECONDS.sleep(2);
+                        TimeUnit.SECONDS.sleep(2); //Any shorter than 2 seconds and sometimes the information pulled will be old
                     }catch(Exception e){
                         Log.i("LOGIN", "Something happened when trying to stop thread. Aborting.");
                         loadingCircle.setVisibility(View.GONE);
