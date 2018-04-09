@@ -39,6 +39,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
     byte b[]; // byte array for image - sent to AddTask
     String username;
     String userid;
+    String task_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +89,14 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view){
+
+
+
         switch (view.getId()){
             case R.id.button7:
                 // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
 
-                Intent in = new Intent(this, EditActivity.class);
+                Intent in = new Intent(UploadPicEdit.this, EditActivity.class);
 
                 //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
                 //arrayB.add(b);
@@ -101,8 +105,13 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                     in.putExtra("barray"+i, arrayB.get(i));
                     Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
                 }
+//                arrayS.clear();
+//                arrayN
                 in.putExtra("userName", username);
                 in.putExtra("userid",userid);
+                in.putExtra("task_id",task_id);
+                Log.i("UPLOADACTBUTTON7",""+task_id);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
 
                 //in.putStringArrayListExtra("images", arrayS);
@@ -129,7 +138,25 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 if (!arrayS.isEmpty()){
                     arrayS.clear();
                 }
-                finish();
+
+                Intent in2 = new Intent(this, EditActivity.class);
+                in2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+                //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
+                in2.putExtra("byteArraySize", arrayB.size());
+                for (int i = 0; i < arrayB.size(); i++) {
+                    in2.putExtra("barray"+i, arrayB.get(i));
+                    Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                }
+//                arrayS.clear();
+//                arrayN
+                in2.putExtra("userName", username);
+                in2.putExtra("userid",userid);
+                in2.putExtra("task_id",task_id);
+                startActivity(in2);
+
+
+      //          finish();
         }
     }
 
@@ -250,7 +277,10 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
-
+        task_id = intent.getStringExtra("task_id");
+        Log.i("UPLOADACT",""+username);
+        Log.i("UPLOADACT",""+userid);
+        Log.i("UPLOADACT",""+task_id);
     }
 
 
