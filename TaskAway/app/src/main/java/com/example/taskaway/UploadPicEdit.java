@@ -129,25 +129,20 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.button8:
-//                if (!arrayU.isEmpty()){
-//                    arrayU.clear();
-//                }
-//                if (!arrayN.isEmpty()){
-//                    arrayN.clear();
-//                }
-//                if (!arrayS.isEmpty()){
-//                    arrayS.clear();
-//                }
-//                Log.i("ARRAY N",""+arrayN);
-//                Log.i("ARRAY B",""+arrayB);
-//                Log.i("ARRAY S",""+arrayS);
-
+                if (!arrayU.isEmpty()){
+                    arrayU.clear();
+                }
+                if (!arrayN.isEmpty()){
+                    arrayN.clear();
+                }
+                if (!arrayS.isEmpty()){
+                    arrayS.clear();
+                }
 
                 Intent in2 = new Intent(this, EditActivity.class);
                 in2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
-                //arrayB.add(b);
                 in2.putExtra("byteArraySize", arrayB.size());
                 for (int i = 0; i < arrayB.size(); i++) {
                     in2.putExtra("barray"+i, arrayB.get(i));
