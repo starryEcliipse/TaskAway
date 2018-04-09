@@ -122,7 +122,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 // NEW TASK - create with valid input
                 String task_id = Calendar.getInstance().getTime().toString();
                 task_id = task_id.replaceAll(" ", "");
-                Task task = new Task(name, comment, s, location, null, arrayB, null, task_id);
+                Task task = new Task(name, comment, s, location, null, arrayB, task_id);
 
                 // Include current user's ID into the task so that we can identify to whom the task
                 // belongs to later on

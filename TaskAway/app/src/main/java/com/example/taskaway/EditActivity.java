@@ -159,7 +159,7 @@ public class EditActivity extends AppCompatActivity {
             //Task is a ghost somehow. Must be exterminated
             if (task == null){
                 User u = ServerWrapper.getUserFromId(user_id);
-                u.removeTask(new Task(null, null, null, null, null, null, null , task_id));
+                u.removeTask(new Task(null, null, null, null, null, null, task_id));
                 ServerWrapper.updateUser(u);
                 Toast.makeText(getApplicationContext(), "This task should not still exist", Toast.LENGTH_SHORT).show();
                 Intent intent2 = new Intent(EditActivity.this, MainActivity.class);
@@ -264,7 +264,7 @@ public class EditActivity extends AppCompatActivity {
                     ArrayList<Bid> bidlist = task.getBids();
 
                     // TODO: remove null
-                    Task task = new Task(name, comment, s, loc, bidlist, pictures, null, task_id);
+                    Task task = new Task(name, comment, s, loc, bidlist, pictures, task_id);
                     task.setCreatorId(creator_id);
                     task.setAssignedId(assigned_id);
 

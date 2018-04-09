@@ -20,7 +20,6 @@ public class Task implements Serializable { // made Serializable to that Task ca
     private String description;
     private ArrayList<Bid> bids = new ArrayList<>();
     private String status;
-    private Float lowestBid;
     private String location;
     private ArrayList<String> pictures;
     private String id;
@@ -41,14 +40,12 @@ public class Task implements Serializable { // made Serializable to that Task ca
      * @param location - location of task
      * @param bids - bids currently made on task
      * @param pictures - pictures related to task
-     * @param lowestBid - lowest bid of all other bids made on task
      */
-    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<String> pictures, Float lowestBid, String id){
+    Task(String name, String description, String status, String location, ArrayList<Bid> bids, ArrayList<String> pictures, String id){
         this.name = name;
         this.description = description;
         this.status = status;
         this.location = location;
-        this.lowestBid = lowestBid;
         if (bids != null) this.bids = bids;
         this.pictures = pictures;
         this.id = id;
