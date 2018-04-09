@@ -58,5 +58,20 @@ public class PicturesImageAdapter extends BaseAdapter {
         return imageView;
     }
 
+    public View getSingleView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+
+        if (convertView == null) {
+            imageView = new ImageView(mContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(3, 3, 3, 3);
+        } else {
+            imageView = (ImageView) convertView;
+        }
+
+        return imageView;
+    }
+
 }
 

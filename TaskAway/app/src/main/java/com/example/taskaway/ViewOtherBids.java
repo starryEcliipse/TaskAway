@@ -242,6 +242,12 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 Bid b = bidList.get(pos);
                 User u = ServerWrapper.getUserFromId(b.getUserId());
 
+                /**
+                 * NEW CODE -- TESTING changing back ground of bid to grey
+                 */
+
+
+
                 u.removeBid(task);
                 bidList.remove(pos);
                 ServerWrapper.updateUser(u);

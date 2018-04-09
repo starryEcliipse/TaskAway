@@ -12,13 +12,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -111,7 +116,31 @@ public class PhotosViewOwnTask extends AppCompatActivity {
                 Log.i("RECIEVED", "one bitmap" + bitmap);
             }
         }
-        GridView gridview = (GridView) findViewById(R.id.gridView);
+        final GridView gridview = (GridView) findViewById(R.id.gridView);
         gridview.setAdapter(new PicturesImageAdapter(PhotosViewOwnTask.this, bitmaps));
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                final View view = LayoutInflater.from(PhotosViewOwnTask.this).inflate(R.layout.imageinflater, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PhotosViewOwnTask.this);
+                builder.setView(view);
+                PicturesImageAdapter singlePicAdapter = new PicturesImageAdapter(PhotosViewOwnTask.this, bitmaps);
+                final ImageView singlePic = view.findViewById(R.id.singlePicInflate);
+                singlePic.setImageBitmap(bitmaps.get(position));
+                //singlePic.setImageResource(new PicturesImageAdapter());
+                //Sets up cancel option for user
+                builder.setNegativeButton("Cancel", null);
+                builder.setCancelable(false);
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
+
+
+            }
+        });
     }
 }
