@@ -1,14 +1,17 @@
+/*
+ * Copyright (c) 2018 Team X, CMPUT301. University of Alberta - All rights reserved.
+ * You may use distribute and modify this code under terms and conditions of Code of Student Behavior at
+ * University of Alberta
+ * You can find a copy of this license in this project. Otherwise please contact contact@abc.ca
+ * /
+ */
+
 package com.example.taskaway;
 
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Parcelable;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,22 +20,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.lang.reflect.Array;
-import java.net.URI;
 import java.util.ArrayList;
 
-public class UploadPic extends AppCompatActivity implements View.OnClickListener{
+public class UploadPicEdit extends AppCompatActivity implements View.OnClickListener {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     ArrayList<Uri> arrayU = new ArrayList<Uri>();
@@ -46,11 +40,10 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
     String username;
     String userid;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_pic);
+        setContentView(R.layout.activity_upload_pic_edit);
         upload = (Button) findViewById(R.id.button5);
         cancel = (Button) findViewById(R.id.button8);
         done = (Button) findViewById(R.id.button7);
@@ -59,6 +52,38 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         done.setOnClickListener(this);
         upload.setOnClickListener(this);
 
+        if (!arrayU.isEmpty()) {
+            arrayU.clear();
+        }
+        if (!arrayN.isEmpty()) {
+            arrayN.clear();
+        }
+        if (!arrayS.isEmpty()) {
+            arrayS.clear();
+        }
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        userid = intent.getStringExtra("userid");
+
+        int size = intent.getIntExtra("byteArraySize", 0);
+        Log.i("RECEIVE SIZE", "size: " + size);
+        if (intent.getByteArrayExtra("barray0") != null) {
+            //ArrayList<byte[]> barray = new ArrayList<>();
+            //int size = intent.getIntExtra("byteArraySize", 0);
+            for (int i = 0; i < size; i++) {
+                byte b[] = intent.getByteArrayExtra("barray" + i);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+                arrayN.add(bitmap);
+                Log.i("RECIEVED", "one bitmap" + bitmap);
+            }
+
+            GridView gridview = (GridView) findViewById(R.id.gridview);
+            gridview.setAdapter(new PicturesImageAdapter(UploadPicEdit.this, arrayN));
+            //byte b[] = getIntent().getByteArrayExtra("bytearray");
+        } else {
+            return;
+        }
     }
 
     @Override
@@ -67,7 +92,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             case R.id.button7:
                 // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
 
-                Intent in = new Intent(this, AddTaskActivity.class);
+                Intent in = new Intent(this, EditActivity.class);
 
                 //Source: https://stackoverflow.com/questions/36521965/how-to-pass-byte-list-to-another-activity
                 //arrayB.add(b);
@@ -204,7 +229,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             }
 
             GridView gridview = (GridView) findViewById(R.id.gridview);
-            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayN));
+            gridview.setAdapter(new PicturesImageAdapter(UploadPicEdit.this, arrayN));
 
 
         }
@@ -221,3 +246,5 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
 
 
 }
+
+

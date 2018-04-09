@@ -82,7 +82,7 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View view) {
                 pictures = task.getPictures();
                 if (pictures != null) {
-                    Intent intent = new Intent(EditActivity.this, UploadPic.class);
+                    Intent intent = new Intent(EditActivity.this, UploadPicEdit.class);
                     intent.putExtra("userid", user_id);
                     intent.putExtra("userName", userName);
                     for (int n = 0; n < pictures.size(); n++) {
@@ -251,7 +251,10 @@ public class EditActivity extends AppCompatActivity {
                         loc = "N/A";
                     }
 
-                    Task task = new Task(name, comment, s, loc, null, null, null, task_id);
+                    ArrayList<Bid> bidlist = task.getBids();
+
+
+                    Task task = new Task(name, comment, s, loc, bidlist, pictures, null, task_id);
                     task.setCreatorId(creator_id);
                     task.setAssignedId(assigned_id);
 

@@ -34,7 +34,8 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".EditActivity" />
-        <activity android:name=".ViewOtherBids"
+        <activity
+            android:name=".ViewOtherBids"
             android:noHistory="true" />
         <activity android:name=".ViewOtherProfile" />
 
@@ -46,7 +47,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".UploadPic" />
-        <activity android:name=".PhotosViewOwnTask"></activity>
+        <activity android:name=".PhotosViewOwnTask" />
+        <activity android:name=".UploadPicEdit"></activity>
     </application>
 
 </manifest>
