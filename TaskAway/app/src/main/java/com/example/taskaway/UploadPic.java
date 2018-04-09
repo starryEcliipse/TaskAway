@@ -59,6 +59,16 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         done.setOnClickListener(this);
         upload.setOnClickListener(this);
 
+        if (!arrayU.isEmpty()){
+            arrayU.clear();
+        }
+        if (!arrayN.isEmpty()){
+            arrayN.clear();
+        }
+        if (!arrayS.isEmpty()){
+            arrayS.clear();
+        }
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
