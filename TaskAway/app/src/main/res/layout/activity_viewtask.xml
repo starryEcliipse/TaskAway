@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ /*Copyright (c) 2018 Team X, CMPUT301. University of Alberta - All rights reserved.
+  ~ *You may use distribute and modify this code under terms and conditions of Code of Student Behavior at
+  ~ *University of Alberta
+  ~ *You can find a copy of this license in this project. Otherwise please contact contact@abc.ca
+  ~ */
+  -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#c8cedd">
+
+    tools:context="com.example.taskaway.AddActivity"><include
+    layout="@layout/add_actionbar"
+    android:id="@+id/actionbar"></include>
+
+    <Button
+        android:id="@+id/taskview_photobtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/actionbar"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Photos"
+        android:textColor="?android:attr/textColorLinkInverse"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:text="Requirments:"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/viewtask_requirementsk"
+        android:layout_width="370dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/box"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:singleLine="false"
+        android:textSize="14dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/taskview_photobtn"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_alignRight="@+id/textView5"
+        app:srcCompat="@drawable/ic_action_user" />
+
+    <TextView
+        android:id="@+id/viewtask_username"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_marginBottom="5dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:layout_toRightOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/viewtask_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/viewtask_requirementsk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="19dp"
+        android:textSize="24sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/viewtask_requirementsk"
+        android:layout_alignStart="@+id/viewtask_requirementsk"
+        android:layout_below="@+id/viewtask_requirementsk"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="55dp"
+        android:text="Location:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView_loc"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/textView6"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="14dp"
+        app:srcCompat="@drawable/loaction_icon" />
+
+    <TextView
+        android:id="@+id/viewown_loc_textview"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView_loc"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5" />
+
+    <ImageButton
+        android:id="@+id/taskview_loaction_detailbtn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/viewown_loc_textview"
+        android:layout_toEndOf="@+id/viewown_loc_textview"
+        android:layout_toRightOf="@+id/viewown_loc_textview"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop"
+        android:tint="@color/colorCoolGrey"
+        app:srcCompat="@android:drawable/ic_dialog_info" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView6"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="24dp"
+        android:text="Status:"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_below="@+id/textView10"
+        android:layout_marginTop="9dp"
+        android:text="Lowest Bid:"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/viewtask_status"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView12"
+        android:layout_alignLeft="@+id/viewown_loc_textview"
+        android:layout_alignStart="@+id/viewown_loc_textview" />
+
+    <TextView
+        android:id="@+id/viewtask_lowestbid"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView12"
+        android:layout_alignBottom="@+id/textView12"
+        android:layout_alignLeft="@+id/viewtask_status"
+        android:layout_alignStart="@+id/viewtask_status" />
+
+    <TextView
+        android:id="@+id/taskview_yourprice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textView12"
+        android:layout_alignRight="@+id/textView12"
+        android:layout_below="@+id/textView12"
+        android:layout_marginTop="29dp"
+        android:text="New Bid:"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/viewtask_newbid"
+        android:layout_width="218dp"
+        android:layout_height="39dp"
+        android:layout_alignBottom="@+id/taskview_yourprice"
+        android:layout_alignLeft="@+id/viewtask_lowestbid"
+        android:layout_alignStart="@+id/viewtask_lowestbid"
+        android:ems="10"
+        android:hint="@string/your_price_amount"
+        android:inputType="numberDecimal"
+        android:textColor="@color/Black" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/taskview_cardview2"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/viewtask_newbid"
+        android:layout_alignRight="@+id/viewtask_newbid"
+        android:layout_alignTop="@+id/taskview_cardview"
+        app:cardBackgroundColor="@color/colorGreenSaveButton"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp">
+        <RelativeLayout
+            android:id="@+id/taskview_savebtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/cardView"
+            android:layout_alignStart="@+id/cardView"
+            android:layout_alignTop="@+id/cardView">
+
+            <TextView
+                android:id="@+id/taskview_savetextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Save"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/imageView_loc"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/imageView_loc"
+        android:layout_marginBottom="45dp"
+        android:id="@+id/taskview_cardview"
+        app:cardBackgroundColor="@color/colorRedCancelButton"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="10dp"
+        android:layout_marginTop="60dp">
+        <RelativeLayout
+            android:id="@+id/taskview_cancelbtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/cardView"
+            android:layout_alignStart="@+id/cardView"
+            android:layout_alignTop="@+id/cardView">
+
+            <TextView
+                android:id="@+id/taskview_canceltextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Cancel"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>

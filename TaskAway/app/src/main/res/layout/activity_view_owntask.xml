@@ -32,7 +32,7 @@
         android:textSize="12sp" />
 
     <Button
-        android:id="@+id/photos_btn"
+        android:id="@+id/taskview_photobtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/requirements_owntask_text"
+        android:id="@+id/viewtask_requirementsk"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_below="@+id/textView5"
@@ -75,9 +75,9 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/requirements_owntask_text"
-        android:layout_alignStart="@+id/requirements_owntask_text"
-        android:layout_below="@+id/requirements_owntask_text"
+        android:layout_alignLeft="@+id/viewtask_requirementsk"
+        android:layout_alignStart="@+id/viewtask_requirementsk"
+        android:layout_below="@+id/viewtask_requirementsk"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="55dp"
@@ -148,8 +148,8 @@
         android:id="@+id/imageView7"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_alignLeft="@+id/requirements_owntask_text"
-        android:layout_alignStart="@+id/requirements_owntask_text"
+        android:layout_alignLeft="@+id/viewtask_requirementsk"
+        android:layout_alignStart="@+id/viewtask_requirementsk"
         android:layout_below="@+id/view"
         android:layout_marginTop="25dp"
         android:background="@android:color/transparent"
@@ -194,7 +194,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/textView6"
         android:layout_marginBottom="37dp"
-        app:cardBackgroundColor="#397D02"
+        app:cardBackgroundColor="@color/colorGreenSaveButton"
         app:cardCornerRadius="25dp"
         app:cardElevation="10dp"
         android:layout_marginTop="60dp">

@@ -1,8 +1,6 @@
 package com.example.taskaway;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -11,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.content.Intent;
@@ -66,9 +63,9 @@ public class ViewOwnTask extends AppCompatActivity {
         // Text layouts
         taskname = (TextView) this.findViewById(R.id.textview_taskname);
         taskstatus = (TextView) this.findViewById(R.id.viewown_status_textview);
-        taskdescription = (TextView) this.findViewById(R.id.requirements_owntask_text);
+        taskdescription = (TextView) this.findViewById(R.id.viewtask_requirementsk);
         tasklocation = (TextView) this.findViewById(R.id.viewown_loc_textview);
-        photos = (Button) this.findViewById(R.id.photos_btn);
+        photos = (Button) this.findViewById(R.id.taskview_photobtn);
         photos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

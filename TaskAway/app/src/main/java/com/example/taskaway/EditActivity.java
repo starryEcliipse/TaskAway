@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -71,7 +70,7 @@ public class EditActivity extends AppCompatActivity {
 
         // EditText layout
         tname = (EditText) findViewById(R.id.name_edit_text);
-        des = (EditText) findViewById(R.id.requirements_owntask_text);
+        des = (EditText) findViewById(R.id.viewtask_requirementsk);
         //status = (EditText) findViewById(R.id.editText);
         imageV = (ImageView) findViewById(R.id.imageView_edit);
         location = (EditText) findViewById(R.id.location_edit_text);
