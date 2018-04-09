@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -23,6 +25,10 @@ import android.widget.TextView;
  * @see ViewProfile
  */
 public class ViewOtherProfile extends AppCompatActivity {
+    private ImageButton toolBarBackbtn;
+    private TextView toolBarTitle;
+    private ImageButton toolBarSaveBtn;
+    private ImageButton editbtn;
 
     /**
      * Sets layout and TextViews for this activity.
@@ -33,6 +39,24 @@ public class ViewOtherProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+         /* REMOVE TOOLBAR SAVE BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_save_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* REMOVE TOOLBAR BACK BUTTON FOR THIS ACTIVITY */
+        toolBarSaveBtn = (ImageButton)findViewById(R.id.toolbar_back_btn);
+        toolBarSaveBtn.setVisibility(View.GONE);
+
+        /* SET TITLE OF TOOLBAR */
+        toolBarTitle = (TextView)findViewById(R.id.toolbar_title);
+        toolBarTitle.setText("User Profile");
+        /* REMOVE EDIT BUTTON  */
+        editbtn = (ImageButton)findViewById(R.id.profile_editbtn);
+        editbtn.setVisibility(View.GONE);
+
+
+
 
         //Get user ID
         final String userID = getIntent().getStringExtra("user_id");
