@@ -76,6 +76,7 @@ public class ViewOwnTask extends AppCompatActivity {
                     intent.putExtra("userName", userName);
                     intent.putExtra("userid",userID);
                     intent.putExtra("task",task);
+                    intent.putExtra("viewTaskType","ViewOwnTask");
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -459,7 +460,6 @@ public class ViewOwnTask extends AppCompatActivity {
 
         }
         catch (Exception e){
-            Log.e("VIEWOWNTASK","CATCH HAS BEEN CALLED");
             e.printStackTrace();
         }
 

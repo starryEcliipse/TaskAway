@@ -40,15 +40,49 @@ public class PhotosViewOwnTask extends AppCompatActivity {
 
         back = (ImageButton)findViewById(R.id.toolbar_back_btn);
         back.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * When the user presses the back button, go back to viewing the task.
+             * Go back to appropriate view depending on which one called this activity
+             *
+             * @param v - instance of View
+             */
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhotosViewOwnTask.this, ViewOwnTask.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("userName", user_name);
-                intent.putExtra("userid", userID);
-                intent.putExtra("task",task);
-                //Log.i("AddActivity","Sending name and id to MainActivity!");
-                startActivity(intent);
+
+                Intent intentGet = getIntent();
+                user_name = intentGet.getStringExtra("userName");
+                userID = intentGet.getStringExtra("userid");
+                task = (Task) intentGet.getSerializableExtra("task");
+
+                /* CHECK WHAT TYPE OF VIEWTASK CALLED THIS ACTIVITY */
+                // VIEWOWNTASK
+                if (intentGet.getStringExtra("viewTaskType").equals("ViewOwnTask")){
+                    Intent intent = new Intent(PhotosViewOwnTask.this, ViewOwnTask.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("userName", user_name);
+                    intent.putExtra("userid", userID);
+                    intent.putExtra("task",task);
+                    startActivity(intent);
+                }
+                // VIEWTASK/ASSIGNED
+                else if (intentGet.getStringExtra("viewTaskType").equals("ViewTask")){
+                    Intent intent = new Intent(PhotosViewOwnTask.this, ViewTask.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("userName", user_name);
+                    intent.putExtra("userid", userID);
+                    intent.putExtra("task",task);
+                    startActivity(intent);
+                }
+                // VIEWBIDTASK
+                else if (intentGet.getStringExtra("viewTaskType").equals("ViewBidTask")){
+                    Intent intent = new Intent(PhotosViewOwnTask.this, ViewBidTask.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("userName", user_name);
+                    intent.putExtra("userid", userID);
+                    intent.putExtra("task",task);
+                    startActivity(intent);
+                }
             }
         });
 

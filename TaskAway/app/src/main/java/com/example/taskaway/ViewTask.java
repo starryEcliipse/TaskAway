@@ -95,8 +95,11 @@ public class ViewTask extends AppCompatActivity {
                 pictures = task.getPictures();
                 if (pictures != null) {
                     Intent intent = new Intent(ViewTask.this, PhotosViewOwnTask.class);
-                    intent.putExtra("username", userName);
+                    intent.putExtra("userName", userName);
                     intent.putExtra("userid",userID);
+                    intent.putExtra("task", task);
+                    intent.putExtra("viewTaskType","ViewTask");
+
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -237,7 +240,12 @@ public class ViewTask extends AppCompatActivity {
              */
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ViewTask.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("user_name", userName);
+                intent.putExtra("user_id", userID);
+                //Log.i("AddActivity","Sending name and id to MainActivity!");
+                startActivity(intent);
             }
         });
 
@@ -307,6 +315,7 @@ public class ViewTask extends AppCompatActivity {
         if(task.hasNewBids()){
             task.setHasNewBids(false);
         }
+
 
         Log.i("ViewTask","Now reading task id: "+task.getId());
 
