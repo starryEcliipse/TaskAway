@@ -1,5 +1,8 @@
 
 package com.example.taskaway;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -7,13 +10,17 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -33,13 +40,15 @@ public class EditActivity extends AppCompatActivity {
 
     private ImageButton toolBarSaveBtn;
     private ImageButton toolBarBackbtn;
+    private ImageView imageV;
 
     private Task task;
 
     private String new_name;
     private String new_des;
     private String new_location;
-
+    ArrayList<String> pictures = new ArrayList<String>();
+    ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     String userName;
     String user_id;
     String task_id;
@@ -64,13 +73,77 @@ public class EditActivity extends AppCompatActivity {
         tname = (EditText) findViewById(R.id.name_edit_text);
         des = (EditText) findViewById(R.id.requirements_owntask_text);
         //status = (EditText) findViewById(R.id.editText);
+        imageV = (ImageView) findViewById(R.id.imageView_edit);
         location = (EditText) findViewById(R.id.location_edit_text);
+
+        uploadPic = (ImageButton) findViewById(R.id.image_camera_edit_btn);
+        uploadPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pictures = task.getPictures();
+                if (pictures != null) {
+                    Intent intent = new Intent(EditActivity.this, UploadPic.class);
+                    intent.putExtra("userid", user_id);
+                    intent.putExtra("userName", userName);
+                    for (int n = 0; n < pictures.size(); n++) {
+                        byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
+                        //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                        arrayB.add(encodeByte);
+                    }
+                    intent.putExtra("byteArraySize", arrayB.size());
+                    for (int i = 0; i < arrayB.size(); i++) {
+                        intent.putExtra("barray"+i, arrayB.get(i));
+                        Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
+                    }
+                    startActivity(intent);
+                }
+
+                else{
+                    Log.i("EDITACTIVITYNOPICTURES", "NO PICTURES");
+                    return;
+                }
+            }
+        });
 
         // Get information needed to update task
         Intent intent = getIntent();
         userName = intent.getStringExtra("userName");
         user_id = intent.getStringExtra("userid");
         task_id = intent.getStringExtra("task_id");
+
+        int size = intent.getIntExtra("byteArraySize", 0);
+        Log.i("RECEIVE SIZE", "size: "+ size);
+        if (intent.getByteArrayExtra("barray0") != null){
+            ArrayList<byte[]> barray = new ArrayList<>();
+            //int size = intent.getIntExtra("byteArraySize", 0);
+            for (int i = 0; i < size; i++) {
+                barray.add(intent.getByteArrayExtra("barray"+i));
+                Log.i("RECIEVED", "barray(i)"+barray.get(i));
+            }
+            //byte b[] = getIntent().getByteArrayExtra("bytearray");
+
+            byte b[] = barray.get(0);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+            Log.i("BITMAPREC", "BITMAP"+bitmap);
+
+            imageV.measure(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            int width = imageV.getMeasuredWidth();
+            int height = imageV.getMeasuredHeight();
+            bitmap = getResizedBitmap(bitmap, height, width);
+
+            imageV.setImageBitmap(bitmap);
+
+            for (int n = 0; n < size; n++){
+                String temp= Base64.encodeToString(barray.get(n), Base64.DEFAULT);
+                pictures.add(temp);
+                //arrayB.add(temp);
+            }
+
+
+        }
+        else if (intent.getByteArrayExtra("bytearray") == null){
+            Log.i("ADDTASK"," null!");
+        }
 
         if (MainActivity.isOnline()){
             task = ServerWrapper.getJobFromId(task_id);
@@ -264,5 +337,31 @@ public class EditActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+
+        int width = bm.getWidth();
+
+        int height = bm.getHeight();
+
+        float scaleWidth = ((float) newWidth) / width;
+
+        float scaleHeight = ((float) newHeight) / height;
+
+// create a matrix for the manipulation
+
+        Matrix matrix = new Matrix();
+
+// resize the bit map
+
+        matrix.postScale(scaleWidth, scaleHeight);
+
+// recreate the new Bitmap
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+
     }
 }

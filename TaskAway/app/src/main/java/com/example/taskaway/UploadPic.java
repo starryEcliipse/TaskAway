@@ -58,6 +58,30 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         cancel.setOnClickListener(this);
         done.setOnClickListener(this);
         upload.setOnClickListener(this);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        userid = intent.getStringExtra("userid");
+
+        int size = intent.getIntExtra("byteArraySize", 0);
+        Log.i("RECEIVE SIZE", "size: "+ size);
+        if (intent.getByteArrayExtra("barray0") != null) {
+            //ArrayList<byte[]> barray = new ArrayList<>();
+            //int size = intent.getIntExtra("byteArraySize", 0);
+            for (int i = 0; i < size; i++) {
+                byte b[] = intent.getByteArrayExtra("barray" + i);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
+                arrayN.add(bitmap);
+                Log.i("RECIEVED", "one bitmap" + bitmap);
+            }
+
+            GridView gridview = (GridView) findViewById(R.id.gridview);
+            gridview.setAdapter(new PicturesImageAdapter(UploadPic.this, arrayN));
+            //byte b[] = getIntent().getByteArrayExtra("bytearray");
+        }
+        else{
+            return;
+        }
     }
 
     @Override
@@ -215,6 +239,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
+
     }
 
 

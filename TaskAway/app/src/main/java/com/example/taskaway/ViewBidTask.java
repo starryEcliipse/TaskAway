@@ -66,11 +66,12 @@ public class ViewBidTask extends AppCompatActivity {
         photos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ViewBidTask.this, PhotosViewOwnTask.class);
-                intent.putExtra("username", userName);
-                intent.putExtra("userid",userID);
+
                 pictures = task.getPictures();
                 if (pictures != null) {
+                    Intent intent = new Intent(ViewBidTask.this, PhotosViewOwnTask.class);
+                    intent.putExtra("username", userName);
+                    intent.putExtra("userid",userID);
                     for (int n = 0; n < pictures.size(); n++) {
                         byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
                         //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
@@ -81,12 +82,13 @@ public class ViewBidTask extends AppCompatActivity {
                         intent.putExtra("barray"+i, arrayB.get(i));
                         Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
                     }
+                    startActivity(intent);
                 }
                 else {
                     Log.i("ADDTASK"," null!");
                     return;
                 }
-                startActivity(intent);
+
             }
         });
 
