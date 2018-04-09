@@ -73,7 +73,6 @@ public class AllBidsListViewAdapter extends RecyclerView.Adapter<AllBidsListView
              */
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "All Bids Item Clicked!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, ViewTask.class);
                 int pos = vHolder.getAdapterPosition();
                 intent.putExtra("task", mData.get(pos));

@@ -52,7 +52,7 @@
         android:layout_alignTop="@+id/textview_taskname"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
-        android:text="Requirments:"
+        android:text="@string/req_tag"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 

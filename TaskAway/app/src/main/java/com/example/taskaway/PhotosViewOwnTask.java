@@ -59,7 +59,7 @@ public class PhotosViewOwnTask extends AppCompatActivity {
                 // VIEWOWNTASK
                 if (intentGet.getStringExtra("viewTaskType").equals("ViewOwnTask")){
                     Intent intent = new Intent(PhotosViewOwnTask.this, ViewOwnTask.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("userName", user_name);
                     intent.putExtra("userid", userID);
                     intent.putExtra("task",task);
@@ -68,7 +68,7 @@ public class PhotosViewOwnTask extends AppCompatActivity {
                 // VIEWTASK/ASSIGNED
                 else if (intentGet.getStringExtra("viewTaskType").equals("ViewTask")){
                     Intent intent = new Intent(PhotosViewOwnTask.this, ViewTask.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("userName", user_name);
                     intent.putExtra("userid", userID);
                     intent.putExtra("task",task);
@@ -77,7 +77,7 @@ public class PhotosViewOwnTask extends AppCompatActivity {
                 // VIEWBIDTASK
                 else if (intentGet.getStringExtra("viewTaskType").equals("ViewBidTask")){
                     Intent intent = new Intent(PhotosViewOwnTask.this, ViewBidTask.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.putExtra("userName", user_name);
                     intent.putExtra("userid", userID);
                     intent.putExtra("task",task);

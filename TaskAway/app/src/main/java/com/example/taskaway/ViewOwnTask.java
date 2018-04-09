@@ -151,47 +151,53 @@ public class ViewOwnTask extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Get task information
-                Intent intent = new Intent(getBaseContext(), EditActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                String name = taskname.getText().toString();
-                String description = taskdescription.getText().toString();
-                String status = taskstatus.getText().toString();
+                if (task.getStatus().equals("REQUESTED")) {
+                    // Get task information
+                    Intent intent = new Intent(getBaseContext(), EditActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    String name = taskname.getText().toString();
+                    String description = taskdescription.getText().toString();
+                    String status = taskstatus.getText().toString();
 
-                // Pass relevant information to EditActivity via SaveFileController
-                final Context context = getApplicationContext();
-                final SaveFileController saveFileController = new SaveFileController();
-                final int userIndex = saveFileController.getUserIndex(context, userName);
+                    // Pass relevant information to EditActivity via SaveFileController
+                    final Context context = getApplicationContext();
+                    final SaveFileController saveFileController = new SaveFileController();
+                    final int userIndex = saveFileController.getUserIndex(context, userName);
 
-                // id of task
-                id = task.getId();
+                    // id of task
+                    id = task.getId();
 
-                // Send task info // TODO: refactor using just one task to pass? or is this better perfomance?
-                String index = Integer.toString(userIndex);
-                intent.putExtra("name", name);
-                intent.putExtra("des", description);
-                intent.putExtra("status", status);
-                intent.putExtra("userindex", index);
-                intent.putExtra("task_id", id);
-                pictures = task.getPictures();
-                if (pictures != null) {
-                    for (int n = 0; n < pictures.size(); n++) {
-                        byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
-                        //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-                        arrayB.add(encodeByte);
+                    // Send task info
+                    String index = Integer.toString(userIndex);
+                    intent.putExtra("name", name);
+                    intent.putExtra("des", description);
+                    intent.putExtra("status", status);
+                    intent.putExtra("userindex", index);
+                    intent.putExtra("task_id", id);
+                    pictures = task.getPictures();
+                    if (pictures != null) {
+                        for (int n = 0; n < pictures.size(); n++) {
+                            byte[] encodeByte = Base64.decode(pictures.get(n), Base64.DEFAULT);
+                            //Bitmap bitmap= BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+                            arrayB.add(encodeByte);
+                        }
+                        intent.putExtra("byteArraySize", arrayB.size());
+                        for (int i = 0; i < arrayB.size(); i++) {
+                            intent.putExtra("barray" + i, arrayB.get(i));
+                            Log.i("UPLOAD", "barray(i)" + arrayB.get(i));
+                        }
+
                     }
-                    intent.putExtra("byteArraySize", arrayB.size());
-                    for (int i = 0; i < arrayB.size(); i++) {
-                        intent.putExtra("barray"+i, arrayB.get(i));
-                        Log.i("UPLOAD", "barray(i)"+arrayB.get(i));
-                    }
+                    // Send user info
+                    intent.putExtra("userid", userID);
+                    intent.putExtra("userName", userName);
 
+                    startActivity(intent);
                 }
-                // Send user info
-                intent.putExtra("userid", userID);
-                intent.putExtra("userName", userName);
+                else{
 
-                startActivity(intent);
+                    Toast.makeText(getApplicationContext(), "You can no longer edit your task!",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
