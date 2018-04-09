@@ -51,8 +51,14 @@ public class Login extends AppCompatActivity {
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
-                if(userName.length()<8){
-                    userNameEdit.setError("Username must be 8 characters minimum");
+                if(userName.length()<5){
+                    userNameEdit.setError("Username must be 5 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
+                    return;
+                }
+
+                if(userName.length()>18){
+                    userNameEdit.setError("Username can be 18 characters maximum");
                     loadingCircle.setVisibility(View.GONE);
                     return;
                 }
@@ -110,8 +116,14 @@ public class Login extends AppCompatActivity {
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
-                if(userName.length()<8){
-                    userNameEdit.setError("Username must be 8 characters minimum");
+                if(userName.length()<5){
+                    userNameEdit.setError("Username must be 5 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
+                    return;
+                }
+
+                if(userName.length()>18){
+                    userNameEdit.setError("Username can be 18 characters maximum");
                     loadingCircle.setVisibility(View.GONE);
                     return;
                 }
@@ -193,8 +205,14 @@ public class Login extends AppCompatActivity {
                 String userName = userNameEdit.getText().toString();
                 String password = passwordEdit.getText().toString();
 
-                if(userName.length()<8){
-                    userNameEdit.setError("Username must be 8 characters minimum");
+                if(userName.length()<5){
+                    userNameEdit.setError("Username must be 5 characters minimum");
+                    loadingCircle.setVisibility(View.GONE);
+                    return;
+                }
+
+                if(userName.length()>18){
+                    userNameEdit.setError("Username can be 18 characters maximum");
                     loadingCircle.setVisibility(View.GONE);
                     return;
                 }
