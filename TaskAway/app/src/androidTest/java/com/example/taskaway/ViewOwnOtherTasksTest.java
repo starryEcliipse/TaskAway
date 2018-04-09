@@ -77,8 +77,8 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
 
         //Place bid
         solo.clickInRecyclerView(0);
-        solo.enterText((EditText) solo.getView(R.id.new_bid_amount), "5.00");
-        solo.clickOnView(solo.getView(R.id.save_button_2));
+        solo.enterText((EditText) solo.getView(R.id.assigned_newbid), "5.00");
+        solo.clickOnView(solo.getView(R.id.assigned_savebtn));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         //go to all bids
@@ -90,7 +90,7 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
         solo.assertCurrentActivity("Wrong Activity", ViewBidTask.class);
 
         //view task requester profile
-        solo.clickOnView(solo.getView(R.id.task_user_name));
+        solo.clickOnView(solo.getView(R.id.assigned_username));
         solo.assertCurrentActivity("Wrong Activity", ViewOtherProfile.class);
     }
 

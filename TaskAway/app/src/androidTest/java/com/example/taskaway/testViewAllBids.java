@@ -79,12 +79,12 @@ public class testViewAllBids extends ActivityInstrumentationTestCase2 {
         solo.assertCurrentActivity("Wrong Activity", AllBids.class);
 
         //Enter no bid and save
-        solo.clickOnView(solo.getView(R.id.save_button_2));
+        solo.clickOnView(solo.getView(R.id.assigned_savebtn));
         solo.assertCurrentActivity("Wrong Activity", ViewBidTask.class);
 
         //Enter correct bid
-        solo.enterText((EditText) solo.getView(R.id.new_bid_amount), "5.00");
-        solo.clickOnView(solo.getView(R.id.save_button_2));
+        solo.enterText((EditText) solo.getView(R.id.assigned_newbid), "5.00");
+        solo.clickOnView(solo.getView(R.id.assigned_savebtn));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         //Logout

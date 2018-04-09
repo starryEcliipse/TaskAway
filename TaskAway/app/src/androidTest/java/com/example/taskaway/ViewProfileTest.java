@@ -77,9 +77,9 @@ public class ViewProfileTest extends ActivityInstrumentationTestCase2{
         solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
 
 
-        solo.clickOnView(solo.getView(R.id.editProfileButton));
-        solo.enterText((EditText) solo.getView(R.id.editPhoneNumber), "7801001000");
-        solo.enterText((EditText) solo.getView(R.id.editEmail), "hello@email.com");
+        solo.clickOnView(solo.getView(R.id.profile_editbtn));
+        solo.enterText((EditText) solo.getView(R.id.profile_phonenumber), "7801001000");
+        solo.enterText((EditText) solo.getView(R.id.profile_email), "hello@email.com");
         solo.clickOnButton("Edit");
         solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
 
