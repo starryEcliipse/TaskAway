@@ -91,8 +91,7 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
                 in.putExtra("userid",userid);
                 startActivity(in);
 
-                //in.putStringArrayListExtra("images", arrayS);
-                //in.putParcelableArrayListExtra("images", arrayN);
+
                 break;
 
             // upload button
@@ -137,9 +136,8 @@ public class UploadPic extends AppCompatActivity implements View.OnClickListener
             if (!arrayS.isEmpty()){
                 arrayS.clear();
             }
-            // IN THE ELSE CONDITION ONE BYTE ARRAY IS BEING OVERWRITTEN IN THE FOR LOOP- HAVE TO FIGURE OUT HOW TO PASS
-            // MULTIPLE PHOTOS BYTES ARRAYSSSSSSSS
-            // If single photo, the photo will NOT be in ClipData - just return it
+
+
             // SOURCE: https://stackoverflow.com/a/40475323
             if (data.getClipData() == null){
                 Uri uri = data.getData();

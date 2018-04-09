@@ -120,7 +120,6 @@ public class PhotosViewOwnTask extends AppCompatActivity {
         userID = intent.getStringExtra("userid");
         task = (Task) intent.getSerializableExtra("task");
 
-        //THIS IS WHERE WE HAVE TO RECEIVE THE BYTE ARRAYS
         //if (intent.getStringArrayListExtra("images") != null) {
         int size = intent.getIntExtra("byteArraySize", 0);
         Log.i("RECEIVE SIZE", "size: "+ size);

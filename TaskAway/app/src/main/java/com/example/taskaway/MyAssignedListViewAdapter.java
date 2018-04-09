@@ -100,9 +100,6 @@ public class MyAssignedListViewAdapter extends RecyclerView.Adapter<MyAssignedLi
         holder.status_img.setImageResource(R.mipmap.ic_assigned);
 
 
-        // TODO - img status and img jobs
-        //holder.img_status.setText(mTasks.getTask(position).getStatus());
-        //holder.img_jobs.setText(mTasks.getTask(position).getPictures());
     }
 
     /**

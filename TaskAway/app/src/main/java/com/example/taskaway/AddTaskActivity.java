@@ -164,8 +164,8 @@ public class AddTaskActivity extends AppCompatActivity {
         username = intent.getStringExtra("username");
         userid = intent.getStringExtra("userid");
 
-        //THIS IS WHERE WE HAVE TO RECEIVE THE BYTE ARRAYSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-        //if (intent.getStringArrayListExtra("images") != null) {
+
+
         int size = intent.getIntExtra("byteArraySize", 0);
         Log.i("RECEIVE SIZE", "size: "+ size);
         if (intent.getByteArrayExtra("barray0") != null){

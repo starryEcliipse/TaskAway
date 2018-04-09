@@ -73,18 +73,7 @@ public class MyJobs extends Fragment {
          *
          * @see AddActivity
          */
-        /*
-        imgButton = (ImageButton) rootView.findViewById(R.id.img_btn_add);
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Add Clicked!", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(getContext(), AddTaskActivity.class);
-                intent1.putExtra("username",user_name);
-                intent1.putExtra("userid", user_id);
-                startActivity(intent1);
-           }
-       });*/
+
 
         myrecyclerview = (RecyclerView) rootView.findViewById(R.id.jobs_recyclerview);
 

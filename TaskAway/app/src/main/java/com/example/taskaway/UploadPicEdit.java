@@ -76,8 +76,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
         int size = intent.getIntExtra("byteArraySize", 0);
         Log.i("RECEIVE SIZE", "size: " + size);
         if (intent.getByteArrayExtra("barray0") != null) {
-            //ArrayList<byte[]> barray = new ArrayList<>();
-            //int size = intent.getIntExtra("byteArraySize", 0);
+
             for (int i = 0; i < size; i++) {
                 byte b[] = intent.getByteArrayExtra("barray" + i);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
@@ -104,7 +103,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.button7:
-                // THIS IS WHERE WE'RE LAUNCHING THE ADD ACTIVITY TO SEND THE PHOTOS TO BE ADDED TO THE TASK
+
 
                 Intent in = new Intent(UploadPicEdit.this, EditActivity.class);
 
@@ -115,8 +114,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                     in.putExtra("barray" + i, arrayB.get(i));
                     Log.i("UPLOAD", "barray(i)" + arrayB.get(i));
                 }
-//                arrayS.clear();
-//                arrayN
+
                 in.putExtra("userName", username);
                 in.putExtra("userid", userid);
                 in.putExtra("task_id", task_id);
@@ -124,8 +122,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(in);
 
-                //in.putStringArrayListExtra("images", arrayS);
-                //in.putParcelableArrayListExtra("images", arrayN);
+
                 break;
 
             // upload button
@@ -200,9 +197,7 @@ public class UploadPicEdit extends AppCompatActivity implements View.OnClickList
             if (!arrayS.isEmpty()){
                 arrayS.clear();
             }
-            // IN THE ELSE CONDITION ONE BYTE ARRAY IS BEING OVERWRITTEN IN THE FOR LOOP- HAVE TO FIGURE OUT HOW TO PASS
-            // MULTIPLE PHOTOS BYTES ARRAYSSSSSSSS
-            // If single photo, the photo will NOT be in ClipData - just return it
+
             // SOURCE: https://stackoverflow.com/a/40475323
             if (data.getClipData() == null){
                 Uri uri = data.getData();
