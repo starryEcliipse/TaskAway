@@ -220,7 +220,10 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (!task.getStatus().equals("REQUESTED")) {
+
+
+                if (task.getStatus().equals("REQUESTED")) {
+
 
                     // Task name
                     String name = tname.getText().toString();
