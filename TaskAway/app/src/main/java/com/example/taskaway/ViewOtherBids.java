@@ -163,9 +163,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     return;
                 }
 
-//                task = ServerWrapper.getJobFromId(taskid);
-//                bidList = task.getBids();
-
                 /* GET BIDDER INFORMATION FOR EACH BID */
                 String CurrentBidderId = selectedBid.getUserId();
                 task.setStatus("ASSIGNED");
@@ -186,8 +183,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     ServerWrapper.updateUser(u);
                     if (i != pos){
                         bidList.remove(i);
-                        adapter.notifyItemRemoved(i);
-                        adapter.notifyItemRangeChanged(i, adapter.getItemCount());
                     }
                 }
                 task.setBids(bidList);
@@ -228,11 +223,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     Toast.makeText(context, "Please select a bid to decline!", Toast.LENGTH_LONG).show();
                     return;
                 }
-                // Task already assigned // TODO: need this at all?
-                if (!task.allowsBids()){
-                    Toast.makeText(context, "Your task has already been assigned!", Toast.LENGTH_LONG).show();
-                    return;
-                }
+
 
                 /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
                 bidList = task.getBids();
@@ -262,8 +253,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 ServerWrapper.updateJob(task);
 
                 bidList = task.getBids();
-
-
 
 
             } // end of onClick
