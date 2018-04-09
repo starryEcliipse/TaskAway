@@ -34,22 +34,26 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.assertCurrentActivity("Wrong Activity", Login.class);
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "imnew");
         solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
-        solo.sleep(100000);
         solo.clickOnButton("Register");
         solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         //test for numbers or other non alphabetic characters
         solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "1stthebest!");
-        solo.sleep(100000);
-        solo.clickOnView(solo.getView(R.id.edit_btn));
+        solo.clickOnButton("Register");
         solo.assertCurrentActivity("Wrong Activity", Login.class);
+
+        //Delete user if Exists
+        User user = ServerWrapper.getUserFromUsername("goodNewUser");
+        if (user!=null){
+            ServerWrapper.deleteUser(user);
+        }
 
         //Test if correct username and password allows login
         solo.clearEditText((EditText) solo.getView(R.id.neweditTextUsername));
         solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "goodNewUser");
-        solo.sleep(100000);
-        solo.clickOnView(solo.getView(R.id.edit_btn));
+        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
+        solo.clickOnButton("Register");
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
     }
 
@@ -58,9 +62,13 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         //Set up for test
         Login activity = (Login)solo.getCurrentActivity();
 
+        //No Login Info provided
+        solo.clickOnView(solo.getView(R.id.newloginButton));
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
+
         //Delete user if Exists
         User user = ServerWrapper.getUserFromUsername("TestUser");
-        if (user==null){
+        if (user!=null){
             ServerWrapper.deleteUser(user);
         }
 
@@ -72,13 +80,10 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<Login> {
         solo.assertCurrentActivity("Switch to MainActivity", MainActivity.class);
         solo.goBack();
 
-        //No Login Info provided
-        solo.clickOnView(solo.getView(R.id.newloginButton));
-        solo.assertCurrentActivity("Wrong Activity", Login.class);
 
         //Delete user if exists
         User user1 = ServerWrapper.getUserFromUsername("imnotright");
-        if (user1==null){
+        if (user1!=null){
             ServerWrapper.deleteUser(user1);
         }
 

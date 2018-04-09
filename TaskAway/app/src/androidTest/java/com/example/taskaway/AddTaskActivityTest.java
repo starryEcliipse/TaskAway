@@ -14,7 +14,7 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTaskActivity> {
+public class AddTaskActivityTest extends ActivityInstrumentationTestCase2{
     private Solo solo;
 
     public AddTaskActivityTest() {
@@ -33,7 +33,25 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
      * Tests all valid and non valid input in creating a task
      */
     public void testAddTask(){
-        AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
+        //Set up for test
+        Login activity = (Login)solo.getCurrentActivity();
+
+        //Delete user if Exists
+        User user = ServerWrapper.getUserFromUsername("TestUsertest");
+        if (user!=null){
+            ServerWrapper.deleteUser(user);
+        }
+
+        //Register User
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
+        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUsertest");
+        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
+        solo.clickOnButton("Register");
+        solo.clickOnView(solo.getView(R.id.newcontinueOfflineTextView));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.add_id));
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
 
         //Test no input
         solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
@@ -75,7 +93,25 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
      * Tests all the EditTestActivity constraints
      */
     public void testEditTask(){
-        AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
+        //Set up for test
+        Login activity = (Login)solo.getCurrentActivity();
+
+        //Delete user if Exists
+        User user = ServerWrapper.getUserFromUsername("TestUsertest");
+        if (user!=null){
+            ServerWrapper.deleteUser(user);
+        }
+
+        //Register User
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
+        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUsertest");
+        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
+        solo.clickOnButton("Register");
+        solo.clickOnView(solo.getView(R.id.newcontinueOfflineTextView));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        solo.clickOnView(solo.getView(R.id.add_id));
+        solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
 
         //Sample Task to edit
         solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Chores");
@@ -119,8 +155,14 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
         solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
+        //Test the back button
+        solo.clickInRecyclerView(0);
+        solo.assertCurrentActivity("Wrong Activity", EditActivity.class);
+        solo.clickOnView(solo.getView(R.id.toolbar_back_btn));
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
         //Check if can Delete a task
-        solo.clickInList(0);
+        solo.clickInRecyclerView(0);
         solo.assertCurrentActivity("Wrong Activity", EditActivity.class);
         solo.clickOnView(solo.getView(R.id.DeleteButton));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -128,16 +170,6 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
 
     }
 
-    /**
-     * Tests the back button
-     */
-    public void testBackOption(){
-        AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
-        solo.clickOnView(solo.getView(R.id.toolbar_back_btn));
-        solo.sleep(100000);
-        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
-
-    }
 
     /**
      * Tests the switch to the upload pic activity
@@ -145,7 +177,6 @@ public class AddTaskActivityTest extends ActivityInstrumentationTestCase2<AddTas
     public void testUploadPic(){
         AddTaskActivity activity = (AddTaskActivity) solo.getCurrentActivity();
         solo.clickOnView(solo.getView(R.id.image_camera_btn));
-        solo.sleep(100000);
         solo.assertCurrentActivity("Wrong Activity", UploadPic.class);
 
     }

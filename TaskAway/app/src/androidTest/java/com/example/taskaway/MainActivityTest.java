@@ -15,11 +15,13 @@ package com.example.taskaway;
 import android.support.design.widget.TabLayout;
 import android.test.ActivityInstrumentationTestCase2;
 import android.app.Activity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import com.example.taskaway.MainActivity;
 import com.robotium.solo.Solo;
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class MainActivityTest extends ActivityInstrumentationTestCase2{
 
     private Solo solo;
 
@@ -37,23 +39,51 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
-     * Used to test the intents and actions of the Toolbar
+     * Used to test profile item in action bar
      */
-    public void testToolbar(){
+    public void testToolbar1(){
 
-        MainActivity activity = (MainActivity) solo.getCurrentActivity();
-
-        //Test if activity goes to profile page
-        solo.clickOnView(solo.getView(R.drawable.ic_menu));
-        solo.clickOnMenuItem("Profile");
-        solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
-        solo.goBack();
-
-        //Test if activity goes to logout page
-        solo.clickOnView(solo.getView(R.drawable.ic_menu));
-        solo.clickOnMenuItem("Logout");
+        Login activity = (Login)solo.getCurrentActivity();
         solo.assertCurrentActivity("Wrong Activity", Login.class);
 
+        //check if user already exists
+        User user = ServerWrapper.getUserFromUsername("TestUser");
+        if (user!=null){
+            ServerWrapper.deleteUser(user);
+        }
+
+        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUser");
+        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
+        solo.clickOnButton("Register");
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        //Test if activity goes to profile page
+        solo.clickOnActionBarItem(1);
+        solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
+    }
+
+    /**
+     * Test logout capabilities
+     */
+    public void testToolbar2(){
+
+        Login activity = (Login)solo.getCurrentActivity();
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
+
+        //check if user already exists
+        User user = ServerWrapper.getUserFromUsername("TestUser");
+        if (user!=null){
+            ServerWrapper.deleteUser(user);
+        }
+
+        solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUser");
+        solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
+        solo.clickOnButton("Register");
+        solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
+
+        //Test if activity goes to profile page
+        solo.clickOnActionBarItem(2);
+        solo.assertCurrentActivity("Wrong Activity", Login.class);
     }
 
     /**
@@ -62,22 +92,28 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testFragments(){
         MainActivity activity = (MainActivity) solo.getCurrentActivity();
 
-        //Swtich to My Bids screen
-        solo.clickInRecyclerView(1);
+        //Switch to My Bids screen
+        ViewGroup tabs = (ViewGroup) solo.getView(R.id.tablayout_id);
+        View myBids = tabs.getChildAt(1);
+        solo.clickOnView(myBids);
         solo.assertCurrentActivity("Wrong Activity", MyBids.class);
 
         //Switch to My Assigned Jobs screen
-        solo.clickInRecyclerView(2);
+        ViewGroup tabs1 = (ViewGroup) solo.getView(R.id.tablayout_id);
+        View myAssign = tabs1.getChildAt(2);
+        solo.clickOnView(myAssign);
         solo.assertCurrentActivity("Wrong Activity", MyAssigned.class);
 
         //Switch to All Bids screen
-        TabLayout tabLayout = (TabLayout) solo.getView(R.id.tablayout_id);
-        TabLayout.Tab tab = tabLayout.getTabAt(3);
-        tab.select();
+        ViewGroup tabs2 = (ViewGroup) solo.getView(R.id.tablayout_id);
+        View allbids = tabs2.getChildAt(3);
+        solo.clickOnView(allbids);
         solo.assertCurrentActivity("Wrong Activity", AllBids.class);
 
         //Switch to My Jobs screen
-        solo.clickInRecyclerView(0);
+        ViewGroup tabs3 = (ViewGroup) solo.getView(R.id.tablayout_id);
+        View mybids = tabs3.getChildAt(3);
+        solo.clickOnView(mybids);
         solo.assertCurrentActivity("Wrong Activity", MyJobs.class);
         
     }

@@ -14,12 +14,12 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<ViewOwnTask> {
+public class BidActivityTest extends ActivityInstrumentationTestCase2 {
 
     private Solo solo;
 
-    public ViewOwnOtherTasksTest() {
-        super(com.example.taskaway.ViewOwnTask.class);
+    public BidActivityTest() {
+        super(com.example.taskaway.Login.class);
     }
 
     public void setUp() throws Exception{
@@ -30,7 +30,7 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
         Activity activity = getActivity();
     }
 
-    public void testViewOwnOtherTask(){
+    public void testBid(){
         //Delete user if Exists
         User user = ServerWrapper.getUserFromUsername("goodNewUser");
         if (user!=null){
@@ -47,8 +47,8 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
         solo.clickOnView(solo.getView(R.id.add_id));
         solo.assertCurrentActivity("Wrong Activity", AddTaskActivity.class);
 
-        //Add sample task
-        solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Testing!!");
+        //Correct inputs for edited Task
+        solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Homework");
         solo.enterText((EditText) solo.getView(R.id.requirements_owntask_text), "Testing is integral to the app");
         solo.enterText((EditText) solo.getView(R.id.location_edit_text), "University of Alberta");
         solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
@@ -77,27 +77,18 @@ public class ViewOwnOtherTasksTest extends ActivityInstrumentationTestCase2<View
 
         //Place bid
         solo.clickInRecyclerView(0);
+        solo.assertCurrentActivity("Wrong Activity", AllBids.class);
+
+        //Enter no bid and save
+        solo.clickOnView(solo.getView(R.id.save_button_2));
+        solo.assertCurrentActivity("Wrong Activity", ViewBidTask.class);
+
+        //Enter correct bid
         solo.enterText((EditText) solo.getView(R.id.new_bid_amount), "5.00");
         solo.clickOnView(solo.getView(R.id.save_button_2));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
-        //go to all bids
-        solo.clickOnView(solo.getView(R.id.search_id));
-        solo.assertCurrentActivity("Wrong Activity", AllBids.class);
 
-        //view task
-        solo.clickInRecyclerView(0);
-        solo.assertCurrentActivity("Wrong Activity", ViewBidTask.class);
-
-        //view task requester profile
-        solo.clickOnView(solo.getView(R.id.task_user_name));
-        solo.assertCurrentActivity("Wrong Activity", ViewOtherProfile.class);
-    }
-
-
-    @Override
-    public void tearDown() throws Exception {
-        solo.finishOpenedActivities();
     }
 
 }

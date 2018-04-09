@@ -40,7 +40,7 @@ public class ViewProfileTest extends ActivityInstrumentationTestCase2{
 
         //check if user already exists
         User user = ServerWrapper.getUserFromUsername("TestUser");
-        if (user==null){
+        if (user!=null){
             ServerWrapper.deleteUser(user);
         }
 
@@ -50,8 +50,7 @@ public class ViewProfileTest extends ActivityInstrumentationTestCase2{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         //Test if activity goes to profile page
-        solo.clickOnView(solo.getView(R.drawable.ic_menu));
-        solo.clickOnMenuItem("Profile");
+        solo.clickOnActionBarItem(1);
         solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
 
     }
@@ -60,7 +59,7 @@ public class ViewProfileTest extends ActivityInstrumentationTestCase2{
         Login activity = (Login)solo.getCurrentActivity();
 
         User user = ServerWrapper.getUserFromUsername("TestUser");
-        if (user==null){
+        if (user!=null){
             solo.enterText((EditText) solo.getView(R.id.neweditTextUsername), "TestUser");
             solo.enterText((EditText) solo.getView(R.id.neweditTextPassword), "test");
             solo.clickOnButton("Register");
@@ -74,9 +73,9 @@ public class ViewProfileTest extends ActivityInstrumentationTestCase2{
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
 
         //Test if activity goes to profile page
-        solo.clickOnView(solo.getView(R.drawable.ic_menu));
-        solo.clickOnMenuItem("Profile");
+        solo.clickOnActionBarItem(1);
         solo.assertCurrentActivity("Wrong Activity", ViewProfile.class);
+
 
         solo.clickOnView(solo.getView(R.id.editProfileButton));
         solo.enterText((EditText) solo.getView(R.id.editPhoneNumber), "7801001000");
