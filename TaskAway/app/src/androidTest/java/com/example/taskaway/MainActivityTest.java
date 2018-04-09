@@ -12,6 +12,7 @@ package com.example.taskaway;
  */
 
 
+import android.support.design.widget.TabLayout;
 import android.test.ActivityInstrumentationTestCase2;
 import android.app.Activity;
 import android.widget.EditText;
@@ -70,7 +71,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         solo.assertCurrentActivity("Wrong Activity", MyAssigned.class);
 
         //Switch to All Bids screen
-        solo.clickInRecyclerView(3);
+        TabLayout tabLayout = (TabLayout) solo.getView(R.id.tablayout_id);
+        TabLayout.Tab tab = tabLayout.getTabAt(3);
+        tab.select();
         solo.assertCurrentActivity("Wrong Activity", AllBids.class);
 
         //Switch to My Jobs screen
