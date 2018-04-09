@@ -48,7 +48,7 @@ public class testViewAllBids extends ActivityInstrumentationTestCase2 {
 
         //Correct inputs for edited Task
         solo.enterText((EditText) solo.getView(R.id.name_edit_text), "Homework");
-        solo.enterText((EditText) solo.getView(R.id.requirements_owntask_text), "Testing is integral to the app");
+        solo.enterText((EditText) solo.getView(R.id.viewtask_requirementsk), "Testing is integral to the app");
         solo.enterText((EditText) solo.getView(R.id.location_edit_text), "University of Alberta");
         solo.clickOnView(solo.getView(R.id.toolbar_save_btn));
         solo.assertCurrentActivity("Wrong Activity", MainActivity.class);
@@ -101,7 +101,7 @@ public class testViewAllBids extends ActivityInstrumentationTestCase2 {
         solo.clickInRecyclerView(1);
         solo.clickOnView(solo.getView(R.id.newother_button));
         solo.assertCurrentActivity("Wrong Activity", ViewOtherBids.class);
-        
+
 
     }
 
