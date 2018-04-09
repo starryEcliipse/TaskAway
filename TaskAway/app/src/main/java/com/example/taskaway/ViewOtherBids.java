@@ -44,7 +44,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
     private OnBidClickListener onBidClickListener; // to be used for passing information to ViewOwnTask
     private Bid selectedBid;
     private int pos;
-    private ArrayList<Bid> bidList;
+    private ArrayList<Bid> bidList = new ArrayList<Bid>();
     private Task task;
     private String taskid;
     private float lowestbidamount;
@@ -78,7 +78,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
 
         // Get information from AddTaskActivity
         Intent intent = getIntent();
-        String taskName = intent.getStringExtra("name"); // task name
+        final String taskName = intent.getStringExtra("name"); // task name
         lowestbidamount = intent.getFloatExtra("lowestbidamount", 0);
 
         tname.setTextSize(20);
@@ -95,20 +95,7 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
         myrecyclerview.setHasFixedSize(true);
         myrecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
-        /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
-        if (MainActivity.isOnline()){ // online
-            task = ServerWrapper.getJobFromId(taskid);
-            bidList = task.getBids();
-        }else{ // offline
-            SaveFileController saveFileController = new SaveFileController();
-            Context context = getApplicationContext();
-            int userindex = saveFileController.getUserIndex(context, user_name);
-            task = saveFileController.getTask(context, userindex, taskid);
-            bidList = task.getBids();
-        }
-
-        // Temporary exception catcher
-        if (bidList == null){
+        if (!MainActivity.isOnline()){
             Toast.makeText(getApplicationContext(),"Something went wrong - unable to get bids!", Toast.LENGTH_SHORT).show();
             Intent intent2 = new Intent(ViewOtherBids.this, ViewOwnTask.class);
             intent.putExtra("task", task); // put task
@@ -116,6 +103,12 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             intent.putExtra("userName", user_name);
             startActivity(intent2);
         }
+
+        /* READ TASK */
+        if (bidList.isEmpty()) {
+            task = (Task) getIntent().getSerializableExtra("task");
+        }
+        bidList = task.getBids(); // bids
 
         /* SET ADAPTER */
         adapter = new OtherBidsViewAdapter(this, bidList, this);
@@ -170,8 +163,8 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                     return;
                 }
 
-                task = ServerWrapper.getJobFromId(taskid);
-                bidList = task.getBids();
+//                task = ServerWrapper.getJobFromId(taskid);
+//                bidList = task.getBids();
 
                 /* GET BIDDER INFORMATION FOR EACH BID */
                 String CurrentBidderId = selectedBid.getUserId();
@@ -242,7 +235,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 }
 
                 /* READ BIDS FROM CURRENT TASK AND DISPLAY THEM */
-                task = ServerWrapper.getJobFromId(taskid);
                 bidList = task.getBids();
 
                 /* GET BIDDER INFORMATION FOR EACH BID */
@@ -253,20 +245,26 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 String biddername = bidder.getUsername();
                 Toast.makeText(context, "You have declined "+ biddername +"\'s " + String.format("$%.2f", selectedBid.getAmount()) + " bid!",Toast.LENGTH_LONG).show();
 
-
                 /* DELETE BID FROM TASK */
                 /* UPDATE BIDDER */
                 Bid b = bidList.get(pos);
                 User u = ServerWrapper.getUserFromId(b.getUserId());
-                u.removeBid(task);
-                ServerWrapper.updateUser(u);
-                bidList.remove(pos);
 
-                ServerWrapper.updateJob(task);
+                u.removeBid(task);
+                bidList.remove(pos);
+                ServerWrapper.updateUser(u);
+
+                task.setBids(bidList);
 
                 /* UPDATE VIEW */
                 adapter.notifyItemRemoved(pos);
                 adapter.notifyItemRangeChanged(pos, adapter.getItemCount());
+                ServerWrapper.updateJob(task);
+
+                bidList = task.getBids();
+
+
+
 
             } // end of onClick
 

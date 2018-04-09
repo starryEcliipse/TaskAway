@@ -37,7 +37,7 @@ public class OtherBidsViewAdapter extends RecyclerView.Adapter<OtherBidsViewAdap
      * Adapter for ViewOtherBids
      *
      * @param mContext - the context of the adapter
-     * @param mData - the TaskList of bids for the current task
+     * @param mData - the list of bids for the current task
      */
     public OtherBidsViewAdapter(Context mContext, ArrayList<Bid> mData, OnBidClickListener onBidClickListener) {
         this.mContext = mContext;

@@ -407,6 +407,7 @@ public class ViewOwnTask extends AppCompatActivity {
                     intent.putExtra("name", name);
                     intent.putExtra("username", userName);
                     intent.putExtra("taskid", id);
+                    intent.putExtra("task",task);
                     startActivity(intent);
                 }
 
@@ -428,6 +429,9 @@ public class ViewOwnTask extends AppCompatActivity {
 
         Intent intent = getIntent(); // receive task
         task = (Task) intent.getSerializableExtra("task");
+
+        Log.i("TESTEST",""+task.getBids());
+
         userID = intent.getStringExtra("userid");
         userName = intent.getStringExtra("userName");
 
