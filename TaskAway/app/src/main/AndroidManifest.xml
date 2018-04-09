@@ -34,7 +34,8 @@
         <activity android:name=".MapActivity" />
         <activity android:name=".AddTaskActivity" />
         <activity android:name=".EditActivity" />
-        <activity android:name=".ViewOtherBids" />
+        <activity android:name=".ViewOtherBids"
+            android:noHistory="true" />
         <activity android:name=".ViewOtherProfile" />
 
         <meta-data

@@ -274,23 +274,34 @@
         android:tint="@color/colorCoolGrey"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
-    <RelativeLayout
-        android:id="@+id/selectDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/photos_btn"
-        android:layout_toRightOf="@+id/photos_btn"
-        android:text="Task Done" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView_markDone_btn"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/textView8"
+        android:layout_alignEnd="@+id/edit_btn"
+        android:layout_alignRight="@+id/edit_btn"
+        android:visibility="gone"
+        app:cardBackgroundColor="@android:color/holo_green_light"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
 
-    <RelativeLayout
-        android:id="@+id/saveStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/edit_btn"
-        android:layout_toStartOf="@+id/edit_btn"
-        android:text="Save" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/cardView"
+            android:layout_alignStart="@+id/cardView"
+            android:layout_alignTop="@+id/cardView">
 
+            <TextView
+                android:id="@+id/taskDone_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Job Done"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>

@@ -131,7 +131,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.putExtra("task", task); // put task
                 intent.putExtra("userid", user_id);
                 intent.putExtra("userName", user_name);
@@ -202,7 +201,6 @@ public class ViewOtherBids extends AppCompatActivity implements OnBidClickListen
                 ServerWrapper.updateJob(task);
 
                 Intent intent = new Intent(ViewOtherBids.this, ViewOwnTask.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // used for back button (Android)
                 intent.putExtra("task", task);
                 intent.putExtra("userid", user_id);
                 intent.putExtra("userName", user_name);

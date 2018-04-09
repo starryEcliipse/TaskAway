@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,7 @@ public class ViewOwnTask extends AppCompatActivity {
     private TextView toolBarTitle;
     private ImageButton toolBarSaveBtn;
     private Button photos;
+    private CardView selectDone;
     ArrayList<String> pictures = new ArrayList<String>();
     ArrayList<byte[]> arrayB = new ArrayList<byte[]>();
     String id;
@@ -311,19 +313,42 @@ public class ViewOwnTask extends AppCompatActivity {
 
         // SETTING TASK STATUS TO DONE
         /**
-         *
+         *  If this task is in "ASSIGNED" state, this button will be visible. When clicked it will set
+         *  the status of the job to "DONE" and return the user to MainActivity.
          */
-       /* RelativeLayout selectDone = (RelativeLayout) findViewById(R.id.selectDone);
-        Log.i("TASK IS", "Task is" + task);
-        if(!task.getStatus().equals("ASSIGNED")){
-            selectDone.setVisibility(View.GONE);
-        }
+        selectDone = (CardView) findViewById(R.id.cardView_markDone_btn);
+        TextView doneButton = (TextView) findViewById(R.id.taskDone_textview);
 
-        RelativeLayout saveStatus = (RelativeLayout) findViewById(R.id.saveStatus);
-        if(!task.getStatus().equals("ASSIGNED")){
-            saveStatus.setVisibility(View.GONE);
-        } */
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Accepts the current lowest bid for the task.
+             *
+             * @author Adrian Schuldhaus
+             *
+             * @param view - instance of View
+             */
+            @Override
+            public void onClick(View view) {
 
+                if (!MainActivity.isOnline()){
+                    Toast.makeText(getApplicationContext(), "You must be online to end a job", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                task.setStatus("DONE");
+                ServerWrapper.updateJob(task);
+
+                Toast.makeText(getApplicationContext(), "Job has been marked as completed",Toast.LENGTH_LONG).show();
+
+                Intent i = new Intent(ViewOwnTask.this, MainActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // for notification conditions
+                i.putExtra("user_name", userName);
+                i.putExtra("user_id", userID);
+
+                startActivity(i);
+
+            }
+        });
 
 
         // OTHER BIDS BUTTON
@@ -393,6 +418,11 @@ public class ViewOwnTask extends AppCompatActivity {
         taskdescription.setText(task.getDescription());
 
         tasklowestbid = task.findLowestBid();
+
+        // If task is "assigned", make "Job Done" button visible
+        if(task.getStatus().equals("ASSIGNED")){
+            selectDone.setVisibility(View.VISIBLE);
+        }
 
         if (task.hasNewBids()){
             task.setHasNewBids(false);
